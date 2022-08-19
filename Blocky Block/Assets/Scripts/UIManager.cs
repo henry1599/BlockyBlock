@@ -11,8 +11,10 @@ namespace BlockyBlock.Managers
     {
         public static UIManager Instance {get; private set;}
         public GraphicRaycaster m_Raycaster;
-        public string m_IDECodeFieldName;
-        public string m_ProviderCodeFieldName;
+        public GameObject m_IDECodeField;
+        public Transform m_IDECodeContent;
+        public GameObject m_PreviewCodeField;
+        public Transform m_PreviewCodeContent;
         public EventSystem m_EventSystem;
         PointerEventData m_PointerEventData;
         void Awake()
@@ -22,7 +24,6 @@ namespace BlockyBlock.Managers
         // Start is called before the first frame update
         void Start()
         {
-            
         }
 
         // Update is called once per frame
@@ -30,16 +31,19 @@ namespace BlockyBlock.Managers
         {
             
         }
-        public bool CheckTriggerUI(BlockMode _mode)
+        public bool CheckTriggerUI(BlockMode _mode, out Transform _container)
         {
-            string containerName = m_IDECodeFieldName;
+            string containerName = m_IDECodeField.name;
+            _container = m_IDECodeField.transform;
             switch (_mode)
             {
                 case BlockMode.IDE:
-                    containerName = m_IDECodeFieldName;
+                    _container = m_IDECodeContent;
+                    containerName = m_IDECodeField.name;
                     break;
                 case BlockMode.PREVIEW:
-                    containerName = m_ProviderCodeFieldName;
+                    _container = m_PreviewCodeContent;
+                    containerName = m_PreviewCodeField.name;
                     break;
             }
             //Set up the new Pointer Event
@@ -57,6 +61,7 @@ namespace BlockyBlock.Managers
             {
                 if (result.gameObject.name.Contains("Block"))
                 {
+                    _container = null;
                     return false;
                 };
             }
@@ -70,7 +75,7 @@ namespace BlockyBlock.Managers
                     return true;
                 };
             }
-
+            _container = null;
             return false;
 
 

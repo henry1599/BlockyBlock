@@ -436,8 +436,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6a91ca70f376fb848851021bd52e76ae, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  m_Mode: 1
+  m_IDEObject: {fileID: 2700481491284779168}
+  m_PreviewObject: {fileID: 2700481490498909001}
   m_CanvasGroup: {fileID: 930384445614607012}
-  m_OutsideContainer: {fileID: 907803812028645373, guid: dcb133437acf242438a9e759a5c67d0b, type: 3}
+  m_OutsideContainerPrefab: {fileID: 907803812028645373, guid: dcb133437acf242438a9e759a5c67d0b, type: 3}
 --- !u!1 &2700481491226171374
 GameObject:
   m_ObjectHideFlags: 0
