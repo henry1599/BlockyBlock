@@ -4,9 +4,15 @@ using UnityEngine;
 using UnityEngine.UI;
 using BlockyBlock.Enums;
 using UnityEngine.EventSystems;
+using BlockyBlock.Events;
+using BlockyBlock.Configurations;
+using RotaryHeart.Lib.SerializableDictionary;
+using BlockyBlock.UI;
 
 namespace BlockyBlock.Managers
 {
+    [System.Serializable]
+    public class BlockData : SerializableDictionaryBase<BlockType, UIBlock> {}
     public class UIManager : MonoBehaviour
     {
         public static UIManager Instance {get; private set;}
@@ -16,20 +22,30 @@ namespace BlockyBlock.Managers
         public GameObject m_PreviewCodeField;
         public Transform m_PreviewCodeContent;
         public EventSystem m_EventSystem;
+        public BlockData m_BlockDatas;
         PointerEventData m_PointerEventData;
         void Awake()
         {
             Instance = this;
+
+            GameEvents.SETUP_LEVEL += HandleSetupLevel;
         }
         // Start is called before the first frame update
         void Start()
         {
-        }
 
-        // Update is called once per frame
-        void Update()
+        }
+        void OnDestroy()
         {
-            
+            GameEvents.SETUP_LEVEL -= HandleSetupLevel;
+        }
+        void HandleSetupLevel(LevelData _data)
+        {
+            foreach (BlockType t in _data.BlockTypes)
+            {
+                GameObject uiBlockObject = Instantiate(m_BlockDatas[t].gameObject);
+                uiBlockObject.transform.SetParent(m_PreviewCodeContent);
+            }
         }
         public bool CheckTriggerUI(BlockMode _mode, out Transform _container)
         {

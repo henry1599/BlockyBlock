@@ -1,0 +1,73 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9eb1eceb4af900641ad8cf73db21be72, type: 3}
+  m_Name: Level Config
+  m_EditorClassIdentifier: 
+  LevelDatas:
+    reorderableList:
+      canAdd: 1
+      canRemove: 1
+      draggable: 1
+      expandable: 1
+      multipleSelection: 1
+      isExpanded: 1
+      label:
+        m_Text: Keys
+        m_Image: {fileID: 0}
+        m_Tooltip: 
+      headerHeight: 18
+      footerHeight: 13
+      slideEasing: 0.15
+      verticalSpacing: 2
+      showDefaultBackground: 1
+      elementDisplayType: 0
+      elementNameProperty: 
+      elementNameOverride: 
+      elementIcon: {fileID: 0}
+    reqReferences: {fileID: 0}
+    isExpanded: 1
+    _keyValues: 000000000100000002000000030000000400000005000000060000000700000008000000090000000a000000
+    _keys: 000000000100000002000000030000000400000005000000060000000700000008000000090000000a000000
+    _values:
+    - LevelType: 0
+      LevelName: Home
+      BlockTypes: 
+    - LevelType: 1
+      LevelName: Level 01
+      BlockTypes: 00000000
+    - LevelType: 1
+      LevelName: Level 02
+      BlockTypes: 
+    - LevelType: 1
+      LevelName: Level 03
+      BlockTypes: 
+    - LevelType: 1
+      LevelName: Level 04
+      BlockTypes: 
+    - LevelType: 1
+      LevelName: Level 05
+      BlockTypes: 
+    - LevelType: 1
+      LevelName: Level 06
+      BlockTypes: 
+    - LevelType: 1
+      LevelName: Level 07
+      BlockTypes: 
+    - LevelType: 1
+      LevelName: Level 08
+      BlockTypes: 
+    - LevelType: 1
+      LevelName: Level 09
+      BlockTypes: 
+    - LevelType: 1
+      LevelName: Level 10
+      BlockTypes: 

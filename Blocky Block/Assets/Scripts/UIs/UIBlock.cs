@@ -4,6 +4,7 @@ using UnityEngine;
 using UnityEngine.EventSystems;
 using BlockyBlock.Managers;
 using BlockyBlock.Enums;
+using BlockyBlock.Events;
 
 namespace BlockyBlock.UI
 {
@@ -27,7 +28,7 @@ namespace BlockyBlock.UI
         [Space(10)]
         [Header("Drag & Drop Value")]
         [SerializeField] protected CanvasGroup m_CanvasGroup;
-        [SerializeField] protected Transform m_OutsideContainerPrefab;
+        protected Transform m_OutsideContainerPrefab;
 
 
 
@@ -50,6 +51,10 @@ namespace BlockyBlock.UI
             set => m_IsDragging = value;
         }
         protected Transform m_CurrentContentField;
+        void Awake()
+        {
+            m_OutsideContainerPrefab = GameObject.FindGameObjectWithTag(GameConstants.UIBLOCK_OUTSIDE_CONTAINER_TAG).transform;
+        }
         // Start is called before the first frame update
         void Start()
         {
@@ -64,6 +69,10 @@ namespace BlockyBlock.UI
         }
         public virtual void OnBeginDrag(PointerEventData eventData)
         {
+            if (m_OutsideContainerPrefab == null)
+            {
+                return;
+            }
             if (Mode == BlockMode.PREVIEW)
             {
                 m_TempBlock = Instantiate(gameObject, transform.position, Quaternion.identity, m_OutsideContainerPrefab).GetComponent<UIBlock>();
@@ -82,6 +91,10 @@ namespace BlockyBlock.UI
         }
         public virtual void OnDrag(PointerEventData data)
         {
+            if (m_OutsideContainerPrefab == null)
+            {
+                return;
+            }
             if (m_IsDragging)
             {
                 if (m_TempBlock != null)
@@ -124,6 +137,10 @@ namespace BlockyBlock.UI
         }
         public virtual void OnEndDrag(PointerEventData eventData)
         {
+            if (m_OutsideContainerPrefab == null)
+            {
+                return;
+            }
             if (!m_IsDragging)
             {
                 return;
@@ -134,7 +151,7 @@ namespace BlockyBlock.UI
 
             if (m_TempBlock != null)
             {
-                if (m_CurrentContentField == m_OutsideContainerPrefab)
+                if (!m_CurrentContentField.gameObject.CompareTag("IDE Content"))
                 {
                     Destroy(m_TempBlock.gameObject);
                     return;
@@ -142,7 +159,7 @@ namespace BlockyBlock.UI
                 m_TempBlock.transform.SetParent(m_CurrentContentField);
                 return;
             }
-            if (m_CurrentContentField == m_OutsideContainerPrefab)
+            if (!m_CurrentContentField.gameObject.CompareTag("IDE Content"))
             {
                 Destroy(gameObject);
                 return;
