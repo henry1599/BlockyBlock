@@ -36,9 +36,6 @@ namespace BlockyBlock.Managers
             {
                 m_CurrentLevelID = value;
 
-                // * Call Event to load Level
-                GameEvents.LOAD_LEVEL?.Invoke(value);
-
                 CurrentLevelData = m_LevelConfig.GetLevelDataByID(value);
             }
         }
@@ -53,6 +50,7 @@ namespace BlockyBlock.Managers
             {
                 Destroy(gameObject);
             }
+            GameEvents.LOAD_LEVEL += HandleLevelLoad;
         }
         // Start is called before the first frame update
         void Start()
@@ -64,6 +62,14 @@ namespace BlockyBlock.Managers
         void Update()
         {
             
+        }
+        void OnDestroy()
+        {
+            GameEvents.LOAD_LEVEL -= HandleLevelLoad;
+        }
+        void HandleLevelLoad(LevelID _id)
+        {
+            CurrentLevelID = _id;
         }
 
         IEnumerator Cor_SetupLevelData(LevelData _data)

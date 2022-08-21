@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using BlockyBlock.Enums;
+using BlockyBlock.Events;
 
 namespace BlockyBlock.Managers
 {
@@ -20,7 +21,8 @@ namespace BlockyBlock.Managers
         }
         public void OnStartButtonClick()
         {
-            LevelManager.Instance.CurrentLevelID = LevelID.LEVEL_01;
+            // * Call Event to load Level
+            GameEvents.LOAD_LEVEL?.Invoke(LevelID.LEVEL_01);
         }
     }
 }

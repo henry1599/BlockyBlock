@@ -93,8 +93,10 @@ namespace BlockyBlock.Managers
             }
             _container = null;
             return false;
-
-
+        }
+        public void OnHomeButtonClick()
+        {
+            GameEvents.LOAD_LEVEL?.Invoke(LevelID.HOME);
         }
     }
 }
