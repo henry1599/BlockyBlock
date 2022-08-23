@@ -1,11 +1,17 @@
 namespace BlockyBlock.Enums
 {
-    public enum BlockMode {IDE, PREVIEW}
+    public enum BlockMode {
+        IDE, 
+        PREVIEW,
+        BLOCK_ON_BLOCK
+    }
     public enum BlockType {
         MOVE,
         PICK_UP,
         PUT_DOWN,
-        DO_UNTIL
+        DO_UNTIL,
+        TURN_LEFT,
+        TURN_RIGHT
     }
     public enum LevelID {
         HOME,

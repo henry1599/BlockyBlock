@@ -1,7 +1,9 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 using UnityEngine.EventSystems;
+using DG.Tweening;
 using BlockyBlock.Managers;
 using BlockyBlock.Enums;
 using BlockyBlock.Events;
@@ -26,6 +28,13 @@ namespace BlockyBlock.UI
 
 
         [Space(10)]
+        [Header("Raycast Target Children")]
+        [SerializeField] List<Image> m_ChildrenImage;
+
+
+
+
+        [Space(10)]
         [Header("Drag & Drop Value")]
         [SerializeField] protected CanvasGroup m_CanvasGroup;
         protected Transform m_OutsideContainerPrefab;
@@ -34,6 +43,7 @@ namespace BlockyBlock.UI
 
         UIBlock m_TempBlock = null;
         BlockMode m_Mode;
+        public CanvasGroup CanvasGroup => m_CanvasGroup;
         public BlockMode Mode 
         {
             get => m_Mode;
@@ -69,34 +79,39 @@ namespace BlockyBlock.UI
         }
         public virtual void OnBeginDrag(PointerEventData eventData)
         {
-            if (m_OutsideContainerPrefab == null)
-            {
-                return;
-            }
             if (Mode == BlockMode.PREVIEW)
             {
-                m_TempBlock = Instantiate(gameObject, transform.position, Quaternion.identity, m_OutsideContainerPrefab).GetComponent<UIBlock>();
-                m_TempBlock.transform.parent = null;
-                m_TempBlock.transform.SetParent(m_OutsideContainerPrefab);
+                InitTempBlock();
             }
             else
             {
-                m_TempBlock = null;
-                transform.parent = null;
-                transform.SetParent(m_OutsideContainerPrefab);
+                InitBlock();
             }
-            m_IsDragging = true;
             m_DragOffset = transform.position - (Vector3)eventData.position;
-            // m_CanvasGroup.blocksRaycasts = false;
+            m_IsDragging = true;
+            m_CanvasGroup.blocksRaycasts = false;
+            ToggleChildrenRaycastTarget(false);
+        }
+        void InitTempBlock()
+        {
+            m_TempBlock = Instantiate(gameObject, transform.position, Quaternion.identity, m_OutsideContainerPrefab).GetComponent<UIBlock>();
+            m_TempBlock.transform.parent = null;
+            m_TempBlock.transform.SetParent(m_OutsideContainerPrefab);
+            m_TempBlock.IsDragging = true;
+            m_TempBlock.CanvasGroup.blocksRaycasts = false;
+            m_TempBlock.ToggleChildrenRaycastTarget(false);
+        }
+        void InitBlock()
+        {
+            m_TempBlock = null;
+            transform.parent = null;
+            transform.SetParent(m_OutsideContainerPrefab);
         }
         public virtual void OnDrag(PointerEventData data)
         {
-            if (m_OutsideContainerPrefab == null)
-            {
-                return;
-            }
             if (m_IsDragging)
             {
+                CastBlockPosition();
                 if (m_TempBlock != null)
                 {
                     m_TempBlock.transform.position = (Vector3)data.position + m_DragOffset;
@@ -135,8 +150,21 @@ namespace BlockyBlock.UI
                 }
             }
         }
+        public virtual void CastBlockPosition()
+        {
+            if (UIManager.Instance.CheckTriggerUI(BlockMode.BLOCK_ON_BLOCK, out Transform _BlockTransform))
+            {
+                if (transform != _BlockTransform)
+                {
+                    int nextIdx = _BlockTransform.GetSiblingIndex();
+                    UIManager.Instance.m_DummyUIBlock.transform.SetSiblingIndex(nextIdx);
+                }
+                
+            }
+        }
         public virtual void OnEndDrag(PointerEventData eventData)
         {
+
             if (m_OutsideContainerPrefab == null)
             {
                 return;
@@ -147,24 +175,50 @@ namespace BlockyBlock.UI
             }
             m_IsDragging = false;
             m_DragOffset = Vector3.zero;
-            // m_CanvasGroup.blocksRaycasts = true;
+            m_CanvasGroup.blocksRaycasts = true;
+            ToggleChildrenRaycastTarget(true);
 
             if (m_TempBlock != null)
             {
+                m_TempBlock.IsDragging = false;
+                m_TempBlock.CanvasGroup.blocksRaycasts = true;
+                m_TempBlock.ToggleChildrenRaycastTarget(true);
                 if (!m_CurrentContentField.gameObject.CompareTag("IDE Content"))
                 {
-                    Destroy(m_TempBlock.gameObject);
+                    UIManager.Instance.m_DummyUIBlock.SetAsLastSibling();
+                    DestroySelf(m_TempBlock.transform);
                     return;
                 }
                 m_TempBlock.transform.SetParent(m_CurrentContentField);
+                m_TempBlock.transform.SetSiblingIndex(UIManager.Instance.m_DummyUIBlock.GetSiblingIndex());
+                UIManager.Instance.m_DummyUIBlock.SetAsLastSibling();
                 return;
             }
             if (!m_CurrentContentField.gameObject.CompareTag("IDE Content"))
             {
-                Destroy(gameObject);
+                UIManager.Instance.m_DummyUIBlock.SetAsLastSibling();
+                DestroySelf(transform);
                 return;
             }
             transform.SetParent(m_CurrentContentField);
+            transform.SetSiblingIndex(UIManager.Instance.m_DummyUIBlock.GetSiblingIndex());
+            UIManager.Instance.m_DummyUIBlock.SetAsLastSibling();
+        }
+        public virtual void DestroySelf(Transform _target)
+        {
+            _target
+                .DOScale(
+                    Vector3.zero,
+                    0.25f
+                )
+                .OnComplete(() => Destroy(_target.gameObject));
+        }
+        public void ToggleChildrenRaycastTarget(bool _status)
+        {
+            foreach (Image img in m_ChildrenImage)
+            {
+                img.raycastTarget = _status;
+            }
         }
     }
 }

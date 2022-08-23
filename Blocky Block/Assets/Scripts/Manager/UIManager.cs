@@ -23,6 +23,7 @@ namespace BlockyBlock.Managers
         public Transform m_PreviewCodeContent;
         public EventSystem m_EventSystem;
         public BlockData m_BlockDatas;
+        public Transform m_DummyUIBlock;
         PointerEventData m_PointerEventData;
         void Awake()
         {
@@ -46,6 +47,7 @@ namespace BlockyBlock.Managers
                 GameObject uiBlockObject = Instantiate(m_BlockDatas[t].gameObject);
                 uiBlockObject.transform.SetParent(m_PreviewCodeContent);
             }
+            
         }
         public bool CheckTriggerUI(BlockMode _mode, out Transform _container)
         {
@@ -61,6 +63,10 @@ namespace BlockyBlock.Managers
                     _container = m_PreviewCodeContent;
                     containerName = m_PreviewCodeField.name;
                     break;
+                default:
+                    _container = null;
+                    containerName = string.Empty;
+                    break;
             }
             //Set up the new Pointer Event
             m_PointerEventData = new PointerEventData(m_EventSystem);
@@ -75,10 +81,17 @@ namespace BlockyBlock.Managers
 
             foreach (RaycastResult result in results)
             {
-                if (result.gameObject.name.Contains("Block"))
+                if (result.gameObject.CompareTag("UI Block"))
                 {
-                    _container = null;
-                    return false;
+                    if (_mode == BlockMode.BLOCK_ON_BLOCK)
+                    {
+                        if (result.gameObject.GetComponent<UIRaycastTargetable>() == null)
+                        {
+                            return false;
+                        }
+                        _container = result.gameObject.GetComponent<UIRaycastTargetable>().Root;
+                        return true;
+                    }
                 };
             }
 
@@ -88,7 +101,7 @@ namespace BlockyBlock.Managers
                 if (result.gameObject.name == containerName)
                 {
                     // BtnInput.Instance.ShowShadow(-1, Vector2.zero);
-                    return true;
+                    return _mode != BlockMode.BLOCK_ON_BLOCK;
                 };
             }
             _container = null;

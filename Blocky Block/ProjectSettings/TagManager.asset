@@ -8,6 +8,7 @@ TagManager:
   - IDE Content
   - Level Manager
   - Scene Manager
+  - UI Block
   layers:
   - Default
   - TransparentFX
