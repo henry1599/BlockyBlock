@@ -12,6 +12,7 @@ namespace Utility.SLayout {
     {
         
         SerializedProperty moveDuration;
+        SerializedProperty m_SmoothDuration;
         SerializedProperty m_Padding;
         SerializedProperty m_Spacing;
         SerializedProperty m_ChildAlignment;
@@ -36,12 +37,14 @@ namespace Utility.SLayout {
             m_ChildForceExpandWidth = serializedObject.FindProperty("m_ChildForceExpandWidth");
             m_ChildForceExpandHeight = serializedObject.FindProperty("m_ChildForceExpandHeight");
             m_ReverseArrangement = serializedObject.FindProperty("m_ReverseArrangement");
+            m_SmoothDuration = serializedObject.FindProperty("m_SmoothDuration");
         }
 
         public override void OnInspectorGUI()
         {
             serializedObject.Update();
             EditorGUILayout.PropertyField(moveDuration, true);
+            EditorGUILayout.PropertyField(m_SmoothDuration, true);
             EditorGUILayout.PropertyField(m_Padding, true);
             EditorGUILayout.PropertyField(m_Spacing, true);
             EditorGUILayout.PropertyField(m_ChildAlignment, true);

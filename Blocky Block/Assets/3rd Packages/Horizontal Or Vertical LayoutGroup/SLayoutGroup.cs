@@ -2,6 +2,8 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using DG.Tweening;
+using DG.Tweening.Core;
+using DG.Tweening.Plugins.Options;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.Pool;
@@ -12,9 +14,11 @@ namespace Utility.SLayout {
     [ExecuteAlways]
     [RequireComponent(typeof(RectTransform))]
     public abstract class SLayoutGroup : UIBehaviour, ILayoutElement, ILayoutGroup {
-        
+        bool m_IsInit;
+        TweenerCore<Vector2, Vector2, VectorOptions> setAnchorTweener;
         [SerializeField] protected RectOffset m_Padding = new RectOffset();
         [SerializeField] public float moveDuration = 1f;
+        [SerializeField] public float m_SmoothDuration = 1f;
 
         private Dictionary<RectTransform, Tween> RectPositionXTweens = new Dictionary<RectTransform, Tween>();
         private Dictionary<RectTransform, Tween> RectPositionYTweens = new Dictionary<RectTransform, Tween>();
@@ -52,7 +56,17 @@ namespace Utility.SLayout {
 
         [System.NonSerialized] private List<RectTransform> m_RectChildren = new List<RectTransform>();
         protected List<RectTransform> rectChildren { get { return m_RectChildren; } }
-
+        // protected override void Awake() {
+	    //     base.Awake();
+	    //     StartCoroutine(SetPositionInitCoroutine());
+        // }
+        
+        // // Wait a few frames so we can skip the initial position animation
+        // IEnumerator SetPositionInitCoroutine() {
+	    //     yield return null;
+	    //     yield return null;
+	    //     m_IsInit = true;
+        // }
         public virtual void CalculateLayoutInputHorizontal()
         {
             m_RectChildren.Clear();
@@ -392,15 +406,19 @@ namespace Utility.SLayout {
                 case 0:
                     dict = RectPositionXTweens;
                     tween = rect.DOAnchorPosX(pos.x, moveDuration);
+                    // setAnchorTweener = rect.DOAnchorPosX(pos.x, m_SmoothDuration);
                     break;
                 case 1:
                     dict = RectPositionYTweens;
                     tween = rect.DOAnchorPosY(pos.y, moveDuration);
+                    // setAnchorTweener = rect.DOAnchorPosY(pos.y, m_SmoothDuration);
                     break;
                 default:
                     return;
             }
-            
+            // if (!m_IsInit) {
+	        //     setAnchorTweener.Complete();
+            // }
             if(dict == null)
                 dict = new Dictionary<RectTransform, Tween>();    
             

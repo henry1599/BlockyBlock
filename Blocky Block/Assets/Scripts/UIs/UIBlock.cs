@@ -159,7 +159,10 @@ namespace BlockyBlock.UI
                     int nextIdx = _BlockTransform.GetSiblingIndex();
                     UIManager.Instance.m_DummyUIBlock.transform.SetSiblingIndex(nextIdx);
                 }
-                
+            }
+            else
+            {
+                UIManager.Instance.m_DummyUIBlock.transform.SetAsLastSibling();
             }
         }
         public virtual void OnEndDrag(PointerEventData eventData)
@@ -190,6 +193,7 @@ namespace BlockyBlock.UI
                     return;
                 }
                 m_TempBlock.transform.SetParent(m_CurrentContentField);
+                m_TempBlock.transform.GetComponent<RectTransform>().anchoredPosition = UIManager.Instance.m_DummyUIBlock.GetComponent<RectTransform>().anchoredPosition;
                 m_TempBlock.transform.SetSiblingIndex(UIManager.Instance.m_DummyUIBlock.GetSiblingIndex());
                 UIManager.Instance.m_DummyUIBlock.SetAsLastSibling();
                 return;
