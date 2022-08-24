@@ -22,10 +22,17 @@ namespace BlockyBlock.Configurations
     [System.Serializable]
     public class Level : SerializableDictionaryBase<LevelID, LevelData> {}
     [System.Serializable]
+    public class UnitData 
+    {
+        public Vector2 StartPosition;
+        public UnitDirection StartDirection;
+    }
+    [System.Serializable]
     public class LevelData
     {
         public LevelType LevelType;
         public string LevelName; 
         public List<BlockType> BlockTypes;
+        public List<UnitData> UnitDatas;
     }
 }

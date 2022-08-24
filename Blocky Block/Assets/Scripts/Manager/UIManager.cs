@@ -34,11 +34,22 @@ namespace BlockyBlock.Managers
         // Start is called before the first frame update
         void Start()
         {
-
+            GameEvents.ON_CLEAR_IDE -= HandleClearIDE;
         }
         void OnDestroy()
         {
             GameEvents.SETUP_LEVEL -= HandleSetupLevel;
+            GameEvents.ON_CLEAR_IDE -= HandleClearIDE;
+        }
+        void HandleClearIDE()
+        {
+            foreach (Transform child in m_IDECodeContent)
+            {
+                if (child.GetComponent<UIBlock>() != null)
+                {
+                    Destroy(child.gameObject);
+                }
+            }
         }
         void HandleSetupLevel(LevelData _data)
         {
@@ -81,7 +92,7 @@ namespace BlockyBlock.Managers
 
             foreach (RaycastResult result in results)
             {
-                if (result.gameObject.CompareTag("UI Block"))
+                if (result.gameObject.CompareTag(GameConstants.UI_BLOCK_TAG))
                 {
                     if (_mode == BlockMode.BLOCK_ON_BLOCK)
                     {
@@ -110,6 +121,14 @@ namespace BlockyBlock.Managers
         public void OnHomeButtonClick()
         {
             GameEvents.LOAD_LEVEL?.Invoke(LevelID.HOME);
+        }
+        public void OnControlButtonActivate(int _type)
+        {
+            GameEvents.ON_CONTROL_BUTTON_TOGGLE?.Invoke((ControlButton)_type, true);
+        }
+        public void OnControlButtonDeactivate(int _type)
+        {
+            GameEvents.ON_CONTROL_BUTTON_TOGGLE?.Invoke((ControlButton)_type, false);
         }
     }
 }

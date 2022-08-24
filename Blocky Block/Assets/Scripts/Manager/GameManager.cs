@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using BlockyBlock.Enums;
+using BlockyBlock.Events;
 
 namespace BlockyBlock.Managers
 {
@@ -26,8 +27,8 @@ namespace BlockyBlock.Managers
             {
                 Destroy(gameObject);
             }
-            GameObject levelManager = GameObject.FindGameObjectWithTag("Level Manager");
-            GameObject gameSceneManager = GameObject.FindGameObjectWithTag("Scene Manager");
+            GameObject levelManager = GameObject.FindGameObjectWithTag(GameConstants.LEVEL_MANAGER_TAG);
+            GameObject gameSceneManager = GameObject.FindGameObjectWithTag(GameConstants.SCENE_MANAGER_TAG);
             if (levelManager == null)
             {
                 Instantiate(m_LevelManager.gameObject);

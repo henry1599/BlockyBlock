@@ -186,7 +186,7 @@ namespace BlockyBlock.UI
                 m_TempBlock.IsDragging = false;
                 m_TempBlock.CanvasGroup.blocksRaycasts = true;
                 m_TempBlock.ToggleChildrenRaycastTarget(true);
-                if (!m_CurrentContentField.gameObject.CompareTag("IDE Content"))
+                if (!m_CurrentContentField.gameObject.CompareTag(GameConstants.IDE_CONTENT_TAG))
                 {
                     UIManager.Instance.m_DummyUIBlock.SetAsLastSibling();
                     DestroySelf(m_TempBlock.transform);
@@ -198,7 +198,7 @@ namespace BlockyBlock.UI
                 UIManager.Instance.m_DummyUIBlock.SetAsLastSibling();
                 return;
             }
-            if (!m_CurrentContentField.gameObject.CompareTag("IDE Content"))
+            if (!m_CurrentContentField.gameObject.CompareTag(GameConstants.IDE_CONTENT_TAG))
             {
                 UIManager.Instance.m_DummyUIBlock.SetAsLastSibling();
                 DestroySelf(transform);
@@ -223,6 +223,10 @@ namespace BlockyBlock.UI
             {
                 img.raycastTarget = _status;
             }
+        }
+        public void HighlightSelf()
+        {
+            
         }
     }
 }

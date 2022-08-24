@@ -1,12 +1,23 @@
 namespace BlockyBlock.Enums
 {
+    public enum ControlButton {
+        STOP = 0,
+        PLAY = 1,
+        DEBUG = 2
+    }
+    public enum UnitDirection {
+        UP,
+        DOWN,
+        LEFT,
+        RIGHT
+    }
     public enum BlockMode {
         IDE, 
         PREVIEW,
         BLOCK_ON_BLOCK
     }
     public enum BlockType {
-        MOVE,
+        MOVE_FORWARD,
         PICK_UP,
         PUT_DOWN,
         DO_UNTIL,
