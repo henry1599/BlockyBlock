@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using BlockyBlock.Enums;
 using BlockyBlock.Events;
+using UnityEngine.UI;
 
 namespace BlockyBlock.UI
 {
@@ -10,14 +11,22 @@ namespace BlockyBlock.UI
     {
         [SerializeField] Animator m_Animator;
         [SerializeField] ControlButton m_Type;
+        [SerializeField] Button m_ThisButton;
         public static readonly int StatusKeyAnimation = Animator.StringToHash("status");
         void Start()
         {
             GameEvents.ON_CONTROL_BUTTON_TOGGLE += HandleControlButtonClick;
+            GameEvents.ON_CONTROL_BUTTON_TOGGLE_ALL += HandleControlButtonClickAll;
         }
         void OnDestroy()
         {
             GameEvents.ON_CONTROL_BUTTON_TOGGLE -= HandleControlButtonClick;
+            GameEvents.ON_CONTROL_BUTTON_TOGGLE_ALL -= HandleControlButtonClickAll;
+        }
+        void HandleControlButtonClickAll(bool _status)
+        {
+            SetStatus(_status);
+            m_ThisButton.interactable = !_status;
         }
         void HandleControlButtonClick(ControlButton _type, bool _status)
         {
@@ -26,6 +35,7 @@ namespace BlockyBlock.UI
                 return;
             }
             SetStatus(_status);
+            m_ThisButton.interactable = !_status;
         }
         public void SetStatus(bool _status)
         {

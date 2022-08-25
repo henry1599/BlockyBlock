@@ -21,12 +21,27 @@ namespace BlockyBlock.Core
             UnitEvents.ON_MOVE_FORWARD += MoveForward;
             UnitEvents.ON_TURN_LEFT += TurnLeft;
             UnitEvents.ON_TURN_RIGHT += TurnRight;
+
+            UnitEvents.ON_STOP += HandleStop;
+            UnitEvents.ON_RESET += HandleReset;
         }
         void OnDestroy()
         {
             UnitEvents.ON_MOVE_FORWARD -= MoveForward;
             UnitEvents.ON_TURN_LEFT -= TurnLeft;
             UnitEvents.ON_TURN_RIGHT -= TurnRight;
+            
+            UnitEvents.ON_STOP -= HandleStop;
+            UnitEvents.ON_RESET -= HandleReset;
+        }
+        void HandleStop()
+        {
+            m_UnitAnimation.SetDirection(m_CurrentDirection);
+        }
+        void HandleReset()
+        {
+            transform.DOKill(true);
+            Setup(m_StartPosition, m_StartDirection);
         }
         public void Setup(Vector3 _startPosition, UnitDirection _startDirection)
         {

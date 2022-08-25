@@ -23,15 +23,21 @@ namespace BlockyBlock.Core
             }
         }
         public int FuncCount;
-        public bool StopExecution = false;
+        public bool StopExecution {
+            get => m_StopExecution;
+            set {
+                m_StopExecution = value;
+                if (value)
+                {
+                    UnitEvents.ON_STOP?.Invoke();
+                }
+            }
+        } private bool m_StopExecution = false;
         void UpdateIndex(int _value)
         {
             if (_value >= FuncCount)
             {
                 StopExecution = true;
-                GameEvents.ON_CONTROL_BUTTON_TOGGLE?.Invoke(ControlButton.PLAY, false);
-                GameEvents.ON_CONTROL_BUTTON_TOGGLE?.Invoke(ControlButton.STOP, false);
-                GameEvents.ON_CONTROL_BUTTON_TOGGLE?.Invoke(ControlButton.DEBUG, false);
                 return;
             }
             if (StopExecution)
@@ -52,15 +58,22 @@ namespace BlockyBlock.Core
         {
             StartCoroutine(Cor_Stop());
         }
+        public void Debug()
+        {
+            StartCoroutine(Cor_Debug());
+        }
         IEnumerator Cor_Stop()
         {
             Functions.Clear();
             IsFinishParse = false;
             StopExecution = true;
             yield return new WaitForSeconds(0.5f);
-            GameEvents.ON_CONTROL_BUTTON_TOGGLE?.Invoke(ControlButton.PLAY, false);
-            GameEvents.ON_CONTROL_BUTTON_TOGGLE?.Invoke(ControlButton.STOP, false);
-            GameEvents.ON_CONTROL_BUTTON_TOGGLE?.Invoke(ControlButton.DEBUG, false);
+            GameEvents.ON_CONTROL_BUTTON_TOGGLE_ALL?.Invoke(false);
+        }
+        IEnumerator Cor_Debug()
+        {
+            yield return new WaitForSeconds(0.25f);
+            GameEvents.ON_CONTROL_BUTTON_TOGGLE_ALL?.Invoke(false);
         }
         IEnumerator Cor_GetIDE()
         {

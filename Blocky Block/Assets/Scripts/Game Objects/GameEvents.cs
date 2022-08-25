@@ -13,6 +13,7 @@ namespace BlockyBlock.Events
         public static Action<LevelID> LOAD_LEVEL;
         public static Action<LevelData> SETUP_LEVEL;
         public static Action<ControlButton, bool> ON_CONTROL_BUTTON_TOGGLE;
+        public static Action<bool> ON_CONTROL_BUTTON_TOGGLE_ALL;
         public static Action ON_CLEAR_IDE;
     }
     public class UnitEvents
@@ -22,6 +23,8 @@ namespace BlockyBlock.Events
         public static Action<BlockFunctionTurnRight> ON_TURN_RIGHT;
         public static Action ON_PICK_UP;
         public static Action ON_PUT_DOWN;
+        public static Action ON_STOP;
+        public static Action ON_RESET;
     }
     public class GameConstants
     {
