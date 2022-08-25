@@ -19,23 +19,27 @@ namespace BlockyBlock.Core
             set
             {
                 m_Index = value;
-                if (m_Index >= FuncCount)
-                {
-                    StopExecution = true;
-                    GameEvents.ON_CONTROL_BUTTON_TOGGLE?.Invoke(ControlButton.PLAY, false);
-                    GameEvents.ON_CONTROL_BUTTON_TOGGLE?.Invoke(ControlButton.STOP, false);
-                    GameEvents.ON_CONTROL_BUTTON_TOGGLE?.Invoke(ControlButton.DEBUG, false);
-                    return;
-                }
-                if (StopExecution)
-                {
-                    return;
-                }
-                Functions[value].Execute();
+                UpdateIndex(value);
             }
         }
         public int FuncCount;
         public bool StopExecution = false;
+        void UpdateIndex(int _value)
+        {
+            if (_value >= FuncCount)
+            {
+                StopExecution = true;
+                GameEvents.ON_CONTROL_BUTTON_TOGGLE?.Invoke(ControlButton.PLAY, false);
+                GameEvents.ON_CONTROL_BUTTON_TOGGLE?.Invoke(ControlButton.STOP, false);
+                GameEvents.ON_CONTROL_BUTTON_TOGGLE?.Invoke(ControlButton.DEBUG, false);
+                return;
+            }
+            if (StopExecution)
+            {
+                return;
+            }
+            Functions[_value].Execute();
+        }
         public void Parse()
         {
             m_Index = 0;
@@ -89,25 +93,13 @@ namespace BlockyBlock.Core
             switch (_uiBlock.Type)
             {
                 case BlockType.MOVE_FORWARD:
-                    Functions.Add(
-                        new BlockFunctionMoveForward(
-                            _uiBlock
-                        )
-                    );
+                    HandleMoveForward((UIBlockMove)_uiBlock);
                     break;
                 case BlockType.TURN_LEFT:
-                    Functions.Add(
-                        new BlockFunctionTurnLeft(
-                            _uiBlock
-                        )
-                    );
+                    HandleTurnLeft((UIBlockTurnLeft)_uiBlock);
                     break;
                 case BlockType.TURN_RIGHT:
-                    Functions.Add(
-                        new BlockFunctionTurnRight(
-                            _uiBlock
-                        )
-                    );
+                    HandleTurnRight((UIBlockTurnRight)_uiBlock);
                     break;
                 case BlockType.PICK_UP:
                     break;
@@ -116,6 +108,28 @@ namespace BlockyBlock.Core
                 case BlockType.DO_UNTIL:
                     break;
             }
+        }
+        void HandleMoveForward(UIBlockMove _uiBlock)
+        {
+            BlockFunctionMoveForward function = new BlockFunctionMoveForward(_uiBlock);
+            function.Setup();
+            Functions.Add(function);
+        }
+        void HandleTurnLeft(UIBlockTurnLeft _uiBlock)
+        {
+            BlockFunctionTurnLeft function = new BlockFunctionTurnLeft(_uiBlock);
+            function.Setup();
+            Functions.Add(function);
+        }
+        void HandleTurnRight(UIBlockTurnRight _uiBlock)
+        {
+            BlockFunctionTurnRight function = new BlockFunctionTurnRight(_uiBlock);
+            function.Setup();
+            Functions.Add(function);
+        }
+        void HandleDoUntil(UIBlock _uiBlock)
+        {
+            
         }
     }
 }

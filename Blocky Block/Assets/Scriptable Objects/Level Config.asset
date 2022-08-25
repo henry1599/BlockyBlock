@@ -41,33 +41,46 @@ MonoBehaviour:
     - LevelType: 0
       LevelName: Home
       BlockTypes: 
+      UnitDatas: []
     - LevelType: 1
       LevelName: Level 01
       BlockTypes: 000000000400000005000000
+      UnitDatas:
+      - StartPosition: {x: -7.25, y: 2.5}
+        StartDirection: 1
     - LevelType: 1
       LevelName: Level 02
       BlockTypes: 
+      UnitDatas: []
     - LevelType: 1
       LevelName: Level 03
       BlockTypes: 
+      UnitDatas: []
     - LevelType: 1
       LevelName: Level 04
       BlockTypes: 
+      UnitDatas: []
     - LevelType: 1
       LevelName: Level 05
       BlockTypes: 
+      UnitDatas: []
     - LevelType: 1
       LevelName: Level 06
       BlockTypes: 
+      UnitDatas: []
     - LevelType: 1
       LevelName: Level 07
       BlockTypes: 
+      UnitDatas: []
     - LevelType: 1
       LevelName: Level 08
       BlockTypes: 
+      UnitDatas: []
     - LevelType: 1
       LevelName: Level 09
       BlockTypes: 
+      UnitDatas: []
     - LevelType: 1
       LevelName: Level 10
       BlockTypes: 
+      UnitDatas: []

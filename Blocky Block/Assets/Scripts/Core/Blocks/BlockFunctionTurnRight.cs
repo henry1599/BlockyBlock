@@ -12,10 +12,15 @@ namespace BlockyBlock.Core
         {
 
         }
+        public void Setup()
+        {
+            
+        }
+
         public override void Execute()
         {
             // * Call Unit movement here
-            UnitEvents.ON_TURN_RIGHT?.Invoke();
+            UnitEvents.ON_TURN_RIGHT?.Invoke(this);
         }
         public override void Highlight()
         {

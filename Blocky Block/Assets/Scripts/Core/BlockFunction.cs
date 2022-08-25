@@ -13,6 +13,7 @@ namespace BlockyBlock.Core
         {
             this.uiBlock = _uiBlock;
         }
+        public virtual void AddSelfToQueue(ref List<BlockFunction> _queue){}
         public virtual void Execute(){}
         public virtual void Highlight()
         {

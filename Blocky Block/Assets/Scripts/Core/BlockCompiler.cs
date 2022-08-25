@@ -1,14 +1,19 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using BlockyBlock.Managers;
 
 namespace BlockyBlock.Core
 {
     public class BlockCompiler : MonoBehaviour
     {
         [SerializeField] BlockParser m_Parser;
-        [SerializeField] float m_RunInterval = 1;
+        float m_RunInterval;
         int m_IdxFunction = 0;
+        void Start()
+        {
+            m_RunInterval = UnitManager.Instance.UnitMoveTime;
+        }
         public void Play() 
         {
             StartCoroutine(Cor_Play());

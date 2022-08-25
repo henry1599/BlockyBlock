@@ -8,14 +8,18 @@ namespace BlockyBlock.Core
 {
     public class BlockFunctionMoveForward : BlockFunction
     {
-        public BlockFunctionMoveForward(UIBlock _uiBlock) : base(_uiBlock)
+        public BlockFunctionMoveForward(UIBlockMove _uiBlock) : base(_uiBlock)
+        {
+
+        }
+        public void Setup()
         {
 
         }
         public override void Execute()
         {
             // * Call Unit movement here
-            UnitEvents.ON_MOVE_FORWARD?.Invoke();
+            UnitEvents.ON_MOVE_FORWARD?.Invoke(this);
         }
         public override void Highlight()
         {
