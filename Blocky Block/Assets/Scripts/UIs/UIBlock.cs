@@ -167,7 +167,6 @@ namespace BlockyBlock.UI
         }
         public virtual void OnEndDrag(PointerEventData eventData)
         {
-
             if (m_OutsideContainerPrefab == null)
             {
                 return;
@@ -186,26 +185,40 @@ namespace BlockyBlock.UI
                 m_TempBlock.IsDragging = false;
                 m_TempBlock.CanvasGroup.blocksRaycasts = true;
                 m_TempBlock.ToggleChildrenRaycastTarget(true);
+
+                // * Destroy block that is not dragged into IDE
                 if (!m_CurrentContentField.gameObject.CompareTag(GameConstants.IDE_CONTENT_TAG))
                 {
                     UIManager.Instance.m_DummyUIBlock.SetAsLastSibling();
                     DestroySelf(m_TempBlock.transform);
                     return;
                 }
+
+                // * Drop block into IDE
                 m_TempBlock.transform.SetParent(m_CurrentContentField);
                 m_TempBlock.transform.GetComponent<RectTransform>().anchoredPosition = UIManager.Instance.m_DummyUIBlock.GetComponent<RectTransform>().anchoredPosition;
                 m_TempBlock.transform.SetSiblingIndex(UIManager.Instance.m_DummyUIBlock.GetSiblingIndex());
+                
+                // * Setup Block
+                Setup();
                 UIManager.Instance.m_DummyUIBlock.SetAsLastSibling();
                 return;
             }
+
+            // * Destroy block that is not dragged into IDE
             if (!m_CurrentContentField.gameObject.CompareTag(GameConstants.IDE_CONTENT_TAG))
             {
                 UIManager.Instance.m_DummyUIBlock.SetAsLastSibling();
                 DestroySelf(transform);
                 return;
             }
+
+            // * Drop block into IDE
             transform.SetParent(m_CurrentContentField);
             transform.SetSiblingIndex(UIManager.Instance.m_DummyUIBlock.GetSiblingIndex());
+
+            // * Setup Block
+            Setup();
             UIManager.Instance.m_DummyUIBlock.SetAsLastSibling();
         }
         public virtual void DestroySelf(Transform _target)
@@ -227,6 +240,10 @@ namespace BlockyBlock.UI
         public void HighlightSelf()
         {
             
+        }
+        public virtual void Setup()
+        {
+
         }
     }
 }

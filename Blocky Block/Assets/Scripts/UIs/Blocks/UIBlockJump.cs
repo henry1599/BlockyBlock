@@ -4,11 +4,13 @@ using UnityEngine;
 
 namespace BlockyBlock.UI
 {
-    public class UIBlockMove : UIBlock
+    public class UIBlockJump : UIBlock
     {
         public override void Setup()
         {
-            print("UIBlock Move Setup");
+            // * Spawn end jump block
+            print("UIBlock Jump Setup");
         }
     }
 }
+
