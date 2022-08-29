@@ -22,7 +22,9 @@ namespace BlockyBlock.Enums
         PUT_DOWN,
         DO_UNTIL,
         TURN_LEFT,
-        TURN_RIGHT
+        TURN_RIGHT,
+        JUMP,
+        SKIP
     }
     public enum LevelID {
         HOME,

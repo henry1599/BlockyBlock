@@ -44,7 +44,7 @@ MonoBehaviour:
       UnitDatas: []
     - LevelType: 1
       LevelName: Level 01
-      BlockTypes: 000000000400000005000000
+      BlockTypes: 00000000040000000500000006000000
       UnitDatas:
       - StartPosition: {x: -7.25, y: 2.5}
         StartDirection: 1

@@ -6,9 +6,9 @@ namespace BlockyBlock.UI
 {
     public class UIBlockTurnRight : UIBlock
     {
-        public override void Setup()
+        public override void Setup(UIBlock _parentBlock = null)
         {
-            print("UIBlock Turn right Setup");
+            // print("UIBlock Turn right Setup");
         }
     }
 }

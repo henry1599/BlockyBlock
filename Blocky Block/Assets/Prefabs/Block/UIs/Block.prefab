@@ -349,8 +349,8 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 15
-  m_fontSizeBase: 15
+  m_fontSize: 25
+  m_fontSizeBase: 25
   m_fontWeight: 400
   m_enableAutoSizing: 0
   m_fontSizeMin: 18
@@ -402,7 +402,6 @@ GameObject:
   - component: {fileID: 2700481491166757150}
   - component: {fileID: 2543140069086152304}
   - component: {fileID: 930384445614607012}
-  - component: {fileID: 7414052503065825606}
   m_Layer: 0
   m_Name: Block
   m_TagString: UI Block
@@ -417,7 +416,7 @@ RectTransform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2700481491166757151}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -452,28 +451,6 @@ CanvasGroup:
   m_Interactable: 1
   m_BlocksRaycasts: 1
   m_IgnoreParentGroups: 0
---- !u!114 &7414052503065825606
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2700481491166757151}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 6a91ca70f376fb848851021bd52e76ae, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_RectTransform: {fileID: 2700481491166757150}
-  m_Type: 0
-  m_IDEObject: {fileID: 2700481491284779168}
-  m_PreviewObject: {fileID: 2700481490498909001}
-  m_ChildrenImage:
-  - {fileID: 2700481490900374696}
-  - {fileID: 2700481490724448633}
-  - {fileID: 2700481491800204835}
-  - {fileID: 2700481491723120616}
-  m_CanvasGroup: {fileID: 930384445614607012}
 --- !u!1 &2700481491226171374
 GameObject:
   m_ObjectHideFlags: 0
@@ -526,7 +503,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &2700481491284779171
 RectTransform:
   m_ObjectHideFlags: 0
@@ -643,8 +620,8 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 20
-  m_fontSizeBase: 20
+  m_fontSize: 30
+  m_fontSizeBase: 30
   m_fontWeight: 400
   m_enableAutoSizing: 0
   m_fontSizeMin: 18

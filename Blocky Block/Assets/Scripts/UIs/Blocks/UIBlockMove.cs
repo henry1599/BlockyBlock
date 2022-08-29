@@ -6,9 +6,9 @@ namespace BlockyBlock.UI
 {
     public class UIBlockMove : UIBlock
     {
-        public override void Setup()
+        public override void Setup(UIBlock _parentBlock = null)
         {
-            print("UIBlock Move Setup");
+            // print("UIBlock Move Setup");
         }
     }
 }

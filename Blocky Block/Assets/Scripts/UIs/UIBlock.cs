@@ -66,16 +66,10 @@ namespace BlockyBlock.UI
             m_OutsideContainerPrefab = GameObject.FindGameObjectWithTag(GameConstants.UIBLOCK_OUTSIDE_CONTAINER_TAG).transform;
         }
         // Start is called before the first frame update
-        void Start()
+        protected virtual void Start()
         {
             m_CurrentContentField = m_OutsideContainerPrefab;
             Mode = BlockMode.PREVIEW;
-        }
-
-        // Update is called once per frame
-        void Update()
-        {
-
         }
         public virtual void OnBeginDrag(PointerEventData eventData)
         {
@@ -175,10 +169,7 @@ namespace BlockyBlock.UI
             {
                 return;
             }
-            m_IsDragging = false;
-            m_DragOffset = Vector3.zero;
-            m_CanvasGroup.blocksRaycasts = true;
-            ToggleChildrenRaycastTarget(true);
+            ResetPreset();
 
             if (m_TempBlock != null)
             {
@@ -200,7 +191,8 @@ namespace BlockyBlock.UI
                 m_TempBlock.transform.SetSiblingIndex(UIManager.Instance.m_DummyUIBlock.GetSiblingIndex());
                 
                 // * Setup Block
-                Setup();
+                print("Setup temp");
+                m_TempBlock.Setup();
                 UIManager.Instance.m_DummyUIBlock.SetAsLastSibling();
                 return;
             }
@@ -220,6 +212,13 @@ namespace BlockyBlock.UI
             // * Setup Block
             Setup();
             UIManager.Instance.m_DummyUIBlock.SetAsLastSibling();
+        }
+        public virtual void ResetPreset()
+        {
+            m_IsDragging = false;
+            m_DragOffset = Vector3.zero;
+            m_CanvasGroup.blocksRaycasts = true;
+            ToggleChildrenRaycastTarget(true);
         }
         public virtual void DestroySelf(Transform _target)
         {
@@ -241,7 +240,7 @@ namespace BlockyBlock.UI
         {
             
         }
-        public virtual void Setup()
+        public virtual void Setup(UIBlock _parentBlock = null)
         {
 
         }

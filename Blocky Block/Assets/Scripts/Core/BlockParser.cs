@@ -120,6 +120,10 @@ namespace BlockyBlock.Core
                     break;
                 case BlockType.DO_UNTIL:
                     break;
+                case BlockType.JUMP:
+                    break;
+                case BlockType.SKIP:
+                    break;
             }
         }
         void HandleMoveForward(UIBlockMove _uiBlock)
