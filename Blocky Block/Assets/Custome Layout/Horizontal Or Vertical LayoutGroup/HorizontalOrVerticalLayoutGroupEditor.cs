@@ -1,6 +1,9 @@
-using UnityEditor;
+#if UNITY_EDITOR
+    using UnityEditor;
+#endif
 using UnityEngine;
 
+#if UNITY_EDITOR
 namespace Utility.SLayout {
     [CustomEditor(typeof(SHorizontalOrVerticalLayoutGroup), true)]
     [CanEditMultipleObjects]
@@ -10,7 +13,6 @@ namespace Utility.SLayout {
     /// </summary>
     public class HorizontalOrVerticalLayoutGroupEditor : Editor
     {
-        
         SerializedProperty moveDuration;
         SerializedProperty m_SmoothDuration;
         SerializedProperty m_Padding;
@@ -97,3 +99,4 @@ namespace Utility.SLayout {
         }
     }
 }
+#endif

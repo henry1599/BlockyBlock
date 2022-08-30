@@ -22,7 +22,6 @@ namespace BlockyBlock.Core
             set
             {
                 m_Index = value;
-                DelayTime = m_BlockConfig.GetDelayTime(Functions[value].BlockType);
                 UpdateIndex(value);
             }
         }
@@ -48,6 +47,7 @@ namespace BlockyBlock.Core
             {
                 return;
             }
+            DelayTime = m_BlockConfig.GetDelayTime(Functions[_value].BlockType);
             Functions[_value].Execute();
         }
         public void Parse()
