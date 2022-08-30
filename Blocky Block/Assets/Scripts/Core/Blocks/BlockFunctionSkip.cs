@@ -7,20 +7,18 @@ using BlockyBlock.Enums;
 
 namespace BlockyBlock.Core
 {
-    public class BlockFunctionTurnLeft : BlockFunction
+    public class BlockFunctionSkip : BlockFunction
     {
-        public BlockFunctionTurnLeft(UIBlock _uiBlock) : base(_uiBlock, BlockType.TURN_LEFT)
+        public BlockFunctionSkip(UIBlockSkip _uiBlock) : base(_uiBlock, BlockType.SKIP)
         {
 
         }
         public void Setup()
         {
-            
+
         }
         public override void Execute()
         {
-            // * Call Unit movement here
-            UnitEvents.ON_TURN_LEFT?.Invoke(this);
         }
         public override void Highlight()
         {

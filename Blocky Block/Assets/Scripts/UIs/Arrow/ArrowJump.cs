@@ -32,6 +32,10 @@ namespace BlockyBlock.UI
             {
                 return;
             }
+            if (_uiBlockJumpTo == null)
+            {
+                return;
+            }
             int idxFrom = m_UIBlockJumpFrom.GetSiblingIndex();
             int idxTo = _uiBlockJumpTo.transform.GetSiblingIndex();
 

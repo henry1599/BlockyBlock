@@ -21,10 +21,16 @@ namespace BlockyBlock.Events
         public static Action<BlockFunctionMoveForward> ON_MOVE_FORWARD;
         public static Action<BlockFunctionTurnLeft> ON_TURN_LEFT;
         public static Action<BlockFunctionTurnRight> ON_TURN_RIGHT;
+        public static Action<BlockFunctionJump> ON_JUMP;
         public static Action ON_PICK_UP;
         public static Action ON_PUT_DOWN;
         public static Action ON_STOP;
         public static Action ON_RESET;
+    }
+    public class EditorEvents
+    {
+        public static Action ON_PREVIEW_STATUS_TOGGLE;
+        public static Action<bool> ON_FORCE_PREVIEW_STATUS_TOGGLE;
     }
     public class GameConstants
     {

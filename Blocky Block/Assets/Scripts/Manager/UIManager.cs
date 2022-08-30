@@ -130,5 +130,13 @@ namespace BlockyBlock.Managers
         {
             GameEvents.ON_CONTROL_BUTTON_TOGGLE?.Invoke((ControlButton)_type, false);
         }
+        public void OnPreviewToggleButtonClick()
+        {
+            EditorEvents.ON_PREVIEW_STATUS_TOGGLE?.Invoke();
+        }
+        public void OnTogglePreview(bool _status)
+        {
+            EditorEvents.ON_FORCE_PREVIEW_STATUS_TOGGLE?.Invoke(_status);
+        }
     }
 }

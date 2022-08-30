@@ -9,11 +9,18 @@ namespace BlockyBlock.Core
     public class BlockCompiler : MonoBehaviour
     {
         [SerializeField] BlockParser m_Parser;
-        float m_RunInterval;
         int m_IdxFunction = 0;
         void Start()
         {
-            m_RunInterval = UnitManager.Instance.UnitMoveTime;
+            UnitEvents.ON_JUMP += HandleJump;
+        }
+        void OnDestroy()
+        {
+            UnitEvents.ON_JUMP -= HandleJump;
+        }
+        void HandleJump(BlockFunctionJump _uiBlockJump)
+        {
+            m_IdxFunction = _uiBlockJump.IdxJumpTo;
         }
         public void Play() 
         {
@@ -50,7 +57,7 @@ namespace BlockyBlock.Core
             {
                 m_Parser.Index = m_IdxFunction;
                 m_IdxFunction ++;
-                yield return new WaitForSeconds(m_RunInterval);
+                yield return new WaitForSeconds(m_Parser.DelayTime);
             }
             m_IdxFunction = 0;
         }

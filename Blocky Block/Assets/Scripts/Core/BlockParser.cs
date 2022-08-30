@@ -4,14 +4,17 @@ using UnityEngine;
 using BlockyBlock.UI;
 using BlockyBlock.Enums;
 using BlockyBlock.Events;
+using BlockyBlock.Configurations;
 
 namespace BlockyBlock.Core
 {
     public class BlockParser : MonoBehaviour
     {
         Transform m_IDEContent = null;
-        public List<BlockFunction> Functions = new List<BlockFunction>();
-        public bool IsFinishParse;
+        public BlockConfig m_BlockConfig;
+        public List<BlockFunction> Functions {get; set;} = new List<BlockFunction>();
+        public bool IsFinishParse {get; set;}
+        public float DelayTime {get; set;} = 0;
         int m_Index;
         public int Index 
         {
@@ -19,10 +22,11 @@ namespace BlockyBlock.Core
             set
             {
                 m_Index = value;
+                DelayTime = m_BlockConfig.GetDelayTime(Functions[value].BlockType);
                 UpdateIndex(value);
             }
         }
-        public int FuncCount;
+        public int FuncCount {get; set;}
         public bool StopExecution {
             get => m_StopExecution;
             set {
@@ -121,8 +125,10 @@ namespace BlockyBlock.Core
                 case BlockType.DO_UNTIL:
                     break;
                 case BlockType.JUMP:
+                    HandleJump((UIBlockJump)_uiBlock);
                     break;
                 case BlockType.SKIP:
+                    HandleSkip((UIBlockSkip)_uiBlock);
                     break;
             }
         }
@@ -141,6 +147,18 @@ namespace BlockyBlock.Core
         void HandleTurnRight(UIBlockTurnRight _uiBlock)
         {
             BlockFunctionTurnRight function = new BlockFunctionTurnRight(_uiBlock);
+            function.Setup();
+            Functions.Add(function);
+        }
+        void HandleJump(UIBlockJump _uiBlock)
+        {
+            BlockFunctionJump function = new BlockFunctionJump(_uiBlock);
+            function.Setup();
+            Functions.Add(function);
+        }
+        void HandleSkip(UIBlockSkip _uiBlock)
+        {
+            BlockFunctionSkip function = new BlockFunctionSkip(_uiBlock);
             function.Setup();
             Functions.Add(function);
         }
