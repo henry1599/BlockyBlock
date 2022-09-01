@@ -17,6 +17,7 @@ namespace BlockyBlock.UI
         private bool m_IsPlaced = false;
         public override void Setup(UIBlock _parentBlock = null)
         {
+            base.Setup(_parentBlock);
             if (!m_IsPlaced)
             {
                 GameObject ideContent = GameObject.FindGameObjectWithTag(GameConstants.IDE_CONTENT_TAG);

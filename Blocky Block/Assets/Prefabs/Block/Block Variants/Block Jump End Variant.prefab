@@ -240,6 +240,7 @@ MonoBehaviour:
   - {fileID: 1166058360674894852}
   - {fileID: 1166058360727801295}
   m_CanvasGroup: {fileID: 4160694678842910851}
+  m_UILineNumber: {fileID: 3750970461463247755}
 --- !u!114 &1166058360674894852 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 2700481491800204835, guid: 28686d5318568c54b8f94e37ad8575fa, type: 3}
@@ -287,6 +288,17 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &3750970461463247755 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 97598972400343468, guid: 28686d5318568c54b8f94e37ad8575fa, type: 3}
+  m_PrefabInstance: {fileID: 3842875041119363623}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 31492355b2d5c8a4cae0b4b0eef778ee, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!225 &4160694678842910851 stripped

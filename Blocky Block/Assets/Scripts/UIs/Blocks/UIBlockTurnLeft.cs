@@ -8,6 +8,7 @@ namespace BlockyBlock.UI
     {
         public override void Setup(UIBlock _parentBlock = null)
         {
+            base.Setup(_parentBlock);
             // print("UIBlock Turn Left Setup");
         }
     }

@@ -38,6 +38,7 @@ namespace BlockyBlock.UI
         [Header("Drag & Drop Value")]
         [SerializeField] protected CanvasGroup m_CanvasGroup;
         protected Transform m_OutsideContainerPrefab;
+        public UILineNumber m_UILineNumber;
 
 
 
@@ -81,6 +82,7 @@ namespace BlockyBlock.UI
             {
                 InitBlock();
             }
+
             m_DragOffset = transform.position - (Vector3)eventData.position;
             m_IsDragging = true;
             m_CanvasGroup.blocksRaycasts = false;
@@ -94,12 +96,14 @@ namespace BlockyBlock.UI
             m_TempBlock.IsDragging = true;
             m_TempBlock.CanvasGroup.blocksRaycasts = false;
             m_TempBlock.ToggleChildrenRaycastTarget(false);
+            m_TempBlock.m_UILineNumber.Unset();
         }
         void InitBlock()
         {
             m_TempBlock = null;
             transform.parent = null;
             transform.SetParent(m_OutsideContainerPrefab);
+            m_UILineNumber.Unset();
         }
         public virtual void OnDrag(PointerEventData data)
         {
@@ -109,10 +113,14 @@ namespace BlockyBlock.UI
                 if (m_TempBlock != null)
                 {
                     m_TempBlock.transform.position = (Vector3)data.position + m_DragOffset;
+
+                    m_TempBlock.m_UILineNumber.Unset();
                 }
                 else
                 {
                     transform.position = (Vector3)data.position + m_DragOffset;
+
+                    m_UILineNumber.Unset();
                 }
                 if (UIManager.Instance.CheckTriggerUI(BlockMode.IDE, out Transform _IDEContainer))
                 {
@@ -191,7 +199,6 @@ namespace BlockyBlock.UI
                 m_TempBlock.transform.SetSiblingIndex(UIManager.Instance.m_DummyUIBlock.GetSiblingIndex());
                 
                 // * Setup Block
-                print("Setup temp");
                 m_TempBlock.Setup();
                 UIManager.Instance.m_DummyUIBlock.SetAsLastSibling();
                 return;
@@ -242,7 +249,10 @@ namespace BlockyBlock.UI
         }
         public virtual void Setup(UIBlock _parentBlock = null)
         {
-
+        }
+        public virtual void UpdateLineNumber()
+        {
+            m_UILineNumber.Setup(transform);
         }
     }
 }

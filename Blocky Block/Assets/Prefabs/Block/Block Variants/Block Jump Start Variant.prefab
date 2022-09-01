@@ -530,6 +530,7 @@ MonoBehaviour:
   - {fileID: 6430903876938131784}
   - {fileID: 6430903877121122435}
   m_CanvasGroup: {fileID: 8118938042786940367}
+  m_UILineNumber: {fileID: 9016097759254369991}
   m_ArrowJump: {fileID: 2057250603263805598}
 --- !u!224 &6430903876564799093 stripped
 RectTransform:
@@ -563,3 +564,14 @@ CanvasGroup:
   m_CorrespondingSourceObject: {fileID: 930384445614607012, guid: 28686d5318568c54b8f94e37ad8575fa, type: 3}
   m_PrefabInstance: {fileID: 8954599284604456811}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &9016097759254369991 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 97598972400343468, guid: 28686d5318568c54b8f94e37ad8575fa, type: 3}
+  m_PrefabInstance: {fileID: 8954599284604456811}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 31492355b2d5c8a4cae0b4b0eef778ee, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 

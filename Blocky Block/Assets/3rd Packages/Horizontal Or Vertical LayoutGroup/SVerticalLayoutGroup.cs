@@ -1,4 +1,5 @@
 using UnityEngine;
+using BlockyBlock.UI;
 
 namespace Utility.SLayout
 {
@@ -39,6 +40,14 @@ namespace Utility.SLayout
         public override void SetLayoutVertical()
         {
             SetChildrenAlongAxis(1, true);
+            foreach (Transform child in transform)
+            {
+                if (child.GetComponent<UIBlock>() == null)
+                {
+                    continue;
+                }
+                child.GetComponent<UIBlock>().UpdateLineNumber();
+            }
         }
     }
 }

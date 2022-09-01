@@ -38,6 +38,7 @@ namespace BlockyBlock.UI
         public override void Setup(UIBlock _parentBlock = null)
         {
             // * Spawn end jump block
+            base.Setup(_parentBlock);
             if (m_UIBlockJumpFrom == null)
             {
                 m_UIBlockJumpFrom = (UIBlockJump)_parentBlock;

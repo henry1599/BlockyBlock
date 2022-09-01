@@ -31,6 +31,7 @@ namespace BlockyBlock.Events
     {
         public static Action ON_PREVIEW_STATUS_TOGGLE;
         public static Action<bool> ON_FORCE_PREVIEW_STATUS_TOGGLE;
+        public static Action ON_UPDATE_LINE_NUMBER;
     }
     public class GameConstants
     {
