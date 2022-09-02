@@ -48,6 +48,76 @@ MonoBehaviour:
       UnitDatas:
       - StartPosition: {x: -7.25, y: 2.5}
         StartDirection: 1
+      - StartPosition: {x: -6.15, y: 1.4}
+        StartDirection: 0
+      - StartPosition: {x: -5.05, y: 2.5}
+        StartDirection: 1
+      - StartPosition: {x: -3.95, y: 1.4}
+        StartDirection: 0
+      - StartPosition: {x: -2.85, y: 2.5}
+        StartDirection: 1
+      - StartPosition: {x: -1.75, y: 1.4}
+        StartDirection: 0
+      - StartPosition: {x: -7.25, y: 0.3}
+        StartDirection: 1
+      - StartPosition: {x: -6.15, y: -0.8}
+        StartDirection: 0
+      - StartPosition: {x: -5.05, y: 0.3}
+        StartDirection: 1
+      - StartPosition: {x: -3.95, y: -0.8}
+        StartDirection: 0
+      - StartPosition: {x: -2.85, y: 0.3}
+        StartDirection: 1
+      - StartPosition: {x: -1.75, y: -0.8}
+        StartDirection: 0
+      - StartPosition: {x: -7.25, y: -1.9}
+        StartDirection: 1
+      - StartPosition: {x: -6.15, y: -3}
+        StartDirection: 0
+      - StartPosition: {x: -5.05, y: -1.9}
+        StartDirection: 1
+      - StartPosition: {x: -3.95, y: -3}
+        StartDirection: 0
+      - StartPosition: {x: -2.85, y: -1.9}
+        StartDirection: 1
+      - StartPosition: {x: -1.75, y: -3}
+        StartDirection: 0
+      - StartPosition: {x: -6.15, y: 2.5}
+        StartDirection: 2
+      - StartPosition: {x: -7.25, y: 1.4}
+        StartDirection: 3
+      - StartPosition: {x: -7.25, y: -0.8}
+        StartDirection: 3
+      - StartPosition: {x: -6.15, y: 0.3}
+        StartDirection: 2
+      - StartPosition: {x: -7.25, y: -3}
+        StartDirection: 3
+      - StartPosition: {x: -6.15, y: -1.9}
+        StartDirection: 2
+      - StartPosition: {x: -3.95, y: -1.9}
+        StartDirection: 2
+      - StartPosition: {x: -1.75, y: -1.9}
+        StartDirection: 2
+      - StartPosition: {x: -5.05, y: -3}
+        StartDirection: 3
+      - StartPosition: {x: -2.85, y: -3}
+        StartDirection: 3
+      - StartPosition: {x: -3.95, y: 2.5}
+        StartDirection: 2
+      - StartPosition: {x: -1.75, y: 2.5}
+        StartDirection: 2
+      - StartPosition: {x: -1.75, y: 0.3}
+        StartDirection: 2
+      - StartPosition: {x: -3.95, y: 0.3}
+        StartDirection: 2
+      - StartPosition: {x: -5.05, y: 1.4}
+        StartDirection: 3
+      - StartPosition: {x: -2.85, y: 1.4}
+        StartDirection: 3
+      - StartPosition: {x: -2.85, y: -0.8}
+        StartDirection: 3
+      - StartPosition: {x: -5.05, y: -0.8}
+        StartDirection: 3
     - LevelType: 1
       LevelName: Level 02
       BlockTypes: 
