@@ -29,6 +29,7 @@ namespace BlockyBlock.Events
     }
     public class EditorEvents
     {
+        public static Action ON_PLAY;
         public static Action ON_PREVIEW_STATUS_TOGGLE;
         public static Action<bool> ON_FORCE_PREVIEW_STATUS_TOGGLE;
         public static Action ON_UPDATE_LINE_NUMBER;
@@ -40,11 +41,5 @@ namespace BlockyBlock.Events
         public static readonly string UI_BLOCK_TAG = "UI Block";
         public static readonly string LEVEL_MANAGER_TAG = "Level Manager";
         public static readonly string SCENE_MANAGER_TAG = "Scene Manager";
-    }
-    public class UnitConstants
-    {
-        public static readonly float BLEND_UP_VALUE = 0;
-        public static readonly float BLEND_DOWN_VALUE = 0.5f;
-        public static readonly float BLEND_SIDE_VALUE = 1;
     }
 }

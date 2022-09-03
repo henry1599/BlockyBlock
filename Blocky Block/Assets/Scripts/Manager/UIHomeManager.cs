@@ -22,7 +22,7 @@ namespace BlockyBlock.Managers
         public void OnStartButtonClick()
         {
             // * Call Event to load Level
-            GameEvents.LOAD_LEVEL?.Invoke(LevelID.LEVEL_01);
+            GameEvents.LOAD_LEVEL?.Invoke(LevelID.LEVEL_TEST_3D);
         }
     }
 }

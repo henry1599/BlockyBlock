@@ -115,35 +115,21 @@ namespace BlockyBlock.UI
                     m_TempBlock.transform.position = (Vector3)data.position + m_DragOffset;
 
                     m_TempBlock.m_UILineNumber.Unset();
+                    m_TempBlock.Mode = BlockMode.IDE;
                 }
                 else
                 {
                     transform.position = (Vector3)data.position + m_DragOffset;
 
                     m_UILineNumber.Unset();
+                    Mode = BlockMode.IDE;
                 }
                 if (UIManager.Instance.CheckTriggerUI(BlockMode.IDE, out Transform _IDEContainer))
                 {
-                    if (m_TempBlock != null)
-                    {
-                        m_TempBlock.Mode = BlockMode.IDE;
-                    }
-                    else
-                    {
-                        Mode = BlockMode.IDE;
-                    }
                     m_CurrentContentField = _IDEContainer;
                 }
                 else if (UIManager.Instance.CheckTriggerUI(BlockMode.PREVIEW, out Transform _PreviewContainer))
                 {
-                    if (m_TempBlock != null)
-                    {
-                        m_TempBlock.Mode = BlockMode.PREVIEW;
-                    }
-                    else
-                    {
-                        Mode = BlockMode.PREVIEW;
-                    }
                     m_CurrentContentField = _PreviewContainer;
                 }
                 else

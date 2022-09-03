@@ -11,7 +11,7 @@ namespace BlockyBlock.Managers
     public class UnitManager : MonoBehaviour
     {
         public static UnitManager Instance {get; private set;}
-        [SerializeField] Unit m_UnitTemplate;
+        [SerializeField] Unit3D m_Unit3DTemplate;
         public float DistanceStepValue {get => m_DistanceStepValue; private set => m_DistanceStepValue = value;} [SerializeField] float m_DistanceStepValue = 1.1f;
         public float UnitMoveTime {get => m_UnitMoveTime; private set => m_UnitMoveTime = value;} [SerializeField] float m_UnitMoveTime = 1f;
         void Awake()
@@ -36,7 +36,7 @@ namespace BlockyBlock.Managers
                 Vector3 startPosition = unitData.StartPosition;
                 UnitDirection startDirection = unitData.StartDirection;
 
-                Unit unitInstance = Instantiate(m_UnitTemplate.gameObject, transform).GetComponent<Unit>();
+                Unit3D unitInstance = Instantiate(m_Unit3DTemplate.gameObject, transform).GetComponent<Unit3D>();
                 unitInstance.Setup(startPosition, startDirection);
             }
         }

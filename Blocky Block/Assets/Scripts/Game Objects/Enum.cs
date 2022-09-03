@@ -38,6 +38,7 @@ namespace BlockyBlock.Enums
         LEVEL_08,
         LEVEL_09,
         LEVEL_10,
+        LEVEL_TEST_3D
     }
     public enum LevelType {
         HOME,

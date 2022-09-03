@@ -3,51 +3,28 @@ using System.Collections.Generic;
 using UnityEngine;
 using BlockyBlock.Enums;
 using BlockyBlock.Events;
+using NaughtyAttributes;
 
 namespace BlockyBlock.Core
 {
     public class UnitAnimation : MonoBehaviour
     {
         [SerializeField] private Animator m_Animator;
-        private static readonly int MovingKeyAnimation = Animator.StringToHash("Moving");
-        private static readonly int BlendKeyAnimation = Animator.StringToHash("Blend");
-        void Flip(bool _isLeft)
+        public void TriggerAnimTurnLeft()
         {
-            transform.localScale = new Vector3(
-                _isLeft ? 1 : -1,
-                1,
-                1
-            );
+            m_Animator.CrossFade("Trot_L", 0, 0);
         }
-        public void TriggerMovingBool(bool _status)
+        public void TriggerAnimTurnRight()
         {
-            m_Animator.SetBool(MovingKeyAnimation, _status);
+            m_Animator.CrossFade("Trot_R", 0, 0);
         }
-        public void TriggerBlendValue(float _value)
+        public void TriggerAnimRunning()
         {
-            m_Animator.SetFloat(BlendKeyAnimation, _value);
+            m_Animator.CrossFade("Trot_F", 0, 0);
         }
-        public void SetDirection(UnitDirection _direction)
+        public void Reset()
         {
-            TriggerMovingBool(false);
-            float blendValue = 0;
-            switch (_direction)
-            {
-                case UnitDirection.UP:
-                    blendValue = UnitConstants.BLEND_UP_VALUE;
-                    break;
-                case UnitDirection.LEFT:
-                    blendValue = UnitConstants.BLEND_SIDE_VALUE;
-                    break;
-                case UnitDirection.RIGHT:
-                    blendValue = UnitConstants.BLEND_SIDE_VALUE;
-                    break;
-                case UnitDirection.DOWN:
-                    blendValue = UnitConstants.BLEND_DOWN_VALUE;
-                    break;
-            }
-            Flip(_direction == UnitDirection.LEFT);
-            TriggerBlendValue(blendValue);
+            m_Animator.CrossFade("Base", 0, 0);
         }
     }
 }

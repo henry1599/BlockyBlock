@@ -32,6 +32,7 @@ namespace BlockyBlock.Core
                 m_StopExecution = value;
                 if (value)
                 {
+                    BlockCompiler.Instance.IsExecuting = false;
                     UnitEvents.ON_STOP?.Invoke();
                 }
             }

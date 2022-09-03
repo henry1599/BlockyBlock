@@ -8,8 +8,14 @@ namespace BlockyBlock.Core
 {
     public class BlockCompiler : MonoBehaviour
     {
+        public static BlockCompiler Instance {get; private set;}
         [SerializeField] BlockParser m_Parser;
+        public bool IsExecuting = false;
         int m_IdxFunction = 0;
+        void Awake()
+        {
+            Instance = this;
+        }
         void Start()
         {
             UnitEvents.ON_JUMP += HandleJump;
@@ -24,10 +30,12 @@ namespace BlockyBlock.Core
         }
         public void Play() 
         {
+            IsExecuting = true;
             StartCoroutine(Cor_Play());
         }
         public void Stop() 
         {
+            IsExecuting = false;
             StopCoroutine(Cor_Play());
             StopCoroutine(Cor_Debug());
             m_IdxFunction = 0;
@@ -36,6 +44,7 @@ namespace BlockyBlock.Core
         }
         public void Debug() 
         {
+            IsExecuting = true;
             m_Parser.Debug();
             if (m_Parser.IsFinishParse == false)
             {
