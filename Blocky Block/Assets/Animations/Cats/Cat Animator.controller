@@ -113,6 +113,7 @@ MonoBehaviour:
   TransitionTo:
   - Look
   - LookDown 0
+  IsSleeping: 0
 --- !u!1102 &-6473532360125792385
 AnimatorState:
   serializedVersion: 6
@@ -280,6 +281,7 @@ MonoBehaviour:
   TransitionTo:
   - LookSite
   - LookDown 0
+  IsSleeping: 0
 --- !u!1101 &-2912741956829836886
 AnimatorStateTransition:
   m_ObjectHideFlags: 1
@@ -313,7 +315,8 @@ AnimatorState:
   m_Speed: 1
   m_CycleOffset: 0
   m_Transitions: []
-  m_StateMachineBehaviours: []
+  m_StateMachineBehaviours:
+  - {fileID: 6249880554303119683}
   m_Position: {x: 50, y: 50, z: 0}
   m_IKOnFeet: 0
   m_WriteDefaultValues: 1
@@ -464,19 +467,19 @@ AnimatorController:
     m_DefaultFloat: 0
     m_DefaultInt: 0
     m_DefaultBool: 0
-    m_Controller: {fileID: 0}
+    m_Controller: {fileID: 9100000}
   - m_Name: Turn Right
     m_Type: 9
     m_DefaultFloat: 0
     m_DefaultInt: 0
     m_DefaultBool: 0
-    m_Controller: {fileID: 0}
+    m_Controller: {fileID: 9100000}
   - m_Name: Running
     m_Type: 4
     m_DefaultFloat: 0
     m_DefaultInt: 0
     m_DefaultBool: 0
-    m_Controller: {fileID: 0}
+    m_Controller: {fileID: 9100000}
   m_AnimatorLayers:
   - serializedVersion: 5
     m_Name: Base Layer
@@ -527,6 +530,7 @@ MonoBehaviour:
   TransitionTo:
   - Sit_Idle 0
   - Sit_from 0
+  IsSleeping: 0
 --- !u!1101 &399233135743290206
 AnimatorStateTransition:
   m_ObjectHideFlags: 1
@@ -699,6 +703,7 @@ MonoBehaviour:
   TransitionTo:
   - Look
   - LookSite
+  IsSleeping: 0
 --- !u!1102 &2782885569202908110
 AnimatorState:
   serializedVersion: 6
@@ -860,6 +865,20 @@ AnimatorState:
   m_MirrorParameter: 
   m_CycleOffsetParameter: 
   m_TimeParameter: 
+--- !u!114 &6249880554303119683
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 424913260e7d22344a86d028a2fa73f4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  TransitionTo: []
+  IsSleeping: 1
 --- !u!1101 &6658886155335561520
 AnimatorStateTransition:
   m_ObjectHideFlags: 1

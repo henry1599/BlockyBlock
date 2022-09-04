@@ -6,11 +6,12 @@ using BlockyBlock.Core;
 public class RandomIdleTransition : StateMachineBehaviour
 {
     public string[] TransitionTo;
+    public bool IsSleeping = false;
     // OnStateEnter is called when a transition starts and the state machine starts to evaluate this state
-    //override public void OnStateEnter(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
-    //{
-    //    
-    //}
+    override public void OnStateEnter(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
+    {
+        animator.GetComponent<UnitParticleSystem>().ToggleParSleep(IsSleeping);
+    }
 
     // OnStateUpdate is called on each Update frame between OnStateEnter and OnStateExit callbacks
     //override public void OnStateUpdate(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
@@ -22,6 +23,10 @@ public class RandomIdleTransition : StateMachineBehaviour
     override public void OnStateExit(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
         if (BlockCompiler.Instance.IsExecuting)
+        {
+            return;
+        }
+        if (TransitionTo.Length == 0)
         {
             return;
         }
