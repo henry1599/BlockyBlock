@@ -22,9 +22,29 @@ namespace BlockyBlock.Core
         {
             m_Animator.CrossFade("Trot_F", 0, 0);
         }
-        public void Reset()
+        public void TriggerAnimSwimming()
         {
-            m_Animator.CrossFade("Base", 0, 0);
+            m_Animator.CrossFade("Swim_F", 0, 0);
+        }
+        public void TriggerAnimWaterToGround()
+        {
+            m_Animator.CrossFade("InPlace", 0, 0);
+        }
+        [Button]
+        public void TriggerAnimGroundToWater()
+        {
+            m_Animator.CrossFade("Swim_Enter", 0, 0);
+        }
+        public void Reset(bool _underwater)
+        {
+            if (_underwater)
+            {
+                m_Animator.CrossFade("Swim_idle", 0, 0);
+            }
+            else
+            {
+                m_Animator.CrossFade("Base", 0, 0);
+            }
         }
     }
 }

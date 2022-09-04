@@ -11,6 +11,7 @@ namespace BlockyBlock.Configurations
     {
         public float StepDistance;
         public float MoveTime;
+        public float EnterWaterTime;
         public float RotateTime;
         public Unit3DRotation Unit3DRotation;
         public DirectionData GetDataByDirection(UnitDirection _direction)

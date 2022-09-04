@@ -1,5 +1,10 @@
 namespace BlockyBlock.Enums
 {
+    public enum GroundType {
+        GROUND,
+        WATER,
+        TRAP
+    }
     public enum ControlButton {
         STOP = 0,
         PLAY = 1,

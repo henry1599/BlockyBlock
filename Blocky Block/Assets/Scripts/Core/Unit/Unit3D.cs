@@ -13,10 +13,35 @@ namespace BlockyBlock.Core
     public class Unit3D : MonoBehaviour
     {
         [SerializeField] UnitAnimation m_Animation;
+        [SerializeField] UnitBound m_Bound;
         private Vector3 m_StartPosition;
         private UnitDirection m_StartDirection;
         private UnitDirection m_CurrentDirection;
         public UnitConfig m_Unit3DConfig;
+        private GroundType m_CurrentGround;
+        private bool m_IsUnderwater = false;
+        private GroundType CurrentGround 
+        {
+            get => m_CurrentGround;
+            set 
+            {
+                m_IsUnderwater = value == GroundType.WATER;
+                if (m_CurrentGround == GroundType.GROUND && value == GroundType.WATER)
+                {
+                    MoveFromGroundToWater();
+                    m_CurrentGround = value;
+                    return;
+                }
+                if (m_CurrentGround == GroundType.WATER && value == GroundType.GROUND)
+                {
+                    MoveFromWaterToGround();
+                    m_CurrentGround = value;
+                    return;
+                }
+                m_CurrentGround = value;
+                MoveNormally(m_CurrentGround);
+            }
+        }
         // Start is called before the first frame update
         void Start()
         {
@@ -26,6 +51,8 @@ namespace BlockyBlock.Core
 
             UnitEvents.ON_STOP += HandleStop;
             UnitEvents.ON_RESET += HandleReset;
+
+            m_CurrentGround = m_Bound.CastBelow();
         }
         void OnDestroy()
         {
@@ -44,18 +71,45 @@ namespace BlockyBlock.Core
 
             transform.position = m_StartPosition;
             transform.eulerAngles = m_Unit3DConfig.GetDataByDirection(_startDirection).Rotation;
+            
+            m_CurrentGround = m_Bound.CastBelow();
         }
         void HandleStop()
         {
-            m_Animation.Reset();
+            m_Animation.Reset(m_IsUnderwater);
         }
         void HandleReset()
         {
             transform.DOKill(true);
             Setup(m_StartPosition, m_StartDirection);
-            m_Animation.Reset();
+            m_IsUnderwater = false;
+            m_Animation.Reset(m_IsUnderwater);
         }
         public void MoveForward(BlockFunctionMoveForward _moveForward)
+        {
+            GroundType nextGround = m_Bound.CastFront();
+            CurrentGround = nextGround;
+        }
+        void MoveFromGroundToWater()
+        {
+            DirectionData directionData = m_Unit3DConfig.GetDataByDirection(m_CurrentDirection);
+            Vector3 newPosition = transform.position + directionData.MoveDirection * m_Unit3DConfig.StepDistance;
+            float moveTime = m_Unit3DConfig.EnterWaterTime; 
+            m_Animation.TriggerAnimGroundToWater();
+            newPosition.y = - 0.9f;
+            transform 
+                .DOMove(
+                    newPosition,
+                    moveTime
+                )
+                .SetEase(Ease.Linear);
+            // StartCoroutine(SetDelay(() => transform.position))
+        }
+        void MoveFromWaterToGround()
+        {
+
+        }
+        void MoveNormally(GroundType _currentGround)
         {
             DirectionData directionData = m_Unit3DConfig.GetDataByDirection(m_CurrentDirection);
             Vector3 newPosition = transform.position + directionData.MoveDirection * m_Unit3DConfig.StepDistance;
@@ -66,7 +120,14 @@ namespace BlockyBlock.Core
                     moveTime
                 )
                 .SetEase(Ease.Linear);
-            m_Animation.TriggerAnimRunning();
+            if (_currentGround == GroundType.GROUND)
+            {
+                m_Animation.TriggerAnimRunning();
+            }
+            else if (_currentGround == GroundType.WATER)
+            {
+                m_Animation.TriggerAnimSwimming();
+            }
         }
         public void TurnLeft(BlockFunctionTurnLeft _turnLeft)
         {

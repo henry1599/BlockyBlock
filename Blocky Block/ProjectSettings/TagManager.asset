@@ -9,6 +9,12 @@ TagManager:
   - Level Manager
   - Scene Manager
   - UI Block
+  - Ground
+  - Trap
+  - Missile
+  - Water
+  - Blue ground
+  - Red ground
   layers:
   - Default
   - TransparentFX
@@ -16,7 +22,7 @@ TagManager:
   - 
   - Water
   - UI
-  - 
+  - Walkable
   - 
   - 
   - 

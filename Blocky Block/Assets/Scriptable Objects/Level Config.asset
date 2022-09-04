@@ -46,7 +46,7 @@ MonoBehaviour:
       LevelName: Level 01
       BlockTypes: 00000000040000000500000006000000
       UnitDatas:
-      - StartPosition: {x: 1, y: 2, z: 0}
+      - StartPosition: {x: 4, y: 2, z: 0}
         StartDirection: 1
     - LevelType: 1
       LevelName: Level 02
@@ -88,5 +88,5 @@ MonoBehaviour:
       LevelName: Level Test 3D
       BlockTypes: 00000000040000000500000006000000
       UnitDatas:
-      - StartPosition: {x: 1, y: 0, z: 2}
+      - StartPosition: {x: 0, y: 0, z: 4}
         StartDirection: 1
