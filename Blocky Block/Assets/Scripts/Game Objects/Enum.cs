@@ -2,8 +2,7 @@ namespace BlockyBlock.Enums
 {
     public enum GroundType {
         GROUND,
-        WATER,
-        TRAP
+        WATER
     }
     public enum ControlButton {
         STOP = 0,

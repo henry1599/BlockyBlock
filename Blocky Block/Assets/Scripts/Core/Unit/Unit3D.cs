@@ -14,6 +14,12 @@ namespace BlockyBlock.Core
     {
         [SerializeField] UnitAnimation m_Animation;
         [SerializeField] UnitBound m_Bound;
+        [Space(10)]
+        [Header("From water to ground")]
+        [SerializeField] float m_JumpPower;
+        [Space(10)]
+        [Header("VFX")]
+        [SerializeField] GameObject m_VfxWaterSplash;
         private Vector3 m_StartPosition;
         private UnitDirection m_StartDirection;
         private UnitDirection m_CurrentDirection;
@@ -87,7 +93,16 @@ namespace BlockyBlock.Core
         }
         public void MoveForward(BlockFunctionMoveForward _moveForward)
         {
-            GroundType nextGround = m_Bound.CastFront();
+            GroundType nextGround = m_Bound.CastFrontDown();
+            switch (CurrentGround)
+            {
+                case GroundType.WATER:
+                    nextGround = m_Bound.CastFrontUp();
+                    break;
+                case GroundType.GROUND:
+                    nextGround = m_Bound.CastFrontDown();
+                    break;
+            }
             CurrentGround = nextGround;
         }
         void MoveFromGroundToWater()
@@ -96,18 +111,38 @@ namespace BlockyBlock.Core
             Vector3 newPosition = transform.position + directionData.MoveDirection * m_Unit3DConfig.StepDistance;
             float moveTime = m_Unit3DConfig.EnterWaterTime; 
             m_Animation.TriggerAnimGroundToWater();
-            newPosition.y = - 0.9f;
+            newPosition.y = -0.9f;
             transform 
                 .DOMove(
                     newPosition,
                     moveTime
                 )
-                .SetEase(Ease.Linear);
-            // StartCoroutine(SetDelay(() => transform.position))
+                .SetEase(Ease.Linear)
+                .OnComplete(() => transform.position = newPosition);
+            StartCoroutine(SetDelay(() => Instantiate(m_VfxWaterSplash, new Vector3(newPosition.x, 0, newPosition.z), Quaternion.Euler(directionData.Rotation)), 0.3f));
+        }
+        IEnumerator SetDelay(System.Action _cb = null, float _delay = 0.0f)
+        {
+            yield return new WaitForSeconds(_delay);
+            _cb?.Invoke();
         }
         void MoveFromWaterToGround()
         {
-
+            DirectionData directionData = m_Unit3DConfig.GetDataByDirection(m_CurrentDirection);
+            Vector3 newPosition = transform.position + directionData.MoveDirection * m_Unit3DConfig.StepDistance;
+            float moveTime = m_Unit3DConfig.EnterWaterTime; 
+            m_Animation.TriggerAnimWaterToGround();
+            newPosition.y = 0f;
+            transform 
+                .DOLocalJump(
+                    newPosition,
+                    m_JumpPower,
+                    1,
+                    moveTime,
+                    false
+                )
+                .SetEase(Ease.InOutSine)
+                .OnComplete(() => transform.position = newPosition);
         }
         void MoveNormally(GroundType _currentGround)
         {
