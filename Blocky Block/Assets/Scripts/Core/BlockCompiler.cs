@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using UnityEngine;
 using BlockyBlock.Managers;
 using BlockyBlock.Events;
+using BlockyBlock.UI;
+using BlockyBlock.Enums;
 
 namespace BlockyBlock.Core
 {
@@ -10,6 +12,15 @@ namespace BlockyBlock.Core
     {
         public static BlockCompiler Instance {get; private set;}
         [SerializeField] BlockParser m_Parser;
+        public IDERunState IDEState
+        {
+            get => m_IDEState;
+            set 
+            {
+                m_IDEState = value;
+                EditorEvents.ON_BLOCK_EDITOR?.Invoke(m_IDEState != IDERunState.STOP);
+            }
+        } private IDERunState m_IDEState;
         public bool IsExecuting = false;
         int m_IdxFunction = 0;
         void Awake()
@@ -31,11 +42,14 @@ namespace BlockyBlock.Core
         public void Play() 
         {
             IsExecuting = true;
+            IDEState = IDERunState.MANNUAL;
             StartCoroutine(Cor_Play());
         }
         public void Stop() 
         {
             IsExecuting = false;
+            IDEState = IDERunState.STOP;
+            BlockEvents.ON_HIGHLIGHT?.Invoke(null, IDEState);
             StopCoroutine(Cor_Play());
             StopCoroutine(Cor_Debug());
             m_IdxFunction = 0;
@@ -46,10 +60,12 @@ namespace BlockyBlock.Core
         {
             IsExecuting = true;
             m_Parser.Debug();
+            IDEState = IDERunState.DEBUGGING;
             if (m_Parser.IsFinishParse == false)
             {
                 m_Parser.Parse();
             }
+            StopCoroutine(Cor_Play());
             StartCoroutine(Cor_Debug());
         }
         IEnumerator Cor_Debug()
@@ -68,6 +84,8 @@ namespace BlockyBlock.Core
                 m_IdxFunction ++;
                 yield return new WaitForSeconds(m_Parser.DelayTime);
             }
+            IDEState = IDERunState.STOP;
+            BlockEvents.ON_HIGHLIGHT?.Invoke(null, IDEState);
             m_IdxFunction = 0;
         }
     }

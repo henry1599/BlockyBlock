@@ -28,6 +28,13 @@ namespace BlockyBlock.UI
 
 
         [Space(10)]
+        [Header("Highlight value")]
+        [SerializeField] protected UICompilerSignal m_Signal;
+
+
+
+
+        [Space(10)]
         [Header("Raycast Target Children")]
         [SerializeField] List<Image> m_ChildrenImage;
 
@@ -44,6 +51,19 @@ namespace BlockyBlock.UI
 
         UIBlock m_TempBlock = null;
         BlockMode m_Mode;
+        ScrollIDEState ScrollIDEState
+        {
+            get => m_ScrollIDEState;
+            set 
+            {
+                if (m_ScrollIDEState == value)
+                {
+                    return;
+                }
+                m_ScrollIDEState = value;
+                EditorEvents.ON_IDE_SCROLL?.Invoke(value);
+            }
+        } ScrollIDEState m_ScrollIDEState;
         public CanvasGroup CanvasGroup => m_CanvasGroup;
         public BlockMode Mode 
         {
@@ -71,6 +91,16 @@ namespace BlockyBlock.UI
         {
             m_CurrentContentField = m_OutsideContainerPrefab;
             Mode = BlockMode.PREVIEW;
+
+            BlockEvents.ON_HIGHLIGHT += HandleHighlight;
+        }
+        void Update()
+        {
+            // CastBlockPosition();
+        }
+        void OnDestroy()
+        {
+            BlockEvents.ON_HIGHLIGHT -= HandleHighlight;
         }
         public virtual void OnBeginDrag(PointerEventData eventData)
         {
@@ -110,6 +140,7 @@ namespace BlockyBlock.UI
             if (m_IsDragging)
             {
                 CastBlockPosition();
+                CastIDETopDown();
                 if (m_TempBlock != null)
                 {
                     m_TempBlock.transform.position = (Vector3)data.position + m_DragOffset;
@@ -148,9 +179,28 @@ namespace BlockyBlock.UI
                     UIManager.Instance.m_DummyUIBlock.transform.SetSiblingIndex(nextIdx);
                 }
             }
+            // else if (!UIManager.Instance.CheckTriggerUI(BlockMode.DUMMY_BLOCK, out Transform _DummyBlockTransform))
+            // {
+            //     UIManager.Instance.m_DummyUIBlock.transform.SetAsLastSibling();
+            // }
+        }
+        public virtual void CastIDETopDown()
+        {
+            if (UIManager.Instance.CheckTriggerUI(GameConstants.TOP_IDE_TAG))
+            {
+                print("TOP");
+                ScrollIDEState = ScrollIDEState.SCROLL_DOWN;
+                UIManager.Instance.m_DummyUIBlock.transform.SetAsLastSibling();
+            }
+            else if (UIManager.Instance.CheckTriggerUI(GameConstants.BELOW_IDE_TAG))
+            {
+                print("BELOW");
+                ScrollIDEState = ScrollIDEState.SCROLL_UP;
+                UIManager.Instance.m_DummyUIBlock.transform.SetAsLastSibling();
+            }
             else
             {
-                UIManager.Instance.m_DummyUIBlock.transform.SetAsLastSibling();
+                ScrollIDEState = ScrollIDEState.STOP_SCROLLING;
             }
         }
         public virtual void OnEndDrag(PointerEventData eventData)
@@ -229,9 +279,34 @@ namespace BlockyBlock.UI
                 img.raycastTarget = _status;
             }
         }
-        public void HighlightSelf()
+        void HandleHighlight(UIBlock _uiBlock, IDERunState _state)
         {
-            
+            if (this == _uiBlock)
+            {
+                HighlightSelf(_state);
+            }
+            else
+            {
+                UnHighlightSelf(_state);
+            }
+        }
+        public virtual void HighlightSelf(IDERunState _state)
+        {
+            switch (_state)
+            {
+                case IDERunState.MANNUAL:
+                    m_Signal?.TogglePlayMode();
+                    break;
+                case IDERunState.DEBUGGING:
+                    m_Signal?.ToggleDebugMode();
+                    break;
+                default:
+                    break;
+            }
+        }
+        public virtual void UnHighlightSelf(IDERunState _state)
+        {
+            m_Signal?.DisableSelf();
         }
         public virtual void Setup(UIBlock _parentBlock = null)
         {

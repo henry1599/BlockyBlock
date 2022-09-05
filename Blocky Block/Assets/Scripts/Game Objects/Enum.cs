@@ -1,5 +1,15 @@
 namespace BlockyBlock.Enums
 {
+    public enum IDERunState {
+        MANNUAL,
+        DEBUGGING,
+        STOP
+    }
+    public enum ScrollIDEState {
+        SCROLL_UP,
+        SCROLL_DOWN,
+        STOP_SCROLLING
+    }
     public enum GroundType {
         GROUND,
         WATER
@@ -18,7 +28,8 @@ namespace BlockyBlock.Enums
     public enum BlockMode {
         IDE, 
         PREVIEW,
-        BLOCK_ON_BLOCK
+        BLOCK_ON_BLOCK,
+        DUMMY_BLOCK
     }
     public enum BlockType {
         MOVE_FORWARD,

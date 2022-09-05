@@ -1,11 +1,26 @@
 using UnityEngine;
 using BlockyBlock.UI;
+using BlockyBlock.Events;
 
 namespace Utility.SLayout
 {
     [AddComponentMenu("Layout/SVertical Layout Group", 151)]
     public class SVerticalLayoutGroup : SHorizontalOrVerticalLayoutGroup
     {
+        protected override void Start()
+        {
+            base.Start();
+            BlockEvents.ON_UPDATE_VERTICAL_LAYOUT += HandleBlockHighlight;
+        }
+        protected override void OnDestroy()
+        {
+            base.OnDestroy();
+            BlockEvents.ON_UPDATE_VERTICAL_LAYOUT += HandleBlockHighlight;
+        }
+        void HandleBlockHighlight()
+        {
+            SetChildrenAlongAxis(1, true);
+        }
         protected SVerticalLayoutGroup()
         {}
 

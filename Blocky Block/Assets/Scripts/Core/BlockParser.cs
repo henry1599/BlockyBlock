@@ -50,6 +50,7 @@ namespace BlockyBlock.Core
             }
             DelayTime = m_BlockConfig.GetDelayTime(Functions[_value].BlockType);
             Functions[_value].Execute();
+            BlockEvents.ON_HIGHLIGHT?.Invoke(Functions[_value].UIBlock, BlockCompiler.Instance.IDEState);
         }
         public void Parse()
         {

@@ -23,9 +23,5 @@ namespace BlockyBlock.Core
             // * Call Unit movement here
             UnitEvents.ON_TURN_RIGHT?.Invoke(this);
         }
-        public override void Highlight()
-        {
-            base.Highlight();
-        }
     }
 }

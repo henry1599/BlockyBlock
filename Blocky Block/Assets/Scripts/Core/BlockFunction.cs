@@ -17,11 +17,6 @@ namespace BlockyBlock.Core
             this.uiBlock = _uiBlock;
             this.blockType = _type;
         }
-        public virtual void AddSelfToQueue(ref List<BlockFunction> _queue){}
         public virtual void Execute(){}
-        public virtual void Highlight()
-        {
-            uiBlock.HighlightSelf();
-        }
     }
 }

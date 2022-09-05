@@ -147,6 +147,10 @@ PrefabInstance:
       propertyPath: m_IsActive
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 2700481491284779171, guid: 28686d5318568c54b8f94e37ad8575fa, type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: 210
+      objectReference: {fileID: 0}
     - target: {fileID: 2700481491682927755, guid: 28686d5318568c54b8f94e37ad8575fa, type: 3}
       propertyPath: m_text
       value: Turn left
@@ -198,6 +202,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 31492355b2d5c8a4cae0b4b0eef778ee, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &1946266056860580566 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 1245233684709030015, guid: 28686d5318568c54b8f94e37ad8575fa, type: 3}
+  m_PrefabInstance: {fileID: 740125097989079721}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0ee7c766b9f21d7409112cb4c5798877, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!114 &3404574263281315137 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 2700481491723120616, guid: 28686d5318568c54b8f94e37ad8575fa, type: 3}
@@ -240,6 +255,7 @@ MonoBehaviour:
   m_Type: 4
   m_IDEObject: {fileID: 3404574263854129673}
   m_PreviewObject: {fileID: 3404574264673300960}
+  m_Signal: {fileID: 1946266056860580566}
   m_ChildrenImage:
   - {fileID: 3404574264003646977}
   - {fileID: 3404574264447757264}

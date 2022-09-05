@@ -15,6 +15,9 @@ TagManager:
   - Water
   - Blue ground
   - Red ground
+  - Below IDE
+  - Top IDE
+  - UI Dummy Block
   layers:
   - Default
   - TransparentFX

@@ -20,9 +20,5 @@ namespace BlockyBlock.Core
         public override void Execute()
         {
         }
-        public override void Highlight()
-        {
-            base.Highlight();
-        }
     }
 }
