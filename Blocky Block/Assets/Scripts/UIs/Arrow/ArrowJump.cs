@@ -11,6 +11,7 @@ namespace BlockyBlock.UI
     {
         public float m_ScaleFactor {get; set;}
         public Transform m_UIBlockJumpFrom;
+        public GameObject m_ArrowHead;
         public RectTransform m_ArrowStart, m_ArrowBody, m_ArrowEnd;
         public float m_ArrowStartInitLengthMin, m_ArrowStartInitLengthMax;
         float m_ArrowStartInitLength;
@@ -45,6 +46,8 @@ namespace BlockyBlock.UI
             float actualArrowHeight = idxDiff * m_ScaleFactor;
             transform.localScale = new Vector3(1, scaleY, 1);
 
+            m_ArrowHead.SetActive(true);
+
             Sequence animatedSequence = DOTween.Sequence();
             animatedSequence.Append(
                 m_ArrowStart
@@ -63,14 +66,15 @@ namespace BlockyBlock.UI
             animatedSequence.Append(
                 m_ArrowEnd
                     .DOSizeDelta(
-                        new Vector2(m_ArrowStartInitLength, m_ArrowStart.sizeDelta.y),
+                        new Vector2(m_ArrowStartInitLength - 20, m_ArrowStart.sizeDelta.y),
                         0.1f
                     )
             );
         }
         public void UnSetupSelf()
         {
-
+            m_ArrowHead.SetActive(false);
+            
             Sequence animatedSequence = DOTween.Sequence();
             animatedSequence.Append(
                 m_ArrowEnd
