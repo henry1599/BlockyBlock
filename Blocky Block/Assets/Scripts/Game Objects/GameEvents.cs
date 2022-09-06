@@ -46,6 +46,7 @@ namespace BlockyBlock.Events
     {
         public static readonly string UIBLOCK_OUTSIDE_CONTAINER_TAG = "Block Container";
         public static readonly string IDE_CONTENT_TAG = "IDE Content";
+        public static readonly string IDE_SCROLL_RECT_TAG = "IDE Scroll Rect";
         public static readonly string UI_BLOCK_TAG = "UI Block";
         public static readonly string UI_DUMMY_BLOCK_TAG = "UI Dummy Block";
         public static readonly string LEVEL_MANAGER_TAG = "Level Manager";

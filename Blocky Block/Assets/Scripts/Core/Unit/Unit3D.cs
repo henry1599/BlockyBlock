@@ -154,6 +154,7 @@ namespace BlockyBlock.Core
                     newPosition,
                     moveTime
                 )
+                .SetDelay(0.2f)
                 .SetEase(Ease.Linear);
             if (_currentGround == GroundType.GROUND)
             {

@@ -58,6 +58,7 @@ namespace BlockyBlock.Core
         }
         public void Debug() 
         {
+            StopCoroutine(Cor_Play());
             IsExecuting = true;
             m_Parser.Debug();
             IDEState = IDERunState.DEBUGGING;
@@ -65,7 +66,6 @@ namespace BlockyBlock.Core
             {
                 m_Parser.Parse();
             }
-            StopCoroutine(Cor_Play());
             StartCoroutine(Cor_Debug());
         }
         IEnumerator Cor_Debug()

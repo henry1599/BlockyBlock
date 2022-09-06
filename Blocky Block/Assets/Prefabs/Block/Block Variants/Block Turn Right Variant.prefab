@@ -235,6 +235,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7b2e9c9d48062d445aca43e38d33fd0b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  m_ThisRect: {fileID: 6819052429560293659}
   m_Type: 5
   m_IDEObject: {fileID: 6819052429443352741}
   m_PreviewObject: {fileID: 6819052428617571148}
@@ -246,6 +247,11 @@ MonoBehaviour:
   - {fileID: 6819052430212974573}
   m_CanvasGroup: {fileID: 8588731918921491105}
   m_UILineNumber: {fileID: 8827776730122564009}
+--- !u!224 &6819052429560293659 stripped
+RectTransform:
+  m_CorrespondingSourceObject: {fileID: 2700481491166757150, guid: 28686d5318568c54b8f94e37ad8575fa, type: 3}
+  m_PrefabInstance: {fileID: 8923932781943695365}
+  m_PrefabAsset: {fileID: 0}
 --- !u!114 &6819052429992201766 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 2700481491800204835, guid: 28686d5318568c54b8f94e37ad8575fa, type: 3}

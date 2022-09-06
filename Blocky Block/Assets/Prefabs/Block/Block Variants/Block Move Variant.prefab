@@ -7,6 +7,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 930384445614607012, guid: 28686d5318568c54b8f94e37ad8575fa, type: 3}
+      propertyPath: m_Alpha
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 1245233683450584985, guid: 28686d5318568c54b8f94e37ad8575fa, type: 3}
       propertyPath: m_IsActive
       value: 1
@@ -217,6 +221,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1ff3854c73b740a41a60d8629476b852, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  m_ThisRect: {fileID: 986352109123434863}
   m_Type: 0
   m_IDEObject: {fileID: 986352108972972241}
   m_PreviewObject: {fileID: 986352108187224888}
@@ -228,6 +233,11 @@ MonoBehaviour:
   - {fileID: 986352108471916441}
   m_CanvasGroup: {fileID: 2604013137936593621}
   m_UILineNumber: {fileID: 2995050021300003293}
+--- !u!224 &986352109123434863 stripped
+RectTransform:
+  m_CorrespondingSourceObject: {fileID: 2700481491166757150, guid: 28686d5318568c54b8f94e37ad8575fa, type: 3}
+  m_PrefabInstance: {fileID: 2939218467695458417}
+  m_PrefabAsset: {fileID: 0}
 --- !u!225 &2604013137936593621 stripped
 CanvasGroup:
   m_CorrespondingSourceObject: {fileID: 930384445614607012, guid: 28686d5318568c54b8f94e37ad8575fa, type: 3}

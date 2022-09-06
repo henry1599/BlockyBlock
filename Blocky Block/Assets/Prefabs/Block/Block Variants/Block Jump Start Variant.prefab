@@ -607,6 +607,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 635d70bf437c0df49b420a47cbbb498a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  m_ThisRect: {fileID: 6430903876564799093}
   m_Type: 6
   m_IDEObject: {fileID: 6430903876414287819}
   m_PreviewObject: {fileID: 6430903875089513506}

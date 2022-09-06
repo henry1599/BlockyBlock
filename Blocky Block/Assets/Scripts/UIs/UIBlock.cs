@@ -20,6 +20,7 @@ namespace BlockyBlock.UI
 
         [Space(10)]
         [Header("Block Visible")]
+        [SerializeField] protected RectTransform m_ThisRect;
         [SerializeField] protected BlockType m_Type;
         [SerializeField] protected GameObject m_IDEObject;
         [SerializeField] protected GameObject m_PreviewObject;
@@ -49,6 +50,8 @@ namespace BlockyBlock.UI
 
 
 
+        protected ScrollRect m_ScrollRect;
+        protected RectTransform m_ContentPanel;
         UIBlock m_TempBlock = null;
         BlockMode m_Mode;
         ScrollIDEState ScrollIDEState
@@ -85,6 +88,8 @@ namespace BlockyBlock.UI
         void Awake()
         {
             m_OutsideContainerPrefab = GameObject.FindGameObjectWithTag(GameConstants.UIBLOCK_OUTSIDE_CONTAINER_TAG).transform;
+            m_ScrollRect = GameObject.FindGameObjectWithTag(GameConstants.IDE_SCROLL_RECT_TAG).GetComponent<ScrollRect>();
+            m_ContentPanel = GameObject.FindGameObjectWithTag(GameConstants.IDE_CONTENT_TAG).GetComponent<RectTransform>();
         }
         // Start is called before the first frame update
         protected virtual void Start()
@@ -104,29 +109,35 @@ namespace BlockyBlock.UI
         }
         public virtual void OnBeginDrag(PointerEventData eventData)
         {
+            m_DragOffset = new Vector3(-210, 0, 0);
+
             if (Mode == BlockMode.PREVIEW)
             {
-                InitTempBlock();
+                InitTempBlock(eventData);
             }
             else
             {
                 InitBlock();
             }
 
-            m_DragOffset = transform.position - (Vector3)eventData.position;
+            // m_DragOffset = transform.position - (Vector3)eventData.position;
             m_IsDragging = true;
             m_CanvasGroup.blocksRaycasts = false;
             ToggleChildrenRaycastTarget(false);
         }
-        void InitTempBlock()
+        void InitTempBlock(PointerEventData eventData)
         {
-            m_TempBlock = Instantiate(gameObject, transform.position, Quaternion.identity, m_OutsideContainerPrefab).GetComponent<UIBlock>();
+            m_TempBlock = Instantiate(gameObject, (Vector3)eventData.position + m_DragOffset, Quaternion.identity, m_OutsideContainerPrefab).GetComponent<UIBlock>();
+
+            m_TempBlock.CanvasGroup.alpha = 0;
+
             m_TempBlock.transform.parent = null;
             m_TempBlock.transform.SetParent(m_OutsideContainerPrefab);
             m_TempBlock.IsDragging = true;
             m_TempBlock.CanvasGroup.blocksRaycasts = false;
             m_TempBlock.ToggleChildrenRaycastTarget(false);
             m_TempBlock.m_UILineNumber.Unset();
+
         }
         void InitBlock()
         {
@@ -139,12 +150,14 @@ namespace BlockyBlock.UI
         {
             if (m_IsDragging)
             {
+                Cursor.visible = false;
                 CastBlockPosition();
                 CastIDETopDown();
                 if (m_TempBlock != null)
                 {
                     m_TempBlock.transform.position = (Vector3)data.position + m_DragOffset;
-
+                    
+                    StartCoroutine(SetDelay(() => m_TempBlock.CanvasGroup.alpha = 1, 0.05f));
                     m_TempBlock.m_UILineNumber.Unset();
                     m_TempBlock.Mode = BlockMode.IDE;
                 }
@@ -205,6 +218,7 @@ namespace BlockyBlock.UI
         }
         public virtual void OnEndDrag(PointerEventData eventData)
         {
+            Cursor.visible = true;
             if (m_OutsideContainerPrefab == null)
             {
                 return;
@@ -272,6 +286,11 @@ namespace BlockyBlock.UI
                 )
                 .OnComplete(() => Destroy(_target.gameObject));
         }
+        IEnumerator SetDelay(System.Action _cb = null, float _delay = 0.0f)
+        {
+            yield return new WaitForSeconds(_delay);
+            _cb?.Invoke();
+        }
         public void ToggleChildrenRaycastTarget(bool _status)
         {
             foreach (Image img in m_ChildrenImage)
@@ -292,6 +311,7 @@ namespace BlockyBlock.UI
         }
         public virtual void HighlightSelf(IDERunState _state)
         {
+            SnapTo(m_ThisRect);
             switch (_state)
             {
                 case IDERunState.MANNUAL:
@@ -314,6 +334,19 @@ namespace BlockyBlock.UI
         public virtual void UpdateLineNumber()
         {
             m_UILineNumber.Setup(transform);
+        }
+        public void SnapTo(RectTransform target)
+        {
+            Canvas.ForceUpdateCanvases();
+
+            Vector2 newPosition = (Vector2)m_ScrollRect.transform.InverseTransformPoint(m_ContentPanel.position) - (Vector2)m_ScrollRect.transform.InverseTransformPoint(target.position) - new Vector2(0, 100);
+            m_ContentPanel
+                .DOAnchorPos(
+                    newPosition,
+                    1
+                )
+                .SetEase(Ease.InOutSine);
+                    
         }
     }
 }

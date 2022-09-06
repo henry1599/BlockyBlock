@@ -13,6 +13,7 @@ namespace BlockyBlock.UI
         [SerializeField] ControlButton m_Type;
         [SerializeField] Button m_ThisButton;
         public static readonly int StatusKeyAnimation = Animator.StringToHash("status");
+        public static readonly int DisableKeyAnimation = Animator.StringToHash("disable");
         void Start()
         {
             GameEvents.ON_CONTROL_BUTTON_TOGGLE += HandleControlButtonClick;
@@ -40,6 +41,10 @@ namespace BlockyBlock.UI
         public void SetStatus(bool _status)
         {
             m_Animator.SetBool(StatusKeyAnimation, _status);
+        }
+        public void ActiveSelf(bool _status)
+        {
+            m_Animator.SetBool(DisableKeyAnimation, _status);
         }
     }
 }

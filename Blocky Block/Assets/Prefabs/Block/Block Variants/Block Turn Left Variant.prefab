@@ -252,6 +252,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9fea1db55f46f2b4ea0d19bb28b1586a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  m_ThisRect: {fileID: 3404574263737222071}
   m_Type: 4
   m_IDEObject: {fileID: 3404574263854129673}
   m_PreviewObject: {fileID: 3404574264673300960}
@@ -263,6 +264,11 @@ MonoBehaviour:
   - {fileID: 3404574263281315137}
   m_CanvasGroup: {fileID: 480777280354109453}
   m_UILineNumber: {fileID: 801586193536916229}
+--- !u!224 &3404574263737222071 stripped
+RectTransform:
+  m_CorrespondingSourceObject: {fileID: 2700481491166757150, guid: 28686d5318568c54b8f94e37ad8575fa, type: 3}
+  m_PrefabInstance: {fileID: 740125097989079721}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &3404574263854129673 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 2700481491284779168, guid: 28686d5318568c54b8f94e37ad8575fa, type: 3}

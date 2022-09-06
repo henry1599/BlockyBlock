@@ -18,6 +18,7 @@ TagManager:
   - Below IDE
   - Top IDE
   - UI Dummy Block
+  - IDE Scroll Rect
   layers:
   - Default
   - TransparentFX
