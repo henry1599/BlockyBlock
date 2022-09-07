@@ -78,7 +78,7 @@ namespace BlockyBlock.Core
         }
         IEnumerator Cor_Debug()
         {
-            yield return new WaitForSeconds(0.25f);
+            yield return new WaitForSeconds(DelayTime);
             GameEvents.ON_CONTROL_BUTTON_TOGGLE_ALL?.Invoke(false);
         }
         IEnumerator Cor_GetIDE()

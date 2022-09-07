@@ -14,11 +14,11 @@ PrefabInstance:
     - target: {fileID: 1245233684709030015, guid: 28686d5318568c54b8f94e37ad8575fa, type: 3}
       propertyPath: m_PlayMode
       value: 
-      objectReference: {fileID: 0}
+      objectReference: {fileID: 2599517124515741117}
     - target: {fileID: 1245233684709030015, guid: 28686d5318568c54b8f94e37ad8575fa, type: 3}
       propertyPath: m_DebugMode
       value: 
-      objectReference: {fileID: 0}
+      objectReference: {fileID: 2599517124977624870}
     - target: {fileID: 2700481490498909000, guid: 28686d5318568c54b8f94e37ad8575fa, type: 3}
       propertyPath: m_AnchoredPosition.x
       value: 122.7
@@ -324,6 +324,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0ee7c766b9f21d7409112cb4c5798877, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!224 &2599517124515741117 stripped
+RectTransform:
+  m_CorrespondingSourceObject: {fileID: 1245233683450584986, guid: 28686d5318568c54b8f94e37ad8575fa, type: 3}
+  m_PrefabInstance: {fileID: 3842875041119363623}
+  m_PrefabAsset: {fileID: 0}
+--- !u!224 &2599517124977624870 stripped
+RectTransform:
+  m_CorrespondingSourceObject: {fileID: 1245233684113810689, guid: 28686d5318568c54b8f94e37ad8575fa, type: 3}
+  m_PrefabInstance: {fileID: 3842875041119363623}
+  m_PrefabAsset: {fileID: 0}
 --- !u!114 &3750970461463247755 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 97598972400343468, guid: 28686d5318568c54b8f94e37ad8575fa, type: 3}

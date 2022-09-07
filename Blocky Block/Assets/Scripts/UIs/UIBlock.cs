@@ -337,6 +337,10 @@ namespace BlockyBlock.UI
         }
         public void SnapTo(RectTransform target)
         {
+            if (m_ScrollRect == null || target == null)
+            {
+                return;
+            }
             Canvas.ForceUpdateCanvases();
 
             Vector2 newPosition = (Vector2)m_ScrollRect.transform.InverseTransformPoint(m_ContentPanel.position) - (Vector2)m_ScrollRect.transform.InverseTransformPoint(target.position) - new Vector2(0, 100);
