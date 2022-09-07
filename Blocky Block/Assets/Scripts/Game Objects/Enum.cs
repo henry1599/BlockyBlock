@@ -11,8 +11,10 @@ namespace BlockyBlock.Enums
         STOP_SCROLLING
     }
     public enum GroundType {
-        GROUND,
-        WATER
+        GROUND = 0,
+        WATER = 1,
+        SPACE = 2,
+        TRAP = 3,
     }
     public enum ControlButton {
         STOP = 0,

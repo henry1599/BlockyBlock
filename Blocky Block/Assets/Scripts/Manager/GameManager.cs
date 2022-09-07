@@ -16,6 +16,8 @@ namespace BlockyBlock.Managers
         [SerializeField] LevelManager m_LevelManager;
         [Tooltip("Spawn this prefab if it is not in the scene as playing")]
         [SerializeField] GameSceneManager m_GameSceneManager;
+        [Tooltip("Spawn this prefab if it is not in the scene as playing")]
+        [SerializeField] ResourceLoader m_ResourceLoader;
         void Awake()
         {
             DontDestroyOnLoad(gameObject);
@@ -29,6 +31,7 @@ namespace BlockyBlock.Managers
             }
             GameObject levelManager = GameObject.FindGameObjectWithTag(GameConstants.LEVEL_MANAGER_TAG);
             GameObject gameSceneManager = GameObject.FindGameObjectWithTag(GameConstants.SCENE_MANAGER_TAG);
+            GameObject resourceLoader = GameObject.FindGameObjectWithTag(GameConstants.RESOURCE_LOADER_TAG);
             if (levelManager == null)
             {
                 Instantiate(m_LevelManager.gameObject);
@@ -37,6 +40,10 @@ namespace BlockyBlock.Managers
             if (gameSceneManager == null)
             {
                 Instantiate(m_GameSceneManager.gameObject);
+            }
+            if (resourceLoader == null)
+            {
+                Instantiate(m_ResourceLoader.gameObject);
             }
         }
         // Start is called before the first frame update

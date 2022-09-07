@@ -74,7 +74,9 @@ namespace BlockyBlock.Managers
 
         IEnumerator Cor_SetupLevelData(LevelData _data)
         {
-            yield return new WaitUntil(() => UIManager.Instance != null || UnitManager.Instance != null);
+            yield return new WaitUntil(() => UIManager.Instance != null &&
+                                             UnitManager.Instance != null &&
+                                             LevelReader.Instance != null);
             GameEvents.SETUP_LEVEL?.Invoke(_data);
         }
     }

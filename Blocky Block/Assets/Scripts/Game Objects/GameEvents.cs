@@ -5,6 +5,7 @@ using BlockyBlock.Enums;
 using BlockyBlock.Configurations;
 using BlockyBlock.Core;
 using BlockyBlock.UI;
+using BlockyBlock.Managers;
 using System;
 
 namespace BlockyBlock.Events
@@ -13,6 +14,8 @@ namespace BlockyBlock.Events
     {
         public static Action<LevelID> LOAD_LEVEL;
         public static Action<LevelData> SETUP_LEVEL;
+        public static Action<LevelGround> SETUP_GROUND;
+        public static Action<int> SETUP_CAMERA;
         public static Action<ControlButton, bool> ON_CONTROL_BUTTON_TOGGLE;
         public static Action<bool> ON_CONTROL_BUTTON_TOGGLE_ALL;
         public static Action ON_CLEAR_IDE;
@@ -44,6 +47,7 @@ namespace BlockyBlock.Events
     }
     public class GameConstants
     {
+        public static readonly float GROUND_HEIGHT_LEVEL = 5;
         public static readonly string UIBLOCK_OUTSIDE_CONTAINER_TAG = "Block Container";
         public static readonly string IDE_CONTENT_TAG = "IDE Content";
         public static readonly string IDE_SCROLL_RECT_TAG = "IDE Scroll Rect";
@@ -51,6 +55,7 @@ namespace BlockyBlock.Events
         public static readonly string UI_DUMMY_BLOCK_TAG = "UI Dummy Block";
         public static readonly string LEVEL_MANAGER_TAG = "Level Manager";
         public static readonly string SCENE_MANAGER_TAG = "Scene Manager";
+        public static readonly string RESOURCE_LOADER_TAG = "Resource Loader";
         public static readonly string GROUND_TAG = "Ground";
         public static readonly string WATER_TAG = "Water";
         public static readonly string TOP_IDE_TAG = "Top IDE";

@@ -42,63 +42,63 @@ MonoBehaviour:
       LevelName: Home
       BlockTypes: 
       UnitDatas: []
-      RawData: {fileID: 0}
+      LevelRawData: {fileID: 0}
     - LevelType: 1
       LevelName: Level 01
       BlockTypes: 00000000040000000500000006000000
       UnitDatas:
       - StartPosition: {x: 4, y: 2, z: 0}
         StartDirection: 1
-      RawData: {fileID: 4900000, guid: a487bf8dbaf909d4793fbb76b6e4a5b7, type: 3}
+      LevelRawData: {fileID: 0}
     - LevelType: 1
       LevelName: Level 02
       BlockTypes: 
       UnitDatas: []
-      RawData: {fileID: 0}
+      LevelRawData: {fileID: 0}
     - LevelType: 1
       LevelName: Level 03
       BlockTypes: 
       UnitDatas: []
-      RawData: {fileID: 0}
+      LevelRawData: {fileID: 0}
     - LevelType: 1
       LevelName: Level 04
       BlockTypes: 
       UnitDatas: []
-      RawData: {fileID: 0}
+      LevelRawData: {fileID: 0}
     - LevelType: 1
       LevelName: Level 05
       BlockTypes: 
       UnitDatas: []
-      RawData: {fileID: 0}
+      LevelRawData: {fileID: 0}
     - LevelType: 1
       LevelName: Level 06
       BlockTypes: 
       UnitDatas: []
-      RawData: {fileID: 0}
+      LevelRawData: {fileID: 0}
     - LevelType: 1
       LevelName: Level 07
       BlockTypes: 
       UnitDatas: []
-      RawData: {fileID: 0}
+      LevelRawData: {fileID: 0}
     - LevelType: 1
       LevelName: Level 08
       BlockTypes: 
       UnitDatas: []
-      RawData: {fileID: 0}
+      LevelRawData: {fileID: 0}
     - LevelType: 1
       LevelName: Level 09
       BlockTypes: 
       UnitDatas: []
-      RawData: {fileID: 0}
+      LevelRawData: {fileID: 0}
     - LevelType: 1
       LevelName: Level 10
       BlockTypes: 
       UnitDatas: []
-      RawData: {fileID: 0}
+      LevelRawData: {fileID: 0}
     - LevelType: 1
       LevelName: Level Test 3D
       BlockTypes: 00000000040000000500000006000000
       UnitDatas:
       - StartPosition: {x: 0, y: 0, z: 4}
         StartDirection: 1
-      RawData: {fileID: 4900000, guid: a487bf8dbaf909d4793fbb76b6e4a5b7, type: 3}
+      LevelRawData: {fileID: 4900000, guid: a487bf8dbaf909d4793fbb76b6e4a5b7, type: 3}
