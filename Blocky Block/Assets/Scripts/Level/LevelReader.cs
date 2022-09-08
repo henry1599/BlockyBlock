@@ -52,7 +52,7 @@ namespace BlockyBlock.Managers
             maxRows  = Mathf.Max(maxRows, levelStringEachRow.Length - 1);
             for (int i = 0; i < levelStringEachRow.Length; i++)
             {
-                maxColumns  = Mathf.Max(maxColumns, levelStringEachRow[i].Length - 1);
+                maxColumns = Mathf.Max(maxColumns, levelStringEachRow[i].Length);
                 for (int j = 0; j < levelStringEachRow[i].Length; j++)
                 {
                     int levelEachRow = levelStringEachRow[i][j] - '0';
@@ -62,6 +62,7 @@ namespace BlockyBlock.Managers
                 }
             }
             squareMapSize = Mathf.Max(maxRows, maxColumns);
+            print(squareMapSize);
             GameEvents.SETUP_GROUND?.Invoke(levelGround);
             GameEvents.SETUP_CAMERA?.Invoke(squareMapSize);
         }

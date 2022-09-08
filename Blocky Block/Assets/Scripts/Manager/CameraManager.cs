@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using BlockyBlock.Events;
+using BlockyBlock.Configurations;
 
 namespace BlockyBlock.Managers
 {
@@ -9,8 +10,8 @@ namespace BlockyBlock.Managers
     {
         [SerializeField] Camera m_MainCamera;
         [SerializeField] Transform m_CameraPivot;
+        [SerializeField] CameraConfig m_CameraConfig;
         [SerializeField] float m_SizeBuffer = 1;
-        [SerializeField] float m_LeftEdgeBuffer = 1;
         Vector3 IsometricCameraRotation = new Vector3(45, 45, 0);
         Vector3 IsometricCameraInitPosition = new Vector3(0, 0, -10);
         void Awake()
@@ -31,16 +32,9 @@ namespace BlockyBlock.Managers
         {
             Vector3 heightNsize = GetPivotHeightAndCameraSize(_squareSize);
 
+            Vector2 cameraPivotXZ = m_CameraConfig.CameraDatas[_squareSize];
             m_MainCamera.orthographicSize = heightNsize.y;
-
-            float verticalHeightSceeen = Camera.main.orthographicSize * 2.0f;
-            float verticalWidthSceeen = verticalHeightSceeen * Camera.main.aspect / (2 * Mathf.Sqrt(2.0f));
-
-            // ! heightNsize.z scale with camera size, not the original size
-            float leftDiff = Mathf.Abs(verticalWidthSceeen - heightNsize.z);
-
-            m_CameraPivot.position = new Vector3(leftDiff, heightNsize.x, -leftDiff);
-            
+            m_CameraPivot.position = new Vector3(cameraPivotXZ.x, heightNsize.x, cameraPivotXZ.y);
             m_MainCamera.transform.localPosition = IsometricCameraInitPosition;
         }
         Vector3 GetPivotHeightAndCameraSize(int _ms)
