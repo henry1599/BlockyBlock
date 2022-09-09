@@ -1,18 +1,31 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using BlockyBlock.Enums;
+using BlockyBlock.Events;
 
-public class ZoomButton : MonoBehaviour
+namespace BlockyBlock.Tools
 {
-    // Start is called before the first frame update
-    void Start()
+    public class ZoomButton : MonoBehaviour
     {
-        
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
+        public ZoomType m_Type;
+        [SerializeField] ToolButtonAnimation m_ToolAnim;
+        // Start is called before the first frame update
+        void Start()
+        {
+            ToolEvents.ON_ZOOM_BUTTON_CLICKED += HandleZoomButtonClick;
+        }
+        void OnDestroy()
+        {
+            ToolEvents.ON_ZOOM_BUTTON_CLICKED -= HandleZoomButtonClick;
+        }
+        void HandleZoomButtonClick(ZoomType _type)
+        {
+            if (m_Type != _type)
+            {
+                return;
+            }
+            m_ToolAnim?.PlayClickAnim();
+        }
     }
 }

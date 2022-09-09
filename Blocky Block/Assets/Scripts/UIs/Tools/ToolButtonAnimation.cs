@@ -12,5 +12,9 @@ namespace BlockyBlock.Tools
         {
             m_Aimator?.SetBool(StatusKeyAnimation, _status);
         }
+        public void PlayClickAnim()
+        {
+            m_Aimator?.CrossFade("click", 0, 0);
+        }
     }
 }
