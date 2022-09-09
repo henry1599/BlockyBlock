@@ -45,6 +45,11 @@ namespace BlockyBlock.Events
         public static Action<UIBlock, IDERunState> ON_HIGHLIGHT;
         public static Action ON_UPDATE_VERTICAL_LAYOUT;
     }
+    public class ToolEvents
+    {
+        public static Action<CursorType> ON_CURSOR_CHANGED;
+        public static Action<ZoomType> ON_ZOOM_BUTTON_CLICKED;
+    }
     public class GameConstants
     {
         public static readonly float GROUND_HEIGHT_LEVEL = 5;

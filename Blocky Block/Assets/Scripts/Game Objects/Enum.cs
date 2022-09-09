@@ -1,5 +1,14 @@
 namespace BlockyBlock.Enums
 {
+    public enum CursorType {
+        SELECTION = 0,
+        MOVE = 1,
+        ROTATE = 2
+    }
+    public enum ZoomType {
+        ZOOM_IN = 0,
+        ZOOM_OUT = 1
+    }
     public enum IDERunState {
         MANNUAL,
         DEBUGGING,
