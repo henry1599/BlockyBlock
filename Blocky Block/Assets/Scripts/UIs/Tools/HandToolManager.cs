@@ -9,12 +9,14 @@ namespace BlockyBlock.Tools
     public class HandToolManager : MonoBehaviour
     {
         public static HandToolManager Instance {get; private set;}
+        public CursorType CurrentCursor = CursorType.SELECTION;
         void Awake()
         {
             Instance = this;
         }
         public void OnToolSelected(int _idx)
         {
+            CurrentCursor = (CursorType)_idx;
             ToolEvents.ON_CURSOR_CHANGED?.Invoke((CursorType)_idx);
         }
         public void OnZoomButtonSelected(int _idx)

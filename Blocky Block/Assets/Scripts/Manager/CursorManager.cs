@@ -23,6 +23,7 @@ namespace BlockyBlock.Managers
         void Start()
         {
             ToolEvents.ON_CURSOR_CHANGED += HandleCursorChanged;
+            HandleCursorChanged(CursorType.SELECTION);
         }
         void OnDestroy()
         {

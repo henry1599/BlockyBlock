@@ -64,7 +64,7 @@ namespace BlockyBlock.Managers
             squareMapSize = Mathf.Max(maxRows, maxColumns);
             print(squareMapSize);
             GameEvents.SETUP_GROUND?.Invoke(levelGround);
-            GameEvents.SETUP_CAMERA?.Invoke(squareMapSize);
+            GameEvents.SETUP_CAMERA?.Invoke(squareMapSize, new Vector2(maxRows, maxColumns));
         }
     }
 }

@@ -96,7 +96,7 @@ MonoBehaviour:
       UnitDatas: []
       LevelRawData: {fileID: 0}
     - LevelType: 1
-      LevelName: Level Test 3D
+      LevelName: Level Test 3D Cinemachine
       BlockTypes: 00000000040000000500000006000000
       UnitDatas:
       - StartPosition: {x: 0, y: 0, z: 4}

@@ -15,7 +15,7 @@ namespace BlockyBlock.Events
         public static Action<LevelID> LOAD_LEVEL;
         public static Action<LevelData> SETUP_LEVEL;
         public static Action<LevelGround> SETUP_GROUND;
-        public static Action<int> SETUP_CAMERA;
+        public static Action<int, Vector2> SETUP_CAMERA;
         public static Action<ControlButton, bool> ON_CONTROL_BUTTON_TOGGLE;
         public static Action<bool> ON_CONTROL_BUTTON_TOGGLE_ALL;
         public static Action ON_CLEAR_IDE;
