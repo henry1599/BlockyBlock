@@ -115,7 +115,7 @@ namespace BlockyBlock.Managers
             float currentOrthosize = m_CMCam.m_Lens.OrthographicSize;
             currentOrthosize += zoomFactor * m_ZoomSpeed;
 
-            m_CMCam.m_Lens.OrthographicSize = currentOrthosize;
+            DOTween.To(() => m_CMCam.m_Lens.OrthographicSize, value => m_CMCam.m_Lens.OrthographicSize = value, currentOrthosize, 1);
         }
         void HandleSetupCamera(int _squareSize, Vector2 _realSize)
         {
