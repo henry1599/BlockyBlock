@@ -23,5 +23,9 @@ namespace BlockyBlock.Tools
         {
             ToolEvents.ON_ZOOM_BUTTON_CLICKED?.Invoke((ZoomType)_idx);
         }
+        public void OnResetButtonSelected()
+        {
+            ToolEvents.ON_RESET_BUTTON_CLICKED?.Invoke();
+        }
     }
 }

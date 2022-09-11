@@ -50,19 +50,19 @@ namespace BlockyBlock.Managers
             int maxColumns = 0;
             int squareMapSize = 0;
             maxRows  = Mathf.Max(maxRows, levelStringEachRow.Length - 1);
-            for (int i = 0; i < levelStringEachRow.Length; i++)
+            for (int i = levelStringEachRow.Length - 2, k = 0; k < levelStringEachRow.Length - 1; i--, k++)
             {
                 maxColumns = Mathf.Max(maxColumns, levelStringEachRow[i].Length);
                 for (int j = 0; j < levelStringEachRow[i].Length; j++)
                 {
                     int levelEachRow = levelStringEachRow[i][j] - '0';
                     GroundType groundType = (GroundType)levelEachRow;
-                    Vector3 position = new Vector3(i, 0, j);
+                    Vector3 position = new Vector3(j, 0, k);
                     levelGround.groundDatas.Add(new GroundData(groundType, position));
                 }
             }
             squareMapSize = Mathf.Max(maxRows, maxColumns);
-            print(squareMapSize);
+            // print(squareMapSize);
             GameEvents.SETUP_GROUND?.Invoke(levelGround);
             GameEvents.SETUP_CAMERA?.Invoke(squareMapSize, new Vector2(maxRows, maxColumns));
         }

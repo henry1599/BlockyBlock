@@ -3,7 +3,8 @@ namespace BlockyBlock.Enums
     public enum CursorType {
         SELECTION = 0,
         MOVE = 1,
-        ROTATE = 2
+        ROTATE = 2,
+        DRAGGING = 3
     }
     public enum ZoomType {
         ZOOM_IN = 0,

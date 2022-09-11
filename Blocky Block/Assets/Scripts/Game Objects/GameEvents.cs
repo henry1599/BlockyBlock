@@ -49,6 +49,7 @@ namespace BlockyBlock.Events
     {
         public static Action<CursorType> ON_CURSOR_CHANGED;
         public static Action<ZoomType> ON_ZOOM_BUTTON_CLICKED;
+        public static Action ON_RESET_BUTTON_CLICKED;
     }
     public class GameConstants
     {

@@ -7,6 +7,7 @@ using DG.Tweening;
 using BlockyBlock.Managers;
 using BlockyBlock.Enums;
 using BlockyBlock.Events;
+using BlockyBlock.Tools;
 
 namespace BlockyBlock.UI
 {
@@ -109,6 +110,10 @@ namespace BlockyBlock.UI
         }
         public virtual void OnBeginDrag(PointerEventData eventData)
         {
+            if (HandToolManager.Instance.CurrentCursor != CursorType.SELECTION)
+            {
+                return;
+            }
             m_DragOffset = new Vector3(-210, 0, 0);
 
             if (Mode == BlockMode.PREVIEW)
@@ -148,6 +153,10 @@ namespace BlockyBlock.UI
         }
         public virtual void OnDrag(PointerEventData data)
         {
+            if (HandToolManager.Instance.CurrentCursor != CursorType.SELECTION)
+            {
+                return;
+            }
             if (m_IsDragging)
             {
                 Cursor.visible = false;
@@ -218,6 +227,10 @@ namespace BlockyBlock.UI
         }
         public virtual void OnEndDrag(PointerEventData eventData)
         {
+            if (HandToolManager.Instance.CurrentCursor != CursorType.SELECTION)
+            {
+                return;
+            }
             Cursor.visible = true;
             if (m_OutsideContainerPrefab == null)
             {
