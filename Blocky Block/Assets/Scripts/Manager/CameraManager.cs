@@ -7,6 +7,7 @@ using BlockyBlock.Configurations;
 using BlockyBlock.Enums;
 using DG.Tweening;
 using Cinemachine;
+using Helpers;
 
 namespace BlockyBlock.Managers
 {
@@ -14,6 +15,7 @@ namespace BlockyBlock.Managers
     {
         [SerializeField] CinemachineVirtualCamera m_CMCam;
         [SerializeField] float m_SizeBuffer = 1;
+        [SerializeField] CinemachineCameraOffset m_CMOffset;
         [SerializeField] Transform m_CinemachinePivot;
         [Space(10)]
         [Header("Move")]
@@ -24,8 +26,8 @@ namespace BlockyBlock.Managers
         [SerializeField] float m_RotateSpeed = 5f;
         [SerializeField] float m_RotatePanSpeed = 1;
         [SerializeField] float m_RotateYSpeed = 0.1f;
-        [SerializeField] float m_MaxYRotation = 60;
-        [SerializeField] float m_MinYRotation = 0f;
+        [SerializeField] float m_MaxXRotation = 30;
+        [SerializeField] float m_MinXRotation = -55f;
         [Space(10)]
         [Header("Zoom")]
         [SerializeField] float m_ZoomSpeed = 1;
@@ -38,7 +40,6 @@ namespace BlockyBlock.Managers
         private Vector2 m_LastFramePosition;
         private Vector3 m_InputMove;
         private CinemachineTransposer m_CMTransposer;
-        private CinemachineComposer m_CMComposer;
         private int m_SquareMapSize;
         private Vector3 m_RealSize;
         private float m_InitY = 15;
@@ -48,7 +49,6 @@ namespace BlockyBlock.Managers
         {
             zoomSequence = DOTween.Sequence();
             m_CMTransposer = m_CMCam.GetCinemachineComponent<CinemachineTransposer>();
-            m_CMComposer = m_CMCam.GetCinemachineComponent<CinemachineComposer>();
 
             GameEvents.SETUP_CAMERA += HandleSetupCamera;
 
@@ -78,6 +78,7 @@ namespace BlockyBlock.Managers
             #region MOVE
             if (Input.GetMouseButtonDown(2))
             {
+                m_RotatePanMouseActive = false;
                 Cursor.SetCursor(CursorManager.Instance.CursorData[CursorType.DRAGGING], Vector3.zero, CursorMode.Auto);
                 m_DragPanMouseActive = true;
                 m_LastFramePosition = Input.mousePosition;
@@ -92,7 +93,8 @@ namespace BlockyBlock.Managers
                 Vector2 moveDelta = (Vector2)Input.mousePosition - m_LastFramePosition;
                 
                 m_InputMove.x = moveDelta.x * m_DragPanSpeed;
-                m_InputMove.z = moveDelta.y * m_DragPanSpeed;
+                m_InputMove.y = moveDelta.y * m_DragPanSpeed;
+                m_InputMove.z = 0;
 
                 m_LastFramePosition = Input.mousePosition;
             }
@@ -101,14 +103,15 @@ namespace BlockyBlock.Managers
                 m_InputMove = Vector3.zero;
             }
 
-            Vector3 moveDir = (m_CinemachinePivot.forward + m_CinemachinePivot.up * Mathf.Cos(m_CMCam.transform.eulerAngles.x)) * m_InputMove.z + m_CinemachinePivot.right * m_InputMove.x;
-            // moveDir.Normalize();
-            m_CinemachinePivot.position += -moveDir * m_MoveSpeed * Time.deltaTime;
+            // Vector3 moveDir = (m_CinemachinePivot.forward) * m_InputMove.z + m_CinemachinePivot.right * m_InputMove.x;
+            // m_CMOffset.m_Offset += new Vector3(-moveDir.x * m_MoveSpeed * Time.deltaTime, -moveDir.z * m_MoveSpeed * Time.deltaTime, 0);
+            m_CMOffset.m_Offset += -m_InputMove * m_MoveSpeed * Time.deltaTime;
             #endregion
 
             #region ROTATE
             if (Input.GetMouseButtonDown(1))
             {
+                m_DragPanMouseActive = false;
                 Cursor.SetCursor(CursorManager.Instance.CursorData[CursorType.ROTATE], Vector3.zero, CursorMode.Auto);
                 m_RotatePanMouseActive = true;
                 m_LastFrameRotation = Input.mousePosition;
@@ -132,14 +135,17 @@ namespace BlockyBlock.Managers
                 m_InputRotate = Vector3.zero;
             }
 
-            m_CinemachinePivot.eulerAngles += new Vector3(0, m_InputRotate.x * m_RotateSpeed * Time.deltaTime, 0);
-
-            float rotateY = m_InputRotate.y * m_RotateYSpeed;
-            m_CMTransposer.m_FollowOffset.y += rotateY;
-            m_CMTransposer.m_FollowOffset.y = Mathf.Clamp(m_CMTransposer.m_FollowOffset.y, m_MinYRotation, m_MaxYRotation);
+            Vector3 angle = m_CinemachinePivot.eulerAngles;
+            angle += new Vector3(m_InputRotate.y * m_RotateSpeed * Time.deltaTime, m_InputRotate.x * m_RotateSpeed * Time.deltaTime, 0);
+            
+            m_CinemachinePivot.localRotation = Quaternion.Euler(angle);
             #endregion
             
             #region ZOOM
+            if (Helper.isOverUI())
+            {
+                return;
+            }
             int zoomFactor = Input.mouseScrollDelta.y > 0 ? -1 : Input.mouseScrollDelta.y < 0 ? 1 : 0;
             if (zoomFactor == 0)
             {
@@ -170,7 +176,8 @@ namespace BlockyBlock.Managers
                 Vector2 moveDelta = (Vector2)Input.mousePosition - m_LastFramePosition;
                 
                 m_InputMove.x = moveDelta.x * m_DragPanSpeed;
-                m_InputMove.z = moveDelta.y * m_DragPanSpeed;
+                m_InputMove.y = moveDelta.y * m_DragPanSpeed;
+                m_InputMove.z = 0;
 
                 m_LastFramePosition = Input.mousePosition;
             }
@@ -178,9 +185,7 @@ namespace BlockyBlock.Managers
             {
                 m_InputMove = Vector3.zero;
             }
-
-            Vector3 moveDir = (m_CinemachinePivot.forward + m_CinemachinePivot.up * Mathf.Cos(Mathf.Abs(m_CMCam.transform.eulerAngles.x))) * m_InputMove.z + m_CinemachinePivot.right * m_InputMove.x;
-            m_CinemachinePivot.position += -moveDir * m_MoveSpeed * Time.deltaTime;
+            m_CMOffset.m_Offset += -m_InputMove * m_MoveSpeed * Time.deltaTime;
         }
         void HandleRotateTool()
         {
@@ -207,11 +212,10 @@ namespace BlockyBlock.Managers
                 m_InputRotate = Vector3.zero;
             }
 
-            m_CinemachinePivot.eulerAngles += new Vector3(0, m_InputRotate.x * m_RotateSpeed * Time.deltaTime, 0);
-
-            float rotateY = m_InputRotate.y * m_RotateYSpeed;
-            m_CMTransposer.m_FollowOffset.y += rotateY;
-            m_CMTransposer.m_FollowOffset.y = Mathf.Clamp(m_CMTransposer.m_FollowOffset.y, m_MinYRotation, m_MaxYRotation);
+            Vector3 angle = m_CinemachinePivot.eulerAngles;
+            angle += new Vector3(m_InputRotate.y * m_RotateSpeed * Time.deltaTime, m_InputRotate.x * m_RotateSpeed * Time.deltaTime, 0);
+            
+            m_CinemachinePivot.localRotation = Quaternion.Euler(angle);
         }
         void OnDestroy()
         {
@@ -252,13 +256,8 @@ namespace BlockyBlock.Managers
                        1);
 
             float offset = (m_RealSize.y - 1) / 2;
-            DOTween.To(() => m_CMComposer.m_TrackedObjectOffset.x,
-                       value => m_CMComposer.m_TrackedObjectOffset.x = value,
-                       offset,
-                       1);
-
-            DOTween.To(() => m_CMTransposer.m_FollowOffset.x,
-                       value => m_CMTransposer.m_FollowOffset.x = value,
+            DOTween.To(() => m_CMOffset.m_Offset.x,
+                       value => m_CMOffset.m_Offset.x = value,
                        offset,
                        1);
                        
@@ -280,10 +279,10 @@ namespace BlockyBlock.Managers
             m_RealSize = _realSize;
 
             m_CinemachinePivot.position = new Vector3((_realSize.y - 1) / 2, 0, (_realSize.x - 1) / 2);
+            m_CinemachinePivot.eulerAngles = Vector3.zero;
             m_CMCam.m_Lens.OrthographicSize = GetPivotHeightAndCameraSize(_squareSize);
 
-            m_CMComposer.m_TrackedObjectOffset.x = (_realSize.y - 1) / 2;
-            m_CMTransposer.m_FollowOffset.x = (_realSize.y - 1) / 2;
+            m_CMOffset.m_Offset.x = (_realSize.y - 1) / 2;
         }
         float GetPivotHeightAndCameraSize(int _ms)
         {

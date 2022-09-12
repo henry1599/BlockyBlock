@@ -102,7 +102,14 @@ namespace BlockyBlock.UI
         }
         void Update()
         {
-            // CastBlockPosition();
+            if (m_IsDragging)
+            {
+                CastBlockPosition();
+            }
+            if (UIManager.Instance.m_DelayBufferTimer >= 0)
+            {
+                UIManager.Instance.m_DelayBufferTimer -= Time.deltaTime;
+            }
         }
         void OnDestroy()
         {
@@ -197,14 +204,22 @@ namespace BlockyBlock.UI
             {
                 if (transform != _BlockTransform)
                 {
-                    int nextIdx = _BlockTransform.GetSiblingIndex();
-                    UIManager.Instance.m_DummyUIBlock.transform.SetSiblingIndex(nextIdx);
+                    if (UIManager.Instance.m_DelayBufferTimer < 0 && UIManager.Instance.m_IsTweening == false)
+                    {
+                        int nextIdx = _BlockTransform.GetSiblingIndex();
+                        UIManager.Instance.m_DummyUIBlock.transform.SetSiblingIndex(nextIdx);
+                        UIManager.Instance.m_DelayBufferTimer = UIManager.Instance.m_DelayBuffer;
+                    }
                 }
             }
-            // else if (!UIManager.Instance.CheckTriggerUI(BlockMode.DUMMY_BLOCK, out Transform _DummyBlockTransform))
-            // {
-            //     UIManager.Instance.m_DummyUIBlock.transform.SetAsLastSibling();
-            // }
+            else if (UIManager.Instance.CheckTriggerUI(GameConstants.NOT_ANY_BLOCK_TAG))
+            {
+                if (UIManager.Instance.m_DelayBufferTimer < 0 && UIManager.Instance.m_IsTweening == false)
+                {
+                    UIManager.Instance.m_DummyUIBlock.transform.SetAsLastSibling();
+                    UIManager.Instance.m_DelayBufferTimer = UIManager.Instance.m_DelayBuffer;
+                }
+            }
         }
         public virtual void CastIDETopDown()
         {
@@ -231,6 +246,7 @@ namespace BlockyBlock.UI
             {
                 return;
             }
+            UIManager.Instance.m_DelayBufferTimer = UIManager.Instance.m_DelayBuffer;
             Cursor.visible = true;
             if (m_OutsideContainerPrefab == null)
             {

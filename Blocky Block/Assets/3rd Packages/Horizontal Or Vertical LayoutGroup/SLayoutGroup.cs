@@ -8,6 +8,7 @@ using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.Pool;
 using UnityEngine.UI;
+using BlockyBlock.Managers;
 
 namespace Utility.SLayout {
     [DisallowMultipleComponent]
@@ -430,8 +431,9 @@ namespace Utility.SLayout {
                 if(dict.Keys.Contains(rect) && dict[rect] == tween) 
                     dict.Remove(rect);
             };
+            tween.onPlay += () => UIManager.Instance.m_IsTweening = true;
             tween.onComplete += () => {
-
+                UIManager.Instance.m_IsTweening = false;
                 if (!dict.ContainsKey(rect))
                     return;
 

@@ -25,6 +25,9 @@ namespace BlockyBlock.Managers
         public EventSystem m_EventSystem;
         public BlockData m_BlockDatas;
         public Transform m_DummyUIBlock;
+        public float m_DelayBuffer = 0.15f;
+        public float m_DelayBufferTimer {get; set;}
+        public bool m_IsTweening = false;
         PointerEventData m_PointerEventData;
         void Awake()
         {
@@ -35,6 +38,7 @@ namespace BlockyBlock.Managers
         // Start is called before the first frame update
         void Start()
         {
+            m_DelayBufferTimer = m_DelayBuffer;
             GameEvents.ON_CLEAR_IDE += HandleClearIDE;
             
             EditorEvents.ON_BLOCK_EDITOR += HandleBlockEditor;
@@ -72,6 +76,7 @@ namespace BlockyBlock.Managers
             }
             
         }
+
         public bool CheckTriggerUI(string _objectTag)
         {
             //Set up the new Pointer Event

@@ -66,6 +66,7 @@ namespace BlockyBlock.Events
         public static readonly string WATER_TAG = "Water";
         public static readonly string TOP_IDE_TAG = "Top IDE";
         public static readonly string BELOW_IDE_TAG = "Below IDE";
+        public static readonly string NOT_ANY_BLOCK_TAG = "Not Any Block";
         public static readonly string LEVELS_RAW_DATA_PATH = $"Data/Levels/";
     }
 }
