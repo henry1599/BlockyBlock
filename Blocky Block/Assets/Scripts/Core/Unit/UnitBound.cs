@@ -58,7 +58,7 @@ namespace BlockyBlock.Core
                     return GroundType.WATER;
                 }
             }
-            return GroundType.GROUND;
+            return GroundType.SPACE;
         }
         void OnDrawGizmos()
         {

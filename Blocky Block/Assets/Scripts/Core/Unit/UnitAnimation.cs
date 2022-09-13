@@ -10,6 +10,10 @@ namespace BlockyBlock.Core
     public class UnitAnimation : MonoBehaviour
     {
         [SerializeField] private Animator m_Animator;
+        public void TriggerAnimSwimIdle()
+        {
+            m_Animator.CrossFade("Swim_idle", 0, 0);
+        }
         public void TriggerAnimTurnLeft()
         {
             m_Animator.CrossFade("Trot_L", 0, 0);

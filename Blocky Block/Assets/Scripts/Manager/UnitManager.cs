@@ -31,6 +31,11 @@ namespace BlockyBlock.Managers
         }
         void HandleSetupLevel(LevelData _data)
         {
+            StartCoroutine(SpawnUnit(_data));
+        }
+        IEnumerator SpawnUnit(LevelData _data)
+        {
+            yield return new WaitUntil(() => GroundManager.Instance.m_IsFinishedSpawnGround == true);
             foreach (UnitData unitData in _data.UnitDatas)
             {
                 Vector3 startPosition = unitData.StartPosition;

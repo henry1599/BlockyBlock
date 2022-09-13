@@ -7,7 +7,7 @@ namespace BlockyBlock.Tools
     public class HandleToolAnimation : MonoBehaviour
     {
         [SerializeField] Animator m_Anim;
-        private bool m_Status = false;
+        private bool m_Status = true;
         private static readonly int StatusKeyAnimation = Animator.StringToHash("status");
         public void TriggerAnimStatus()
         {

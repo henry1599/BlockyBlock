@@ -57,8 +57,6 @@ namespace BlockyBlock.Core
 
             UnitEvents.ON_STOP += HandleStop;
             UnitEvents.ON_RESET += HandleReset;
-
-            m_CurrentGround = m_Bound.CastBelow();
         }
         void OnDestroy()
         {
@@ -91,6 +89,8 @@ namespace BlockyBlock.Core
             m_IsUnderwater = false;
             m_Animation.Reset(m_IsUnderwater);
         }
+
+        #region Move Forward
         public void MoveForward(BlockFunctionMoveForward _moveForward)
         {
             GroundType nextGround = m_Bound.CastFrontDown();
@@ -165,6 +165,9 @@ namespace BlockyBlock.Core
                 m_Animation.TriggerAnimSwimming();
             }
         }
+        #endregion
+
+        #region Turn Left
         public void TurnLeft(BlockFunctionTurnLeft _turnLeft)
         {
             switch (m_CurrentDirection)
@@ -190,6 +193,9 @@ namespace BlockyBlock.Core
                 );
             m_Animation.TriggerAnimTurnLeft();
         }
+        #endregion
+
+        #region Turn Right
         public void TurnRight(BlockFunctionTurnRight _turnRight)
         {
             
@@ -216,5 +222,6 @@ namespace BlockyBlock.Core
                 );
             m_Animation.TriggerAnimTurnRight();
         }
+        #endregion
     }
 }

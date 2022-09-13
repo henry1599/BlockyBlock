@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using BlockyBlock.Enums;
 using BlockyBlock.Core;
 
 public class RandomIdleTransition : StateMachineBehaviour

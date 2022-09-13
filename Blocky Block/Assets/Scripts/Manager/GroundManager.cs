@@ -7,6 +7,12 @@ namespace BlockyBlock.Managers
 {
     public class GroundManager : MonoBehaviour
     {
+        public static GroundManager Instance {get; private set;}
+        public bool m_IsFinishedSpawnGround = false;
+        void Awake()
+        {
+            Instance = this;
+        }
         void Start()
         {
             GameEvents.SETUP_GROUND += HandleSetupGround;
@@ -26,6 +32,7 @@ namespace BlockyBlock.Managers
             {
                 Instantiate(ResourceLoader.Instance.Grounds[_data.groundType].gameObject, _data.position, Quaternion.identity, transform);
             }
+            m_IsFinishedSpawnGround = true;
         }
     }
 }

@@ -101,4 +101,6 @@ MonoBehaviour:
       UnitDatas:
       - StartPosition: {x: 0, y: 0, z: 4}
         StartDirection: 1
+      - StartPosition: {x: 2, y: 0, z: 1}
+        StartDirection: 0
       LevelRawData: {fileID: 4900000, guid: a487bf8dbaf909d4793fbb76b6e4a5b7, type: 3}

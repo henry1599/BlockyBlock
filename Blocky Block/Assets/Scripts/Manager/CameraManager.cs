@@ -290,13 +290,5 @@ namespace BlockyBlock.Managers
             float camSize = (rs / (2 * Mathf.Sqrt(2.0f))) + m_SizeBuffer;
             return camSize;
         }
-        void OnDrawGizmos()
-        {
-            float verticalHeightSeen = Camera.main.orthographicSize * 2.0f;
-            float verticalWidthSeen = verticalHeightSeen * Camera.main.aspect;
-            
-            Gizmos.color = Color.cyan;
-            Gizmos.DrawWireCube(transform.position, new Vector3(verticalWidthSeen, verticalHeightSeen, 0));
-        }
     }
 }
