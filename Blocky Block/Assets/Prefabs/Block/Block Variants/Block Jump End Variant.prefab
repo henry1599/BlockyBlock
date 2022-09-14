@@ -260,7 +260,7 @@ MonoBehaviour:
   m_PivotOffset: {x: -140, y: 0, z: 0}
   m_CanvasGroup: {fileID: 4160694678842910851}
   m_UILineNumber: {fileID: 3750970461463247755}
-  m_TopPanelRect: {fileID: 1166058361742396225}
+  TopPanel: {fileID: 1166058361742396225}
 --- !u!224 &1166058360242529081 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 2700481491166757150, guid: 28686d5318568c54b8f94e37ad8575fa, type: 3}

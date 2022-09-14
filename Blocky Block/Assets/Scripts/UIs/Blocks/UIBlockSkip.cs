@@ -9,6 +9,7 @@ namespace BlockyBlock.UI
     {
         public UIBlockJump m_UIBlockJumpFrom {get; set;} = null;
         public bool IsDragging => m_IsDragging;
+        public RectTransform TopPanel;
         protected override void Start() 
         {
             base.Start();

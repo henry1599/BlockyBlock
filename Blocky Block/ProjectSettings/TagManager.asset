@@ -21,6 +21,7 @@ TagManager:
   - IDE Scroll Rect
   - Resource Loader
   - Not Any Block
+  - Connection Manager
   layers:
   - Default
   - TransparentFX
@@ -29,7 +30,7 @@ TagManager:
   - Water
   - UI
   - Walkable
-  - 
+  - UI Line
   - 
   - 
   - 

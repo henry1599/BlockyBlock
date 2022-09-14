@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using System.Collections.Generic;
+using BlockyBlock.Events;
 
 public class ConnectionManager : MonoBehaviour {
 	static ConnectionManager _instance;
@@ -7,7 +8,7 @@ public class ConnectionManager : MonoBehaviour {
 		get {
 			if (!_instance) {
 				//first try to find one in the scene
-				_instance = FindObjectOfType<ConnectionManager>();
+				_instance = GameObject.FindGameObjectWithTag(GameConstants.CONNECTION_MANAGER_TAG).GetComponent<ConnectionManager>();
 
 				if (!_instance) {
 					//if that fails, make a new one
@@ -61,7 +62,7 @@ public class ConnectionManager : MonoBehaviour {
 		if (c == null || !instance) return;
 
 		if (!instance.connections.Contains(c)) {
-			c.transform.SetParent(instance.transform);
+			// c.transform.SetParent(instance.transform);
 			instance.connections.Add(c);
 		}
 	}

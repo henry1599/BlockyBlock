@@ -1,6 +1,7 @@
 ﻿using UnityEngine;
+using UnityEngine.UI.Extensions;
 
-[RequireComponent(typeof(LineRenderer)), ExecuteInEditMode]
+[RequireComponent(typeof(UILineRenderer)), ExecuteInEditMode]
 public class Connection : MonoBehaviour {
 	const int minResolution = 2;
 	const int maxResolution = 20;
@@ -15,16 +16,21 @@ public class Connection : MonoBehaviour {
 
 	[SerializeField, Range(minResolution, maxResolution)] int resolution = avgResolution;
 
-	[SerializeField] LineRenderer _line;
-	public LineRenderer line {
+	[SerializeField] UILineRenderer _line;
+	public UILineRenderer line {
 		get {
-			if (!_line) _line = GetComponent<LineRenderer>();
+			if (!_line) _line = GetComponent<UILineRenderer>();
 			return _line;
 		}
 	}
 
 	public bool isValid {
 		get {return target[0] && target[1];}
+	}
+	public void SetWeight(float _weight)
+	{
+		points[0].weight = _weight;
+		points[1].weight = _weight;
 	}
 
 	public bool Match(RectTransform start, RectTransform end) {
@@ -107,25 +113,29 @@ public class Connection : MonoBehaviour {
 		} else {
 			line.enabled = true;
 			if (sActive && !eActive) {
-				line.SetColors(points[0].color, Color.clear);
+				// line.SetColors(points[0].color, Color.clear);
 			} else if (!sActive && eActive) {
-				line.SetColors(Color.clear, points[1].color);
+				// line.SetColors(Color.clear, points[1].color);
 			} else {
-				line.SetColors(points[0].color, points[1].color);
+				// line.SetColors(points[0].color, points[1].color);
 			}
 		}
 
 		points[0].CalculateVectors(target[0]);
 		points[1].CalculateVectors(target[1]);
 
-		line.SetVertexCount(resolution);
+		// line.SetVertexCount(resolution);
+		line.Points = new Vector2[resolution];
 		for (int i = 0; i < resolution; i++) {
-			line.SetPosition(i, GetBezierPoint((float)i/(float)(resolution-1)));
+			// line.SetPosition(i, GetBezierPoint((float)i/(float)(resolution-1)));
+			line.Points[i] = GetBezierPoint((float)i/(float)(resolution-1));
 		}
 
 		//handle icons here
 
-		transform.position = GetBezierPoint(.5f);
+		// line.transform.position = Vector3.zero;
+		// transform.position = GetBezierPoint(.5f);
+		transform.position = Vector3.zero;
 	}
 
 	public Vector3 GetBezierPoint(float t, int derivative = 0) {

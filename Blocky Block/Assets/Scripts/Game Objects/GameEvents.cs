@@ -62,6 +62,7 @@ namespace BlockyBlock.Events
         public static readonly string LEVEL_MANAGER_TAG = "Level Manager";
         public static readonly string SCENE_MANAGER_TAG = "Scene Manager";
         public static readonly string RESOURCE_LOADER_TAG = "Resource Loader";
+        public static readonly string CONNECTION_MANAGER_TAG = "Connection Manager";
         public static readonly string GROUND_TAG = "Ground";
         public static readonly string WATER_TAG = "Water";
         public static readonly string TOP_IDE_TAG = "Top IDE";

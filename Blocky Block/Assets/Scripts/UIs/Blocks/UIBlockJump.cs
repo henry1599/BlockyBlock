@@ -4,17 +4,26 @@ using BlockyBlock.Managers;
 using BlockyBlock.Enums;
 using BlockyBlock.Events;
 using UnityEngine.EventSystems;
+using Helpers;
 
 namespace BlockyBlock.UI
 {
     public class UIBlockJump : UIBlock
     {
         public UIBlockSkip m_UIBlockJumpTo {get; set;}
-        public ArrowJump m_ArrowJump;
+        public float MinWeightConnection;
+        public float MaxWeightConnection;
+        // public ArrowJump m_ArrowJump;
         private bool m_IsPlaced = false;
+        public Connection m_Connection;
+        public RectTransform TopPanel;
+        private float m_WeightConnection;
         public override void Setup(UIBlock _parentBlock = null)
         {
             base.Setup(_parentBlock);
+
+            m_WeightConnection = Random.Range(MinWeightConnection, MaxWeightConnection);
+
             if (!m_IsPlaced)
             {
                 GameObject ideContent = GameObject.FindGameObjectWithTag(GameConstants.IDE_CONTENT_TAG);
@@ -60,7 +69,14 @@ namespace BlockyBlock.UI
         }
         public void EnableArrow()
         {
-            m_ArrowJump.EnableSelf();
+            StartCoroutine(SetupConnection());
+            // m_ArrowJump.EnableSelf();
+        }
+        IEnumerator SetupConnection()
+        {
+            yield return new WaitUntil(() => m_UIBlockJumpTo != null);
+            m_Connection.SetTargets(TopPanel, m_UIBlockJumpTo.TopPanel);
+            m_Connection.SetWeight(m_WeightConnection);
         }
         public void SetupArrow()
         {
@@ -69,11 +85,11 @@ namespace BlockyBlock.UI
         IEnumerator Cor_SetupArrow()
         {
             yield return new WaitUntil(() => m_UIBlockJumpTo != null);
-            m_ArrowJump.SetupSelf(m_UIBlockJumpTo);
+            // m_ArrowJump.SetupSelf(m_UIBlockJumpTo);
         }
         public void DisableArrow()
         {
-            m_ArrowJump.DisableSelf();
+            // m_ArrowJump.DisableSelf();
         }
         void OnDestroy() 
         {
