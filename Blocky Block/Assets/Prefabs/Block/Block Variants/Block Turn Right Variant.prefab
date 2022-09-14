@@ -245,6 +245,7 @@ MonoBehaviour:
   - {fileID: 6819052428912116092}
   - {fileID: 6819052429992201766}
   - {fileID: 6819052430212974573}
+  m_PivotOffset: {x: -140, y: 0, z: 0}
   m_CanvasGroup: {fileID: 8588731918921491105}
   m_UILineNumber: {fileID: 8827776730122564009}
 --- !u!224 &6819052429560293659 stripped

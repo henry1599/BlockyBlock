@@ -9,7 +9,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 2700481490498909001, guid: 28686d5318568c54b8f94e37ad8575fa, type: 3}
       propertyPath: m_IsActive
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 2700481490724448614, guid: 28686d5318568c54b8f94e37ad8575fa, type: 3}
       propertyPath: m_SizeDelta.x
@@ -262,6 +262,7 @@ MonoBehaviour:
   - {fileID: 3404574264447757264}
   - {fileID: 3404574263371965578}
   - {fileID: 3404574263281315137}
+  m_PivotOffset: {x: -140, y: 0, z: 0}
   m_CanvasGroup: {fileID: 480777280354109453}
   m_UILineNumber: {fileID: 801586193536916229}
 --- !u!224 &3404574263737222071 stripped

@@ -8,10 +8,11 @@ using BlockyBlock.Managers;
 using BlockyBlock.Enums;
 using BlockyBlock.Events;
 using BlockyBlock.Tools;
+using Helpers;
 
 namespace BlockyBlock.UI
 {
-    public class UIBlock : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDragHandler
+    public class UIBlock : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDragHandler, IPointerDownHandler, IPointerUpHandler 
     {
         protected bool m_IsDragging = false;
         protected Vector3 m_DragOffset = Vector3.zero;
@@ -45,9 +46,24 @@ namespace BlockyBlock.UI
 
         [Space(10)]
         [Header("Drag & Drop Value")]
+        public Vector3 m_PivotOffset;
         [SerializeField] protected CanvasGroup m_CanvasGroup;
         protected Transform m_OutsideContainerPrefab;
         public UILineNumber m_UILineNumber;
+
+
+
+
+        // [Space(10)]
+        // [Header("Click Shake Rotation")]
+        // [Range(0.05f, 1f)]
+        // public float ShakeDuration = 0.15f;
+        // public Vector3 ShakeStrength = new Vector3(0, 0, 1);
+        // [Range(0f, 180f)]
+        // public float Randomness = 90f;
+        // [Range(10f, 100f)]
+        // public float Vibrato = 10;
+
 
 
 
@@ -86,6 +102,7 @@ namespace BlockyBlock.UI
             set => m_IsDragging = value;
         }
         protected Transform m_CurrentContentField;
+        private Vector3 m_InitClickPosition;
         void Awake()
         {
             m_OutsideContainerPrefab = GameObject.FindGameObjectWithTag(GameConstants.UIBLOCK_OUTSIDE_CONTAINER_TAG).transform;
@@ -115,13 +132,40 @@ namespace BlockyBlock.UI
         {
             BlockEvents.ON_HIGHLIGHT -= HandleHighlight;
         }
+        public void OnPointerDown(PointerEventData pointerEventData)
+        {
+            if (Mode == BlockMode.PREVIEW)
+            {
+                return;
+            }
+            Vector3 endPosition = (Vector3)(pointerEventData.position) + m_PivotOffset;
+
+            m_InitClickPosition = transform.position;
+            transform
+                .DOMove(endPosition, 0.1f).SetEase(Ease.InOutSine);
+        }
+        public void OnPointerUp(PointerEventData pointerEventData)
+        {
+            if (Mode == BlockMode.PREVIEW)
+            {
+                return;
+            }
+            if (!m_IsDragging)
+            {
+                transform.DOKill();
+                // transform
+                //     .DOMove(m_InitClickPosition, 0.1f).SetEase(Ease.InOutSine);
+                transform.position = m_InitClickPosition;
+            }
+            
+        }
         public virtual void OnBeginDrag(PointerEventData eventData)
         {
             if (HandToolManager.Instance.CurrentCursor != CursorType.SELECTION)
             {
                 return;
             }
-            m_DragOffset = new Vector3(-210, 0, 0);
+            m_DragOffset = m_PivotOffset;
 
             if (Mode == BlockMode.PREVIEW)
             {
@@ -129,7 +173,7 @@ namespace BlockyBlock.UI
             }
             else
             {
-                InitBlock();
+                InitBlock(eventData);
             }
 
             // m_DragOffset = transform.position - (Vector3)eventData.position;
@@ -139,23 +183,30 @@ namespace BlockyBlock.UI
         }
         void InitTempBlock(PointerEventData eventData)
         {
-            m_TempBlock = Instantiate(gameObject, (Vector3)eventData.position + m_DragOffset, Quaternion.identity, m_OutsideContainerPrefab).GetComponent<UIBlock>();
+            m_TempBlock = Instantiate(gameObject, (Vector3)(eventData.position) + m_DragOffset, Quaternion.identity, m_OutsideContainerPrefab).GetComponent<UIBlock>();
+            // m_TempBlock = Instantiate(gameObject).GetComponent<UIBlock>();
 
             m_TempBlock.CanvasGroup.alpha = 0;
 
             m_TempBlock.transform.parent = null;
             m_TempBlock.transform.SetParent(m_OutsideContainerPrefab);
+
             m_TempBlock.IsDragging = true;
             m_TempBlock.CanvasGroup.blocksRaycasts = false;
             m_TempBlock.ToggleChildrenRaycastTarget(false);
             m_TempBlock.m_UILineNumber.Unset();
 
         }
-        void InitBlock()
+        void InitBlock(PointerEventData _data)
         {
             m_TempBlock = null;
             transform.parent = null;
             transform.SetParent(m_OutsideContainerPrefab);
+            // transform
+            //     .DOMove(
+            //         (Vector3)_data.position + m_DragOffset,
+            //         0.15f
+            //     );
             m_UILineNumber.Unset();
         }
         public virtual void OnDrag(PointerEventData data)
@@ -166,12 +217,13 @@ namespace BlockyBlock.UI
             }
             if (m_IsDragging)
             {
-                Cursor.visible = false;
+                // Cursor.visible = false;
                 CastBlockPosition();
                 CastIDETopDown();
                 if (m_TempBlock != null)
                 {
-                    m_TempBlock.transform.position = (Vector3)data.position + m_DragOffset;
+                    m_TempBlock.transform.DOKill();
+                    m_TempBlock.transform.position = (Vector3)(data.position) + m_DragOffset;
                     
                     StartCoroutine(SetDelay(() => m_TempBlock.CanvasGroup.alpha = 1, 0.05f));
                     m_TempBlock.m_UILineNumber.Unset();
@@ -179,7 +231,8 @@ namespace BlockyBlock.UI
                 }
                 else
                 {
-                    transform.position = (Vector3)data.position + m_DragOffset;
+                    transform.DOKill();
+                    transform.position = (Vector3)(data.position) + m_DragOffset;
 
                     m_UILineNumber.Unset();
                     Mode = BlockMode.IDE;
@@ -247,7 +300,7 @@ namespace BlockyBlock.UI
                 return;
             }
             UIManager.Instance.m_DelayBufferTimer = UIManager.Instance.m_DelayBuffer;
-            Cursor.visible = true;
+            // Cursor.visible = true;
             if (m_OutsideContainerPrefab == null)
             {
                 return;
