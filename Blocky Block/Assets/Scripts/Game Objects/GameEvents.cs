@@ -19,6 +19,8 @@ namespace BlockyBlock.Events
         public static Action<ControlButton, bool> ON_CONTROL_BUTTON_TOGGLE;
         public static Action<bool> ON_CONTROL_BUTTON_TOGGLE_ALL;
         public static Action ON_CLEAR_IDE;
+        public static Action<bool> ON_TOGGLE_CONTROLLER_PANEL;
+        public static Action<bool> ON_EXECUTING_BLOCK;
     }
     public class UnitEvents
     {
@@ -40,6 +42,7 @@ namespace BlockyBlock.Events
         public static Action<ScrollIDEState> ON_IDE_SCROLL;
         public static Action<bool> ON_BLOCK_EDITOR;
         public static Action<int> ON_IDE_CONTENT_CHANGED;
+        public static Action<float> ON_IDE_SCROLL_SNAP;
     }
     public class BlockEvents
     {

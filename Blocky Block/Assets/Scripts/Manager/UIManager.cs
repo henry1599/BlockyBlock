@@ -18,6 +18,7 @@ namespace BlockyBlock.Managers
         public static UIManager Instance {get; private set;}
         public GraphicRaycaster m_Raycaster;
         public GameObject[] m_BlockUIs;
+        public int ScrollBlockIdx = 8;
         public GameObject m_IDECodeField;
         public Transform m_IDECodeContent;
         public GameObject m_PreviewCodeField;
@@ -28,6 +29,7 @@ namespace BlockyBlock.Managers
         public float m_DelayBuffer = 0.15f;
         public float m_DelayBufferTimer {get; set;}
         public bool m_IsTweening = false;
+        public int CurrentIdx = 0;
         PointerEventData m_PointerEventData;
         void Awake()
         {

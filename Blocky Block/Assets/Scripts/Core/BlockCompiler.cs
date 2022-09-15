@@ -42,12 +42,14 @@ namespace BlockyBlock.Core
         public void Play() 
         {
             IsExecuting = true;
+            GameEvents.ON_EXECUTING_BLOCK?.Invoke(IsExecuting);
             IDEState = IDERunState.MANNUAL;
             StartCoroutine(Cor_Play());
         }
         public void Stop() 
         {
             IsExecuting = false;
+            GameEvents.ON_EXECUTING_BLOCK?.Invoke(IsExecuting);
             IDEState = IDERunState.STOP;
             BlockEvents.ON_HIGHLIGHT?.Invoke(null, IDEState);
             StopCoroutine(Cor_Play());

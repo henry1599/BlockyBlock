@@ -67,7 +67,7 @@ namespace BlockyBlock.UI
 
 
 
-        protected ScrollRect m_ScrollRect;
+        protected RectTransform m_IDEMainField;
         protected RectTransform m_ContentPanel;
         UIBlock m_TempBlock = null;
         BlockMode m_Mode;
@@ -106,8 +106,8 @@ namespace BlockyBlock.UI
         void Awake()
         {
             m_OutsideContainerPrefab = GameObject.FindGameObjectWithTag(GameConstants.UIBLOCK_OUTSIDE_CONTAINER_TAG).transform;
-            m_ScrollRect = GameObject.FindGameObjectWithTag(GameConstants.IDE_SCROLL_RECT_TAG).GetComponent<ScrollRect>();
             m_ContentPanel = GameObject.FindGameObjectWithTag(GameConstants.IDE_CONTENT_TAG).GetComponent<RectTransform>();
+            m_IDEMainField = GameObject.FindGameObjectWithTag(GameConstants.IDE_MAIN_FIELD_TAG).GetComponent<RectTransform>();
         }
         // Start is called before the first frame update
         protected virtual void Start()
@@ -393,7 +393,20 @@ namespace BlockyBlock.UI
         }
         public virtual void HighlightSelf(IDERunState _state)
         {
-            SnapTo(m_ThisRect);
+            try
+            {
+                SnapTo(transform);
+            }
+            catch (System.Exception)
+            {
+            }
+            try
+            {
+                UIManager.Instance.CurrentIdx = transform.GetSiblingIndex();
+            }
+            catch (System.Exception)
+            {
+            }
             switch (_state)
             {
                 case IDERunState.MANNUAL:
@@ -417,22 +430,24 @@ namespace BlockyBlock.UI
         {
             m_UILineNumber.Setup(transform);
         }
-        public void SnapTo(RectTransform target)
+        public void SnapTo(Transform target)
         {
-            if (m_ScrollRect == null || target == null)
+            if (m_ContentPanel == null || target == null)
             {
                 return;
             }
+            if (target.GetSiblingIndex() < UIManager.Instance.ScrollBlockIdx)
+            {
+                EditorEvents.ON_IDE_SCROLL?.Invoke(ScrollIDEState.SCROLL_DOWN);
+                return;
+            }
             Canvas.ForceUpdateCanvases();
-
-            Vector2 newPosition = (Vector2)m_ScrollRect.transform.InverseTransformPoint(m_ContentPanel.position) - (Vector2)m_ScrollRect.transform.InverseTransformPoint(target.position) - new Vector2(0, 100);
-            m_ContentPanel
-                .DOAnchorPos(
-                    newPosition,
-                    1
-                )
-                .SetEase(Ease.InOutSine);
-                    
+            int thisIdx = transform.GetSiblingIndex();
+            int lastIdx = UIManager.Instance.CurrentIdx;
+            int blockDiff = thisIdx - lastIdx;
+            float scrollDelta = 50.0f * blockDiff;
+            print(scrollDelta);
+            EditorEvents.ON_IDE_SCROLL_SNAP?.Invoke(scrollDelta);
         }
     }
 }

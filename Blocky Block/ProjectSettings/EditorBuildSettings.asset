@@ -17,4 +17,7 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/Manual Levels/Level Test 3D Cinemachine.unity
     guid: 9ba9bfd85a7ff264a87a9120a0b56e02
+  - enabled: 1
+    path: Assets/Scenes/Manual Levels/Level Test 3D Scroll Extension.unity
+    guid: bef3f797827e2184c8a67692ef3bbd12
   m_configObjects: {}

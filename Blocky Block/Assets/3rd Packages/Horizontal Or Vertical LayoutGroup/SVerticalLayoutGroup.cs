@@ -55,6 +55,8 @@ namespace Utility.SLayout
         public override void SetLayoutVertical()
         {
             SetChildrenAlongAxis(1, true);
+            int childCount = transform.childCount - 1;
+            GameEvents.ON_TOGGLE_CONTROLLER_PANEL?.Invoke(childCount > 0);
             foreach (Transform child in transform)
             {
                 if (child.GetComponent<UIBlock>() == null)
