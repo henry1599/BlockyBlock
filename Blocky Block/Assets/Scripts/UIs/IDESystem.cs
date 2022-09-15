@@ -33,7 +33,7 @@ namespace BlockyBlock.UI
             float contentSpacing = m_ContentLayout.spacing;
             float contentTopPadding = m_ContentLayout.padding.top;
             m_CurrentIDEHeight = 
-                m_TopPadding + contentTopPadding + contentSpacing * _childCount;
+                m_TopPadding + contentTopPadding + contentSpacing * _childCount + 70;
             m_CurrentIDEHeight = Mathf.Max(m_CurrentIDEHeight, m_MinRectHeight);
             Vector2 finalSize = new Vector2(m_ThisRect.sizeDelta.x, m_CurrentIDEHeight);
 
