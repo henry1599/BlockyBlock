@@ -22,6 +22,7 @@ TagManager:
   - Resource Loader
   - Not Any Block
   - Connection Manager
+  - IDE Main Field
   layers:
   - Default
   - TransparentFX

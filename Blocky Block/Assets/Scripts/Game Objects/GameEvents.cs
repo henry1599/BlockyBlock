@@ -39,6 +39,7 @@ namespace BlockyBlock.Events
         public static Action ON_UPDATE_LINE_NUMBER;
         public static Action<ScrollIDEState> ON_IDE_SCROLL;
         public static Action<bool> ON_BLOCK_EDITOR;
+        public static Action<int> ON_IDE_CONTENT_CHANGED;
     }
     public class BlockEvents
     {
@@ -63,6 +64,7 @@ namespace BlockyBlock.Events
         public static readonly string SCENE_MANAGER_TAG = "Scene Manager";
         public static readonly string RESOURCE_LOADER_TAG = "Resource Loader";
         public static readonly string CONNECTION_MANAGER_TAG = "Connection Manager";
+        public static readonly string IDE_MAIN_FIELD_TAG = "IDE Main Field";
         public static readonly string GROUND_TAG = "Ground";
         public static readonly string WATER_TAG = "Water";
         public static readonly string TOP_IDE_TAG = "Top IDE";

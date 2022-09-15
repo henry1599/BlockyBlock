@@ -63,6 +63,7 @@ namespace Utility.SLayout
                 }
                 child.GetComponent<UIBlock>().UpdateLineNumber();
             }
+            EditorEvents.ON_IDE_CONTENT_CHANGED?.Invoke(transform.childCount);
         }
     }
 }
