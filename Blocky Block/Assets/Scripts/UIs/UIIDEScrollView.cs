@@ -12,6 +12,7 @@ namespace BlockyBlock.UI
     {
         [SerializeField] ScrollRect m_ScrollView;
         [SerializeField] RectTransform m_Content;
+        [SerializeField] GameObject m_TopScrollIDE, m_BottomScrollIDE;
         Sequence m_TweenSequence;
         void Start()
         {
@@ -21,6 +22,8 @@ namespace BlockyBlock.UI
 
             UnitEvents.ON_RESET += HandleResetIDE;
             GameEvents.ON_EXECUTING_BLOCK += HandleExecutingBlock;
+
+            BlockEvents.ON_UI_BLOCK_DRAG += HandleUIBlockDrag;
         }
         void OnDestroy()
         {
@@ -29,6 +32,13 @@ namespace BlockyBlock.UI
             
             UnitEvents.ON_RESET -= HandleResetIDE;
             GameEvents.ON_EXECUTING_BLOCK -= HandleExecutingBlock;
+            
+            BlockEvents.ON_UI_BLOCK_DRAG -= HandleUIBlockDrag;
+        }
+        void HandleUIBlockDrag(bool _status)
+        {
+            m_TopScrollIDE.SetActive(_status);
+            m_BottomScrollIDE.SetActive(_status);
         }
         void HandleExecutingBlock(bool _isExecuting)
         {

@@ -165,6 +165,7 @@ namespace BlockyBlock.UI
             {
                 return;
             }
+            BlockEvents.ON_UI_BLOCK_DRAG?.Invoke(true);
             m_DragOffset = m_PivotOffset;
 
             if (Mode == BlockMode.PREVIEW)
@@ -299,6 +300,7 @@ namespace BlockyBlock.UI
             {
                 return;
             }
+            BlockEvents.ON_UI_BLOCK_DRAG?.Invoke(false);
             UIManager.Instance.m_DelayBufferTimer = UIManager.Instance.m_DelayBuffer;
             // Cursor.visible = true;
             if (m_OutsideContainerPrefab == null)

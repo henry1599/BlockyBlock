@@ -48,6 +48,7 @@ namespace BlockyBlock.Events
     {
         public static Action<UIBlock, IDERunState> ON_HIGHLIGHT;
         public static Action ON_UPDATE_VERTICAL_LAYOUT;
+        public static Action<bool> ON_UI_BLOCK_DRAG;
     }
     public class ToolEvents
     {
