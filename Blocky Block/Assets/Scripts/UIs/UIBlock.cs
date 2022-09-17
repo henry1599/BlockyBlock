@@ -138,6 +138,7 @@ namespace BlockyBlock.UI
             {
                 return;
             }
+            ClickSelf();
             Vector3 endPosition = (Vector3)(pointerEventData.position) + m_PivotOffset;
 
             m_InitClickPosition = transform.position;
@@ -150,6 +151,7 @@ namespace BlockyBlock.UI
             {
                 return;
             }
+            UnclickSelf();
             if (!m_IsDragging)
             {
                 transform.DOKill();
@@ -420,6 +422,14 @@ namespace BlockyBlock.UI
                 default:
                     break;
             }
+        }
+        public virtual void ClickSelf()
+        {
+
+        }
+        public virtual void UnclickSelf()
+        {
+
         }
         public virtual void UnHighlightSelf(IDERunState _state)
         {

@@ -16,13 +16,17 @@ namespace BlockyBlock.UI
         // public ArrowJump m_ArrowJump;
         private bool m_IsPlaced = false;
         public Connection m_Connection;
+        public Color ClickedColor, UnclickedColor;
         public RectTransform TopPanel;
-        private float m_WeightConnection;
+        private float m_WeightConnection = 0;
         public override void Setup(UIBlock _parentBlock = null)
         {
             base.Setup(_parentBlock);
 
-            m_WeightConnection = Random.Range(MinWeightConnection, MaxWeightConnection);
+            if (m_WeightConnection == 0)
+            {
+                m_WeightConnection = Random.Range(MinWeightConnection, MaxWeightConnection);
+            }
 
             if (!m_IsPlaced)
             {
@@ -30,7 +34,7 @@ namespace BlockyBlock.UI
 
                 m_IsPlaced = true;
 
-                m_UIBlockJumpTo = Instantiate(UIManager.Instance.m_BlockDatas[BlockType.SKIP].gameObject).GetComponent<UIBlockSkip>();
+                m_UIBlockJumpTo = Instantiate(UIManager.Instance.m_BlockDatas[BlockType.SKIP].gameObject, transform.position, Quaternion.identity, ideContent.transform).GetComponent<UIBlockSkip>();
                 m_UIBlockJumpTo.transform.SetParent(ideContent.transform);
 
                 m_UIBlockJumpTo.Setup(this);
@@ -66,6 +70,18 @@ namespace BlockyBlock.UI
             EnableArrow();
             SetupArrow();
             base.OnEndDrag(eventData);
+        }
+        public override void ClickSelf()
+        {
+            base.ClickSelf();
+            m_Connection.line.color = ClickedColor;
+            m_UIBlockJumpTo.Arrow.color = ClickedColor;
+        }
+        public override void UnclickSelf()
+        {
+            base.UnclickSelf();
+            m_Connection.line.color = UnclickedColor;
+            m_UIBlockJumpTo.Arrow.color = UnclickedColor;
         }
         public void EnableArrow()
         {

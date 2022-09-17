@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 using UnityEngine.EventSystems;
 
 namespace BlockyBlock.UI 
@@ -10,6 +11,7 @@ namespace BlockyBlock.UI
         public UIBlockJump m_UIBlockJumpFrom {get; set;} = null;
         public bool IsDragging => m_IsDragging;
         public RectTransform TopPanel;
+        public Image Arrow;
         protected override void Start() 
         {
             base.Start();
@@ -48,6 +50,18 @@ namespace BlockyBlock.UI
             m_DragOffset = Vector3.zero;
             m_CanvasGroup.blocksRaycasts = true;
             ToggleChildrenRaycastTarget(true);
+        }
+        public override void ClickSelf()
+        {
+            base.ClickSelf();
+            m_UIBlockJumpFrom.m_Connection.line.color = m_UIBlockJumpFrom.ClickedColor;
+            Arrow.color = m_UIBlockJumpFrom.ClickedColor;
+        }
+        public override void UnclickSelf()
+        {
+            base.UnclickSelf();
+            m_UIBlockJumpFrom.m_Connection.line.color = m_UIBlockJumpFrom.UnclickedColor;
+            Arrow.color = m_UIBlockJumpFrom.UnclickedColor;
         }
     }
 }
