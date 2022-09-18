@@ -23,6 +23,7 @@ TagManager:
   - Not Any Block
   - Connection Manager
   - IDE Main Field
+  - UI Block Option
   layers:
   - Default
   - TransparentFX

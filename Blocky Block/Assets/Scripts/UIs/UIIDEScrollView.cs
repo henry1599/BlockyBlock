@@ -51,16 +51,6 @@ namespace BlockyBlock.UI
         }
         void HandleIDEScrollSnap(float _delta)
         {
-            // float currentPos = m_ScrollView.normalizedPosition.y;
-            // currentPos -= _delta;
-            // if (currentPos <= 0) currentPos = 0;
-            // m_ScrollView
-            //     .DOVerticalNormalizedPos(
-            //         currentPos,
-            //         0.15f
-            //     )
-            //     .SetEase(Ease.InOutSine);
-            
             float maxHeight = m_Content.sizeDelta.y - 1080;
             Vector2 curPos = m_Content.anchoredPosition;
             curPos.y += _delta;

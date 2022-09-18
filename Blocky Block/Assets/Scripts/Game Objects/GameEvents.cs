@@ -49,6 +49,9 @@ namespace BlockyBlock.Events
         public static Action<UIBlock, IDERunState> ON_HIGHLIGHT;
         public static Action ON_UPDATE_VERTICAL_LAYOUT;
         public static Action<bool> ON_UI_BLOCK_DRAG;
+        public static Action<UIBlockOption, bool> ON_UI_BLOCK_OPTION_SELECTED;
+        public static Action<UIBlock> BLOCK_IDE_UI;
+        public static Action<UIBlock> UNBLOCK_IDE_UI;
     }
     public class ToolEvents
     {
@@ -63,6 +66,7 @@ namespace BlockyBlock.Events
         public static readonly string IDE_CONTENT_TAG = "IDE Content";
         public static readonly string IDE_SCROLL_RECT_TAG = "IDE Scroll Rect";
         public static readonly string UI_BLOCK_TAG = "UI Block";
+        public static readonly string UI_BLOCK_OPTION_TAG = "UI Block Option";
         public static readonly string UI_DUMMY_BLOCK_TAG = "UI Dummy Block";
         public static readonly string LEVEL_MANAGER_TAG = "Level Manager";
         public static readonly string SCENE_MANAGER_TAG = "Scene Manager";

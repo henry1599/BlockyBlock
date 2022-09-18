@@ -84,6 +84,8 @@ namespace BlockyBlock.UI
                 EditorEvents.ON_IDE_SCROLL?.Invoke(value);
             }
         } ScrollIDEState m_ScrollIDEState;
+        private bool m_IsHoverOptionBlock;
+        private bool m_IsDragOnOptionBlock;
         public CanvasGroup CanvasGroup => m_CanvasGroup;
         public BlockMode Mode 
         {
@@ -116,9 +118,19 @@ namespace BlockyBlock.UI
             Mode = BlockMode.PREVIEW;
 
             BlockEvents.ON_HIGHLIGHT += HandleHighlight;
+            BlockEvents.BLOCK_IDE_UI += HanldeBlockIDEUI;
+            BlockEvents.UNBLOCK_IDE_UI += HanldeUnBlockIDEUI;
         }
         void Update()
         {
+            if (UIManager.Instance.CheckTriggerUI(GameConstants.UI_BLOCK_OPTION_TAG))
+            {
+                m_IsHoverOptionBlock = true;
+            }
+            else
+            {
+                m_IsHoverOptionBlock = false;
+            }
             if (m_IsDragging)
             {
                 CastBlockPosition();
@@ -131,11 +143,42 @@ namespace BlockyBlock.UI
         void OnDestroy()
         {
             BlockEvents.ON_HIGHLIGHT -= HandleHighlight;
+            BlockEvents.BLOCK_IDE_UI -= HanldeBlockIDEUI;
+            BlockEvents.UNBLOCK_IDE_UI -= HanldeUnBlockIDEUI;
+        }
+        void HanldeBlockIDEUI(UIBlock _uiBlockCallFrom)
+        {
+            if (_uiBlockCallFrom != this)
+            {
+                CanvasGroup 
+                    .DOFade(
+                        0.4f,
+                        0.2f
+                    );
+            }
+            ToggleChildrenRaycastTarget(false);
+        }
+        void HanldeUnBlockIDEUI(UIBlock _uiBlockCallFrom)
+        {
+            if (_uiBlockCallFrom != this)
+            {
+                CanvasGroup 
+                    .DOFade(
+                        1f,
+                        0.2f
+                    );
+            }
+            ToggleChildrenRaycastTarget(true);
         }
         public void OnPointerDown(PointerEventData pointerEventData)
         {
             if (Mode == BlockMode.PREVIEW)
             {
+                return;
+            }
+            if (m_IsHoverOptionBlock)
+            {
+                m_IsDragOnOptionBlock = true;
                 return;
             }
             ClickSelf();
@@ -151,12 +194,15 @@ namespace BlockyBlock.UI
             {
                 return;
             }
+            if (m_IsDragOnOptionBlock)
+            {
+                m_IsDragOnOptionBlock = false;
+                return;
+            }
             UnclickSelf();
             if (!m_IsDragging)
             {
                 transform.DOKill();
-                // transform
-                //     .DOMove(m_InitClickPosition, 0.1f).SetEase(Ease.InOutSine);
                 transform.position = m_InitClickPosition;
             }
             
@@ -164,6 +210,10 @@ namespace BlockyBlock.UI
         public virtual void OnBeginDrag(PointerEventData eventData)
         {
             if (HandToolManager.Instance.CurrentCursor != CursorType.SELECTION)
+            {
+                return;
+            }
+            if (m_IsDragOnOptionBlock)
             {
                 return;
             }
@@ -191,7 +241,7 @@ namespace BlockyBlock.UI
 
             m_TempBlock.CanvasGroup.alpha = 0;
 
-            m_TempBlock.transform.parent = null;
+            m_TempBlock.transform.SetParent(null);
             m_TempBlock.transform.SetParent(m_OutsideContainerPrefab);
 
             m_TempBlock.IsDragging = true;
@@ -203,7 +253,7 @@ namespace BlockyBlock.UI
         void InitBlock(PointerEventData _data)
         {
             m_TempBlock = null;
-            transform.parent = null;
+            transform.SetParent(null);
             transform.SetParent(m_OutsideContainerPrefab);
             // transform
             //     .DOMove(
@@ -215,6 +265,10 @@ namespace BlockyBlock.UI
         public virtual void OnDrag(PointerEventData data)
         {
             if (HandToolManager.Instance.CurrentCursor != CursorType.SELECTION)
+            {
+                return;
+            }
+            if (m_IsDragOnOptionBlock)
             {
                 return;
             }
@@ -300,6 +354,11 @@ namespace BlockyBlock.UI
         {
             if (HandToolManager.Instance.CurrentCursor != CursorType.SELECTION)
             {
+                return;
+            }
+            if (m_IsDragOnOptionBlock)
+            {
+                m_IsDragOnOptionBlock = false;
                 return;
             }
             BlockEvents.ON_UI_BLOCK_DRAG?.Invoke(false);
@@ -458,7 +517,7 @@ namespace BlockyBlock.UI
             int lastIdx = UIManager.Instance.CurrentIdx;
             int blockDiff = thisIdx - lastIdx;
             float scrollDelta = 50.0f * blockDiff;
-            print(scrollDelta);
+            // print(scrollDelta);
             EditorEvents.ON_IDE_SCROLL_SNAP?.Invoke(scrollDelta);
         }
     }
