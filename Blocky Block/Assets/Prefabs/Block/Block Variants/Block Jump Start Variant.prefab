@@ -412,6 +412,7 @@ MonoBehaviour:
   m_PivotOffset: {x: -140, y: 0, z: 0}
   m_CanvasGroup: {fileID: 8118938042786940367}
   m_UILineNumber: {fileID: 9016097759254369991}
+  UIBlockOption: {fileID: 0}
   MinWeightConnection: 150
   MaxWeightConnection: 260
   m_Connection: {fileID: 7342584479421379242}

@@ -52,6 +52,7 @@ namespace BlockyBlock.Events
         public static Action<UIBlockOption, bool> ON_UI_BLOCK_OPTION_SELECTED;
         public static Action<UIBlock> BLOCK_IDE_UI;
         public static Action<UIBlock> UNBLOCK_IDE_UI;
+        public static Action ON_DISABLE_UI_FUNCTION;
     }
     public class ToolEvents
     {

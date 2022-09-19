@@ -69,6 +69,13 @@ namespace BlockyBlock.UI
 
 
 
+        [Space(10)]
+        [Header("Optional Block")]
+        public UIBlockOption UIBlockOption;
+
+
+
+
         // [Space(10)]
         // [Header("Click Shake Rotation")]
         // [Range(0.05f, 1f)]
@@ -81,7 +88,7 @@ namespace BlockyBlock.UI
 
 
 
-
+        protected bool m_IsDisabled = false;
         protected RectTransform m_IDEMainField;
         protected RectTransform m_ContentPanel;
         protected Color m_TopColor, m_BelowColor;
@@ -114,7 +121,7 @@ namespace BlockyBlock.UI
             }
         }
         public BlockType Type => m_Type;
-        public bool IsDragging 
+        public virtual bool IsDragging 
         {
             get => m_IsDragging;
             set => m_IsDragging = value;
@@ -177,6 +184,14 @@ namespace BlockyBlock.UI
                         0.4f,
                         0.2f
                     );
+                if (UIBlockOption == null)
+                {
+                    m_IsDisabled = true;
+                }
+                else 
+                {
+                    UIBlockOption.IsDisabled = m_IsDisabled = true;
+                }
             }
             // ToggleChildrenRaycastTarget(false);
         }
@@ -189,6 +204,14 @@ namespace BlockyBlock.UI
                         1f,
                         0.2f
                     );
+                if (UIBlockOption == null)
+                {
+                    m_IsDisabled = false;
+                }
+                else 
+                {
+                    UIBlockOption.IsDisabled = m_IsDisabled = false;
+                }
             }
             // ToggleChildrenRaycastTarget(true);
         }
@@ -196,6 +219,7 @@ namespace BlockyBlock.UI
         {
             if (Mode == BlockMode.PREVIEW)
             {
+                BlockEvents.ON_DISABLE_UI_FUNCTION?.Invoke();
                 return;
             }
             if (m_IsHoverOptionBlock)
@@ -506,7 +530,7 @@ namespace BlockyBlock.UI
         }
         public virtual void ClickSelf()
         {
-
+            BlockEvents.ON_DISABLE_UI_FUNCTION?.Invoke();
         }
         public virtual void UnclickSelf()
         {

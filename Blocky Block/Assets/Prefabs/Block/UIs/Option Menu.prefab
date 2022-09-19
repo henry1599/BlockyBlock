@@ -86,7 +86,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 7222954778346424032}
-  - component: {fileID: 1214406915452331219}
+  - component: {fileID: 2971246237202604172}
   m_Layer: 8
   m_Name: Option Menu
   m_TagString: UI Block Option
@@ -115,7 +115,7 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 104, y: 0}
   m_Pivot: {x: 0.5, y: 1}
---- !u!114 &1214406915452331219
+--- !u!114 &2971246237202604172
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -124,10 +124,14 @@ MonoBehaviour:
   m_GameObject: {fileID: 2210518690707225982}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9ca7991e15ba2d1409d6cc4c0e063793, type: 3}
+  m_Script: {fileID: 11500000, guid: bdddde06caa9dd640907ec553caf667b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   DropDuration: 0.1
+  HeightForEachOption: 45
+  m_TopPanel: {fileID: 1239123334792649215}
+  m_BelowPanel: {fileID: 2480906985416412401}
+  UIOptionItemTemplate: {fileID: -8787529808311916560, guid: a3e340739e6a17c41a4da5fc49417871, type: 3}
 --- !u!1 &7491517970979072090
 GameObject:
   m_ObjectHideFlags: 0
@@ -139,6 +143,7 @@ GameObject:
   - component: {fileID: 1239123334792649215}
   - component: {fileID: 771096912362202054}
   - component: {fileID: 2350304154259383452}
+  - component: {fileID: 2093390010}
   m_Layer: 8
   m_Name: Top Panel
   m_TagString: UI Block Option
@@ -204,3 +209,29 @@ MonoBehaviour:
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 1
+--- !u!114 &2093390010
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7491517970979072090}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 59f8146938fff824cb5fd77236b75775, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Padding:
+    m_Left: 0
+    m_Right: 0
+    m_Top: 0
+    m_Bottom: 0
+  m_ChildAlignment: 1
+  m_Spacing: 0
+  m_ChildForceExpandWidth: 1
+  m_ChildForceExpandHeight: 1
+  m_ChildControlWidth: 0
+  m_ChildControlHeight: 0
+  m_ChildScaleWidth: 0
+  m_ChildScaleHeight: 0
+  m_ReverseArrangement: 0

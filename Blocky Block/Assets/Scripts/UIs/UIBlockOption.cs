@@ -12,10 +12,18 @@ namespace BlockyBlock.UI
     {
         public Transform m_TopPanel, m_BelowPanel;
         public GameObject m_TextObject;
+        public TMP_Text m_CurrentOptionText;
         public UIBlock UIBlock;
+        public bool IsDisabled {get; set;} = false;
+        protected bool Status 
+        {
+            get => m_Status;
+            set => m_Status = value;
+        }
         bool m_Status = false;
         public void OnPointerClick(PointerEventData eventData)
         {
+            if (IsDisabled) return;
             m_Status = !m_Status;
             BlockEvents.ON_UI_BLOCK_OPTION_SELECTED?.Invoke(this, m_Status);
         }

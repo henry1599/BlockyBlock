@@ -6,13 +6,12 @@ using DG.Tweening;
 
 namespace BlockyBlock.UI
 {
-    public class UIBlockTurnLeft : UIBlock
+    public class UIBlockTurn : UIBlock
     {
-        [SerializeField] UIBlockOptionTurn m_UIBlockOptionTurn;
         public override void Setup(UIBlock _parentBlock = null)
         {
             base.Setup(_parentBlock);
-            m_UIBlockOptionTurn.Setup();
+            ((UIBlockOptionTurn)UIBlockOption).Setup();
             // print("UIBlock Turn Left Setup");
         }
     }

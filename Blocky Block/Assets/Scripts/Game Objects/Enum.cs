@@ -1,8 +1,8 @@
 namespace BlockyBlock.Enums
 {
     public enum TurnDirection {
-        LEFT,
-        RIGHT
+        LEFT = 0,
+        RIGHT = 1
     }
     public enum CursorType {
         SELECTION = 0,

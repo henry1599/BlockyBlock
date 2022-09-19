@@ -27,6 +27,7 @@ namespace BlockyBlock.Managers
         public BlockData m_BlockDatas;
         public BlockConfig m_BlockConfig;
         public Transform m_DummyUIBlock;
+        public UIOption UIOption;
         public float m_DelayBuffer = 0.15f;
         public float m_DelayBufferTimer {get; set;}
         public bool m_IsTweening = false;
