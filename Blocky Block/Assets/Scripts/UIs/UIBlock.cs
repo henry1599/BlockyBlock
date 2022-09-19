@@ -9,6 +9,7 @@ using BlockyBlock.Enums;
 using BlockyBlock.Events;
 using BlockyBlock.Tools;
 using Helpers;
+using TMPro;
 
 namespace BlockyBlock.UI
 {
@@ -20,6 +21,20 @@ namespace BlockyBlock.UI
 
 
 
+        [Space(10)]
+        [Header("Block Init")]
+        [SerializeField] protected Image m_TopPanelIDE;
+        [SerializeField] protected Image m_BelowPanelIDE;
+        [SerializeField] protected Image m_TopPanelPreview;
+        [SerializeField] protected Image m_BelowPanelPreview;
+        [SerializeField] protected TMP_Text m_TextIDE;
+        [SerializeField] protected TMP_Text m_TextPreview;
+
+
+
+
+
+        
         [Space(10)]
         [Header("Block Visible")]
         [SerializeField] protected RectTransform m_ThisRect;
@@ -69,6 +84,7 @@ namespace BlockyBlock.UI
 
         protected RectTransform m_IDEMainField;
         protected RectTransform m_ContentPanel;
+        protected Color m_TopColor, m_BelowColor;
         UIBlock m_TempBlock = null;
         BlockMode m_Mode;
         ScrollIDEState ScrollIDEState
@@ -111,6 +127,14 @@ namespace BlockyBlock.UI
             m_ContentPanel = GameObject.FindGameObjectWithTag(GameConstants.IDE_CONTENT_TAG).GetComponent<RectTransform>();
             m_IDEMainField = GameObject.FindGameObjectWithTag(GameConstants.IDE_MAIN_FIELD_TAG).GetComponent<RectTransform>();
         }
+        public void Init(Color _topColor, Color _belowColor, string _text)
+        {
+            m_TopColor = _topColor;
+            m_BelowColor = _belowColor;
+            m_TextIDE.text = m_TextPreview.text = _text;
+            m_TopPanelIDE.color = m_TopPanelPreview.color = _topColor;
+            m_BelowPanelIDE.color = m_BelowPanelPreview.color = _belowColor;
+        }
         // Start is called before the first frame update
         protected virtual void Start()
         {
@@ -118,8 +142,6 @@ namespace BlockyBlock.UI
             Mode = BlockMode.PREVIEW;
 
             BlockEvents.ON_HIGHLIGHT += HandleHighlight;
-            BlockEvents.BLOCK_IDE_UI += HanldeBlockIDEUI;
-            BlockEvents.UNBLOCK_IDE_UI += HanldeUnBlockIDEUI;
         }
         void Update()
         {
@@ -156,7 +178,7 @@ namespace BlockyBlock.UI
                         0.2f
                     );
             }
-            ToggleChildrenRaycastTarget(false);
+            // ToggleChildrenRaycastTarget(false);
         }
         void HanldeUnBlockIDEUI(UIBlock _uiBlockCallFrom)
         {
@@ -168,7 +190,7 @@ namespace BlockyBlock.UI
                         0.2f
                     );
             }
-            ToggleChildrenRaycastTarget(true);
+            // ToggleChildrenRaycastTarget(true);
         }
         public void OnPointerDown(PointerEventData pointerEventData)
         {
@@ -384,7 +406,7 @@ namespace BlockyBlock.UI
                 if (!m_CurrentContentField.gameObject.CompareTag(GameConstants.IDE_CONTENT_TAG))
                 {
                     UIManager.Instance.m_DummyUIBlock.SetAsLastSibling();
-                    DestroySelf(m_TempBlock.transform);
+                    DestroySelf(m_TempBlock.gameObject);
                     return;
                 }
 
@@ -403,7 +425,7 @@ namespace BlockyBlock.UI
             if (!m_CurrentContentField.gameObject.CompareTag(GameConstants.IDE_CONTENT_TAG))
             {
                 UIManager.Instance.m_DummyUIBlock.SetAsLastSibling();
-                DestroySelf(transform);
+                DestroySelf(gameObject);
                 return;
             }
 
@@ -422,9 +444,9 @@ namespace BlockyBlock.UI
             m_CanvasGroup.blocksRaycasts = true;
             ToggleChildrenRaycastTarget(true);
         }
-        public virtual void DestroySelf(Transform _target)
+        public virtual void DestroySelf(GameObject _target)
         {
-            _target
+            _target.transform
                 .DOScale(
                     Vector3.zero,
                     0.25f
@@ -496,6 +518,8 @@ namespace BlockyBlock.UI
         }
         public virtual void Setup(UIBlock _parentBlock = null)
         {
+            BlockEvents.BLOCK_IDE_UI += HanldeBlockIDEUI;
+            BlockEvents.UNBLOCK_IDE_UI += HanldeUnBlockIDEUI;
         }
         public virtual void UpdateLineNumber()
         {

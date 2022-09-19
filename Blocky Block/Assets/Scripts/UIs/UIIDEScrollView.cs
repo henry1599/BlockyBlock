@@ -10,6 +10,7 @@ namespace BlockyBlock.UI
 {
     public class UIIDEScrollView : MonoBehaviour
     {
+        [SerializeField] RectTransform m_ThisRect;
         [SerializeField] ScrollRect m_ScrollView;
         [SerializeField] RectTransform m_Content;
         [SerializeField] GameObject m_TopScrollIDE, m_BottomScrollIDE;
@@ -17,6 +18,9 @@ namespace BlockyBlock.UI
         void Start()
         {
             m_TweenSequence = DOTween.Sequence();
+
+            m_ThisRect.sizeDelta = new Vector2(m_ThisRect.sizeDelta.x, Screen.height);
+
             EditorEvents.ON_IDE_SCROLL += HandleIDEScroll;
             EditorEvents.ON_IDE_SCROLL_SNAP += HandleIDEScrollSnap;
 

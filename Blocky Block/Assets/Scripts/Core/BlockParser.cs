@@ -114,11 +114,8 @@ namespace BlockyBlock.Core
                 case BlockType.MOVE_FORWARD:
                     HandleMoveForward((UIBlockMove)_uiBlock);
                     break;
-                case BlockType.TURN_LEFT:
+                case BlockType.TURN:
                     HandleTurnLeft((UIBlockTurnLeft)_uiBlock);
-                    break;
-                case BlockType.TURN_RIGHT:
-                    HandleTurnRight((UIBlockTurnRight)_uiBlock);
                     break;
                 case BlockType.PICK_UP:
                     break;
@@ -143,12 +140,6 @@ namespace BlockyBlock.Core
         void HandleTurnLeft(UIBlockTurnLeft _uiBlock)
         {
             BlockFunctionTurnLeft function = new BlockFunctionTurnLeft(_uiBlock);
-            function.Setup();
-            Functions.Add(function);
-        }
-        void HandleTurnRight(UIBlockTurnRight _uiBlock)
-        {
-            BlockFunctionTurnRight function = new BlockFunctionTurnRight(_uiBlock);
             function.Setup();
             Functions.Add(function);
         }

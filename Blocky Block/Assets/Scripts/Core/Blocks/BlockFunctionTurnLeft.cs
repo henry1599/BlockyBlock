@@ -9,7 +9,7 @@ namespace BlockyBlock.Core
 {
     public class BlockFunctionTurnLeft : BlockFunction
     {
-        public BlockFunctionTurnLeft(UIBlock _uiBlock) : base(_uiBlock, BlockType.TURN_LEFT)
+        public BlockFunctionTurnLeft(UIBlock _uiBlock) : base(_uiBlock, BlockType.TURN)
         {
 
         }

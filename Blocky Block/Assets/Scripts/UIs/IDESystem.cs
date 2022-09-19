@@ -14,14 +14,18 @@ namespace BlockyBlock.UI
         [SerializeField] private RectTransform m_ThisRect;
         [Tooltip("The top padding for level title")]
         [SerializeField] private float m_TopPadding = 350;
-        [Tooltip("The Minimum height of this rectTransform")]
-        [SerializeField] private float m_MinRectHeight = 950;
+        [Tooltip("The bottom padding for tools")]
+        [SerializeField] private float m_BottomPadding = 90;
+        [Tooltip("Scale duration")]
+        [SerializeField] private float m_ScaleDuration = 0.5f;
+        private float m_MinRectHeight;
         [Tooltip("The content that contain the SVerticalLayoutGroup")]
         [SerializeField] private SVerticalLayoutGroup m_ContentLayout;
         private float m_CurrentIDEHeight = 0;
         // Start is called before the first frame update
         void Start()
         {
+            m_MinRectHeight = Screen.height;
             EditorEvents.ON_IDE_CONTENT_CHANGED += HandleContentChanged;
         }
         void OnDestroy()
@@ -33,11 +37,11 @@ namespace BlockyBlock.UI
             float contentSpacing = m_ContentLayout.spacing;
             float contentTopPadding = m_ContentLayout.padding.top;
             m_CurrentIDEHeight = 
-                m_TopPadding + contentTopPadding + contentSpacing * _childCount + 70;
+                m_TopPadding + contentTopPadding + contentSpacing * _childCount + m_BottomPadding;
             m_CurrentIDEHeight = Mathf.Max(m_CurrentIDEHeight, m_MinRectHeight);
             Vector2 finalSize = new Vector2(m_ThisRect.sizeDelta.x, m_CurrentIDEHeight);
 
-            DOTween.To(() => m_ThisRect.sizeDelta, value => m_ThisRect.sizeDelta = value, finalSize, 0.5f);
+            DOTween.To(() => m_ThisRect.sizeDelta, value => m_ThisRect.sizeDelta = value, finalSize, m_ScaleDuration);
         }
     }
 }

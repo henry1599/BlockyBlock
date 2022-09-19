@@ -12,9 +12,17 @@ namespace BlockyBlock.Configurations
         public Block Blocks;
         public float GetDelayTime(BlockType _type)
         {
-            return Blocks[_type];
+            return Blocks[_type].ExecutionTime;
         }
     }
     [System.Serializable]
-    public class Block : SerializableDictionaryBase<BlockType, float> {}
+    public class Block : SerializableDictionaryBase<BlockType, UIBlockData> {}
+    [System.Serializable]
+    public class UIBlockData
+    {
+        public string Text;
+        public float ExecutionTime;
+        public Color TopColor;
+        public Color ShadowColor;
+    }
 }

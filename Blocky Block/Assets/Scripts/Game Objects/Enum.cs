@@ -52,8 +52,7 @@ namespace BlockyBlock.Enums
         PICK_UP,
         PUT_DOWN,
         DO_UNTIL,
-        TURN_LEFT,
-        TURN_RIGHT,
+        TURN,
         JUMP,
         SKIP
     }

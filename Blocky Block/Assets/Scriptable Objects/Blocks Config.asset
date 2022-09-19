@@ -35,14 +35,34 @@ MonoBehaviour:
       elementIcon: {fileID: 0}
     reqReferences: {fileID: 0}
     isExpanded: 1
-    _keyValues: 0100000000000000020000000300000004000000050000000600000007000000
-    _keys: 0100000000000000020000000300000004000000050000000600000007000000
+    _keyValues: 01000000000000000200000003000000040000000500000006000000
+    _keys: 01000000000000000200000003000000040000000500000006000000
     _values:
-    - 1.5
-    - 1.25
-    - 1.5
-    - 1.5
-    - 1
-    - 1
-    - 1
-    - 1
+    - Text: 
+      ExecutionTime: 0
+      TopColor: {r: 0, g: 0, b: 0, a: 0}
+      ShadowColor: {r: 0, g: 0, b: 0, a: 0}
+    - Text: Step Forward
+      ExecutionTime: 1.25
+      TopColor: {r: 0, g: 1, b: 0.45882353, a: 1}
+      ShadowColor: {r: 0, g: 0.3137255, b: 0.3137255, a: 1}
+    - Text: 
+      ExecutionTime: 0
+      TopColor: {r: 0, g: 0, b: 0, a: 0}
+      ShadowColor: {r: 0, g: 0, b: 0, a: 0}
+    - Text: 
+      ExecutionTime: 0
+      TopColor: {r: 0, g: 0, b: 0, a: 0}
+      ShadowColor: {r: 0, g: 0, b: 0, a: 0}
+    - Text: Turn
+      ExecutionTime: 1
+      TopColor: {r: 1, g: 0.48235294, b: 0.6745098, a: 1}
+      ShadowColor: {r: 0.48235294, g: 0.21568628, b: 0.29411766, a: 1}
+    - Text: Jump
+      ExecutionTime: 1
+      TopColor: {r: 0.7058824, g: 0.49411765, b: 1, a: 1}
+      ShadowColor: {r: 0.17254902, g: 0.023529412, b: 0.34117648, a: 1}
+    - Text: 
+      ExecutionTime: 1
+      TopColor: {r: 0.7058824, g: 0.49411765, b: 1, a: 1}
+      ShadowColor: {r: 0.17254902, g: 0.023529412, b: 0.34117648, a: 1}

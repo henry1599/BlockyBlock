@@ -36,7 +36,7 @@ namespace BlockyBlock.UI
             {
                 return;
             }
-            m_UIBlockJumpFrom.DestroySelf(m_UIBlockJumpFrom.transform);
+            m_UIBlockJumpFrom.DestroySelf(m_UIBlockJumpFrom.gameObject);
         }
         public override void Setup(UIBlock _parentBlock = null)
         {

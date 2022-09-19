@@ -113,7 +113,7 @@ namespace BlockyBlock.UI
             {
                 return;
             }
-            m_UIBlockJumpTo.DestroySelf(m_UIBlockJumpTo.transform);
+            m_UIBlockJumpTo.DestroySelf(m_UIBlockJumpTo.gameObject);
         }
     }
 }
