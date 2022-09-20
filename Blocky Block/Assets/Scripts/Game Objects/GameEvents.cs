@@ -14,7 +14,7 @@ namespace BlockyBlock.Events
     {
         public static Action<LevelID> LOAD_LEVEL;
         public static Action<LevelData> SETUP_LEVEL;
-        public static Action<LevelGround> SETUP_GROUND;
+        public static Action<List<LevelGround>> SETUP_GROUND;
         public static Action<int, Vector2> SETUP_CAMERA;
         public static Action<ControlButton, bool> ON_CONTROL_BUTTON_TOGGLE;
         public static Action<bool> ON_CONTROL_BUTTON_TOGGLE_ALL;
@@ -72,6 +72,7 @@ namespace BlockyBlock.Events
         public static readonly string LEVEL_MANAGER_TAG = "Level Manager";
         public static readonly string SCENE_MANAGER_TAG = "Scene Manager";
         public static readonly string RESOURCE_LOADER_TAG = "Resource Loader";
+        public static readonly string CONFIG_MANAGER_TAG = "Config Manager";
         public static readonly string CONNECTION_MANAGER_TAG = "Connection Manager";
         public static readonly string IDE_MAIN_FIELD_TAG = "IDE Main Field";
         public static readonly string GROUND_TAG = "Ground";

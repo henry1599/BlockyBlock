@@ -13,6 +13,8 @@ namespace BlockyBlock.Managers
         [SerializeField] LevelID m_LevelID;
         [Header("Managers")]
         [Tooltip("Spawn this prefab if it is not in the scene as playing")]
+        [SerializeField] ConfigManager m_ConfigManager;
+        [Tooltip("Spawn this prefab if it is not in the scene as playing")]
         [SerializeField] LevelManager m_LevelManager;
         [Tooltip("Spawn this prefab if it is not in the scene as playing")]
         [SerializeField] GameSceneManager m_GameSceneManager;
@@ -32,6 +34,11 @@ namespace BlockyBlock.Managers
             GameObject levelManager = GameObject.FindGameObjectWithTag(GameConstants.LEVEL_MANAGER_TAG);
             GameObject gameSceneManager = GameObject.FindGameObjectWithTag(GameConstants.SCENE_MANAGER_TAG);
             GameObject resourceLoader = GameObject.FindGameObjectWithTag(GameConstants.RESOURCE_LOADER_TAG);
+            GameObject configManager = GameObject.FindGameObjectWithTag(GameConstants.CONFIG_MANAGER_TAG);
+            if (configManager == null)
+            {
+                Instantiate(m_ConfigManager.gameObject);
+            }
             if (levelManager == null)
             {
                 Instantiate(m_LevelManager.gameObject);

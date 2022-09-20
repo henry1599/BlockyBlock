@@ -9,6 +9,7 @@ namespace BlockyBlock.Configurations
     [CreateAssetMenu(fileName = "Level Config", menuName = "Scriptable Object/Level Config")]
     public class LevelConfig : ScriptableObject
     {
+        public float SpaceEachFloor;
         public Level LevelDatas;
         public LevelData GetLevelDataByID(LevelID _id)
         {

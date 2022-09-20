@@ -25,7 +25,6 @@ namespace BlockyBlock.Managers
         public Transform m_PreviewCodeContent;
         public EventSystem m_EventSystem;
         public BlockData m_BlockDatas;
-        public BlockConfig m_BlockConfig;
         public Transform m_DummyUIBlock;
         public UIOption UIOption;
         public float m_DelayBuffer = 0.15f;
@@ -76,7 +75,7 @@ namespace BlockyBlock.Managers
             foreach (BlockType t in _data.BlockTypes)
             {
                 GameObject uiBlockObject = Instantiate(m_BlockDatas[t].gameObject);
-                uiBlockObject.GetComponent<UIBlock>().Init(m_BlockConfig.Blocks[t].TopColor, m_BlockConfig.Blocks[t].ShadowColor, m_BlockConfig.Blocks[t].Text);
+                uiBlockObject.GetComponent<UIBlock>().Init(ConfigManager.Instance.BlockConfig.Blocks[t].TopColor, ConfigManager.Instance.BlockConfig.Blocks[t].ShadowColor, ConfigManager.Instance.BlockConfig.Blocks[t].Text);
                 uiBlockObject.transform.SetParent(m_PreviewCodeContent);
             }
             

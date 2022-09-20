@@ -5,13 +5,13 @@ using BlockyBlock.UI;
 using BlockyBlock.Enums;
 using BlockyBlock.Events;
 using BlockyBlock.Configurations;
+using BlockyBlock.Managers;
 
 namespace BlockyBlock.Core
 {
     public class BlockParser : MonoBehaviour
     {
         Transform m_IDEContent = null;
-        public BlockConfig m_BlockConfig;
         public List<BlockFunction> Functions {get; set;} = new List<BlockFunction>();
         public bool IsFinishParse {get; set;}
         public float DelayTime {get; set;} = 0;
@@ -48,7 +48,7 @@ namespace BlockyBlock.Core
             {
                 return;
             }
-            DelayTime = m_BlockConfig.GetDelayTime(Functions[_value].BlockType);
+            DelayTime = ConfigManager.Instance.BlockConfig.GetDelayTime(Functions[_value].BlockType);
             Functions[_value].Execute();
             BlockEvents.ON_HIGHLIGHT?.Invoke(Functions[_value].UIBlock, BlockCompiler.Instance.IDEState);
         }

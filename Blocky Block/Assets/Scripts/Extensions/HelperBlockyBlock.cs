@@ -7,7 +7,7 @@ namespace Helpers.BlockyBlock
 {
     public static class HelperBlockyBlock
     {
-        public static string DirectionToString(TurnDirection _direction)
+        public static string TurnDirectionToString(TurnDirection _direction)
         {
             string result = "";
             switch (_direction)
@@ -21,7 +21,7 @@ namespace Helpers.BlockyBlock
             }
             return result;
         }
-        public static TurnDirection StringToDirection(string _string)
+        public static TurnDirection StringToTurnDirection(string _string)
         {
             TurnDirection result = TurnDirection.LEFT;
             _string = _string.ToLower();

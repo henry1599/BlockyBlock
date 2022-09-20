@@ -24,6 +24,7 @@ TagManager:
   - Connection Manager
   - IDE Main Field
   - UI Block Option
+  - Config Manager
   layers:
   - Default
   - TransparentFX

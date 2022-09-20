@@ -10,9 +10,8 @@ namespace BlockyBlock.Managers
     public class LevelManager : MonoBehaviour
     {
         public static LevelManager Instance {get; private set;}
-        [SerializeField] LevelConfig m_LevelConfig;
         [SerializeField] LevelID m_CurrentLevelID;
-        public LevelConfig LevelConfig => m_LevelConfig;
+        public LevelConfig LevelConfig => ConfigManager.Instance.LevelConfig;
         LevelData m_CurrentLevelData;
         public LevelData CurrentLevelData
         {
@@ -36,7 +35,7 @@ namespace BlockyBlock.Managers
             {
                 m_CurrentLevelID = value;
 
-                CurrentLevelData = m_LevelConfig.GetLevelDataByID(value);
+                CurrentLevelData = ConfigManager.Instance.LevelConfig.GetLevelDataByID(value);
             }
         }
         void Awake()
@@ -76,7 +75,8 @@ namespace BlockyBlock.Managers
         {
             yield return new WaitUntil(() => UIManager.Instance != null &&
                                              UnitManager.Instance != null &&
-                                             LevelReader.Instance != null);
+                                             LevelReader.Instance != null && 
+                                             ConfigManager.Instance != null);
             GameEvents.SETUP_LEVEL?.Invoke(_data);
         }
     }

@@ -9,7 +9,7 @@ namespace BlockyBlock.UI
     public class UIBlockSkip : UIBlock
     {
         public UIBlockJump m_UIBlockJumpFrom {get; set;} = null;
-        public bool IsDragging => m_IsDragging;
+        public override bool IsDragging => m_IsDragging;
         public RectTransform TopPanel;
         public Image Arrow;
         protected override void Start() 

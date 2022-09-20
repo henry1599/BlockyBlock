@@ -12,6 +12,7 @@ namespace BlockyBlock.Managers
     [System.Serializable]
     public class LevelGround
     {
+        public float Height;
         public List<GroundData> groundDatas;
         public LevelGround() => groundDatas = new List<GroundData>();
     }
@@ -44,27 +45,41 @@ namespace BlockyBlock.Managers
         void HandleSetupLevel(LevelData _data)
         {
             string rawLevelString = _data.LevelRawData.text;
-            string[] levelStringEachRow = Regex.Replace(rawLevelString, @"[\r\n\t ]+", "").Split(";");
-            LevelGround levelGround = new LevelGround();
-            int maxRows = 0;
-            int maxColumns = 0;
-            int squareMapSize = 0;
-            maxRows  = Mathf.Max(maxRows, levelStringEachRow.Length - 1);
-            for (int i = levelStringEachRow.Length - 2, k = 0; k < levelStringEachRow.Length - 1; i--, k++)
+            string formatString = Regex.Replace(rawLevelString, @"[\r\n\t ]+", "");
+            string[] levelFloors = formatString.Split("-");
+            List<string[]> stringEachFloor = new List<string[]>();
+            foreach (string levelFloor in levelFloors)
             {
-                maxColumns = Mathf.Max(maxColumns, levelStringEachRow[i].Length);
-                for (int j = 0; j < levelStringEachRow[i].Length; j++)
-                {
-                    int levelEachRow = levelStringEachRow[i][j] - '0';
-                    GroundType groundType = (GroundType)levelEachRow;
-                    Vector3 position = new Vector3(j, 0, k);
-                    levelGround.groundDatas.Add(new GroundData(groundType, position));
-                }
+                stringEachFloor.Add(levelFloor.Split(";"));
             }
-            squareMapSize = Mathf.Max(maxRows, maxColumns);
+            List<LevelGround> levelGrounds = new List<LevelGround>();
+            int idxFloor = 0;
+            foreach (string[] levelStringEachRow in stringEachFloor)
+            {
+                LevelGround levelGround = new LevelGround();
+                int maxRows = 0;
+                int maxColumns = 0;
+                int squareMapSize = 0;
+                maxRows  = Mathf.Max(maxRows, levelStringEachRow.Length - 1);
+                for (int i = levelStringEachRow.Length - 2, k = 0; k < levelStringEachRow.Length - 1; i--, k++)
+                {
+                    maxColumns = Mathf.Max(maxColumns, levelStringEachRow[i].Length);
+                    for (int j = 0; j < levelStringEachRow[i].Length; j++)
+                    {
+                        int levelEachRow = levelStringEachRow[i][j] - '0';
+                        GroundType groundType = (GroundType)levelEachRow;
+                        Vector3 position = new Vector3(j, 0, k);
+                        levelGround.groundDatas.Add(new GroundData(groundType, position));
+                        levelGround.Height = idxFloor * ConfigManager.Instance.LevelConfig.SpaceEachFloor;
+                    }
+                }
+                idxFloor++;
+                levelGrounds.Add(levelGround);
+                squareMapSize = Mathf.Max(maxRows, maxColumns);
+                GameEvents.SETUP_CAMERA?.Invoke(squareMapSize, new Vector2(maxRows, maxColumns));
+            }
             // print(squareMapSize);
-            GameEvents.SETUP_GROUND?.Invoke(levelGround);
-            GameEvents.SETUP_CAMERA?.Invoke(squareMapSize, new Vector2(maxRows, maxColumns));
+            GameEvents.SETUP_GROUND?.Invoke(levelGrounds);
         }
     }
 }

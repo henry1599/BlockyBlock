@@ -12,6 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9eb1eceb4af900641ad8cf73db21be72, type: 3}
   m_Name: Level Config
   m_EditorClassIdentifier: 
+  SpaceEachFloor: 4
   LevelDatas:
     reorderableList:
       canAdd: 1

@@ -25,11 +25,11 @@ namespace BlockyBlock.UI
             {
                 // m_ThisRect.anchoredPosition = _rectSnapTo.anchoredPosition;
                 transform.position = _rectSnapTo.position;
-                transform.DOScaleY(1, DropDuration).SetEase(Ease.InOutSine);
+                transform.DOScaleY(1, DropDuration).SetEase(Ease.OutBack);
             }
             else
             {
-                transform.DOScaleY(0, DropDuration).SetEase(Ease.InOutSine);
+                transform.DOScaleY(0, DropDuration).SetEase(Ease.InBack);
             }
         }
         public virtual void ShowData(List<string> _optionStrings)
@@ -45,7 +45,7 @@ namespace BlockyBlock.UI
             foreach (string optionString in _optionStrings)
             {
                 UIOptionItem itemInstance = Instantiate(UIOptionItemTemplate.gameObject, m_TopPanel.transform).GetComponent<UIOptionItem>();
-                itemInstance.SetText((int)HelperBlockyBlock.StringToDirection(optionString), optionString);
+                itemInstance.SetText((int)HelperBlockyBlock.StringToTurnDirection(optionString), optionString);
             }
         }
     }

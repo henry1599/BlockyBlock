@@ -4,6 +4,7 @@ using UnityEngine;
 using BlockyBlock.Events;
 using BlockyBlock.Enums;
 using BlockyBlock.Managers;
+using BlockyBlock.Configurations;
 
 namespace BlockyBlock.UI 
 {
@@ -34,6 +35,7 @@ namespace BlockyBlock.UI
         {
             IsOpenned = false;
             CurrentTurnDirection = TurnDirection.LEFT;
+
             BlockEvents.ON_UI_BLOCK_OPTION_SELECTED += HandleSelected;
             BlockEvents.ON_DISABLE_UI_FUNCTION += HandleDisableUIFunction;
 
@@ -94,30 +96,14 @@ namespace BlockyBlock.UI
             }
             foreach (TurnDirection direction in remainingOptions)
             {
-                switch (direction)
-                {
-                    case TurnDirection.LEFT:
-                        result.Add("Left");
-                        break;
-                    case TurnDirection.RIGHT:
-                        result.Add("Right");
-                        break;
-                }
+                result.Add(ConfigManager.Instance.TurnDirectionConfig.Data[direction]);
             }
             return result;
         }
         void UpdateOption(TurnDirection _turnDirection)
         {
             string result = "";
-            switch (_turnDirection)
-            {
-                case TurnDirection.LEFT:
-                    result = "Left";
-                    break;
-                case TurnDirection.RIGHT:
-                    result = "Right";
-                    break;
-            }
+            result = ConfigManager.Instance.TurnDirectionConfig.Data[_turnDirection];
             m_CurrentOptionText.text = result;
         }
     }

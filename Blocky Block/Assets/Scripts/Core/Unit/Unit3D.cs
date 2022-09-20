@@ -23,7 +23,6 @@ namespace BlockyBlock.Core
         private Vector3 m_StartPosition;
         private UnitDirection m_StartDirection;
         private UnitDirection m_CurrentDirection;
-        public UnitConfig m_Unit3DConfig;
         private GroundType m_CurrentGround;
         private bool m_IsUnderwater = false;
         private GroundType CurrentGround 
@@ -74,7 +73,7 @@ namespace BlockyBlock.Core
             m_CurrentDirection = _startDirection;
 
             transform.position = m_StartPosition;
-            transform.eulerAngles = m_Unit3DConfig.GetDataByDirection(_startDirection).Rotation;
+            transform.eulerAngles = ConfigManager.Instance.UnitConfig.GetDataByDirection(_startDirection).Rotation;
             
             m_CurrentGround = m_Bound.CastBelow();
         }
@@ -107,9 +106,9 @@ namespace BlockyBlock.Core
         }
         void MoveFromGroundToWater()
         {
-            DirectionData directionData = m_Unit3DConfig.GetDataByDirection(m_CurrentDirection);
-            Vector3 newPosition = transform.position + directionData.MoveDirection * m_Unit3DConfig.StepDistance;
-            float moveTime = m_Unit3DConfig.EnterWaterTime; 
+            DirectionData directionData = ConfigManager.Instance.UnitConfig.GetDataByDirection(m_CurrentDirection);
+            Vector3 newPosition = transform.position + directionData.MoveDirection * ConfigManager.Instance.UnitConfig.StepDistance;
+            float moveTime = ConfigManager.Instance.UnitConfig.EnterWaterTime; 
             m_Animation.TriggerAnimGroundToWater();
             newPosition.y = -0.9f;
             transform 
@@ -128,9 +127,9 @@ namespace BlockyBlock.Core
         }
         void MoveFromWaterToGround()
         {
-            DirectionData directionData = m_Unit3DConfig.GetDataByDirection(m_CurrentDirection);
-            Vector3 newPosition = transform.position + directionData.MoveDirection * m_Unit3DConfig.StepDistance;
-            float moveTime = m_Unit3DConfig.EnterWaterTime; 
+            DirectionData directionData = ConfigManager.Instance.UnitConfig.GetDataByDirection(m_CurrentDirection);
+            Vector3 newPosition = transform.position + directionData.MoveDirection * ConfigManager.Instance.UnitConfig.StepDistance;
+            float moveTime = ConfigManager.Instance.UnitConfig.EnterWaterTime; 
             m_Animation.TriggerAnimWaterToGround();
             newPosition.y = 0f;
             transform 
@@ -146,9 +145,9 @@ namespace BlockyBlock.Core
         }
         void MoveNormally(GroundType _currentGround)
         {
-            DirectionData directionData = m_Unit3DConfig.GetDataByDirection(m_CurrentDirection);
-            Vector3 newPosition = transform.position + directionData.MoveDirection * m_Unit3DConfig.StepDistance;
-            float moveTime = m_Unit3DConfig.MoveTime; 
+            DirectionData directionData = ConfigManager.Instance.UnitConfig.GetDataByDirection(m_CurrentDirection);
+            Vector3 newPosition = transform.position + directionData.MoveDirection * ConfigManager.Instance.UnitConfig.StepDistance;
+            float moveTime = ConfigManager.Instance.UnitConfig.MoveTime; 
             transform 
                 .DOMove(
                     newPosition,
@@ -185,11 +184,11 @@ namespace BlockyBlock.Core
                     m_CurrentDirection = UnitDirection.RIGHT;
                     break;
             }
-            DirectionData directionData = m_Unit3DConfig.GetDataByDirection(m_CurrentDirection);
+            DirectionData directionData = ConfigManager.Instance.UnitConfig.GetDataByDirection(m_CurrentDirection);
             transform
                 .DOLocalRotate(
                     directionData.Rotation,
-                    m_Unit3DConfig.RotateTime
+                    ConfigManager.Instance.UnitConfig.RotateTime
                 );
             m_Animation.TriggerAnimTurnLeft();
         }
@@ -214,11 +213,11 @@ namespace BlockyBlock.Core
                     m_CurrentDirection = UnitDirection.LEFT;
                     break;
             }
-            DirectionData directionData = m_Unit3DConfig.GetDataByDirection(m_CurrentDirection);
+            DirectionData directionData = ConfigManager.Instance.UnitConfig.GetDataByDirection(m_CurrentDirection);
             transform
                 .DOLocalRotate(
                     directionData.Rotation,
-                    m_Unit3DConfig.RotateTime
+                    ConfigManager.Instance.UnitConfig.RotateTime
                 );
             m_Animation.TriggerAnimTurnRight();
         }
