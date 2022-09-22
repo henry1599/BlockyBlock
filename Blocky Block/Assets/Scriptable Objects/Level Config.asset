@@ -48,7 +48,8 @@ MonoBehaviour:
       LevelName: Level 01
       BlockTypes: 00000000040000000500000006000000
       UnitDatas:
-      - StartPosition: {x: 4, y: 2, z: 0}
+      - Floor: 0
+        StartPosition: {x: 4, y: 2, z: 0}
         StartDirection: 1
       LevelRawData: {fileID: 0}
     - LevelType: 1
@@ -100,8 +101,10 @@ MonoBehaviour:
       LevelName: Level Test 3D Scroll Extension
       BlockTypes: 000000000400000005000000
       UnitDatas:
-      - StartPosition: {x: 0, y: 0, z: 4}
+      - Floor: 1
+        StartPosition: {x: 0, y: 0, z: 4}
         StartDirection: 1
-      - StartPosition: {x: 2, y: 0, z: 1}
+      - Floor: 0
+        StartPosition: {x: 2, y: 0, z: 1}
         StartDirection: 0
       LevelRawData: {fileID: 4900000, guid: a487bf8dbaf909d4793fbb76b6e4a5b7, type: 3}

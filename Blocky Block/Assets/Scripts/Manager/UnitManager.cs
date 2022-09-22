@@ -38,7 +38,7 @@ namespace BlockyBlock.Managers
             yield return new WaitUntil(() => GroundManager.Instance.m_IsFinishedSpawnGround == true);
             foreach (UnitData unitData in _data.UnitDatas)
             {
-                Vector3 startPosition = unitData.StartPosition;
+                Vector3 startPosition = unitData.StartPosition + Vector3.up * ConfigManager.Instance.LevelConfig.SpaceEachFloor * unitData.Floor;
                 UnitDirection startDirection = unitData.StartDirection;
 
                 Unit3D unitInstance = Instantiate(m_Unit3DTemplate.gameObject, transform).GetComponent<Unit3D>();

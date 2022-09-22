@@ -25,6 +25,8 @@ namespace BlockyBlock.Configurations
     [System.Serializable]
     public class UnitData 
     {
+        [Range(0, 2)]
+        public int Floor;
         public Vector3 StartPosition;
         public UnitDirection StartDirection;
     }

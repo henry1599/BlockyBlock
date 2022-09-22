@@ -12,18 +12,20 @@ namespace BlockyBlock.Managers
     [System.Serializable]
     public class LevelGround
     {
-        public float Height;
-        public List<GroundData> groundDatas;
-        public LevelGround() => groundDatas = new List<GroundData>();
+        public GroundData[,] GroundDatas;
+        public LevelGround() {}
     }
     public class GroundData
     {
         public GroundType groundType;
-        public Vector3 position;
-        public GroundData(GroundType _type, Vector3 _position)
+        public int floorIdx;
+        public Vector2 idx;
+        public GroundData() {}
+        public GroundData(GroundType _type, int _floorIdx, Vector2 _idx)
         {
             this.groundType = _type;
-            this.position = _position;
+            this.floorIdx = _floorIdx;
+            this.idx = _idx;
         }
     }
     public class LevelReader : MonoBehaviour
@@ -57,29 +59,31 @@ namespace BlockyBlock.Managers
             foreach (string[] levelStringEachRow in stringEachFloor)
             {
                 LevelGround levelGround = new LevelGround();
-                int maxRows = 0;
-                int maxColumns = 0;
                 int squareMapSize = 0;
-                maxRows  = Mathf.Max(maxRows, levelStringEachRow.Length - 1);
+                int maxRows  = levelStringEachRow.Length - 1;
+                int maxColumns = levelStringEachRow[0].Length;
+
+                Core.Grid grid = new Core.Grid(maxRows, maxColumns, Vector3.zero);
+                
                 for (int i = levelStringEachRow.Length - 2, k = 0; k < levelStringEachRow.Length - 1; i--, k++)
                 {
-                    maxColumns = Mathf.Max(maxColumns, levelStringEachRow[i].Length);
                     for (int j = 0; j < levelStringEachRow[i].Length; j++)
                     {
                         int levelEachRow = levelStringEachRow[i][j] - '0';
                         GroundType groundType = (GroundType)levelEachRow;
-                        Vector3 position = new Vector3(j, 0, k);
-                        levelGround.groundDatas.Add(new GroundData(groundType, position));
-                        levelGround.Height = idxFloor * ConfigManager.Instance.LevelConfig.SpaceEachFloor;
+                        GroundData groundData = new GroundData(groundType, idxFloor, new Vector2(j, k));
+                        grid.GroundDatas.Add(groundData);
                     }
                 }
                 idxFloor++;
                 levelGrounds.Add(levelGround);
                 squareMapSize = Mathf.Max(maxRows, maxColumns);
                 GameEvents.SETUP_CAMERA?.Invoke(squareMapSize, new Vector2(maxRows, maxColumns));
+
+                GridManager.Instance.AddGrid(grid);
             }
             // print(squareMapSize);
-            GameEvents.SETUP_GROUND?.Invoke(levelGrounds);
+            GameEvents.SETUP_GROUND?.Invoke();
         }
     }
 }
