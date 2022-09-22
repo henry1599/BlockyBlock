@@ -255,10 +255,6 @@ namespace BlockyBlock.UI
         }
         public virtual void OnBeginDrag(PointerEventData eventData)
         {
-            if (HandToolManager.Instance.CurrentCursor != CursorType.SELECTION)
-            {
-                return;
-            }
             if (m_IsDragOnOptionBlock)
             {
                 return;
@@ -310,10 +306,6 @@ namespace BlockyBlock.UI
         }
         public virtual void OnDrag(PointerEventData data)
         {
-            if (HandToolManager.Instance.CurrentCursor != CursorType.SELECTION)
-            {
-                return;
-            }
             if (m_IsDragOnOptionBlock)
             {
                 return;
@@ -398,10 +390,6 @@ namespace BlockyBlock.UI
         }
         public virtual void OnEndDrag(PointerEventData eventData)
         {
-            if (HandToolManager.Instance.CurrentCursor != CursorType.SELECTION)
-            {
-                return;
-            }
             if (m_IsDragOnOptionBlock)
             {
                 m_IsDragOnOptionBlock = false;

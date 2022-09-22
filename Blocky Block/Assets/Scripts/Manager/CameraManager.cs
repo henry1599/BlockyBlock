@@ -52,26 +52,11 @@ namespace BlockyBlock.Managers
 
             GameEvents.SETUP_CAMERA += HandleSetupCamera;
 
-            ToolEvents.ON_CURSOR_CHANGED += HandleCursorChanged;
-            ToolEvents.ON_ZOOM_BUTTON_CLICKED += HandleZoomButtonClicked;
             ToolEvents.ON_RESET_BUTTON_CLICKED += HandleResetButtonClicked;
         }
         void Update()
         {
-            
-            
-            switch (HandToolManager.Instance.CurrentCursor)
-            {
-                case Enums.CursorType.SELECTION:
-                    HandleSelectionTool();
-                    break;
-                case Enums.CursorType.MOVE:
-                    HandleMoveTool();
-                    break;
-                case Enums.CursorType.ROTATE:
-                    HandleRotateTool();
-                    break;
-            }
+            HandleSelectionTool();
         }
         void HandleSelectionTool()
         {
@@ -158,88 +143,10 @@ namespace BlockyBlock.Managers
             zoomSequence.Append(zoomTween);
             #endregion
         }
-        void HandleMoveTool()
-        {
-            if (Input.GetMouseButtonDown(0))
-            {
-                Cursor.SetCursor(CursorManager.Instance.CursorData[CursorType.DRAGGING], Vector3.zero, CursorMode.Auto);
-                m_DragPanMouseActive = true;
-                m_LastFramePosition = Input.mousePosition;
-            }
-            if (Input.GetMouseButtonUp(0) || Input.GetMouseButtonUp(1))
-            {
-                Cursor.SetCursor(CursorManager.Instance.CursorData[CursorType.MOVE], Vector3.zero, CursorMode.Auto);
-                m_DragPanMouseActive = false;
-            }
-            if (m_DragPanMouseActive)
-            {
-                Vector2 moveDelta = (Vector2)Input.mousePosition - m_LastFramePosition;
-                
-                m_InputMove.x = moveDelta.x * m_DragPanSpeed;
-                m_InputMove.y = moveDelta.y * m_DragPanSpeed;
-                m_InputMove.z = 0;
-
-                m_LastFramePosition = Input.mousePosition;
-            }
-            else
-            {
-                m_InputMove = Vector3.zero;
-            }
-            m_CMOffset.m_Offset += -m_InputMove * m_MoveSpeed * Time.deltaTime;
-        }
-        void HandleRotateTool()
-        {
-            if (Input.GetMouseButtonDown(0))
-            {
-                m_RotatePanMouseActive = true;
-                m_LastFrameRotation = Input.mousePosition;
-            }
-            if (Input.GetMouseButtonUp(0))
-            {
-                m_RotatePanMouseActive = false;
-            }
-            if (m_RotatePanMouseActive)
-            {
-                Vector2 rotateDelta = (Vector2)Input.mousePosition - m_LastFrameRotation;
-
-                m_InputRotate.x = rotateDelta.x * m_RotatePanSpeed;
-                m_InputRotate.y = -rotateDelta.y * m_RotatePanSpeed;
-
-                m_LastFrameRotation = Input.mousePosition;
-            }
-            else
-            {
-                m_InputRotate = Vector3.zero;
-            }
-
-            Vector3 angle = m_CinemachinePivot.eulerAngles;
-            angle += new Vector3(m_InputRotate.y * m_RotateSpeed * Time.deltaTime, m_InputRotate.x * m_RotateSpeed * Time.deltaTime, 0);
-            
-            m_CinemachinePivot.localRotation = Quaternion.Euler(angle);
-        }
         void OnDestroy()
         {
             GameEvents.SETUP_CAMERA -= HandleSetupCamera;
-
-            ToolEvents.ON_ZOOM_BUTTON_CLICKED -= HandleZoomButtonClicked;
             ToolEvents.ON_RESET_BUTTON_CLICKED -= HandleResetButtonClicked;
-            ToolEvents.ON_CURSOR_CHANGED += HandleCursorChanged;
-        }
-        void HandleCursorChanged(CursorType _type)
-        {
-            if (_type == CursorType.SELECTION)
-            {
-                m_DragPanMouseActive = false;
-                m_RotatePanMouseActive = false;
-            }
-        }
-        void HandleZoomButtonClicked(ZoomType _type)
-        {
-            int zoomFactor = _type == ZoomType.ZOOM_IN ? -1 : 1;
-            float currentOrthosize = m_CMCam.m_Lens.OrthographicSize;
-            currentOrthosize += zoomFactor * m_ZoomSpeed;
-
-            DOTween.To(() => m_CMCam.m_Lens.OrthographicSize, value => m_CMCam.m_Lens.OrthographicSize = value, currentOrthosize, 1);
         }
         void HandleResetButtonClicked()
         {

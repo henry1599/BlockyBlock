@@ -13,7 +13,6 @@ namespace BlockyBlock.Tools
         void Start()
         {
             ToolEvents.ON_CURSOR_CHANGED += HandleCursorChanged;
-            HandToolManager.Instance.OnToolSelected(0);
         }
         void OnDestroy()
         {
