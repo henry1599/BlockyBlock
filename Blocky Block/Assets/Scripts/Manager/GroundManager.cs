@@ -42,7 +42,7 @@ namespace BlockyBlock.Managers
                     int floorIdx = groundData.floorIdx;
 
                     GameObject groundPrefab = ResourceLoader.Instance.Grounds[groundType];
-                    Vector3 position = grid.GetWorldPosition(i, j, floorIdx);
+                    Vector3 position = grid.GetWorldPosition(i, j);
                     Ground groundInstance = Instantiate(groundPrefab, position, Quaternion.identity, transform).GetComponent<Ground>();
 
                     grid.GridArray[i, j] = groundInstance;
@@ -51,4 +51,5 @@ namespace BlockyBlock.Managers
             m_IsFinishedSpawnGround = true;
         }
     }
+
 }

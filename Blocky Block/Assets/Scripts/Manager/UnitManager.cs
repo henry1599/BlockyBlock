@@ -38,7 +38,12 @@ namespace BlockyBlock.Managers
             yield return new WaitUntil(() => GroundManager.Instance.m_IsFinishedSpawnGround == true);
             foreach (UnitData unitData in _data.UnitDatas)
             {
-                Vector3 startPosition = unitData.StartPosition + Vector3.up * ConfigManager.Instance.LevelConfig.SpaceEachFloor * unitData.Floor;
+                if (GridManager.Instance.Grids.Count - 1 < unitData.Floor)
+                {
+                    Debug.LogError("Unit's floor does not match with the maximum floor on this level => Check LevelConfig for more detail");
+                    yield break;
+                }
+                Vector3 startPosition = GridManager.Instance.Grids[unitData.Floor].GetWorldPosition(unitData.X, unitData.Y);
                 UnitDirection startDirection = unitData.StartDirection;
 
                 Unit3D unitInstance = Instantiate(m_Unit3DTemplate.gameObject, transform).GetComponent<Unit3D>();

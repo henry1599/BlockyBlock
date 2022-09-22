@@ -27,7 +27,8 @@ namespace BlockyBlock.Configurations
     {
         [Range(0, 2)]
         public int Floor;
-        public Vector3 StartPosition;
+        public int X;
+        public int Y;
         public UnitDirection StartDirection;
     }
     [System.Serializable]
