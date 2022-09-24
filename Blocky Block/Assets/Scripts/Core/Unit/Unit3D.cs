@@ -13,46 +13,21 @@ namespace BlockyBlock.Core
     public class Unit3D : MonoBehaviour
     {
         [SerializeField] UnitAnimation m_Animation;
-        [SerializeField] UnitBound m_Bound;
-        [Space(10)]
-        [Header("From water to ground")]
-        [SerializeField] float m_JumpPower;
-        [Space(10)]
-        [Header("VFX")]
-        [SerializeField] GameObject m_VfxWaterSplash;
         private Vector3 m_StartPosition;
         private UnitDirection m_StartDirection;
         private UnitDirection m_CurrentDirection;
-        private GroundType m_CurrentGround;
+        private int m_CurrentFloor;
         private bool m_IsUnderwater = false;
-        private GroundType CurrentGround 
-        {
-            get => m_CurrentGround;
-            set 
-            {
-                m_IsUnderwater = value == GroundType.WATER;
-                if (m_CurrentGround == GroundType.GROUND && value == GroundType.WATER)
-                {
-                    MoveFromGroundToWater();
-                    m_CurrentGround = value;
-                    return;
-                }
-                if (m_CurrentGround == GroundType.WATER && value == GroundType.GROUND)
-                {
-                    MoveFromWaterToGround();
-                    m_CurrentGround = value;
-                    return;
-                }
-                m_CurrentGround = value;
-                MoveNormally(m_CurrentGround);
-            }
-        }
+        private Vector2 m_CurrentCell;
+        private Vector2 m_StartCell;
         // Start is called before the first frame update
         void Start()
         {
             UnitEvents.ON_MOVE_FORWARD += MoveForward;
             UnitEvents.ON_TURN_LEFT += TurnLeft;
             UnitEvents.ON_TURN_RIGHT += TurnRight;
+            UnitEvents.ON_PICK_UP += Pickup;
+            UnitEvents.ON_PUT_DOWN += Putdown;
 
             UnitEvents.ON_STOP += HandleStop;
             UnitEvents.ON_RESET += HandleReset;
@@ -62,20 +37,22 @@ namespace BlockyBlock.Core
             UnitEvents.ON_MOVE_FORWARD -= MoveForward;
             UnitEvents.ON_TURN_LEFT -= TurnLeft;
             UnitEvents.ON_TURN_RIGHT -= TurnRight;
+            UnitEvents.ON_PICK_UP -= Pickup;
+            UnitEvents.ON_PUT_DOWN -= Putdown;
             
             UnitEvents.ON_STOP -= HandleStop;
             UnitEvents.ON_RESET -= HandleReset;
         }
-        public void Setup(Vector3 _startPosition, UnitDirection _startDirection)
+        public void Setup(Vector3 _startPosition, UnitDirection _startDirection, int _startX, int _startY)
         {
+            m_StartCell = new Vector2(_startX, _startY);
+            m_CurrentCell = m_StartCell;
             m_StartPosition = _startPosition;
             m_StartDirection = _startDirection;
             m_CurrentDirection = _startDirection;
 
             transform.position = m_StartPosition;
             transform.eulerAngles = ConfigManager.Instance.UnitConfig.GetDataByDirection(_startDirection).Rotation;
-            
-            m_CurrentGround = m_Bound.CastBelow();
         }
         void HandleStop()
         {
@@ -84,7 +61,7 @@ namespace BlockyBlock.Core
         void HandleReset()
         {
             transform.DOKill(true);
-            Setup(m_StartPosition, m_StartDirection);
+            Setup(m_StartPosition, m_StartDirection, (int)m_StartCell.x, (int)m_StartCell.y);
             m_IsUnderwater = false;
             m_Animation.Reset(m_IsUnderwater);
         }
@@ -92,61 +69,13 @@ namespace BlockyBlock.Core
         #region Move Forward
         public void MoveForward(BlockFunctionMoveForward _moveForward)
         {
-            GroundType nextGround = m_Bound.CastFrontDown();
-            switch (CurrentGround)
-            {
-                case GroundType.WATER:
-                    nextGround = m_Bound.CastFrontUp();
-                    break;
-                case GroundType.GROUND:
-                    nextGround = m_Bound.CastFrontDown();
-                    break;
-            }
-            CurrentGround = nextGround;
-        }
-        void MoveFromGroundToWater()
-        {
             DirectionData directionData = ConfigManager.Instance.UnitConfig.GetDataByDirection(m_CurrentDirection);
-            Vector3 newPosition = transform.position + directionData.MoveDirection * ConfigManager.Instance.UnitConfig.StepDistance;
-            float moveTime = ConfigManager.Instance.UnitConfig.EnterWaterTime; 
-            m_Animation.TriggerAnimGroundToWater();
-            newPosition.y = -0.9f;
-            transform 
-                .DOMove(
-                    newPosition,
-                    moveTime
-                )
-                .SetEase(Ease.Linear)
-                .OnComplete(() => transform.position = newPosition);
-            StartCoroutine(SetDelay(() => Instantiate(m_VfxWaterSplash, new Vector3(newPosition.x, 0, newPosition.z), Quaternion.Euler(directionData.Rotation)), 0.3f));
+            m_CurrentCell = new Vector2(m_CurrentCell.x + directionData.XIdx, m_CurrentCell.y + directionData.YIdx);
+            Move();
         }
-        IEnumerator SetDelay(System.Action _cb = null, float _delay = 0.0f)
+        void Move()
         {
-            yield return new WaitForSeconds(_delay);
-            _cb?.Invoke();
-        }
-        void MoveFromWaterToGround()
-        {
-            DirectionData directionData = ConfigManager.Instance.UnitConfig.GetDataByDirection(m_CurrentDirection);
-            Vector3 newPosition = transform.position + directionData.MoveDirection * ConfigManager.Instance.UnitConfig.StepDistance;
-            float moveTime = ConfigManager.Instance.UnitConfig.EnterWaterTime; 
-            m_Animation.TriggerAnimWaterToGround();
-            newPosition.y = 0f;
-            transform 
-                .DOLocalJump(
-                    newPosition,
-                    m_JumpPower,
-                    1,
-                    moveTime,
-                    false
-                )
-                .SetEase(Ease.InOutSine)
-                .OnComplete(() => transform.position = newPosition);
-        }
-        void MoveNormally(GroundType _currentGround)
-        {
-            DirectionData directionData = ConfigManager.Instance.UnitConfig.GetDataByDirection(m_CurrentDirection);
-            Vector3 newPosition = transform.position + directionData.MoveDirection * ConfigManager.Instance.UnitConfig.StepDistance;
+            Vector3 newPosition = GridManager.Instance.Grids[m_CurrentFloor].GetWorldPosition((int)m_CurrentCell.x, (int)m_CurrentCell.y);
             float moveTime = ConfigManager.Instance.UnitConfig.MoveTime; 
             transform 
                 .DOMove(
@@ -155,14 +84,7 @@ namespace BlockyBlock.Core
                 )
                 .SetDelay(0.2f)
                 .SetEase(Ease.Linear);
-            if (_currentGround == GroundType.GROUND)
-            {
-                m_Animation.TriggerAnimRunning();
-            }
-            else if (_currentGround == GroundType.WATER)
-            {
-                m_Animation.TriggerAnimSwimming();
-            }
+            m_Animation.TriggerAnimRunning();
         }
         #endregion
 
@@ -190,7 +112,7 @@ namespace BlockyBlock.Core
                     directionData.Rotation,
                     ConfigManager.Instance.UnitConfig.RotateTime
                 );
-            m_Animation.TriggerAnimTurnLeft();
+            m_Animation.TriggerAnimTurn();
         }
         #endregion
 
@@ -219,7 +141,21 @@ namespace BlockyBlock.Core
                     directionData.Rotation,
                     ConfigManager.Instance.UnitConfig.RotateTime
                 );
-            m_Animation.TriggerAnimTurnRight();
+            m_Animation.TriggerAnimTurn();
+        }
+        #endregion
+
+        #region Pick up
+        void Pickup(BlockFunctionPickup _pickup)
+        {
+
+        }
+        #endregion
+
+        #region Put down
+        void Putdown(BlockFunctionPutdown _putdown)
+        {
+            
         }
         #endregion
     }

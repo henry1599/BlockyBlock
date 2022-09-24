@@ -28,8 +28,8 @@ namespace BlockyBlock.Events
         public static Action<BlockFunctionTurnLeft> ON_TURN_LEFT;
         public static Action<BlockFunctionTurnRight> ON_TURN_RIGHT;
         public static Action<BlockFunctionJump> ON_JUMP;
-        public static Action ON_PICK_UP;
-        public static Action ON_PUT_DOWN;
+        public static Action<BlockFunctionPickup> ON_PICK_UP;
+        public static Action<BlockFunctionPutdown> ON_PUT_DOWN;
         public static Action ON_STOP;
         public static Action ON_RESET;
     }
