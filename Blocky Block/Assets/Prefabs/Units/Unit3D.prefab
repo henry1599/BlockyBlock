@@ -1281,6 +1281,7 @@ Transform:
   - {fileID: 8013453348701773057}
   - {fileID: 4592046451387040930}
   - {fileID: 6426884531487783183}
+  - {fileID: 5335953180437631403}
   m_Father: {fileID: 7281933558986982734}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -7469,6 +7470,37 @@ SkinnedMeshRenderer:
     m_Center: {x: -0.00000011920929, y: 0.00058448315, z: 0.9496391}
     m_Extent: {x: 1.4588004, y: 0.30299744, z: 0.29521427}
   m_DirtyAABB: 0
+--- !u!1 &5104510802707649631
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 5335953180437631403}
+  m_Layer: 0
+  m_Name: Grab Pivot
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &5335953180437631403
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5104510802707649631}
+  m_LocalRotation: {x: -0.15469474, y: 0.03949339, z: 0.124380246, w: 0.9793055}
+  m_LocalPosition: {x: -0.322, y: 0.07, z: -0.026}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 5775083975729391601}
+  m_RootOrder: 4
+  m_LocalEulerAnglesHint: {x: -18.229, y: 2.345, z: 14.1}
 --- !u!1 &5104666516547542756
 GameObject:
   m_ObjectHideFlags: 0
@@ -11537,6 +11569,7 @@ GameObject:
   - component: {fileID: 1711180706493922886}
   - component: {fileID: 765293476}
   - component: {fileID: 8259703543162366538}
+  - component: {fileID: 6195197407467076712}
   m_Layer: 0
   m_Name: Unit3D
   m_TagString: Untagged
@@ -11573,6 +11606,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Animation: {fileID: 765293476}
+  m_UnitVision: {fileID: 6195197407467076712}
+  m_GrabPivot: {fileID: 5335953180437631403}
+  m_GrabDelay: 0.25
+  m_UngrabDelay: 0.4
 --- !u!114 &765293476
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -11599,6 +11636,18 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 0.5, y: 1.5687077, z: 0.5}
   m_Center: {x: 0, y: 0.78907144, z: 0}
+--- !u!114 &6195197407467076712
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8376788409492785044}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5bf4b58d67bc4ac44a7ecce7df5a3dac, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &8376788409688888986
 GameObject:
   m_ObjectHideFlags: 0

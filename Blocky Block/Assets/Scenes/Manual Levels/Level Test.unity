@@ -1157,8 +1157,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Unit3DTemplate: {fileID: 1711180706493922886, guid: 855fc2fa5bc40a940a3ac95891943f43, type: 3}
-  m_DistanceStepValue: 1.1
-  m_UnitMoveTime: 1
 --- !u!1 &1631822953
 GameObject:
   m_ObjectHideFlags: 0

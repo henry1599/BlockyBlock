@@ -39,15 +39,15 @@ MonoBehaviour:
     _keys: 01000000000000000200000003000000040000000500000006000000
     _values:
     - Text: Pick Up
-      ExecutionTime: 0.7
+      ExecutionTime: 1.25
       TopColor: {r: 1, g: 0.7244243, b: 0.27735847, a: 1}
       ShadowColor: {r: 0.49056602, g: 0.3557006, b: 0.13606264, a: 1}
     - Text: Step Forward
-      ExecutionTime: 0.7
+      ExecutionTime: 0.6
       TopColor: {r: 0, g: 1, b: 0.45882353, a: 1}
       ShadowColor: {r: 0, g: 0.3137255, b: 0.3137255, a: 1}
     - Text: Put Down
-      ExecutionTime: 0.7
+      ExecutionTime: 1.25
       TopColor: {r: 0.2584905, g: 0.73731095, b: 1, a: 1}
       ShadowColor: {r: 0.09754359, g: 0.2769121, b: 0.3773585, a: 1}
     - Text: 

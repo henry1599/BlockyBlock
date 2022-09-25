@@ -7,19 +7,33 @@ using BlockyBlock.Core;
 using DG.Tweening;
 using BlockyBlock.Managers;
 using BlockyBlock.Configurations;
+using Helpers;
 
 namespace BlockyBlock.Core
 {
     public class Unit3D : MonoBehaviour
     {
         [SerializeField] UnitAnimation m_Animation;
+        [SerializeField] UnitVision m_UnitVision;
+        [SerializeField] Transform m_GrabPivot;
+        const float m_GrabDelay = 0.25f;
+        const float m_UngrabDelay = 0.4f;
         private Vector3 m_StartPosition;
         private UnitDirection m_StartDirection;
         private UnitDirection m_CurrentDirection;
         private int m_CurrentFloor;
-        private bool m_IsUnderwater = false;
         private Vector2 m_CurrentCell;
         private Vector2 m_StartCell;
+        private GameObject m_GrabbedObject;
+        private bool IsGrabSomething 
+        {
+            get => m_IsGrabSomething;
+            set 
+            {
+                m_IsGrabSomething = value;
+                UpdateGrabStatus(value);
+            }
+        } bool m_IsGrabSomething;
         // Start is called before the first frame update
         void Start()
         {
@@ -46,6 +60,7 @@ namespace BlockyBlock.Core
         public void Setup(Vector3 _startPosition, UnitDirection _startDirection, int _startX, int _startY)
         {
             m_StartCell = new Vector2(_startX, _startY);
+            IsGrabSomething = false;
             m_CurrentCell = m_StartCell;
             m_StartPosition = _startPosition;
             m_StartDirection = _startDirection;
@@ -56,14 +71,22 @@ namespace BlockyBlock.Core
         }
         void HandleStop()
         {
-            m_Animation.Reset(m_IsUnderwater);
+            m_Animation.Reset();
         }
         void HandleReset()
         {
             transform.DOKill(true);
             Setup(m_StartPosition, m_StartDirection, (int)m_StartCell.x, (int)m_StartCell.y);
-            m_IsUnderwater = false;
-            m_Animation.Reset(m_IsUnderwater);
+            m_Animation.Reset();
+        }
+        void UpdateGrabStatus(bool _status)
+        {
+            if (_status == false)
+            {
+                m_GrabbedObject = null;
+            }
+            int weight = _status ? 1 : 0;
+            m_Animation.TriggerAnimUpperLayer(weight);
         }
 
         #region Move Forward
@@ -148,14 +171,64 @@ namespace BlockyBlock.Core
         #region Pick up
         void Pickup(BlockFunctionPickup _pickup)
         {
-
+            DoPickup();
+        }
+        void DoPickup()
+        {
+            DirectionData directionData = ConfigManager.Instance.UnitConfig.GetDataByDirection(m_CurrentDirection);
+            m_GrabbedObject = m_UnitVision.GetFontObject((int)m_CurrentCell.x, (int)m_CurrentCell.y, m_CurrentFloor, directionData);
+            if (m_GrabbedObject == null)
+            {
+                Debug.Log("Nothing to grab");
+            }
+            else
+            {
+                m_Animation.Reset();
+                IsGrabSomething = true;
+                m_Animation.TriggerAnimPickup();
+                StartCoroutine(GrabStuff(m_GrabbedObject.GetComponent<GrabableObject>()));
+            }
+        }
+        IEnumerator GrabStuff(GrabableObject _grabableObject)
+        {
+            yield return Helper.GetWait(m_GrabDelay);
+            _grabableObject.transform.SetParent(m_GrabPivot, true);
+            _grabableObject.transform.DOLocalMove(Vector3.zero, 0.25f).SetEase(Ease.InOutSine);
+            _grabableObject.GrabSelf();
         }
         #endregion
 
         #region Put down
         void Putdown(BlockFunctionPutdown _putdown)
         {
-            
+            DoPutdown();
+        }
+        void DoPutdown()
+        {
+            if (IsGrabSomething)
+            {
+                m_Animation.Reset();
+                m_Animation.TriggerAnimPutdown();
+                StartCoroutine(ResetGrab());
+                StartCoroutine(UnGrabStuff(m_GrabbedObject.GetComponent<GrabableObject>()));
+            }
+            else
+            {
+                Debug.Log("Nothing to put down");
+            }
+        }
+        IEnumerator UnGrabStuff(GrabableObject _grabableObject)
+        {
+            yield return Helper.GetWait(m_UngrabDelay * ConfigManager.Instance.BlockConfig.Blocks[BlockType.PUT_DOWN].ExecutionTime);
+            DirectionData directionData = ConfigManager.Instance.UnitConfig.GetDataByDirection(m_CurrentDirection);
+            int putIdxX = (int)m_CurrentCell.x + directionData.XIdx;
+            int putIdxY = (int)m_CurrentCell.y + directionData.YIdx;
+            _grabableObject.UngrabSelf(putIdxX, putIdxY, m_CurrentFloor);
+        }
+        IEnumerator ResetGrab()
+        {
+            yield return Helper.GetWait(0.95f * ConfigManager.Instance.BlockConfig.Blocks[BlockType.PUT_DOWN].ExecutionTime);
+            IsGrabSomething = false;
         }
         #endregion
     }

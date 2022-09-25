@@ -12,8 +12,6 @@ namespace BlockyBlock.Managers
     {
         public static UnitManager Instance {get; private set;}
         [SerializeField] Unit3D m_Unit3DTemplate;
-        public float DistanceStepValue {get => m_DistanceStepValue; private set => m_DistanceStepValue = value;} [SerializeField] float m_DistanceStepValue = 1.1f;
-        public float UnitMoveTime {get => m_UnitMoveTime; private set => m_UnitMoveTime = value;} [SerializeField] float m_UnitMoveTime = 1f;
         void Awake()
         {
             Instance = this;

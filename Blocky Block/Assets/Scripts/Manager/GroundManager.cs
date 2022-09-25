@@ -41,11 +41,30 @@ namespace BlockyBlock.Managers
                     GroundType groundType = groundData.groundType;
                     int floorIdx = groundData.floorIdx;
 
-                    GameObject groundPrefab = ResourceLoader.Instance.Grounds[groundType];
-                    Vector3 position = grid.GetWorldPosition(i, j);
-                    Ground groundInstance = Instantiate(groundPrefab, position, Quaternion.identity, transform).GetComponent<Ground>();
+                    if (groundType == GroundType.BOX ||
+                        groundType == GroundType.TREE)
+                    {
+                        GameObject stuffPrefab = ResourceLoader.Instance.Grounds[groundType];
+                        Vector3 stuffPosition = grid.GetWorldPosition(i, j);
+                        GameObject stuffInstance = Instantiate(stuffPrefab, stuffPosition, Quaternion.identity, transform);
+                        stuffInstance.GetComponent<GrabableObject>()?.Setup(i, j, floorIdx, stuffPosition, Vector3.zero, transform);
 
-                    grid.GridArray[i, j] = groundInstance;
+                        GameObject groundPrefab = ResourceLoader.Instance.Grounds[GroundType.GROUND];
+                        Vector3 groundPosition = grid.GetWorldPosition(i, j);
+                        Ground groundInstance = Instantiate(groundPrefab, groundPosition, Quaternion.identity, transform).GetComponent<Ground>();
+
+                        groundInstance.Stuff = stuffInstance;
+                        grid.GridArray[i, j] = groundInstance;
+                    }
+                    else
+                    {
+                        GameObject groundPrefab = ResourceLoader.Instance.Grounds[groundType];
+                        Vector3 groundPosition = grid.GetWorldPosition(i, j);
+                        Ground groundInstance = Instantiate(groundPrefab, groundPosition, Quaternion.identity, transform).GetComponent<Ground>();
+
+                        grid.GridArray[i, j] = groundInstance;
+                    }
+
                 }
             }
             m_IsFinishedSpawnGround = true;

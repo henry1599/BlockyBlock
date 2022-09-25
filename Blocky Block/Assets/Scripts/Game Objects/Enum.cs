@@ -27,8 +27,10 @@ namespace BlockyBlock.Enums
     public enum GroundType {
         GROUND = 0,
         WATER = 1,
-        SPACE = 2,
-        TRAP = 3,
+        TREE = 2,
+        BOX = 3,
+        SPACE = 4,
+        TRAP = 5,
     }
     public enum ControlButton {
         STOP = 0,
