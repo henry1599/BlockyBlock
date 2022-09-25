@@ -31,6 +31,7 @@ namespace BlockyBlock.Enums
         BOX = 3,
         SPACE = 4,
         TRAP = 5,
+        COLLECTIBLE = 6
     }
     public enum ControlButton {
         STOP = 0,

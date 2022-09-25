@@ -9,6 +9,7 @@ namespace BlockyBlock.Core
 {
     public class GrabableObject : MonoBehaviour
     {
+        [SerializeField] ParticleSystem m_VfxPut;
         bool IsGrabbed = false;
         private int m_InitFloor;
         private int m_InitX, m_InitY;
@@ -56,12 +57,14 @@ namespace BlockyBlock.Core
         {
             IsGrabbed = true;
         }
-        public void UngrabSelf(int _putDownX, int _putDownY, int _floor)
+        public void UngrabSelf(int _putDownX, int _putDownY, int _floor, bool _playPar = false)
         {
             transform.SetParent(m_InitParent, true);
             transform.eulerAngles = Vector3.zero;
             Vector3 putPosition = GridManager.Instance.Grids[_floor].GetWorldPosition(_putDownX, _putDownY);
             transform.position = putPosition;
+            if (_playPar)
+                m_VfxPut?.Play();
             IsGrabbed = false;
         }
     }

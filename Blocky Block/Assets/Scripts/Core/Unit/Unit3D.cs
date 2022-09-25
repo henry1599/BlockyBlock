@@ -91,15 +91,23 @@ namespace BlockyBlock.Core
 
         #region Move Forward
         public void MoveForward(BlockFunctionMoveForward _moveForward)
-        {
-            DirectionData directionData = ConfigManager.Instance.UnitConfig.GetDataByDirection(m_CurrentDirection);
-            m_CurrentCell = new Vector2(m_CurrentCell.x + directionData.XIdx, m_CurrentCell.y + directionData.YIdx);
+        { 
             Move();
         }
         void Move()
         {
+            DirectionData directionData = ConfigManager.Instance.UnitConfig.GetDataByDirection(m_CurrentDirection);
+
+            GameObject m_Collectible = m_UnitVision.GetFontObject((int)m_CurrentCell.x, (int)m_CurrentCell.y, m_CurrentFloor, directionData);
+
+            m_CurrentCell = new Vector2(m_CurrentCell.x + directionData.XIdx, m_CurrentCell.y + directionData.YIdx);
             Vector3 newPosition = GridManager.Instance.Grids[m_CurrentFloor].GetWorldPosition((int)m_CurrentCell.x, (int)m_CurrentCell.y);
             float moveTime = ConfigManager.Instance.UnitConfig.MoveTime; 
+
+            if (m_Collectible?.GetComponent<CollectibleObject>() != null)
+            {
+                StartCoroutine(Collect(m_Collectible.GetComponent<CollectibleObject>(), 0.2f));
+            }
             transform 
                 .DOMove(
                     newPosition,
@@ -108,6 +116,11 @@ namespace BlockyBlock.Core
                 .SetDelay(0.2f)
                 .SetEase(Ease.Linear);
             m_Animation.TriggerAnimRunning();
+        }
+        IEnumerator Collect(CollectibleObject _collectibleObject, float _delay)
+        {
+            yield return Helper.GetWait(_delay);
+            _collectibleObject.OnCollect();
         }
         #endregion
 
@@ -223,7 +236,7 @@ namespace BlockyBlock.Core
             DirectionData directionData = ConfigManager.Instance.UnitConfig.GetDataByDirection(m_CurrentDirection);
             int putIdxX = (int)m_CurrentCell.x + directionData.XIdx;
             int putIdxY = (int)m_CurrentCell.y + directionData.YIdx;
-            _grabableObject.UngrabSelf(putIdxX, putIdxY, m_CurrentFloor);
+            _grabableObject.UngrabSelf(putIdxX, putIdxY, m_CurrentFloor, true);
         }
         IEnumerator ResetGrab()
         {

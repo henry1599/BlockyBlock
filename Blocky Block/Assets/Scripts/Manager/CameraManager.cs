@@ -167,6 +167,10 @@ namespace BlockyBlock.Managers
                        value => m_CMOffset.m_Offset.x = value,
                        offset,
                        1);
+            DOTween.To(() => m_CMOffset.m_Offset.y,
+                       value => m_CMOffset.m_Offset.y = value,
+                       0,
+                       1);
                        
             DOTween.To(() => m_CMTransposer.m_FollowOffset.y,
                        value => m_CMTransposer.m_FollowOffset.y = value,

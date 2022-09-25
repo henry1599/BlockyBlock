@@ -56,6 +56,20 @@ namespace BlockyBlock.Managers
                         groundInstance.Stuff = stuffInstance;
                         grid.GridArray[i, j] = groundInstance;
                     }
+                    else if (groundType == GroundType.COLLECTIBLE)
+                    {
+                        GameObject collectiblePrefab = ResourceLoader.Instance.Grounds[groundType];
+                        Vector3 collectiblePosition = grid.GetWorldPosition(i, j);
+                        GameObject collectibleInstance = Instantiate(collectiblePrefab, collectiblePosition, Quaternion.identity, transform);
+                        collectibleInstance.GetComponent<CollectibleObject>()?.Setup(i, j, floorIdx, collectiblePosition);
+
+                        GameObject groundPrefab = ResourceLoader.Instance.Grounds[GroundType.GROUND];
+                        Vector3 groundPosition = grid.GetWorldPosition(i, j);
+                        Ground groundInstance = Instantiate(groundPrefab, groundPosition, Quaternion.identity, transform).GetComponent<Ground>();
+
+                        groundInstance.Stuff = collectibleInstance;
+                        grid.GridArray[i, j] = groundInstance;
+                    }
                     else
                     {
                         GameObject groundPrefab = ResourceLoader.Instance.Grounds[groundType];
