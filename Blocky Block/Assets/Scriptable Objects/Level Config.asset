@@ -99,7 +99,7 @@ MonoBehaviour:
       UnitDatas: []
       LevelRawData: {fileID: 0}
     - LevelType: 1
-      LevelName: Level Test 3D Scroll Extension
+      LevelName: Level Test
       BlockTypes: 0000000004000000050000000100000002000000
       UnitDatas:
       - Floor: 0

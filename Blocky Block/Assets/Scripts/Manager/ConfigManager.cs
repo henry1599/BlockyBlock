@@ -14,15 +14,7 @@ namespace BlockyBlock.Managers
         public TurnDirectionConfig TurnDirectionConfig;
         void Awake()
         {
-            DontDestroyOnLoad(gameObject);
-            if (Instance == null)
-            {
-                Instance = this;
-            }
-            else
-            {
-                Destroy(gameObject);
-            }
+            Instance = this;
         }
     }
 }

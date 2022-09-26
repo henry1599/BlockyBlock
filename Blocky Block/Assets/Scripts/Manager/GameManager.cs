@@ -22,36 +22,8 @@ namespace BlockyBlock.Managers
         [SerializeField] ResourceLoader m_ResourceLoader;
         void Awake()
         {
-            DontDestroyOnLoad(gameObject);
-            if (Instance == null)
-            {
-                Instance = this;
-            }
-            else
-            {
-                Destroy(gameObject);
-            }
-            GameObject levelManager = GameObject.FindGameObjectWithTag(GameConstants.LEVEL_MANAGER_TAG);
-            GameObject gameSceneManager = GameObject.FindGameObjectWithTag(GameConstants.SCENE_MANAGER_TAG);
-            GameObject resourceLoader = GameObject.FindGameObjectWithTag(GameConstants.RESOURCE_LOADER_TAG);
-            GameObject configManager = GameObject.FindGameObjectWithTag(GameConstants.CONFIG_MANAGER_TAG);
-            if (configManager == null)
-            {
-                Instantiate(m_ConfigManager.gameObject);
-            }
-            if (levelManager == null)
-            {
-                Instantiate(m_LevelManager.gameObject);
-                StartCoroutine(Cor_UpdateSceneID());
-            }
-            if (gameSceneManager == null)
-            {
-                Instantiate(m_GameSceneManager.gameObject);
-            }
-            if (resourceLoader == null)
-            {
-                Instantiate(m_ResourceLoader.gameObject);
-            }
+            Instance = this;
+            StartCoroutine(Cor_UpdateSceneID());
         }
         // Start is called before the first frame update
         void Start()
