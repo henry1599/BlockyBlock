@@ -60,6 +60,10 @@ namespace BlockyBlock.Events
         public static Action<ZoomType> ON_ZOOM_BUTTON_CLICKED;
         public static Action ON_RESET_BUTTON_CLICKED;
     }
+    public class ErrorEvents
+    {
+        public static Action<ErrorType> ON_ERROR;
+    }
     public class GameConstants
     {
         public static readonly float GROUND_HEIGHT_LEVEL = 5;

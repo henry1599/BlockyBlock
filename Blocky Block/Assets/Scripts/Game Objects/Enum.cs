@@ -1,5 +1,10 @@
 namespace BlockyBlock.Enums
 {
+    public enum ErrorType {
+        INVALID_MOVE,
+        INVALID_PUT_DOWN,
+        INVALID_PICK_UP
+    }
     public enum TurnDirection {
         LEFT = 0,
         RIGHT = 1

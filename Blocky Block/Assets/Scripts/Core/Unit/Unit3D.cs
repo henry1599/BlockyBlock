@@ -100,7 +100,23 @@ namespace BlockyBlock.Core
 
             GameObject m_Collectible = m_UnitVision.GetFontObject((int)m_CurrentCell.x, (int)m_CurrentCell.y, m_CurrentFloor, directionData);
 
-            m_CurrentCell = new Vector2(m_CurrentCell.x + directionData.XIdx, m_CurrentCell.y + directionData.YIdx);
+            int nextX = (int)m_CurrentCell.x + directionData.XIdx;
+            int nextY = (int)m_CurrentCell.y + directionData.YIdx;
+            int maxX = GridManager.Instance.Grids[m_CurrentFloor].GridArray.GetLength(0) - 1;
+            int maxY = GridManager.Instance.Grids[m_CurrentFloor].GridArray.GetLength(1) - 1;
+
+            if (nextX > maxX)
+            {
+                ErrorEvents.ON_ERROR?.Invoke(ErrorType.INVALID_MOVE);
+                return;
+            }
+            if (nextY > maxY)
+            {
+                ErrorEvents.ON_ERROR?.Invoke(ErrorType.INVALID_MOVE);
+                return;
+            }
+
+            m_CurrentCell = new Vector2(nextX, nextY);
             Vector3 newPosition = GridManager.Instance.Grids[m_CurrentFloor].GetWorldPosition((int)m_CurrentCell.x, (int)m_CurrentCell.y);
             float moveTime = ConfigManager.Instance.UnitConfig.MoveTime; 
 
@@ -192,7 +208,7 @@ namespace BlockyBlock.Core
             m_GrabbedObject = m_UnitVision.GetFontObject((int)m_CurrentCell.x, (int)m_CurrentCell.y, m_CurrentFloor, directionData);
             if (m_GrabbedObject == null)
             {
-                Debug.Log("Nothing to grab");
+                ErrorEvents.ON_ERROR?.Invoke(ErrorType.INVALID_PICK_UP);
             }
             else
             {
@@ -227,7 +243,7 @@ namespace BlockyBlock.Core
             }
             else
             {
-                Debug.Log("Nothing to put down");
+                ErrorEvents.ON_ERROR?.Invoke(ErrorType.INVALID_PUT_DOWN);
             }
         }
         IEnumerator UnGrabStuff(GrabableObject _grabableObject)

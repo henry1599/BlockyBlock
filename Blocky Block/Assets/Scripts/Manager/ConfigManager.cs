@@ -12,6 +12,7 @@ namespace BlockyBlock.Managers
         public BlockConfig BlockConfig;
         public UnitConfig UnitConfig;
         public TurnDirectionConfig TurnDirectionConfig;
+        public ErrorConfig ErrorConfig;
         void Awake()
         {
             Instance = this;
