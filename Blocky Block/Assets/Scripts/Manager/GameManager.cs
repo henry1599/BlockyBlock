@@ -3,23 +3,13 @@ using System.Collections.Generic;
 using UnityEngine;
 using BlockyBlock.Enums;
 using BlockyBlock.Events;
+using UnityEngine.SceneManagement;
 
 namespace BlockyBlock.Managers
 {
     public class GameManager : MonoBehaviour
     {
         public static GameManager Instance {get; private set;}
-        [Header("Current Scene ID On Start (Debug Only)")]
-        [SerializeField] LevelID m_LevelID;
-        [Header("Managers")]
-        [Tooltip("Spawn this prefab if it is not in the scene as playing")]
-        [SerializeField] ConfigManager m_ConfigManager;
-        [Tooltip("Spawn this prefab if it is not in the scene as playing")]
-        [SerializeField] LevelManager m_LevelManager;
-        [Tooltip("Spawn this prefab if it is not in the scene as playing")]
-        [SerializeField] GameSceneManager m_GameSceneManager;
-        [Tooltip("Spawn this prefab if it is not in the scene as playing")]
-        [SerializeField] ResourceLoader m_ResourceLoader;
         void Awake()
         {
             Instance = this;
@@ -38,8 +28,10 @@ namespace BlockyBlock.Managers
         }
         IEnumerator Cor_UpdateSceneID()
         {
-            yield return new WaitUntil(() => LevelManager.Instance != null);
-            LevelManager.Instance.CurrentLevelID = m_LevelID;
+            yield return new WaitUntil(() => LevelManager.Instance != null && 
+                                             ConfigManager.Instance != null);
+            string sceneName = SceneManager.GetActiveScene().name;
+            LevelManager.Instance.CurrentLevelID = ConfigManager.Instance.LevelConfig.GetLevelIDBySceneName(sceneName);
         }
     }
 }

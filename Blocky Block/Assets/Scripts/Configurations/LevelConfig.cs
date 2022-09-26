@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using BlockyBlock.Enums;
 using RotaryHeart.Lib.SerializableDictionary;
+using System.Linq;
 
 namespace BlockyBlock.Configurations
 {
@@ -18,6 +19,10 @@ namespace BlockyBlock.Configurations
         public string GetSceneNameByID(LevelID _id)
         {
             return LevelDatas[_id].LevelName;
+        }
+        public LevelID GetLevelIDBySceneName(string _name)
+        {
+            return LevelDatas.FirstOrDefault(p => p.Value.LevelName == _name).Key;
         }
     }
     [System.Serializable]

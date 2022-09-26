@@ -9,7 +9,7 @@ namespace BlockyBlock.Core
     public class Ground : MonoBehaviour
     {
         public GroundType Type;
-        public Transform Position;
-        public GameObject Stuff;
+        public Transform Position {get; set;}
+        public GameObject Stuff {get; set;}
     }
 }
