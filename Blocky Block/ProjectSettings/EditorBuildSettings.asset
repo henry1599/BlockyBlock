@@ -8,15 +8,15 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/Home.unity
     guid: a464c6d64e70ccf4592080feb6155609
-  - enabled: 1
-    path: Assets/Scenes/Manual Levels/Level 01.unity
-    guid: 8c9cfa26abfee488c85f1582747f6a02
-  - enabled: 1
-    path: Assets/Scenes/Manual Levels/Level 3D 01.unity
-    guid: 6b715859a82349344b389a55ab90f724
-  - enabled: 1
-    path: Assets/Scenes/Manual Levels/Level Test 3D Cinemachine.unity
-    guid: 9ba9bfd85a7ff264a87a9120a0b56e02
+  - enabled: 0
+    path: 
+    guid: 00000000000000000000000000000000
+  - enabled: 0
+    path: 
+    guid: 00000000000000000000000000000000
+  - enabled: 0
+    path: 
+    guid: 00000000000000000000000000000000
   - enabled: 1
     path: Assets/Scenes/Manual Levels/Level Test.unity
     guid: bef3f797827e2184c8a67692ef3bbd12

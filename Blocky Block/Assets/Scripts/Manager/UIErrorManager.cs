@@ -22,6 +22,7 @@ namespace BlockyBlock.Managers
         }
         void HandleError(ErrorType _type)
         {
+            ErrorEvents.ON_ERROR_HANDLING?.Invoke();
             // m_ErrorText.text = ConfigManager.Instance.ErrorConfig.ErrorData[_type];
             print(ConfigManager.Instance.ErrorConfig.ErrorData[_type]);
         }

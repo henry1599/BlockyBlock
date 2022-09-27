@@ -41,7 +41,7 @@ namespace BlockyBlock.Managers
                     GroundType groundType = groundData.groundType;
                     int floorIdx = groundData.floorIdx;
 
-                    if (groundType == GroundType.BOX ||
+                    if (groundType == GroundType.BOX_ON_GROUND ||
                         groundType == GroundType.TREE)
                     {
                         GameObject stuffPrefab = ResourceLoader.Instance.Grounds[groundType];
@@ -53,7 +53,7 @@ namespace BlockyBlock.Managers
                         Vector3 groundPosition = grid.GetWorldPosition(i, j);
                         Ground groundInstance = Instantiate(groundPrefab, groundPosition, Quaternion.identity, transform).GetComponent<Ground>();
 
-                        groundInstance.Stuff = stuffInstance;
+                        groundInstance.Setup(groundType, stuffInstance);
                         grid.GridArray[i, j] = groundInstance;
                     }
                     else if (groundType == GroundType.COLLECTIBLE)
@@ -67,15 +67,16 @@ namespace BlockyBlock.Managers
                         Vector3 groundPosition = grid.GetWorldPosition(i, j);
                         Ground groundInstance = Instantiate(groundPrefab, groundPosition, Quaternion.identity, transform).GetComponent<Ground>();
 
-                        groundInstance.Stuff = collectibleInstance;
+                        groundInstance.Setup(groundType, collectibleInstance);
                         grid.GridArray[i, j] = groundInstance;
                     }
-                    else
+                    else if (groundType == GroundType.GROUND || groundType == GroundType.WATER || groundType == GroundType.SPACE)
                     {
                         GameObject groundPrefab = ResourceLoader.Instance.Grounds[groundType];
                         Vector3 groundPosition = grid.GetWorldPosition(i, j);
                         Ground groundInstance = Instantiate(groundPrefab, groundPosition, Quaternion.identity, transform).GetComponent<Ground>();
 
+                        groundInstance.Setup(groundType, null);
                         grid.GridArray[i, j] = groundInstance;
                     }
 

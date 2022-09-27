@@ -48,9 +48,13 @@ namespace BlockyBlock.Core
             {
                 return;
             }
-            DelayTime = ConfigManager.Instance.BlockConfig.GetDelayTime(Functions[_value].BlockType);
-            Functions[_value].Execute();
-            BlockEvents.ON_HIGHLIGHT?.Invoke(Functions[_value].UIBlock, BlockCompiler.Instance.IDEState);
+            try
+            {
+                DelayTime = ConfigManager.Instance.BlockConfig.GetDelayTime(Functions[_value].BlockType);
+                Functions[_value].Execute();
+                BlockEvents.ON_HIGHLIGHT?.Invoke(Functions[_value].UIBlock, BlockCompiler.Instance.IDEState);
+            }
+            catch(System.Exception e){}
         }
         public void Parse()
         {
@@ -63,6 +67,12 @@ namespace BlockyBlock.Core
         public void Stop() 
         {
             StartCoroutine(Cor_Stop());
+        }
+        public void HandleError()
+        {
+            Functions.Clear();
+            IsFinishParse = false;
+            StopExecution = true;
         }
         public void Debug()
         {

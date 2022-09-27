@@ -98,21 +98,44 @@ namespace BlockyBlock.Core
         {
             DirectionData directionData = ConfigManager.Instance.UnitConfig.GetDataByDirection(m_CurrentDirection);
 
-            GameObject m_Collectible = m_UnitVision.GetFontObject((int)m_CurrentCell.x, (int)m_CurrentCell.y, m_CurrentFloor, directionData);
+            GameObject m_Collectible = m_UnitVision.GetFrontObject((int)m_CurrentCell.x, (int)m_CurrentCell.y, m_CurrentFloor, directionData);
 
             int nextX = (int)m_CurrentCell.x + directionData.XIdx;
             int nextY = (int)m_CurrentCell.y + directionData.YIdx;
             int maxX = GridManager.Instance.Grids[m_CurrentFloor].GridArray.GetLength(0) - 1;
             int maxY = GridManager.Instance.Grids[m_CurrentFloor].GridArray.GetLength(1) - 1;
-
+            
+            // * Move outside map
             if (nextX > maxX)
             {
-                ErrorEvents.ON_ERROR?.Invoke(ErrorType.INVALID_MOVE);
+                ErrorEvents.ON_ERROR?.Invoke(ErrorType.INVALID_MOVE_TO_SPACE);
                 return;
             }
             if (nextY > maxY)
             {
-                ErrorEvents.ON_ERROR?.Invoke(ErrorType.INVALID_MOVE);
+                ErrorEvents.ON_ERROR?.Invoke(ErrorType.INVALID_MOVE_TO_SPACE);
+                return;
+            }
+
+            // * Move to space
+            if (GridManager.Instance.Grids[m_CurrentFloor].GridArray[nextX, nextY].Type == GroundType.SPACE)
+            {
+                ErrorEvents.ON_ERROR?.Invoke(ErrorType.INVALID_MOVE_TO_SPACE);
+                return;
+            }
+
+            // * Move to water
+            if (GridManager.Instance.Grids[m_CurrentFloor].GridArray[nextX, nextY].Type == GroundType.WATER)
+            {
+                ErrorEvents.ON_ERROR?.Invoke(ErrorType.INVALID_MOVE_TO_WATER);
+                return;
+            }
+
+            // * Move to wall
+            if (GridManager.Instance.Grids[m_CurrentFloor].GridArray[nextX, nextY].Type == GroundType.BOX_ON_GROUND ||
+                GridManager.Instance.Grids[m_CurrentFloor].GridArray[nextX, nextY].Type == GroundType.TREE)
+            {
+                ErrorEvents.ON_ERROR?.Invoke(ErrorType.INVALID_MOVE_WALL);
                 return;
             }
 
@@ -205,7 +228,7 @@ namespace BlockyBlock.Core
         void DoPickup()
         {
             DirectionData directionData = ConfigManager.Instance.UnitConfig.GetDataByDirection(m_CurrentDirection);
-            m_GrabbedObject = m_UnitVision.GetFontObject((int)m_CurrentCell.x, (int)m_CurrentCell.y, m_CurrentFloor, directionData);
+            m_GrabbedObject = m_UnitVision.GetFrontObject((int)m_CurrentCell.x, (int)m_CurrentCell.y, m_CurrentFloor, directionData);
             if (m_GrabbedObject == null)
             {
                 ErrorEvents.ON_ERROR?.Invoke(ErrorType.INVALID_PICK_UP);
@@ -236,6 +259,16 @@ namespace BlockyBlock.Core
         {
             if (IsGrabSomething)
             {
+                DirectionData directionData = ConfigManager.Instance.UnitConfig.GetDataByDirection(m_CurrentDirection);
+                int putIdxX = (int)m_CurrentCell.x + directionData.XIdx;
+                int putIdxY = (int)m_CurrentCell.y + directionData.YIdx;
+                if (GridManager.Instance.Grids[m_CurrentFloor].GridArray[putIdxX, putIdxY].Type == GroundType.SPACE ||
+                GridManager.Instance.Grids[m_CurrentFloor].GridArray[putIdxX, putIdxY].Type == GroundType.BOX || 
+                GridManager.Instance.Grids[m_CurrentFloor].GridArray[putIdxX, putIdxY].Type == GroundType.COLLECTIBLE)
+                {
+                    ErrorEvents.ON_ERROR?.Invoke(ErrorType.INVALID_PUT_DOWN_PLACE);
+                    return;
+                }
                 m_Animation.Reset();
                 m_Animation.TriggerAnimPutdown();
                 StartCoroutine(ResetGrab());
@@ -243,7 +276,7 @@ namespace BlockyBlock.Core
             }
             else
             {
-                ErrorEvents.ON_ERROR?.Invoke(ErrorType.INVALID_PUT_DOWN);
+                ErrorEvents.ON_ERROR?.Invoke(ErrorType.INVALID_PUT_DOWN_NOTHING);
             }
         }
         IEnumerator UnGrabStuff(GrabableObject _grabableObject)
@@ -252,6 +285,7 @@ namespace BlockyBlock.Core
             DirectionData directionData = ConfigManager.Instance.UnitConfig.GetDataByDirection(m_CurrentDirection);
             int putIdxX = (int)m_CurrentCell.x + directionData.XIdx;
             int putIdxY = (int)m_CurrentCell.y + directionData.YIdx;
+            
             _grabableObject.UngrabSelf(putIdxX, putIdxY, m_CurrentFloor, true);
         }
         IEnumerator ResetGrab()

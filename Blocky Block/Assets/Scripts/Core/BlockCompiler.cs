@@ -30,10 +30,12 @@ namespace BlockyBlock.Core
         void Start()
         {
             UnitEvents.ON_JUMP += HandleJump;
+            ErrorEvents.ON_ERROR_HANDLING += HandleError;
         }
         void OnDestroy()
         {
             UnitEvents.ON_JUMP -= HandleJump;
+            ErrorEvents.ON_ERROR_HANDLING -= HandleError;
         }
         void HandleJump(BlockFunctionJump _uiBlockJump)
         {
@@ -45,6 +47,17 @@ namespace BlockyBlock.Core
             GameEvents.ON_EXECUTING_BLOCK?.Invoke(IsExecuting);
             IDEState = IDERunState.MANNUAL;
             StartCoroutine(Cor_Play());
+        }
+        void HandleError()
+        {
+            StopCoroutine(Cor_Play());
+            StopCoroutine(Cor_Debug());
+            IsExecuting = false;
+            GameEvents.ON_EXECUTING_BLOCK?.Invoke(IsExecuting);
+            IDEState = IDERunState.STOP;
+            BlockEvents.ON_HIGHLIGHT?.Invoke(null, IDEState);
+            m_IdxFunction = 0;
+            m_Parser.HandleError();
         }
         public void Stop() 
         {

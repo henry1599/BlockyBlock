@@ -8,7 +8,7 @@ namespace BlockyBlock.Core
 {
     public class UnitVision : MonoBehaviour
     {
-        public GameObject GetFontObject(int _unitX, int _unitY, int _floorIdx, DirectionData _directionData)
+        public GameObject GetFrontObject(int _unitX, int _unitY, int _floorIdx, DirectionData _directionData)
         {
             Ground[,] gridArray = GridManager.Instance.Grids[_floorIdx].GridArray;
             int x = _unitX + _directionData.XIdx;
@@ -23,6 +23,10 @@ namespace BlockyBlock.Core
             }
             if (gridArray[x, y].Stuff != null)
             {
+                if (gridArray[x, y].Type == Enums.GroundType.BOX_IN_WATER)
+                {
+                    return null;
+                }
                 return gridArray[x, y].Stuff.gameObject;
             }
             else
