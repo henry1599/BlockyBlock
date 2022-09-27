@@ -12,17 +12,10 @@ namespace BlockyBlock.Managers
         public BlockConfig BlockConfig;
         public UnitConfig UnitConfig;
         public TurnDirectionConfig TurnDirectionConfig;
+        public ErrorConfig ErrorConfig;
         void Awake()
         {
-            DontDestroyOnLoad(gameObject);
-            if (Instance == null)
-            {
-                Instance = this;
-            }
-            else
-            {
-                Destroy(gameObject);
-            }
+            Instance = this;
         }
     }
 }

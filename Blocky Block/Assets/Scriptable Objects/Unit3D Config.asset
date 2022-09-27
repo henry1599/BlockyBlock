@@ -13,9 +13,9 @@ MonoBehaviour:
   m_Name: Unit3D Config
   m_EditorClassIdentifier: 
   StepDistance: 1
-  MoveTime: 1
+  MoveTime: 0.5
   EnterWaterTime: 1
-  RotateTime: 1
+  RotateTime: 0.5
   Unit3DRotation:
     reorderableList:
       canAdd: 1
@@ -43,10 +43,14 @@ MonoBehaviour:
     _keys: 01000000000000000200000003000000
     _values:
     - Rotation: {x: 0, y: 180, z: 0}
-      MoveDirection: {x: 0, y: 0, z: -1}
+      XIdx: 0
+      YIdx: 1
     - Rotation: {x: 0, y: 0, z: 0}
-      MoveDirection: {x: 0, y: 0, z: 1}
+      XIdx: 0
+      YIdx: -1
     - Rotation: {x: 0, y: -90, z: 0}
-      MoveDirection: {x: -1, y: 0, z: 0}
+      XIdx: 1
+      YIdx: 0
     - Rotation: {x: 0, y: 90, z: 0}
-      MoveDirection: {x: 1, y: 0, z: 0}
+      XIdx: -1
+      YIdx: 0

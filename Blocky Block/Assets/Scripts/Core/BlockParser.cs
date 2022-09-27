@@ -48,9 +48,13 @@ namespace BlockyBlock.Core
             {
                 return;
             }
-            DelayTime = ConfigManager.Instance.BlockConfig.GetDelayTime(Functions[_value].BlockType);
-            Functions[_value].Execute();
-            BlockEvents.ON_HIGHLIGHT?.Invoke(Functions[_value].UIBlock, BlockCompiler.Instance.IDEState);
+            try
+            {
+                DelayTime = ConfigManager.Instance.BlockConfig.GetDelayTime(Functions[_value].BlockType);
+                Functions[_value].Execute();
+                BlockEvents.ON_HIGHLIGHT?.Invoke(Functions[_value].UIBlock, BlockCompiler.Instance.IDEState);
+            }
+            catch(System.Exception e){}
         }
         public void Parse()
         {
@@ -63,6 +67,12 @@ namespace BlockyBlock.Core
         public void Stop() 
         {
             StartCoroutine(Cor_Stop());
+        }
+        public void HandleError()
+        {
+            Functions.Clear();
+            IsFinishParse = false;
+            StopExecution = true;
         }
         public void Debug()
         {
@@ -118,8 +128,10 @@ namespace BlockyBlock.Core
                     HandleTurn((UIBlockTurn)_uiBlock);
                     break;
                 case BlockType.PICK_UP:
+                    HandlePickup((UIBlockPickup)_uiBlock);
                     break;
                 case BlockType.PUT_DOWN:
+                    HandlePutdown((UIBlockPutdown)_uiBlock);
                     break;
                 case BlockType.DO_UNTIL:
                     break;
@@ -172,6 +184,18 @@ namespace BlockyBlock.Core
         void HandleDoUntil(UIBlock _uiBlock)
         {
             
+        }
+        void HandlePickup(UIBlockPickup _uiBlock)
+        {
+            BlockFunctionPickup function = new BlockFunctionPickup(_uiBlock);
+            function.Setup();
+            Functions.Add(function);
+        }
+        void HandlePutdown(UIBlockPutdown _uiBlock)
+        {
+            BlockFunctionPutdown function = new BlockFunctionPutdown(_uiBlock);
+            function.Setup();
+            Functions.Add(function);
         }
     }
 }

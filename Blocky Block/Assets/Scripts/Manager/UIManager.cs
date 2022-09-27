@@ -185,6 +185,10 @@ namespace BlockyBlock.Managers
         {
             GameEvents.ON_CONTROL_BUTTON_TOGGLE?.Invoke((ControlButton)_type, false);
         }
+        public void OnResetButtonClick()
+        {
+            ToolEvents.ON_RESET_BUTTON_CLICKED?.Invoke();
+        }
         public void OnPreviewToggleButtonClick()
         {
             EditorEvents.ON_PREVIEW_STATUS_TOGGLE?.Invoke();

@@ -12,8 +12,6 @@ namespace BlockyBlock.Managers
     {
         public static UnitManager Instance {get; private set;}
         [SerializeField] Unit3D m_Unit3DTemplate;
-        public float DistanceStepValue {get => m_DistanceStepValue; private set => m_DistanceStepValue = value;} [SerializeField] float m_DistanceStepValue = 1.1f;
-        public float UnitMoveTime {get => m_UnitMoveTime; private set => m_UnitMoveTime = value;} [SerializeField] float m_UnitMoveTime = 1f;
         void Awake()
         {
             Instance = this;
@@ -38,11 +36,16 @@ namespace BlockyBlock.Managers
             yield return new WaitUntil(() => GroundManager.Instance.m_IsFinishedSpawnGround == true);
             foreach (UnitData unitData in _data.UnitDatas)
             {
-                Vector3 startPosition = unitData.StartPosition;
+                if (GridManager.Instance.Grids.Count - 1 < unitData.Floor)
+                {
+                    Debug.LogError("Unit's floor does not match with the maximum floor on this level => Check LevelConfig for more detail");
+                    yield break;
+                }
+                Vector3 startPosition = GridManager.Instance.Grids[unitData.Floor].GetWorldPosition(unitData.X, unitData.Y);
                 UnitDirection startDirection = unitData.StartDirection;
 
                 Unit3D unitInstance = Instantiate(m_Unit3DTemplate.gameObject, transform).GetComponent<Unit3D>();
-                unitInstance.Setup(startPosition, startDirection);
+                unitInstance.Setup(startPosition, startDirection, unitData.X, unitData.Y);
             }
         }
 

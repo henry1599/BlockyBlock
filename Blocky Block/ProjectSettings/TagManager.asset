@@ -25,6 +25,10 @@ TagManager:
   - IDE Main Field
   - UI Block Option
   - Config Manager
+  - Unit
+  - Collectible
+  - Walkable
+  - Unwalkable
   layers:
   - Default
   - TransparentFX

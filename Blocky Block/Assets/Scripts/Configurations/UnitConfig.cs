@@ -25,6 +25,7 @@ namespace BlockyBlock.Configurations
     public class DirectionData
     {
         public Vector3 Rotation;
-        public Vector3 MoveDirection;
+        public int XIdx;
+        public int YIdx;
     }
 }

@@ -12,16 +12,7 @@ namespace BlockyBlock.Managers
         public static GameSceneManager Instance {get; private set;}
         void Awake()
         {
-            DontDestroyOnLoad(gameObject);
-            if (Instance == null)
-            {
-                Instance = this;
-            }
-            else
-            {
-                Destroy(gameObject);
-            }
-
+            Instance = this;
             GameEvents.LOAD_LEVEL += HandleLoadLevel;
         }
         void OnDestroy()

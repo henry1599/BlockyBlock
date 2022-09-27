@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using BlockyBlock.Enums;
 using RotaryHeart.Lib.SerializableDictionary;
+using System.Linq;
 
 namespace BlockyBlock.Configurations
 {
@@ -19,13 +20,20 @@ namespace BlockyBlock.Configurations
         {
             return LevelDatas[_id].LevelName;
         }
+        public LevelID GetLevelIDBySceneName(string _name)
+        {
+            return LevelDatas.FirstOrDefault(p => p.Value.LevelName == _name).Key;
+        }
     }
     [System.Serializable]
     public class Level : SerializableDictionaryBase<LevelID, LevelData> {}
     [System.Serializable]
     public class UnitData 
     {
-        public Vector3 StartPosition;
+        [Range(0, 2)]
+        public int Floor;
+        public int X;
+        public int Y;
         public UnitDirection StartDirection;
     }
     [System.Serializable]

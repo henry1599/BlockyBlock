@@ -40,15 +40,7 @@ namespace BlockyBlock.Managers
         }
         void Awake()
         {
-            DontDestroyOnLoad(gameObject);
-            if (Instance == null)
-            {
-                Instance = this;
-            }
-            else
-            {
-                Destroy(gameObject);
-            }
+            Instance = this;
             GameEvents.LOAD_LEVEL += HandleLevelLoad;
         }
         // Start is called before the first frame update

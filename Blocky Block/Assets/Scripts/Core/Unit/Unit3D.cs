@@ -7,52 +7,41 @@ using BlockyBlock.Core;
 using DG.Tweening;
 using BlockyBlock.Managers;
 using BlockyBlock.Configurations;
+using Helpers;
 
 namespace BlockyBlock.Core
 {
     public class Unit3D : MonoBehaviour
     {
         [SerializeField] UnitAnimation m_Animation;
-        [SerializeField] UnitBound m_Bound;
-        [Space(10)]
-        [Header("From water to ground")]
-        [SerializeField] float m_JumpPower;
-        [Space(10)]
-        [Header("VFX")]
-        [SerializeField] GameObject m_VfxWaterSplash;
+        [SerializeField] UnitVision m_UnitVision;
+        [SerializeField] Transform m_GrabPivot;
+        const float m_GrabDelay = 0.25f;
+        const float m_UngrabDelay = 0.4f;
         private Vector3 m_StartPosition;
         private UnitDirection m_StartDirection;
         private UnitDirection m_CurrentDirection;
-        private GroundType m_CurrentGround;
-        private bool m_IsUnderwater = false;
-        private GroundType CurrentGround 
+        private int m_CurrentFloor;
+        private Vector2 m_CurrentCell;
+        private Vector2 m_StartCell;
+        private GameObject m_GrabbedObject;
+        private bool IsGrabSomething 
         {
-            get => m_CurrentGround;
+            get => m_IsGrabSomething;
             set 
             {
-                m_IsUnderwater = value == GroundType.WATER;
-                if (m_CurrentGround == GroundType.GROUND && value == GroundType.WATER)
-                {
-                    MoveFromGroundToWater();
-                    m_CurrentGround = value;
-                    return;
-                }
-                if (m_CurrentGround == GroundType.WATER && value == GroundType.GROUND)
-                {
-                    MoveFromWaterToGround();
-                    m_CurrentGround = value;
-                    return;
-                }
-                m_CurrentGround = value;
-                MoveNormally(m_CurrentGround);
+                m_IsGrabSomething = value;
+                UpdateGrabStatus(value);
             }
-        }
+        } bool m_IsGrabSomething;
         // Start is called before the first frame update
         void Start()
         {
             UnitEvents.ON_MOVE_FORWARD += MoveForward;
             UnitEvents.ON_TURN_LEFT += TurnLeft;
             UnitEvents.ON_TURN_RIGHT += TurnRight;
+            UnitEvents.ON_PICK_UP += Pickup;
+            UnitEvents.ON_PUT_DOWN += Putdown;
 
             UnitEvents.ON_STOP += HandleStop;
             UnitEvents.ON_RESET += HandleReset;
@@ -62,92 +51,102 @@ namespace BlockyBlock.Core
             UnitEvents.ON_MOVE_FORWARD -= MoveForward;
             UnitEvents.ON_TURN_LEFT -= TurnLeft;
             UnitEvents.ON_TURN_RIGHT -= TurnRight;
+            UnitEvents.ON_PICK_UP -= Pickup;
+            UnitEvents.ON_PUT_DOWN -= Putdown;
             
             UnitEvents.ON_STOP -= HandleStop;
             UnitEvents.ON_RESET -= HandleReset;
         }
-        public void Setup(Vector3 _startPosition, UnitDirection _startDirection)
+        public void Setup(Vector3 _startPosition, UnitDirection _startDirection, int _startX, int _startY)
         {
+            m_StartCell = new Vector2(_startX, _startY);
+            IsGrabSomething = false;
+            m_CurrentCell = m_StartCell;
             m_StartPosition = _startPosition;
             m_StartDirection = _startDirection;
             m_CurrentDirection = _startDirection;
 
             transform.position = m_StartPosition;
             transform.eulerAngles = ConfigManager.Instance.UnitConfig.GetDataByDirection(_startDirection).Rotation;
-            
-            m_CurrentGround = m_Bound.CastBelow();
         }
         void HandleStop()
         {
-            m_Animation.Reset(m_IsUnderwater);
+            m_Animation.Reset();
         }
         void HandleReset()
         {
             transform.DOKill(true);
-            Setup(m_StartPosition, m_StartDirection);
-            m_IsUnderwater = false;
-            m_Animation.Reset(m_IsUnderwater);
+            Setup(m_StartPosition, m_StartDirection, (int)m_StartCell.x, (int)m_StartCell.y);
+            m_Animation.Reset();
+        }
+        void UpdateGrabStatus(bool _status)
+        {
+            if (_status == false)
+            {
+                m_GrabbedObject = null;
+            }
+            int weight = _status ? 1 : 0;
+            m_Animation.TriggerAnimUpperLayer(weight);
         }
 
         #region Move Forward
         public void MoveForward(BlockFunctionMoveForward _moveForward)
+        { 
+            Move();
+        }
+        void Move()
         {
-            GroundType nextGround = m_Bound.CastFrontDown();
-            switch (CurrentGround)
+            DirectionData directionData = ConfigManager.Instance.UnitConfig.GetDataByDirection(m_CurrentDirection);
+
+            GameObject m_Collectible = m_UnitVision.GetFrontObject((int)m_CurrentCell.x, (int)m_CurrentCell.y, m_CurrentFloor, directionData);
+
+            int nextX = (int)m_CurrentCell.x + directionData.XIdx;
+            int nextY = (int)m_CurrentCell.y + directionData.YIdx;
+            int maxX = GridManager.Instance.Grids[m_CurrentFloor].GridArray.GetLength(0) - 1;
+            int maxY = GridManager.Instance.Grids[m_CurrentFloor].GridArray.GetLength(1) - 1;
+            
+            // * Move outside map
+            if (nextX > maxX)
             {
-                case GroundType.WATER:
-                    nextGround = m_Bound.CastFrontUp();
-                    break;
-                case GroundType.GROUND:
-                    nextGround = m_Bound.CastFrontDown();
-                    break;
+                ErrorEvents.ON_ERROR?.Invoke(ErrorType.INVALID_MOVE_TO_SPACE);
+                return;
             }
-            CurrentGround = nextGround;
-        }
-        void MoveFromGroundToWater()
-        {
-            DirectionData directionData = ConfigManager.Instance.UnitConfig.GetDataByDirection(m_CurrentDirection);
-            Vector3 newPosition = transform.position + directionData.MoveDirection * ConfigManager.Instance.UnitConfig.StepDistance;
-            float moveTime = ConfigManager.Instance.UnitConfig.EnterWaterTime; 
-            m_Animation.TriggerAnimGroundToWater();
-            newPosition.y = -0.9f;
-            transform 
-                .DOMove(
-                    newPosition,
-                    moveTime
-                )
-                .SetEase(Ease.Linear)
-                .OnComplete(() => transform.position = newPosition);
-            StartCoroutine(SetDelay(() => Instantiate(m_VfxWaterSplash, new Vector3(newPosition.x, 0, newPosition.z), Quaternion.Euler(directionData.Rotation)), 0.3f));
-        }
-        IEnumerator SetDelay(System.Action _cb = null, float _delay = 0.0f)
-        {
-            yield return new WaitForSeconds(_delay);
-            _cb?.Invoke();
-        }
-        void MoveFromWaterToGround()
-        {
-            DirectionData directionData = ConfigManager.Instance.UnitConfig.GetDataByDirection(m_CurrentDirection);
-            Vector3 newPosition = transform.position + directionData.MoveDirection * ConfigManager.Instance.UnitConfig.StepDistance;
-            float moveTime = ConfigManager.Instance.UnitConfig.EnterWaterTime; 
-            m_Animation.TriggerAnimWaterToGround();
-            newPosition.y = 0f;
-            transform 
-                .DOLocalJump(
-                    newPosition,
-                    m_JumpPower,
-                    1,
-                    moveTime,
-                    false
-                )
-                .SetEase(Ease.InOutSine)
-                .OnComplete(() => transform.position = newPosition);
-        }
-        void MoveNormally(GroundType _currentGround)
-        {
-            DirectionData directionData = ConfigManager.Instance.UnitConfig.GetDataByDirection(m_CurrentDirection);
-            Vector3 newPosition = transform.position + directionData.MoveDirection * ConfigManager.Instance.UnitConfig.StepDistance;
+            if (nextY > maxY)
+            {
+                ErrorEvents.ON_ERROR?.Invoke(ErrorType.INVALID_MOVE_TO_SPACE);
+                return;
+            }
+
+            // * Move to space
+            if (GridManager.Instance.Grids[m_CurrentFloor].GridArray[nextX, nextY].Type == GroundType.SPACE)
+            {
+                ErrorEvents.ON_ERROR?.Invoke(ErrorType.INVALID_MOVE_TO_SPACE);
+                return;
+            }
+
+            // * Move to water
+            if (GridManager.Instance.Grids[m_CurrentFloor].GridArray[nextX, nextY].Type == GroundType.WATER)
+            {
+                ErrorEvents.ON_ERROR?.Invoke(ErrorType.INVALID_MOVE_TO_WATER);
+                return;
+            }
+
+            // * Move to wall
+            if (GridManager.Instance.Grids[m_CurrentFloor].GridArray[nextX, nextY].Type == GroundType.BOX_ON_GROUND ||
+                GridManager.Instance.Grids[m_CurrentFloor].GridArray[nextX, nextY].Type == GroundType.TREE)
+            {
+                ErrorEvents.ON_ERROR?.Invoke(ErrorType.INVALID_MOVE_WALL);
+                return;
+            }
+
+            m_CurrentCell = new Vector2(nextX, nextY);
+            Vector3 newPosition = GridManager.Instance.Grids[m_CurrentFloor].GetWorldPosition((int)m_CurrentCell.x, (int)m_CurrentCell.y);
             float moveTime = ConfigManager.Instance.UnitConfig.MoveTime; 
+
+            if (m_Collectible?.GetComponent<CollectibleObject>() != null)
+            {
+                StartCoroutine(Collect(m_Collectible.GetComponent<CollectibleObject>(), 0.2f));
+            }
             transform 
                 .DOMove(
                     newPosition,
@@ -155,14 +154,12 @@ namespace BlockyBlock.Core
                 )
                 .SetDelay(0.2f)
                 .SetEase(Ease.Linear);
-            if (_currentGround == GroundType.GROUND)
-            {
-                m_Animation.TriggerAnimRunning();
-            }
-            else if (_currentGround == GroundType.WATER)
-            {
-                m_Animation.TriggerAnimSwimming();
-            }
+            m_Animation.TriggerAnimRunning();
+        }
+        IEnumerator Collect(CollectibleObject _collectibleObject, float _delay)
+        {
+            yield return Helper.GetWait(_delay);
+            _collectibleObject.OnCollect();
         }
         #endregion
 
@@ -190,7 +187,7 @@ namespace BlockyBlock.Core
                     directionData.Rotation,
                     ConfigManager.Instance.UnitConfig.RotateTime
                 );
-            m_Animation.TriggerAnimTurnLeft();
+            m_Animation.TriggerAnimTurn();
         }
         #endregion
 
@@ -219,7 +216,82 @@ namespace BlockyBlock.Core
                     directionData.Rotation,
                     ConfigManager.Instance.UnitConfig.RotateTime
                 );
-            m_Animation.TriggerAnimTurnRight();
+            m_Animation.TriggerAnimTurn();
+        }
+        #endregion
+
+        #region Pick up
+        void Pickup(BlockFunctionPickup _pickup)
+        {
+            DoPickup();
+        }
+        void DoPickup()
+        {
+            DirectionData directionData = ConfigManager.Instance.UnitConfig.GetDataByDirection(m_CurrentDirection);
+            m_GrabbedObject = m_UnitVision.GetFrontObject((int)m_CurrentCell.x, (int)m_CurrentCell.y, m_CurrentFloor, directionData);
+            if (m_GrabbedObject == null)
+            {
+                ErrorEvents.ON_ERROR?.Invoke(ErrorType.INVALID_PICK_UP);
+            }
+            else
+            {
+                m_Animation.Reset();
+                IsGrabSomething = true;
+                m_Animation.TriggerAnimPickup();
+                StartCoroutine(GrabStuff(m_GrabbedObject.GetComponent<GrabableObject>()));
+            }
+        }
+        IEnumerator GrabStuff(GrabableObject _grabableObject)
+        {
+            yield return Helper.GetWait(m_GrabDelay);
+            _grabableObject.transform.SetParent(m_GrabPivot, true);
+            _grabableObject.transform.DOLocalMove(Vector3.zero, 0.25f).SetEase(Ease.InOutSine);
+            _grabableObject.GrabSelf();
+        }
+        #endregion
+
+        #region Put down
+        void Putdown(BlockFunctionPutdown _putdown)
+        {
+            DoPutdown();
+        }
+        void DoPutdown()
+        {
+            if (IsGrabSomething)
+            {
+                DirectionData directionData = ConfigManager.Instance.UnitConfig.GetDataByDirection(m_CurrentDirection);
+                int putIdxX = (int)m_CurrentCell.x + directionData.XIdx;
+                int putIdxY = (int)m_CurrentCell.y + directionData.YIdx;
+                if (GridManager.Instance.Grids[m_CurrentFloor].GridArray[putIdxX, putIdxY].Type == GroundType.SPACE ||
+                GridManager.Instance.Grids[m_CurrentFloor].GridArray[putIdxX, putIdxY].Type == GroundType.BOX || 
+                GridManager.Instance.Grids[m_CurrentFloor].GridArray[putIdxX, putIdxY].Type == GroundType.COLLECTIBLE)
+                {
+                    ErrorEvents.ON_ERROR?.Invoke(ErrorType.INVALID_PUT_DOWN_PLACE);
+                    return;
+                }
+                m_Animation.Reset();
+                m_Animation.TriggerAnimPutdown();
+                StartCoroutine(ResetGrab());
+                StartCoroutine(UnGrabStuff(m_GrabbedObject.GetComponent<GrabableObject>()));
+            }
+            else
+            {
+                ErrorEvents.ON_ERROR?.Invoke(ErrorType.INVALID_PUT_DOWN_NOTHING);
+            }
+        }
+        IEnumerator UnGrabStuff(GrabableObject _grabableObject)
+        {
+            yield return Helper.GetWait(m_UngrabDelay * ConfigManager.Instance.BlockConfig.Blocks[BlockType.PUT_DOWN].ExecutionTime);
+            DirectionData directionData = ConfigManager.Instance.UnitConfig.GetDataByDirection(m_CurrentDirection);
+            int putIdxX = (int)m_CurrentCell.x + directionData.XIdx;
+            int putIdxY = (int)m_CurrentCell.y + directionData.YIdx;
+            
+            _grabableObject.UngrabSelf(putIdxX, putIdxY, m_CurrentFloor, true);
+        }
+        IEnumerator ResetGrab()
+        {
+            yield return Helper.GetWait(0.95f * ConfigManager.Instance.BlockConfig.Blocks[BlockType.PUT_DOWN].ExecutionTime);
+            IsGrabSomething = false;
         }
         #endregion
     }

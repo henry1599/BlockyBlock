@@ -10,45 +10,31 @@ namespace BlockyBlock.Core
     public class UnitAnimation : MonoBehaviour
     {
         [SerializeField] private Animator m_Animator;
-        public void TriggerAnimSwimIdle()
+        static readonly int m_UpperLayerIdx = 1;
+        static readonly int m_AboveLayerIdx = 0; 
+        public void TriggerAnimTurn()
         {
-            m_Animator.CrossFade("Swim_idle", 0, 0);
+            m_Animator.CrossFade("Turn", 0, m_AboveLayerIdx);
         }
-        public void TriggerAnimTurnLeft()
+        public void TriggerAnimUpperLayer(int _weight)
         {
-            m_Animator.CrossFade("Trot_L", 0, 0);
+            m_Animator.SetLayerWeight(m_UpperLayerIdx, _weight);
         }
-        public void TriggerAnimTurnRight()
+        public void TriggerAnimPickup()
         {
-            m_Animator.CrossFade("Trot_R", 0, 0);
+            m_Animator.CrossFade("Grab", 0, m_UpperLayerIdx);
+        }
+        public void TriggerAnimPutdown()
+        {
+            m_Animator.CrossFade("Throw", 0, m_UpperLayerIdx);
         }
         public void TriggerAnimRunning()
         {
-            m_Animator.CrossFade("Trot_F", 0, 0);
+            m_Animator.CrossFade("Run", 0, m_AboveLayerIdx);
         }
-        public void TriggerAnimSwimming()
+        public void Reset()
         {
-            m_Animator.CrossFade("Swim_F", 0, 0);
-        }
-        public void TriggerAnimWaterToGround()
-        {
-            m_Animator.CrossFade("InPlace", 0, 0);
-        }
-        [Button]
-        public void TriggerAnimGroundToWater()
-        {
-            m_Animator.CrossFade("Swim_Enter", 0, 0);
-        }
-        public void Reset(bool _underwater)
-        {
-            if (_underwater)
-            {
-                m_Animator.CrossFade("Swim_idle", 0, 0);
-            }
-            else
-            {
-                m_Animator.CrossFade("Base", 0, 0);
-            }
+            m_Animator.CrossFade("Idle", 0, m_AboveLayerIdx);
         }
     }
 }

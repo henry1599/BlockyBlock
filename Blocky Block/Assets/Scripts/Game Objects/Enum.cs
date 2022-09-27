@@ -1,5 +1,13 @@
 namespace BlockyBlock.Enums
 {
+    public enum ErrorType {
+        INVALID_MOVE_TO_SPACE,
+        INVALID_MOVE_WALL,
+        INVALID_MOVE_TO_WATER,
+        INVALID_PUT_DOWN_PLACE,
+        INVALID_PUT_DOWN_NOTHING,
+        INVALID_PICK_UP
+    }
     public enum TurnDirection {
         LEFT = 0,
         RIGHT = 1
@@ -25,10 +33,15 @@ namespace BlockyBlock.Enums
         STOP_SCROLLING
     }
     public enum GroundType {
-        GROUND = 0,
-        WATER = 1,
-        SPACE = 2,
-        TRAP = 3,
+        GROUND = 0b000001, // * 0
+        WATER = 0b000010, // * 1
+        TREE = 0b010000, // * 2
+        BOX = 0b001000,
+        SPACE = 0b000011, // * 4
+        TRAP = 0b011000, // * 5
+        COLLECTIBLE = 0b100000, // * 6
+        BOX_ON_GROUND = BOX | GROUND, // * 3
+        BOX_IN_WATER = BOX | WATER // * 7
     }
     public enum ControlButton {
         STOP = 0,

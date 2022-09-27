@@ -14,7 +14,7 @@ namespace BlockyBlock.Events
     {
         public static Action<LevelID> LOAD_LEVEL;
         public static Action<LevelData> SETUP_LEVEL;
-        public static Action<List<LevelGround>> SETUP_GROUND;
+        public static Action SETUP_GROUND;
         public static Action<int, Vector2> SETUP_CAMERA;
         public static Action<ControlButton, bool> ON_CONTROL_BUTTON_TOGGLE;
         public static Action<bool> ON_CONTROL_BUTTON_TOGGLE_ALL;
@@ -28,8 +28,8 @@ namespace BlockyBlock.Events
         public static Action<BlockFunctionTurnLeft> ON_TURN_LEFT;
         public static Action<BlockFunctionTurnRight> ON_TURN_RIGHT;
         public static Action<BlockFunctionJump> ON_JUMP;
-        public static Action ON_PICK_UP;
-        public static Action ON_PUT_DOWN;
+        public static Action<BlockFunctionPickup> ON_PICK_UP;
+        public static Action<BlockFunctionPutdown> ON_PUT_DOWN;
         public static Action ON_STOP;
         public static Action ON_RESET;
     }
@@ -60,6 +60,11 @@ namespace BlockyBlock.Events
         public static Action<ZoomType> ON_ZOOM_BUTTON_CLICKED;
         public static Action ON_RESET_BUTTON_CLICKED;
     }
+    public class ErrorEvents
+    {
+        public static Action<ErrorType> ON_ERROR;
+        public static Action ON_ERROR_HANDLING;
+    }
     public class GameConstants
     {
         public static readonly float GROUND_HEIGHT_LEVEL = 5;
@@ -80,6 +85,8 @@ namespace BlockyBlock.Events
         public static readonly string TOP_IDE_TAG = "Top IDE";
         public static readonly string BELOW_IDE_TAG = "Below IDE";
         public static readonly string NOT_ANY_BLOCK_TAG = "Not Any Block";
+        public static readonly string WALKABLE_TAG = "Walkable";
+        public static readonly string UNWALKABLE_TAG = "Unwalkable";
         public static readonly string LEVELS_RAW_DATA_PATH = $"Data/Levels/";
     }
 }
