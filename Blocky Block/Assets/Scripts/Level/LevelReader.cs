@@ -80,7 +80,7 @@ namespace BlockyBlock.Managers
                 int maxRows  = levelStringEachRow.Count;
                 int maxColumns = levelStringEachRow[0].Length;
 
-                Core.Grid grid = new Core.Grid(maxRows, maxColumns, Vector3.zero, idxFloor);
+                Core.Grid grid = new Core.Grid(maxColumns, maxRows, Vector3.zero, idxFloor);
                 
                 for (int i = levelStringEachRow.Count - 1, k = 0; k < levelStringEachRow.Count; i--, k++)
                 {
