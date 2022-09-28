@@ -18,6 +18,7 @@ namespace BlockyBlock.Core
         [SerializeField] Transform m_GrabPivot;
         const float m_GrabDelay = 0.25f;
         const float m_UngrabDelay = 0.4f;
+        const float m_PushDelay = 0.2f;
         private Vector3 m_StartPosition;
         private UnitDirection m_StartDirection;
         private UnitDirection m_CurrentDirection;
@@ -240,10 +241,10 @@ namespace BlockyBlock.Core
                 m_Animation.Reset();
                 IsGrabSomething = true;
                 m_Animation.TriggerAnimPickup();
-                StartCoroutine(GrabStuff(m_GrabbedObject.GetComponent<GrabableObject>()));
+                StartCoroutine(GrabStuff(m_GrabbedObject.GetComponent<InteractableObject>()));
             }
         }
-        IEnumerator GrabStuff(GrabableObject _grabableObject)
+        IEnumerator GrabStuff(InteractableObject _grabableObject)
         {
             yield return Helper.GetWait(m_GrabDelay);
             _grabableObject.transform.SetParent(m_GrabPivot, true);
@@ -274,14 +275,14 @@ namespace BlockyBlock.Core
                 m_Animation.Reset();
                 m_Animation.TriggerAnimPutdown();
                 StartCoroutine(ResetGrab());
-                StartCoroutine(UnGrabStuff(m_GrabbedObject.GetComponent<GrabableObject>()));
+                StartCoroutine(UnGrabStuff(m_GrabbedObject.GetComponent<InteractableObject>()));
             }
             else
             {
                 ErrorEvents.ON_ERROR?.Invoke(ErrorType.INVALID_PUT_DOWN_NOTHING);
             }
         }
-        IEnumerator UnGrabStuff(GrabableObject _grabableObject)
+        IEnumerator UnGrabStuff(InteractableObject _grabableObject)
         {
             yield return Helper.GetWait(m_UngrabDelay * ConfigManager.Instance.BlockConfig.Blocks[BlockType.PUT_DOWN].ExecutionTime);
             DirectionData directionData = ConfigManager.Instance.UnitConfig.GetDataByDirection(m_CurrentDirection);
@@ -300,7 +301,25 @@ namespace BlockyBlock.Core
         #region Push
         void Push(BlockFunctionPush _push)
         {
-            print("PUSH");
+            DirectionData directionData = ConfigManager.Instance.UnitConfig.GetDataByDirection(m_CurrentDirection);
+            GameObject pushableObject = m_UnitVision.GetFrontObject((int)m_CurrentCell.x, (int)m_CurrentCell.y, m_CurrentFloor, directionData);
+            if (pushableObject == null)
+            {
+                ErrorEvents.ON_ERROR?.Invoke(ErrorType.INVALID_PICK_UP);
+            }
+            else
+            {
+                m_Animation.Reset();
+                m_Animation.TriggerAnimPush();
+                int pushIdxX = (int)m_CurrentCell.x + directionData.XIdx * 2;
+                int pushIdxY = (int)m_CurrentCell.y + directionData.YIdx * 2;
+                StartCoroutine(PushStuff(pushableObject.GetComponent<InteractableObject>(), pushIdxX, pushIdxY, m_CurrentFloor));
+            }
+        }
+        IEnumerator PushStuff(InteractableObject _pushableObject, int _pushIdxX, int _pushIdxY, int _floor)
+        {
+            yield return Helper.GetWait(m_PushDelay);
+            _pushableObject?.PushSelf(_pushIdxX, _pushIdxY, _floor);
         }
         #endregion
     }

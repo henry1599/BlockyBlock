@@ -47,7 +47,7 @@ namespace BlockyBlock.Managers
                         GameObject stuffPrefab = ResourceLoader.Instance.Grounds[groundType];
                         Vector3 stuffPosition = grid.GetWorldPosition(i, j);
                         GameObject stuffInstance = Instantiate(stuffPrefab, stuffPosition, Quaternion.identity, transform);
-                        stuffInstance.GetComponent<GrabableObject>()?.Setup(i, j, floorIdx, stuffPosition, Vector3.zero, transform);
+                        stuffInstance.GetComponent<InteractableObject>()?.Setup(i, j, floorIdx, stuffPosition, Vector3.zero, transform);
 
                         GameObject groundPrefab = ResourceLoader.Instance.Grounds[GroundType.GROUND];
                         Vector3 groundPosition = grid.GetWorldPosition(i, j);

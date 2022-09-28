@@ -106,8 +106,4 @@ MonoBehaviour:
         X: 1
         Y: 1
         StartDirection: 0
-      - Floor: 0
-        X: 5
-        Y: 6
-        StartDirection: 1
-      LevelRawData: {fileID: 4900000, guid: a487bf8dbaf909d4793fbb76b6e4a5b7, type: 3}
+      LevelRawData: {fileID: 4900000, guid: 7b4589d22cb05c644ab7e863b5c36d3a, type: 3}

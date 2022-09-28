@@ -7,8 +7,8 @@
         {
             "name": "Unity Editor",
             "type": "unity",
-            "path": "/G:/block-adventure/Blocky Block/Library/EditorInstance.json",
-            // "path": "/D:/My Game/block-adventure/Blocky Block/Library/EditorInstance.json",
+            // "path": "/G:/block-adventure/Blocky Block/Library/EditorInstance.json",
+            "path": "/D:/Đồ án tốt nghiệp/block-adventure/Blocky Block/Library/EditorInstance.json",
             "request": "launch"
         },
         {

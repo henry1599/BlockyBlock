@@ -8,10 +8,10 @@ using BlockyBlock.Enums;
 
 namespace BlockyBlock.Core 
 {
-    public class GrabableObject : MonoBehaviour
+    public class InteractableObject : MonoBehaviour
     {
         [SerializeField] GroundType Type;
-        [SerializeField] ParticleSystem m_VfxPut, m_VfxPutWater;
+        [SerializeField] ParticleSystem m_VfxPut, m_VfxPutWater, m_VfxBeginPush, m_VfxEndPush;
         bool IsGrabbed = false;
         private int m_InitFloor;
         private int m_InitX, m_InitY;
@@ -62,6 +62,18 @@ namespace BlockyBlock.Core
 
             IsGrabbed = false;
             // UngrabSelf(m_InitX, m_InitY, m_InitFloor);
+        }
+        public void PushSelf(int _pushToX, int _pushToY, int _floor)
+        {
+            Vector3 pushPosition = GridManager.Instance.Grids[_floor].GetWorldPosition(_pushToX, _pushToY);
+
+            transform.DOLocalMove(pushPosition, 0.5f).SetEase(Ease.InOutSine);
+
+            UpdateGrid(null);
+            m_CurrentX = _pushToX;
+            m_CurrentY = _pushToY;
+            m_CurrentFloor = _floor;
+            UpdateGrid(gameObject);
         }
         public void GrabSelf()
         {
