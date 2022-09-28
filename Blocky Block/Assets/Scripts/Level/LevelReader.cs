@@ -48,7 +48,8 @@ namespace BlockyBlock.Managers
         void HandleSetupLevel(LevelData _data)
         {
             string rawLevelString = _data.LevelRawData.text;
-            string formatString = Regex.Replace(rawLevelString, @"[\r\n\t ]+", "");
+            string formatString = Regex.Replace(rawLevelString, @"[\r\n\t]+", "");
+            formatString = formatString.Replace(' ','4');
             string[] levelFloors = formatString.Split("-");
             // * levelFloors = ["000;000;000;","111;111;111"]
 
