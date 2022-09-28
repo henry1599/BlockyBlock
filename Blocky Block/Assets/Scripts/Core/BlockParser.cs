@@ -141,6 +141,9 @@ namespace BlockyBlock.Core
                 case BlockType.SKIP:
                     HandleSkip((UIBlockSkip)_uiBlock);
                     break;
+                case BlockType.PUSH:
+                    HandlePush((UIBlockPush)_uiBlock);
+                    break;
             }
         }
         void HandleMoveForward(UIBlockMove _uiBlock)
@@ -194,6 +197,12 @@ namespace BlockyBlock.Core
         void HandlePutdown(UIBlockPutdown _uiBlock)
         {
             BlockFunctionPutdown function = new BlockFunctionPutdown(_uiBlock);
+            function.Setup();
+            Functions.Add(function);
+        }
+        void HandlePush(UIBlockPush _uiBlock)
+        {
+            BlockFunctionPush function = new BlockFunctionPush(_uiBlock);
             function.Setup();
             Functions.Add(function);
         }

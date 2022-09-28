@@ -67,7 +67,8 @@ namespace BlockyBlock.Enums
         DO_UNTIL,
         TURN,
         JUMP,
-        SKIP
+        SKIP,
+        PUSH
     }
     public enum LevelID {
         HOME,

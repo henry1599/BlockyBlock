@@ -42,15 +42,15 @@ MonoBehaviour:
     _keyValues: 01000000000000000200000003000000
     _keys: 01000000000000000200000003000000
     _values:
-    - Rotation: {x: 0, y: 180, z: 0}
-      XIdx: 0
-      YIdx: 1
     - Rotation: {x: 0, y: 0, z: 0}
       XIdx: 0
       YIdx: -1
-    - Rotation: {x: 0, y: -90, z: 0}
-      XIdx: 1
-      YIdx: 0
+    - Rotation: {x: 0, y: 180, z: 0}
+      XIdx: 0
+      YIdx: 1
     - Rotation: {x: 0, y: 90, z: 0}
       XIdx: -1
+      YIdx: 0
+    - Rotation: {x: 0, y: -90, z: 0}
+      XIdx: 1
       YIdx: 0

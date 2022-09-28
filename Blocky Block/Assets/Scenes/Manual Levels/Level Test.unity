@@ -906,6 +906,10 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 1280051080, guid: 3dfdf424db28de64983b6f6aac2df112, type: 3}
+      propertyPath: m_Interactable
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1280051080, guid: 3dfdf424db28de64983b6f6aac2df112, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
       objectReference: {fileID: 1752039791}
@@ -1083,6 +1087,30 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7796412885740912675, guid: 3dfdf424db28de64983b6f6aac2df112, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7796412886152160202, guid: 3dfdf424db28de64983b6f6aac2df112, type: 3}
+      propertyPath: m_AnchorMax.x
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7796412886152160202, guid: 3dfdf424db28de64983b6f6aac2df112, type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7796412886152160202, guid: 3dfdf424db28de64983b6f6aac2df112, type: 3}
+      propertyPath: m_AnchorMin.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7796412886152160202, guid: 3dfdf424db28de64983b6f6aac2df112, type: 3}
+      propertyPath: m_AnchorMin.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7796412886152160202, guid: 3dfdf424db28de64983b6f6aac2df112, type: 3}
+      propertyPath: m_SizeDelta.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7796412886152160202, guid: 3dfdf424db28de64983b6f6aac2df112, type: 3}
+      propertyPath: m_SizeDelta.y
       value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
@@ -1480,8 +1508,8 @@ MonoBehaviour:
       elementIcon: {fileID: 0}
     reqReferences: {fileID: 0}
     isExpanded: 1
-    _keyValues: 000000000600000001000000040000000500000002000000
-    _keys: 000000000600000001000000040000000500000002000000
+    _keyValues: 00000000060000000100000004000000050000000200000007000000
+    _keys: 00000000060000000100000004000000050000000200000007000000
     _values:
     - {fileID: 5952086727007329222, guid: d9111c5ef9c896a4db8ee9c2e2d34dbf, type: 3}
     - {fileID: 6858137870092973381, guid: bac9d12aa838e0946a69ae36a4d29ff3, type: 3}
@@ -1489,6 +1517,7 @@ MonoBehaviour:
     - {fileID: 1396007082449984454, guid: 7f5f7bd109cab8d469f234077d18a069, type: 3}
     - {fileID: -4369584254306069747, guid: d7c8c8cb0d79a9e4493c8f67f4badf06, type: 3}
     - {fileID: 7995749221465224167, guid: 446fb4109fdf9e84bb68eb6e4219189c, type: 3}
+    - {fileID: 7995749221465224167, guid: 9215c77f9e997c846bf5b6ce421ea8f9, type: 3}
   m_DummyUIBlock: {fileID: 127563565}
   UIOption: {fileID: 755122141}
   m_DelayBuffer: 0.5

@@ -42,6 +42,7 @@ namespace BlockyBlock.Core
             UnitEvents.ON_TURN_RIGHT += TurnRight;
             UnitEvents.ON_PICK_UP += Pickup;
             UnitEvents.ON_PUT_DOWN += Putdown;
+            UnitEvents.ON_PUSH += Push;
 
             UnitEvents.ON_STOP += HandleStop;
             UnitEvents.ON_RESET += HandleReset;
@@ -53,6 +54,7 @@ namespace BlockyBlock.Core
             UnitEvents.ON_TURN_RIGHT -= TurnRight;
             UnitEvents.ON_PICK_UP -= Pickup;
             UnitEvents.ON_PUT_DOWN -= Putdown;
+            UnitEvents.ON_PUSH -= Push;
             
             UnitEvents.ON_STOP -= HandleStop;
             UnitEvents.ON_RESET -= HandleReset;
@@ -292,6 +294,13 @@ namespace BlockyBlock.Core
         {
             yield return Helper.GetWait(0.95f * ConfigManager.Instance.BlockConfig.Blocks[BlockType.PUT_DOWN].ExecutionTime);
             IsGrabSomething = false;
+        }
+        #endregion
+    
+        #region Push
+        void Push(BlockFunctionPush _push)
+        {
+            print("PUSH");
         }
         #endregion
     }

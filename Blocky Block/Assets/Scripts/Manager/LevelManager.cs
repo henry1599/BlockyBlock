@@ -10,7 +10,7 @@ namespace BlockyBlock.Managers
     public class LevelManager : MonoBehaviour
     {
         public static LevelManager Instance {get; private set;}
-        [SerializeField] LevelID m_CurrentLevelID;
+        LevelID m_CurrentLevelID;
         public LevelConfig LevelConfig => ConfigManager.Instance.LevelConfig;
         LevelData m_CurrentLevelData;
         public LevelData CurrentLevelData

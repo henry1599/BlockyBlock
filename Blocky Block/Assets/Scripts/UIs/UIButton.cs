@@ -18,11 +18,19 @@ namespace BlockyBlock.UI
         {
             GameEvents.ON_CONTROL_BUTTON_TOGGLE += HandleControlButtonClick;
             GameEvents.ON_CONTROL_BUTTON_TOGGLE_ALL += HandleControlButtonClickAll;
+            
+            ErrorEvents.ON_ERROR_HANDLING += HandleError;
         }
         void OnDestroy()
         {
             GameEvents.ON_CONTROL_BUTTON_TOGGLE -= HandleControlButtonClick;
             GameEvents.ON_CONTROL_BUTTON_TOGGLE_ALL -= HandleControlButtonClickAll;
+
+            ErrorEvents.ON_ERROR_HANDLING -= HandleError;
+        }
+        void HandleError()
+        {
+            ActiveSelf(false);
         }
         void HandleControlButtonClickAll(bool _status)
         {
