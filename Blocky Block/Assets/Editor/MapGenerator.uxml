@@ -6,6 +6,6 @@
         <ui:Button text="Initialize Raw Map" display-tooltip-when-elided="true" name="_initBtn" style="-unity-font-style: bold;" />
         <ui:Label text="Map Elements" display-tooltip-when-elided="true" name="_mapEle" style="justify-content: center; align-items: center; -unity-text-align: upper-center; -unity-font: url(&apos;project://database/Assets/Fonts/Raw/Dosis-Bold.ttf?fileID=12800000&amp;guid=855e119d5139f2b43a08e7ead8937fce&amp;type=3#Dosis-Bold&apos;); -unity-font-style: bold; font-size: 15px; color: rgb(255, 255, 255); padding-top: 0; margin-top: 10px;" />
     </ui:VisualElement>
-    <ui:IMGUIContainer name="_mapElementsField" style="flex-grow: 0; flex-direction: row; flex-wrap: wrap; flex-basis: auto; height: 240px; width: 600px; max-width: 600px; max-height: 240px; min-width: 50px; min-height: 240px;" />
-    <ui:Button text="Generate Text File" display-tooltip-when-elided="true" name="_generateBtn" />
+    <ui:IMGUIContainer name="_mapElementsField" style="flex-grow: 0; flex-direction: row; flex-wrap: wrap; flex-basis: auto; height: 240px; width: 780px; max-width: 780px; max-height: 240px; min-width: 65px; min-height: 240px;" />
+    <ui:Button text="Generate Text File" display-tooltip-when-elided="true" name="_generateBtn" style="margin-top: 10px;" />
 </ui:UXML>
