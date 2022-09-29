@@ -1,0 +1,3 @@
+<ui:UXML xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements">
+    <ui:Button text="Ground" display-tooltip-when-elided="true" name="_buttonTemplate" style="width: 50px; height: 20px;" />
+</ui:UXML>
