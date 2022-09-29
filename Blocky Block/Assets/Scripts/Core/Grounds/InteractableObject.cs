@@ -66,8 +66,20 @@ namespace BlockyBlock.Core
         public void PushSelf(int _pushToX, int _pushToY, int _floor)
         {
             Vector3 pushPosition = GridManager.Instance.Grids[_floor].GetWorldPosition(_pushToX, _pushToY);
+            if (GridManager.Instance.Grids[_floor].GridArray[_pushToX, _pushToY].Type == GroundType.WATER)
+            {
+                transform.DOLocalMove(pushPosition, 0.5f).SetEase(Ease.InOutSine)
+                    .OnComplete(() => {
+                        pushPosition += new Vector3(0, -0.8f, 0);
+                        transform.DOLocalMove(pushPosition, 0.45f).SetEase(Ease.InOutSine);
+                        m_VfxPutWater.Play();
+                    });
+            }
+            else
+            {
+                transform.DOLocalMove(pushPosition, 0.5f).SetEase(Ease.InOutSine);
+            }
 
-            transform.DOLocalMove(pushPosition, 0.5f).SetEase(Ease.InOutSine);
 
             UpdateGrid(null);
             m_CurrentX = _pushToX;
@@ -110,6 +122,11 @@ namespace BlockyBlock.Core
         }
         void UpdateGrid(GameObject _stuff)
         {
+            // * Unchanged type
+            if (GridManager.Instance.Grids[m_CurrentFloor].GridArray[m_CurrentX, m_CurrentY].Type == GroundType.BOX_IN_WATER)
+            {
+                return;
+            }
             GridManager.Instance.Grids[m_CurrentFloor].GridArray[m_CurrentX, m_CurrentY].Stuff = _stuff;
             if (_stuff == null)
             {
@@ -129,6 +146,13 @@ namespace BlockyBlock.Core
             else
             {
                 gameObject.tag = GameConstants.UNWALKABLE_TAG;
+            }
+        }
+        void OnTriggerEnter(Collider other)
+        {
+            if (other.CompareTag("Box"))
+            {
+                print("Box collide");
             }
         }
     }

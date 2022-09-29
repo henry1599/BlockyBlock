@@ -10,7 +10,8 @@ GameObject:
   m_Component:
   - component: {fileID: 455989657984056330}
   - component: {fileID: 6769943716621800014}
-  m_Layer: 0
+  - component: {fileID: 3090644350204908761}
+  m_Layer: 9
   m_Name: Box01
   m_TagString: Unwalkable
   m_Icon: {fileID: 0}
@@ -50,6 +51,21 @@ MonoBehaviour:
   Type: 8
   m_VfxPut: {fileID: 7091981584671224551}
   m_VfxPutWater: {fileID: 355322748339860610}
+  m_VfxBeginPush: {fileID: 0}
+  m_VfxEndPush: {fileID: 0}
+--- !u!65 &3090644350204908761
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 177191908017464871}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 0.8, y: 0.8, z: 0.8}
+  m_Center: {x: 0, y: 0.4, z: 0}
 --- !u!1001 &3280534783109376020
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -57,9 +73,17 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 455989657984056330}
     m_Modifications:
+    - target: {fileID: 5759271233238603545, guid: 1b86977114f008846bb032ae3a1e7b76, type: 3}
+      propertyPath: m_Layer
+      value: 9
+      objectReference: {fileID: 0}
     - target: {fileID: 5759271233238611321, guid: 1b86977114f008846bb032ae3a1e7b76, type: 3}
       propertyPath: m_Name
       value: Vfx_PutBox
+      objectReference: {fileID: 0}
+    - target: {fileID: 5759271233238611321, guid: 1b86977114f008846bb032ae3a1e7b76, type: 3}
+      propertyPath: m_Layer
+      value: 9
       objectReference: {fileID: 0}
     - target: {fileID: 5759271233238902497, guid: 1b86977114f008846bb032ae3a1e7b76, type: 3}
       propertyPath: m_RootOrder
@@ -196,6 +220,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: crate
       objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 77422e9241979ab46b1a70b779bacdcf, type: 3}
+      propertyPath: m_Layer
+      value: 9
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 77422e9241979ab46b1a70b779bacdcf, type: 3}
 --- !u!4 &5160474917741091853 stripped
@@ -266,6 +294,18 @@ PrefabInstance:
       propertyPath: playOnAwake
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 311695706119216802, guid: 168aee8d3e8589a41825e23e899278e5, type: 3}
+      propertyPath: m_Layer
+      value: 9
+      objectReference: {fileID: 0}
+    - target: {fileID: 311695706119332796, guid: 168aee8d3e8589a41825e23e899278e5, type: 3}
+      propertyPath: m_Layer
+      value: 9
+      objectReference: {fileID: 0}
+    - target: {fileID: 311695706119409588, guid: 168aee8d3e8589a41825e23e899278e5, type: 3}
+      propertyPath: m_Layer
+      value: 9
+      objectReference: {fileID: 0}
     - target: {fileID: 311695706119512802, guid: 168aee8d3e8589a41825e23e899278e5, type: 3}
       propertyPath: m_LocalPosition.y
       value: 0
@@ -273,6 +313,10 @@ PrefabInstance:
     - target: {fileID: 311695706119512802, guid: 168aee8d3e8589a41825e23e899278e5, type: 3}
       propertyPath: m_LocalPosition.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 312712568936618470, guid: 168aee8d3e8589a41825e23e899278e5, type: 3}
+      propertyPath: m_Layer
+      value: 9
       objectReference: {fileID: 0}
     - target: {fileID: 498925441570723830, guid: 168aee8d3e8589a41825e23e899278e5, type: 3}
       propertyPath: playOnAwake
@@ -285,6 +329,10 @@ PrefabInstance:
     - target: {fileID: 7606640302523245051, guid: 168aee8d3e8589a41825e23e899278e5, type: 3}
       propertyPath: m_Name
       value: Vfx_WaterSplashSharp
+      objectReference: {fileID: 0}
+    - target: {fileID: 7606640302523245051, guid: 168aee8d3e8589a41825e23e899278e5, type: 3}
+      propertyPath: m_Layer
+      value: 9
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 168aee8d3e8589a41825e23e899278e5, type: 3}

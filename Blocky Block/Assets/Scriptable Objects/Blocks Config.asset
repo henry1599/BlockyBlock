@@ -67,6 +67,6 @@ MonoBehaviour:
       TopColor: {r: 0.7058824, g: 0.49411765, b: 1, a: 1}
       ShadowColor: {r: 0.17254902, g: 0.023529412, b: 0.34117648, a: 1}
     - Text: Push
-      ExecutionTime: 1.25
+      ExecutionTime: 0.75
       TopColor: {r: 0.49411762, g: 1, b: 0.89679503, a: 1}
       ShadowColor: {r: 0.1206123, g: 0.26415092, b: 0.23744604, a: 1}

@@ -633,6 +633,37 @@ SkinnedMeshRenderer:
     m_Center: {x: -0.00000011920929, y: 0.04528922, z: 0.8206737}
     m_Extent: {x: 1.3458344, y: 0.61795, z: 0.8410951}
   m_DirtyAABB: 0
+--- !u!1 &368309061050541226
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1357383829806226884}
+  m_Layer: 0
+  m_Name: Front Pivot
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1357383829806226884
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 368309061050541226}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0.75, z: -1}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 8376788409492785047}
+  m_RootOrder: 2
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &439869353119260375
 GameObject:
   m_ObjectHideFlags: 0
@@ -2037,6 +2068,37 @@ SkinnedMeshRenderer:
     m_Center: {x: -0.00000011920929, y: 0.0030858219, z: 0.9630588}
     m_Extent: {x: 1.5608062, y: 0.3793363, z: 0.38387188}
   m_DirtyAABB: 0
+--- !u!1 &1441006316729221700
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 4630380085985599517}
+  m_Layer: 0
+  m_Name: Beyond Front Pivot
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &4630380085985599517
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1441006316729221700}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0.75, z: -2}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 8376788409492785047}
+  m_RootOrder: 4
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1468463967922811750
 GameObject:
   m_ObjectHideFlags: 0
@@ -3692,6 +3754,37 @@ Transform:
   - {fileID: 6415472635143895970}
   m_Father: {fileID: 6990349293452790134}
   m_RootOrder: 18
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &2762024285218940819
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 5797016808475767440}
+  m_Layer: 0
+  m_Name: Ground Pivot
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &5797016808475767440
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2762024285218940819}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: -0.5, z: -1}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 8376788409492785047}
+  m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &2847090538869037232
 GameObject:
@@ -11623,6 +11716,9 @@ Transform:
   m_Children:
   - {fileID: 8376788409688888989}
   - {fileID: 5951889309041208647}
+  - {fileID: 1357383829806226884}
+  - {fileID: 5797016808475767440}
+  - {fileID: 4630380085985599517}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -11679,6 +11775,20 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5bf4b58d67bc4ac44a7ecce7df5a3dac, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  m_FrontPivot: {fileID: 1357383829806226884}
+  m_GroundPivot: {fileID: 5797016808475767440}
+  m_BeyondFrontPivot: {fileID: 4630380085985599517}
+  m_FrontRadius: 0.45
+  m_GroundRadius: 0.45
+  m_InteractableLayer:
+    serializedVersion: 2
+    m_Bits: 512
+  m_WalkableLayer:
+    serializedVersion: 2
+    m_Bits: 576
+  m_CannotPushToLayer:
+    serializedVersion: 2
+    m_Bits: 6656
 --- !u!1 &8376788409688888986
 GameObject:
   m_ObjectHideFlags: 0

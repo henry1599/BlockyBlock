@@ -103,7 +103,7 @@ MonoBehaviour:
       BlockTypes: 000000000400000005000000010000000200000007000000
       UnitDatas:
       - Floor: 0
-        X: 1
+        X: 2
         Y: 1
         StartDirection: 0
       LevelRawData: {fileID: 4900000, guid: 7b4589d22cb05c644ab7e863b5c36d3a, type: 3}

@@ -39,10 +39,10 @@ TagManager:
   - Walkable
   - UI Line
   - UI 01
-  - 
-  - 
-  - 
-  - 
+  - Interactable
+  - Unwalkable
+  - Obstacle
+  - Space
   - 
   - 
   - 

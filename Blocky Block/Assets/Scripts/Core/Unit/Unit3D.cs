@@ -101,44 +101,15 @@ namespace BlockyBlock.Core
         {
             DirectionData directionData = ConfigManager.Instance.UnitConfig.GetDataByDirection(m_CurrentDirection);
 
-            GameObject m_Collectible = m_UnitVision.GetFrontObject((int)m_CurrentCell.x, (int)m_CurrentCell.y, m_CurrentFloor, directionData);
+            // GameObject m_Collectible = m_UnitVision.GetFrontObject((int)m_CurrentCell.x, (int)m_CurrentCell.y, m_CurrentFloor, directionData);
+            GameObject m_Collectible = m_UnitVision.GetFrontObject();
 
             int nextX = (int)m_CurrentCell.x + directionData.XIdx;
             int nextY = (int)m_CurrentCell.y + directionData.YIdx;
-            int maxX = GridManager.Instance.Grids[m_CurrentFloor].GridArray.GetLength(0) - 1;
-            int maxY = GridManager.Instance.Grids[m_CurrentFloor].GridArray.GetLength(1) - 1;
             
-            // * Move outside map
-            if (nextX > maxX)
+            if (m_UnitVision.IsWalkable() == false)
             {
-                ErrorEvents.ON_ERROR?.Invoke(ErrorType.INVALID_MOVE_TO_SPACE);
-                return;
-            }
-            if (nextY > maxY)
-            {
-                ErrorEvents.ON_ERROR?.Invoke(ErrorType.INVALID_MOVE_TO_SPACE);
-                return;
-            }
-
-            // * Move to space
-            if (GridManager.Instance.Grids[m_CurrentFloor].GridArray[nextX, nextY].Type == GroundType.SPACE)
-            {
-                ErrorEvents.ON_ERROR?.Invoke(ErrorType.INVALID_MOVE_TO_SPACE);
-                return;
-            }
-
-            // * Move to water
-            if (GridManager.Instance.Grids[m_CurrentFloor].GridArray[nextX, nextY].Type == GroundType.WATER)
-            {
-                ErrorEvents.ON_ERROR?.Invoke(ErrorType.INVALID_MOVE_TO_WATER);
-                return;
-            }
-
-            // * Move to wall
-            if (GridManager.Instance.Grids[m_CurrentFloor].GridArray[nextX, nextY].Type == GroundType.BOX_ON_GROUND ||
-                GridManager.Instance.Grids[m_CurrentFloor].GridArray[nextX, nextY].Type == GroundType.TREE)
-            {
-                ErrorEvents.ON_ERROR?.Invoke(ErrorType.INVALID_MOVE_WALL);
+                ErrorEvents.ON_ERROR?.Invoke(ErrorType.INVALID_MOVE);
                 return;
             }
 
@@ -231,7 +202,8 @@ namespace BlockyBlock.Core
         void DoPickup()
         {
             DirectionData directionData = ConfigManager.Instance.UnitConfig.GetDataByDirection(m_CurrentDirection);
-            m_GrabbedObject = m_UnitVision.GetFrontObject((int)m_CurrentCell.x, (int)m_CurrentCell.y, m_CurrentFloor, directionData);
+            // m_GrabbedObject = m_UnitVision.GetFrontObject((int)m_CurrentCell.x, (int)m_CurrentCell.y, m_CurrentFloor, directionData);
+            m_GrabbedObject = m_UnitVision.GetFrontObject();
             if (m_GrabbedObject == null)
             {
                 ErrorEvents.ON_ERROR?.Invoke(ErrorType.INVALID_PICK_UP);
@@ -265,9 +237,9 @@ namespace BlockyBlock.Core
                 DirectionData directionData = ConfigManager.Instance.UnitConfig.GetDataByDirection(m_CurrentDirection);
                 int putIdxX = (int)m_CurrentCell.x + directionData.XIdx;
                 int putIdxY = (int)m_CurrentCell.y + directionData.YIdx;
-                if (GridManager.Instance.Grids[m_CurrentFloor].GridArray[putIdxX, putIdxY].Type == GroundType.SPACE ||
-                GridManager.Instance.Grids[m_CurrentFloor].GridArray[putIdxX, putIdxY].Type == GroundType.BOX || 
-                GridManager.Instance.Grids[m_CurrentFloor].GridArray[putIdxX, putIdxY].Type == GroundType.COLLECTIBLE)
+                
+                if (ConfigManager.Instance.BehaviourConfig.BehaviourData[ErrorType.INVALID_PUT_DOWN_PLACE].GroundTypes
+                        .Contains(GridManager.Instance.Grids[m_CurrentFloor].GridArray[putIdxX, putIdxY].Type))
                 {
                     ErrorEvents.ON_ERROR?.Invoke(ErrorType.INVALID_PUT_DOWN_PLACE);
                     return;
@@ -302,23 +274,33 @@ namespace BlockyBlock.Core
         void Push(BlockFunctionPush _push)
         {
             DirectionData directionData = ConfigManager.Instance.UnitConfig.GetDataByDirection(m_CurrentDirection);
-            GameObject pushableObject = m_UnitVision.GetFrontObject((int)m_CurrentCell.x, (int)m_CurrentCell.y, m_CurrentFloor, directionData);
+            // GameObject pushableObject = m_UnitVision.GetFrontObject((int)m_CurrentCell.x, (int)m_CurrentCell.y, m_CurrentFloor, directionData);
+            GameObject pushableObject = m_UnitVision.GetFrontObject();
             if (pushableObject == null)
             {
-                ErrorEvents.ON_ERROR?.Invoke(ErrorType.INVALID_PICK_UP);
+                ErrorEvents.ON_ERROR?.Invoke(ErrorType.INVALID_PUSH);
             }
             else
             {
-                m_Animation.Reset();
-                m_Animation.TriggerAnimPush();
                 int pushIdxX = (int)m_CurrentCell.x + directionData.XIdx * 2;
                 int pushIdxY = (int)m_CurrentCell.y + directionData.YIdx * 2;
+                GameObject beyondObject = m_UnitVision.GetBeyondFrontObject();
+                if (ConfigManager.Instance.BehaviourConfig.BehaviourData[ErrorType.INVALID_PUSH].GroundTypes
+                        .Contains(GridManager.Instance.Grids[m_CurrentFloor].GridArray[pushIdxX, pushIdxY].Type) &&
+                    beyondObject != null)
+                {
+                    ErrorEvents.ON_ERROR?.Invoke(ErrorType.INVALID_PUSH);
+                    return;
+                }
+                m_Animation.Reset();
+                m_Animation.TriggerAnimPush();
                 StartCoroutine(PushStuff(pushableObject.GetComponent<InteractableObject>(), pushIdxX, pushIdxY, m_CurrentFloor));
             }
         }
         IEnumerator PushStuff(InteractableObject _pushableObject, int _pushIdxX, int _pushIdxY, int _floor)
         {
             yield return Helper.GetWait(m_PushDelay);
+            
             _pushableObject?.PushSelf(_pushIdxX, _pushIdxY, _floor);
         }
         #endregion

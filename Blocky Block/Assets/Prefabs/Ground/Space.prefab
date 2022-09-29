@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 8276852884284803256}
   - component: {fileID: 8225637574494732030}
   - component: {fileID: 230791736659691551}
-  m_Layer: 6
+  m_Layer: 12
   m_Name: Space
   m_TagString: Ground
   m_Icon: {fileID: 0}
@@ -58,6 +58,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6b5a11c43b184b444b5810fdb66e1dd2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Type: 4
-  Position: {fileID: 0}
-  Stuff: {fileID: 0}
+  Type: 3
