@@ -101,8 +101,8 @@ namespace BlockyBlock.Core
         {
             DirectionData directionData = ConfigManager.Instance.UnitConfig.GetDataByDirection(m_CurrentDirection);
 
-            // GameObject m_Collectible = m_UnitVision.GetFrontObject((int)m_CurrentCell.x, (int)m_CurrentCell.y, m_CurrentFloor, directionData);
-            GameObject m_Collectible = m_UnitVision.GetFrontObject();
+            GameObject m_Collectible = m_UnitVision.GetFrontObject((int)m_CurrentCell.x, (int)m_CurrentCell.y, m_CurrentFloor, directionData);
+            // GameObject m_Collectible = m_UnitVision.GetFrontObject();
 
             int nextX = (int)m_CurrentCell.x + directionData.XIdx;
             int nextY = (int)m_CurrentCell.y + directionData.YIdx;
@@ -116,7 +116,6 @@ namespace BlockyBlock.Core
             m_CurrentCell = new Vector2(nextX, nextY);
             Vector3 newPosition = GridManager.Instance.Grids[m_CurrentFloor].GetWorldPosition((int)m_CurrentCell.x, (int)m_CurrentCell.y);
             float moveTime = ConfigManager.Instance.UnitConfig.MoveTime; 
-
             if (m_Collectible?.GetComponent<CollectibleObject>() != null)
             {
                 StartCoroutine(Collect(m_Collectible.GetComponent<CollectibleObject>(), 0.2f));
@@ -286,8 +285,7 @@ namespace BlockyBlock.Core
                 int pushIdxY = (int)m_CurrentCell.y + directionData.YIdx * 2;
                 GameObject beyondObject = m_UnitVision.GetBeyondFrontObject();
                 if (ConfigManager.Instance.BehaviourConfig.BehaviourData[ErrorType.INVALID_PUSH].GroundTypes
-                        .Contains(GridManager.Instance.Grids[m_CurrentFloor].GridArray[pushIdxX, pushIdxY].Type) &&
-                    beyondObject != null)
+                        .Contains(GridManager.Instance.Grids[m_CurrentFloor].GridArray[pushIdxX, pushIdxY].Type))
                 {
                     ErrorEvents.ON_ERROR?.Invoke(ErrorType.INVALID_PUSH);
                     return;

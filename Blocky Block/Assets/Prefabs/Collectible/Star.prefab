@@ -10,6 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2598070685570255216}
   - component: {fileID: 3024531547284151995}
+  - component: {fileID: 1191378783486479540}
   m_Layer: 0
   m_Name: Star
   m_TagString: Walkable
@@ -48,6 +49,19 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_VfxCollected: {fileID: 4874880018932230181}
   m_CollectibleModel: {fileID: 7620701119427359078}
+--- !u!135 &1191378783486479540
+SphereCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1887430729127807146}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Radius: 0.4
+  m_Center: {x: 0, y: 0.6, z: 0}
 --- !u!1001 &4874880018917213767
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -55,13 +69,33 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 2598070685570255216}
     m_Modifications:
+    - target: {fileID: 112990, guid: c51e34914bd18ff4880b11005334182e, type: 3}
+      propertyPath: m_Layer
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 126554, guid: c51e34914bd18ff4880b11005334182e, type: 3}
+      propertyPath: m_Layer
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 147324, guid: c51e34914bd18ff4880b11005334182e, type: 3}
       propertyPath: m_Name
       value: StarPoof
       objectReference: {fileID: 0}
     - target: {fileID: 147324, guid: c51e34914bd18ff4880b11005334182e, type: 3}
+      propertyPath: m_Layer
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 147324, guid: c51e34914bd18ff4880b11005334182e, type: 3}
       propertyPath: m_IsActive
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 158566, guid: c51e34914bd18ff4880b11005334182e, type: 3}
+      propertyPath: m_Layer
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 163444, guid: c51e34914bd18ff4880b11005334182e, type: 3}
+      propertyPath: m_Layer
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 435162, guid: c51e34914bd18ff4880b11005334182e, type: 3}
       propertyPath: m_RootOrder
@@ -150,9 +184,21 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 2598070685570255216}
     m_Modifications:
+    - target: {fileID: 1169401747845330, guid: ce15738198c922d4284af0d7b9fe1cba, type: 3}
+      propertyPath: m_Layer
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1940254841323130, guid: ce15738198c922d4284af0d7b9fe1cba, type: 3}
+      propertyPath: m_Layer
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 1954463562733328, guid: ce15738198c922d4284af0d7b9fe1cba, type: 3}
       propertyPath: m_Name
       value: PowerboxStar
+      objectReference: {fileID: 0}
+    - target: {fileID: 1954463562733328, guid: ce15738198c922d4284af0d7b9fe1cba, type: 3}
+      propertyPath: m_Layer
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4683914821993014, guid: ce15738198c922d4284af0d7b9fe1cba, type: 3}
       propertyPath: m_RootOrder
