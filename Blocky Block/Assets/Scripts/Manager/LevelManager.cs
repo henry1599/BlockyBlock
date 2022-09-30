@@ -44,6 +44,7 @@ namespace BlockyBlock.Managers
             GameEvents.LOAD_LEVEL += HandleLevelLoad;
 
             UnitEvents.ON_COLLECT_STUFF += HandleCollectStuff;
+            UnitEvents.ON_RESET += HandleReset;
         }
         // Start is called before the first frame update
         void Start()
@@ -61,6 +62,13 @@ namespace BlockyBlock.Managers
             GameEvents.LOAD_LEVEL -= HandleLevelLoad;
 
             UnitEvents.ON_COLLECT_STUFF -= HandleCollectStuff;
+            UnitEvents.ON_RESET -= HandleReset;
+        }
+        void HandleReset()
+        {
+            CurrentCollectedStuff = 0;
+            IsCollectTheChest = false;
+            IsReachToPosition = false;
         }
         void HandleLevelLoad(LevelID _id)
         {
