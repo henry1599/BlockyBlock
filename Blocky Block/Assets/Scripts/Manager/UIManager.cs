@@ -43,6 +43,8 @@ namespace BlockyBlock.Managers
         {
             m_DelayBufferTimer = m_DelayBuffer;
             GameEvents.ON_CLEAR_IDE += HandleClearIDE;
+            GameEvents.ON_WIN += HandleWin;
+            GameEvents.ON_LOSE += HandleLose;
             
             EditorEvents.ON_BLOCK_EDITOR += HandleBlockEditor;
         }
@@ -50,6 +52,8 @@ namespace BlockyBlock.Managers
         {
             GameEvents.SETUP_LEVEL -= HandleSetupLevel;
             GameEvents.ON_CLEAR_IDE -= HandleClearIDE;
+            GameEvents.ON_WIN -= HandleWin;
+            GameEvents.ON_LOSE -= HandleLose;
             
             EditorEvents.ON_BLOCK_EDITOR -= HandleBlockEditor;
         }
@@ -62,6 +66,14 @@ namespace BlockyBlock.Managers
                     Destroy(child.gameObject);
                 }
             }
+        }
+        void HandleWin()
+        {
+            HandleBlockEditor(true);
+        }
+        void HandleLose()
+        {
+            HandleBlockEditor(true);
         }
         void HandleBlockEditor(bool _status)
         {

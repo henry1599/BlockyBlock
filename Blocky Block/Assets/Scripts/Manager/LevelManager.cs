@@ -42,6 +42,8 @@ namespace BlockyBlock.Managers
         {
             Instance = this;
             GameEvents.LOAD_LEVEL += HandleLevelLoad;
+
+            UnitEvents.ON_COLLECT_STUFF += HandleCollectStuff;
         }
         // Start is called before the first frame update
         void Start()
@@ -57,10 +59,17 @@ namespace BlockyBlock.Managers
         void OnDestroy()
         {
             GameEvents.LOAD_LEVEL -= HandleLevelLoad;
+
+            UnitEvents.ON_COLLECT_STUFF -= HandleCollectStuff;
         }
         void HandleLevelLoad(LevelID _id)
         {
             CurrentLevelID = _id;
+        }
+        void HandleCollectStuff()
+        {
+            CurrentCollectedStuff++;
+            LevelChecker();
         }
 
         IEnumerator Cor_SetupLevelData(LevelData _data)
@@ -70,6 +79,50 @@ namespace BlockyBlock.Managers
                                              LevelReader.Instance != null && 
                                              ConfigManager.Instance != null);
             GameEvents.SETUP_LEVEL?.Invoke(_data);
+        }
+        void LevelChecker()
+        {
+            switch (CurrentLevelData.WinCondition)
+            {
+                case WinType.COLLECT_ALL_STUFF: 
+                    CheckCollectAllStuff();
+                    break;
+                case WinType.COLLECT_THE_CHEST: 
+                    CheckCollectTheChest();
+                    break;
+                case WinType.REACH_TO_POSITION: 
+                    CheckReachToPosition();
+                    break;
+            }
+        }
+
+        // * Collect all stuff
+        public int CurrentCollectedStuff { get => m_CurrentCollectedStuff; set => m_CurrentCollectedStuff = value; } int m_CurrentCollectedStuff = 0;
+        void CheckCollectAllStuff()
+        {
+            if (CurrentCollectedStuff >= CurrentLevelData.StuffToCollect)
+            {
+                GameEvents.ON_WIN?.Invoke();
+            }
+        }
+
+        // * Collect the chest
+        public bool IsCollectTheChest {get => m_IsCollectTheChest; set => m_IsCollectTheChest = value;} bool m_IsCollectTheChest = false;
+        void CheckCollectTheChest()
+        {
+            if (IsCollectTheChest)
+            {
+                GameEvents.ON_WIN?.Invoke();
+            }
+        }
+        // * Reach to Position
+        public bool IsReachToPosition {get => m_IsReachToPosition; set => m_IsReachToPosition = value;} bool m_IsReachToPosition = false;
+        void CheckReachToPosition()
+        {
+            if (IsReachToPosition)
+            {
+                GameEvents.ON_WIN?.Invoke();
+            }
         }
     }
 }

@@ -21,6 +21,9 @@ namespace BlockyBlock.Events
         public static Action ON_CLEAR_IDE;
         public static Action<bool> ON_TOGGLE_CONTROLLER_PANEL;
         public static Action<bool> ON_EXECUTING_BLOCK;
+        public static Action ON_LEVEL_CHECK;
+        public static Action ON_WIN;
+        public static Action ON_LOSE;
     }
     public class UnitEvents
     {
@@ -31,6 +34,7 @@ namespace BlockyBlock.Events
         public static Action<BlockFunctionPickup> ON_PICK_UP;
         public static Action<BlockFunctionPutdown> ON_PUT_DOWN;
         public static Action<BlockFunctionPush> ON_PUSH;
+        public static Action ON_COLLECT_STUFF;
         public static Action ON_STOP;
         public static Action ON_RESET;
     }

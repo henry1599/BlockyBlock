@@ -13,10 +13,20 @@ namespace BlockyBlock.UI
         void Start()
         {
             GameEvents.ON_TOGGLE_CONTROLLER_PANEL += HandleToggleController;
+            
+            GameEvents.ON_WIN += HandleStopRunning;
+            GameEvents.ON_LOSE += HandleStopRunning;
         }
         void OnDestroy()
         {
             GameEvents.ON_TOGGLE_CONTROLLER_PANEL -= HandleToggleController;
+            
+            GameEvents.ON_WIN -= HandleStopRunning;
+            GameEvents.ON_LOSE -= HandleStopRunning;
+        }
+        void HandleStopRunning()
+        {
+            HandleToggleController(false);
         }
         void HandleToggleController(bool _status)
         {

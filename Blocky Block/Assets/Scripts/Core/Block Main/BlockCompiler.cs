@@ -31,11 +31,28 @@ namespace BlockyBlock.Core
         {
             UnitEvents.ON_JUMP += HandleJump;
             ErrorEvents.ON_ERROR_HANDLING += HandleError;
+
+            GameEvents.ON_WIN += HandleStopRunning;
+            GameEvents.ON_LOSE += HandleStopRunning;
         }
         void OnDestroy()
         {
             UnitEvents.ON_JUMP -= HandleJump;
             ErrorEvents.ON_ERROR_HANDLING -= HandleError;
+
+            GameEvents.ON_WIN -= HandleStopRunning;
+            GameEvents.ON_LOSE -= HandleStopRunning;
+        }
+        void HandleStopRunning()
+        {
+            StopCoroutine(Cor_Play());
+            StopCoroutine(Cor_Debug());
+            IsExecuting = false;
+            GameEvents.ON_EXECUTING_BLOCK?.Invoke(IsExecuting);
+            IDEState = IDERunState.STOP;
+            BlockEvents.ON_HIGHLIGHT?.Invoke(null, IDEState);
+            m_IdxFunction = 0;
+            m_Parser.HandleError();
         }
         void HandleJump(BlockFunctionJump _uiBlockJump)
         {

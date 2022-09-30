@@ -40,11 +40,15 @@ MonoBehaviour:
     _keys: 000000000100000002000000030000000400000005000000060000000700000008000000090000000a0000000b000000
     _values:
     - LevelType: 0
+      WinCondition: 0
+      StuffToCollect: 0
       LevelName: Home
       BlockTypes: 
       UnitDatas: []
       LevelRawData: {fileID: 0}
     - LevelType: 1
+      WinCondition: 0
+      StuffToCollect: 0
       LevelName: Level 01
       BlockTypes: 00000000040000000500000006000000
       UnitDatas:
@@ -54,56 +58,76 @@ MonoBehaviour:
         StartDirection: 1
       LevelRawData: {fileID: 0}
     - LevelType: 1
+      WinCondition: 0
+      StuffToCollect: 0
       LevelName: Level 02
       BlockTypes: 
       UnitDatas: []
       LevelRawData: {fileID: 0}
     - LevelType: 1
+      WinCondition: 0
+      StuffToCollect: 0
       LevelName: Level 03
       BlockTypes: 
       UnitDatas: []
       LevelRawData: {fileID: 0}
     - LevelType: 1
+      WinCondition: 0
+      StuffToCollect: 0
       LevelName: Level 04
       BlockTypes: 
       UnitDatas: []
       LevelRawData: {fileID: 0}
     - LevelType: 1
+      WinCondition: 0
+      StuffToCollect: 0
       LevelName: Level 05
       BlockTypes: 
       UnitDatas: []
       LevelRawData: {fileID: 0}
     - LevelType: 1
+      WinCondition: 0
+      StuffToCollect: 0
       LevelName: Level 06
       BlockTypes: 
       UnitDatas: []
       LevelRawData: {fileID: 0}
     - LevelType: 1
+      WinCondition: 0
+      StuffToCollect: 0
       LevelName: Level 07
       BlockTypes: 
       UnitDatas: []
       LevelRawData: {fileID: 0}
     - LevelType: 1
+      WinCondition: 0
+      StuffToCollect: 0
       LevelName: Level 08
       BlockTypes: 
       UnitDatas: []
       LevelRawData: {fileID: 0}
     - LevelType: 1
+      WinCondition: 0
+      StuffToCollect: 0
       LevelName: Level 09
       BlockTypes: 
       UnitDatas: []
       LevelRawData: {fileID: 0}
     - LevelType: 1
+      WinCondition: 0
+      StuffToCollect: 0
       LevelName: Level 10
       BlockTypes: 
       UnitDatas: []
       LevelRawData: {fileID: 0}
     - LevelType: 1
+      WinCondition: 1000
+      StuffToCollect: 2
       LevelName: Level Test
       BlockTypes: 000000000400000005000000010000000200000007000000
       UnitDatas:
       - Floor: 0
-        X: 2
-        Y: 1
+        X: 1
+        Y: 3
         StartDirection: 0
       LevelRawData: {fileID: 4900000, guid: 7b4589d22cb05c644ab7e863b5c36d3a, type: 3}

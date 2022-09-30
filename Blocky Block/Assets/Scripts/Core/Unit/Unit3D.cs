@@ -133,6 +133,7 @@ namespace BlockyBlock.Core
         {
             yield return Helper.GetWait(_delay);
             _collectibleObject.OnCollect();
+            UnitEvents.ON_COLLECT_STUFF?.Invoke();
         }
         #endregion
 

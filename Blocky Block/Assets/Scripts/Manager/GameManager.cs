@@ -18,7 +18,21 @@ namespace BlockyBlock.Managers
         // Start is called before the first frame update
         void Start()
         {
-            
+            GameEvents.ON_WIN += HandleWin;
+            GameEvents.ON_LOSE += HandleLose;
+        }
+        void OnDestroy()
+        {
+            GameEvents.ON_WIN -= HandleWin;
+            GameEvents.ON_LOSE -= HandleLose;
+        }
+        void HandleWin()
+        {
+            Debug.Log("Win");
+        }
+        void HandleLose()
+        {
+            Debug.Log("Lose");
         }
 
         // Update is called once per frame

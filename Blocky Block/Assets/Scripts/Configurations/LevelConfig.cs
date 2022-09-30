@@ -40,6 +40,8 @@ namespace BlockyBlock.Configurations
     public class LevelData
     {
         public LevelType LevelType;
+        public WinType WinCondition;
+        public int StuffToCollect;
         public string LevelName; 
         public List<BlockType> BlockTypes;
         public List<UnitData> UnitDatas;

@@ -72,7 +72,8 @@ namespace BlockyBlock.Core
                     .OnComplete(() => {
                         pushPosition += new Vector3(0, -0.8f, 0);
                         transform.DOLocalMove(pushPosition, 0.45f).SetEase(Ease.InOutSine);
-                        m_VfxPutWater.Play();
+                        DOVirtual.DelayedCall(0.25f, () => m_VfxPutWater.Play());
+                        
                     });
             }
             else

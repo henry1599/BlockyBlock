@@ -1,5 +1,10 @@
 namespace BlockyBlock.Enums
 {
+    public enum WinType {
+        COLLECT_ALL_STUFF = 1000,
+        COLLECT_THE_CHEST = 1001,
+        REACH_TO_POSITION = 1002
+    }
     public enum ErrorType {
         INVALID_MOVE,
         INVALID_PUT_DOWN_PLACE,

@@ -18,6 +18,8 @@ namespace BlockyBlock.UI
         {
             GameEvents.ON_CONTROL_BUTTON_TOGGLE += HandleControlButtonClick;
             GameEvents.ON_CONTROL_BUTTON_TOGGLE_ALL += HandleControlButtonClickAll;
+            GameEvents.ON_WIN += HandleFreeze;
+            GameEvents.ON_LOSE += HandleFreeze;
             
             ErrorEvents.ON_ERROR_HANDLING += HandleError;
         }
@@ -25,8 +27,14 @@ namespace BlockyBlock.UI
         {
             GameEvents.ON_CONTROL_BUTTON_TOGGLE -= HandleControlButtonClick;
             GameEvents.ON_CONTROL_BUTTON_TOGGLE_ALL -= HandleControlButtonClickAll;
+            GameEvents.ON_WIN -= HandleFreeze;
+            GameEvents.ON_LOSE -= HandleFreeze;
 
             ErrorEvents.ON_ERROR_HANDLING -= HandleError;
+        }
+        void HandleFreeze()
+        {
+            SetStatus(true);
         }
         void HandleError()
         {

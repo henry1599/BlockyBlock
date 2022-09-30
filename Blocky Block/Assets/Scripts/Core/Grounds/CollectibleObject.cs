@@ -4,6 +4,7 @@ using UnityEngine;
 using BlockyBlock.Events;
 using BlockyBlock.Managers;
 using DG.Tweening;
+using BlockyBlock.Enums;
 
 namespace BlockyBlock.Core 
 {
@@ -48,6 +49,18 @@ namespace BlockyBlock.Core
             print("Collect");
             m_CollectibleModel.SetActive(false);
             m_VfxCollected.Play();
+            UpdateGrid();
+        }
+        void UpdateGrid()
+        {
+            // * Unchanged type
+            if (GridManager.Instance.Grids[m_InitFloor].GridArray[m_InitX, m_InitY].Type == GroundType.BOX_IN_WATER)
+            {
+                return;
+            }
+            GroundType type = GridManager.Instance.Grids[m_InitFloor].GridArray[m_InitX, m_InitY].Type;
+            type = (GroundType)((int)type & 0b000111);
+            GridManager.Instance.Grids[m_InitFloor].GridArray[m_InitX, m_InitY].Type = type; 
         }
     }
 }

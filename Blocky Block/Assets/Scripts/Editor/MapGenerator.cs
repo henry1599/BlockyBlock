@@ -100,32 +100,24 @@ namespace BlockyBlock.Editor
         }
         void HandleGenerateBtnClicked()
         {
-            int width = m_WidthSlider.value; // 2
-            int height = m_HeightSlider.value; // 3
-            // 00
-            // 00
-            // 00
+            int width = m_WidthSlider.value;
+            int height = m_HeightSlider.value;
 
             string resultString = "";
 
             for (int i = 0; i < height; i++)
             {
-                // i = 0, 1
-                // Debug.Log("i : " + i.ToString());
                 string stringEachRow = "";
                 for (int j = 0; j < width; j++)
                 {
-                    // j = 0 -> 1
-                    // j = 2 -> 
-                    // Debug.Log(j);
                     string split = m_Enums[i * width + j].name;
-                    // Debug.Log("e : " + split);
                     stringEachRow += split;
                 }
                 stringEachRow += ";";
                 resultString += stringEachRow;
             }
             Debug.Log(resultString);
+            // * Save to txt file here
         }
         string GetCharByGroundTypeEditor(GroundTypeEditor _type)
         {
