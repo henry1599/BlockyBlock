@@ -29,6 +29,7 @@ TagManager:
   - Collectible
   - Walkable
   - Unwalkable
+  - UIError
   layers:
   - Default
   - TransparentFX

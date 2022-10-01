@@ -33,6 +33,13 @@ namespace BlockyBlock.Managers
         [SerializeField] float m_ZoomSpeed = 1;
         [SerializeField] float m_ZoomScrollBuffer = 1;
         [SerializeField] float m_ZoomInterval = 0.5f;
+        [Space(10)]
+        [Header("Shake")]
+        [SerializeField] float m_TargetAmplitudeGain;
+        [SerializeField] float m_ShakeDuration;
+        private CinemachineBasicMultiChannelPerlin m_CMShake;
+        private float m_InitAmplitudeGain = 0;
+        private float m_PersistentFrequencyGain = 5;
         private bool m_RotatePanMouseActive;
         private Vector2 m_LastFrameRotation;
         private Vector3 m_InputRotate;
@@ -49,8 +56,10 @@ namespace BlockyBlock.Managers
         {
             zoomSequence = DOTween.Sequence();
             m_CMTransposer = m_CMCam.GetCinemachineComponent<CinemachineTransposer>();
+            m_CMShake = m_CMCam.GetCinemachineComponent<CinemachineBasicMultiChannelPerlin>();
 
             GameEvents.SETUP_CAMERA += HandleSetupCamera;
+            GameEvents.ON_SHAKE_CAMERA += HandleShake;
 
             ToolEvents.ON_RESET_BUTTON_CLICKED += HandleResetButtonClicked;
         }
@@ -146,7 +155,13 @@ namespace BlockyBlock.Managers
         void OnDestroy()
         {
             GameEvents.SETUP_CAMERA -= HandleSetupCamera;
+            GameEvents.ON_SHAKE_CAMERA -= HandleShake;
             ToolEvents.ON_RESET_BUTTON_CLICKED -= HandleResetButtonClicked;
+        }
+        void HandleShake()
+        {
+            DOTween.To(() => m_CMShake.m_AmplitudeGain, value => m_CMShake.m_AmplitudeGain = value, m_TargetAmplitudeGain, m_ShakeDuration / 2f)
+                    .OnComplete(() => DOTween.To(() => m_CMShake.m_AmplitudeGain, value => m_CMShake.m_AmplitudeGain = value, m_InitAmplitudeGain, m_ShakeDuration / 2f));
         }
         void HandleResetButtonClicked()
         {

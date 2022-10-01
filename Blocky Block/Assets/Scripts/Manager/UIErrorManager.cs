@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using BlockyBlock.Events;
+using BlockyBlock.UI;
 using BlockyBlock.Enums;
 using TMPro;
 
@@ -10,8 +11,14 @@ namespace BlockyBlock.Managers
 {
     public class UIErrorManager : MonoBehaviour
     {
-        [SerializeField] TMP_Text m_ErrorText;
         // Start is called before the first frame update
+        public static UIErrorManager Instance {get; private set;}
+        UIError m_UIError;
+        void Awake()
+        {
+            Instance = this;
+            m_UIError = GameObject.FindGameObjectWithTag(GameConstants.UIERROR_TAG)?.GetComponent<UIError>();
+        }
         void Start()
         {
             ErrorEvents.ON_ERROR += HandleError;
@@ -23,8 +30,13 @@ namespace BlockyBlock.Managers
         void HandleError(ErrorType _type)
         {
             ErrorEvents.ON_ERROR_HANDLING?.Invoke();
-            // m_ErrorText.text = ConfigManager.Instance.ErrorConfig.ErrorData[_type];
-            print(ConfigManager.Instance.ErrorConfig.ErrorData[_type]);
+            string msg = ConfigManager.Instance.ErrorConfig.ErrorData[_type];
+            m_UIError.Open(msg);
+            GameEvents.ON_SHAKE_CAMERA?.Invoke();
+        }
+        public void Reset()
+        {
+            m_UIError.Close();
         }
     }
 }

@@ -24,6 +24,7 @@ namespace BlockyBlock.Events
         public static Action ON_LEVEL_CHECK;
         public static Action ON_WIN;
         public static Action ON_LOSE;
+        public static Action ON_SHAKE_CAMERA;
     }
     public class UnitEvents
     {
@@ -92,6 +93,7 @@ namespace BlockyBlock.Events
         public static readonly string NOT_ANY_BLOCK_TAG = "Not Any Block";
         public static readonly string WALKABLE_TAG = "Walkable";
         public static readonly string UNWALKABLE_TAG = "Unwalkable";
+        public static readonly string UIERROR_TAG = "UIError";
         public static readonly string LEVELS_RAW_DATA_PATH = $"Data/Levels/";
     }
 }

@@ -79,6 +79,7 @@ namespace BlockyBlock.Core
         public void Stop() 
         {
             IsExecuting = false;
+            UIErrorManager.Instance.Reset();
             GameEvents.ON_EXECUTING_BLOCK?.Invoke(IsExecuting);
             IDEState = IDERunState.STOP;
             BlockEvents.ON_HIGHLIGHT?.Invoke(null, IDEState);
