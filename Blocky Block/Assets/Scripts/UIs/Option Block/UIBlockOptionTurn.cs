@@ -72,7 +72,7 @@ namespace BlockyBlock.UI
         }
         void Selected(bool _status)
         {
-            UIManager.Instance.UIOption.Setup(_status, m_SnapPivot, GetOptionStrings());
+            UIManager.Instance.UIOptionTurn.Setup(_status, m_SnapPivot, GetOptionStrings());
             // * Block ui ide
             if (_status)
             {
