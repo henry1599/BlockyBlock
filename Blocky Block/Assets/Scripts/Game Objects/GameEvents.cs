@@ -35,6 +35,7 @@ namespace BlockyBlock.Events
         public static Action<BlockFunctionPickup> ON_PICK_UP;
         public static Action<BlockFunctionPutdown> ON_PUT_DOWN;
         public static Action<BlockFunctionPush> ON_PUSH;
+        public static Action<BlockFunctionIfElse> ON_JUMP_IF_ELSE;
         public static Action ON_COLLECT_STUFF;
         public static Action ON_STOP;
         public static Action ON_RESET;

@@ -144,6 +144,12 @@ namespace BlockyBlock.Core
                 case BlockType.PUSH:
                     HandlePush((UIBlockPush)_uiBlock);
                     break;
+                case BlockType.IF_ELSE:
+                    HandleIfElse((UIBlockIfElse)_uiBlock);
+                    break;
+                case BlockType.END_IF:
+                    HandleEndIf((UIBlockEndIf)_uiBlock);
+                    break;
             }
         }
         void HandleMoveForward(UIBlockMove _uiBlock)
@@ -203,6 +209,18 @@ namespace BlockyBlock.Core
         void HandlePush(UIBlockPush _uiBlock)
         {
             BlockFunctionPush function = new BlockFunctionPush(_uiBlock);
+            function.Setup();
+            Functions.Add(function);
+        }
+        void HandleIfElse(UIBlockIfElse _uiBlock)
+        {
+            BlockFunctionIfElse function = new BlockFunctionIfElse(_uiBlock);
+            function.Setup();
+            Functions.Add(function);
+        }
+        void HandleEndIf(UIBlockEndIf _uiBlock)
+        {
+            BlockFunctionEndIf function = new BlockFunctionEndIf(_uiBlock);
             function.Setup();
             Functions.Add(function);
         }

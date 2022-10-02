@@ -30,6 +30,7 @@ TagManager:
   - Walkable
   - Unwalkable
   - UIError
+  - If Content
   layers:
   - Default
   - TransparentFX

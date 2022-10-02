@@ -12,6 +12,25 @@ namespace BlockyBlock.Enums
         INVALID_PICK_UP,
         INVALID_PUSH
     }
+    public enum ConditionDirection
+    {
+        //*        |  LEFT   |  MID   |  RIGHT
+        //*====================================
+        //* TOP    |  0101   |  1001  |  1101
+        //* CENTER |  0110   |  1010  |  1110
+        //* BOTTOM |  0111   |  1011  |  1111
+        LEFT = 0b0100, //* => 01 00
+        MID = 0b1000, //* => 10 00
+        RIGHT = 0b1100, //* => 11 00
+        TOP = 0b0001, //* => 00 01
+        CENTER = 0b0010, //* => 00 10
+        BOTTOM = 0b0011, //* => 00 11
+    }
+    public enum Operator
+    {
+        EQUAL = 0b0,
+        NOT_EQUAL = 0b1
+    }
     public enum TurnDirection {
         LEFT = 0,
         RIGHT = 1
@@ -72,7 +91,9 @@ namespace BlockyBlock.Enums
         TURN,
         JUMP,
         SKIP,
-        PUSH
+        PUSH,
+        IF_ELSE,
+        END_IF
     }
     public enum LevelID {
         HOME,
