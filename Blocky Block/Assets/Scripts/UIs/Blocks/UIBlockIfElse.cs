@@ -22,6 +22,7 @@ namespace BlockyBlock.UI
         public override void Setup(UIBlock _parentBlock = null)
         {
             base.Setup(_parentBlock);
+            ((UIBlockOptionIfElse)UIBlockOption).Setup();
 
             if (m_WeightConnection == 0)
             {

@@ -30,6 +30,7 @@ namespace BlockyBlock.Core
         void Start()
         {
             UnitEvents.ON_JUMP += HandleJump;
+            UnitEvents.ON_JUMP_IF_ELSE += HandleJumpIf;
             ErrorEvents.ON_ERROR_HANDLING += HandleError;
 
             GameEvents.ON_WIN += HandleStopRunning;
@@ -38,6 +39,7 @@ namespace BlockyBlock.Core
         void OnDestroy()
         {
             UnitEvents.ON_JUMP -= HandleJump;
+            UnitEvents.ON_JUMP_IF_ELSE -= HandleJumpIf;
             ErrorEvents.ON_ERROR_HANDLING -= HandleError;
 
             GameEvents.ON_WIN -= HandleStopRunning;
@@ -57,6 +59,10 @@ namespace BlockyBlock.Core
         void HandleJump(BlockFunctionJump _uiBlockJump)
         {
             m_IdxFunction = _uiBlockJump.IdxJumpTo;
+        }
+        void HandleJumpIf(BlockFunctionIfElse _uiBlockJumpIf)
+        {
+            m_IdxFunction = _uiBlockJumpIf.IdxJumpTo;
         }
         public void Play() 
         {

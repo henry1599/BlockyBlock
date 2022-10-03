@@ -59,9 +59,19 @@ namespace BlockyBlock.UI
         }
         void HandleSelected(UIBlockOption _uiBlockOption, bool _status)
         {
-            if ((UIBlockOptionTurn)_uiBlockOption != this)
+            if (_uiBlockOption is UIBlockOptionIfElse)
             {
-                return;
+                if ((UIBlockOptionIfElse)_uiBlockOption != this)
+                {
+                    return;
+                }
+            }
+            else if (_uiBlockOption is UIBlockOptionTurn)
+            {
+                if ((UIBlockOptionTurn)_uiBlockOption != this)
+                {
+                    return;
+                }
             }
             // * Show selection menu
             IsOpenned = _status;
@@ -72,7 +82,7 @@ namespace BlockyBlock.UI
         }
         void Selected(bool _status)
         {
-            UIManager.Instance.UIOptionTurn.Setup(_status, m_SnapPivot, GetOptionStrings());
+            UIManager.Instance.UIOptionIfElse.Setup(_status, m_SnapPivot, GetOptionStrings());
             // * Block ui ide
             if (_status)
             {
