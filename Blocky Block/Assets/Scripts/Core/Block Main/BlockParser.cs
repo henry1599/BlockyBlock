@@ -144,6 +144,12 @@ namespace BlockyBlock.Core
                 case BlockType.PUSH:
                     HandlePush((UIBlockPush)_uiBlock);
                     break;
+                case BlockType.JUMP_GRAB_STH:
+                    HandleJumpIfGrabSth((UIBlockJumpIfGrabSth)_uiBlock);
+                    break;
+                case BlockType.SKIP_GRAB_STH:
+                    HandleSkipJumpIfGrabSth((UIBlockSkipJumpIfGrabSth)_uiBlock);
+                    break;
             }
         }
         void HandleMoveForward(UIBlockMove _uiBlock)
@@ -203,6 +209,18 @@ namespace BlockyBlock.Core
         void HandlePush(UIBlockPush _uiBlock)
         {
             BlockFunctionPush function = new BlockFunctionPush(_uiBlock);
+            function.Setup();
+            Functions.Add(function);
+        }
+        void HandleJumpIfGrabSth(UIBlockJumpIfGrabSth _uiBlock)
+        {
+            BlockFunctionJumpIfGrabSth function = new BlockFunctionJumpIfGrabSth(_uiBlock);
+            function.Setup();
+            Functions.Add(function);
+        }
+        void HandleSkipJumpIfGrabSth(UIBlockSkipJumpIfGrabSth _uiBlock)
+        {
+            BlockFunctionSkipJumpIfGrabSth function = new BlockFunctionSkipJumpIfGrabSth(_uiBlock);
             function.Setup();
             Functions.Add(function);
         }

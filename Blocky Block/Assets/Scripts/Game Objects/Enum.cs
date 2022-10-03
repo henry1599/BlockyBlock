@@ -72,7 +72,11 @@ namespace BlockyBlock.Enums
         TURN,
         JUMP,
         SKIP,
-        PUSH
+        PUSH,
+        JUMP_GRAB_STH,
+        SKIP_GRAB_STH,
+        JUMP_GRAB_NTH,
+        SKIP_GRAB_NTH
     }
     public enum LevelID {
         HOME,

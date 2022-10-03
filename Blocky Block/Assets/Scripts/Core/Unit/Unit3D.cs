@@ -44,6 +44,7 @@ namespace BlockyBlock.Core
             UnitEvents.ON_PICK_UP += Pickup;
             UnitEvents.ON_PUT_DOWN += Putdown;
             UnitEvents.ON_PUSH += Push;
+            UnitEvents.ON_JUMP_IF_GRAB_STH += JumpIfGrabSomething;
 
             UnitEvents.ON_STOP += HandleStop;
             UnitEvents.ON_RESET += HandleReset;
@@ -56,6 +57,7 @@ namespace BlockyBlock.Core
             UnitEvents.ON_PICK_UP -= Pickup;
             UnitEvents.ON_PUT_DOWN -= Putdown;
             UnitEvents.ON_PUSH -= Push;
+            UnitEvents.ON_JUMP_IF_GRAB_STH -= JumpIfGrabSomething;
             
             UnitEvents.ON_STOP -= HandleStop;
             UnitEvents.ON_RESET -= HandleReset;
@@ -81,6 +83,10 @@ namespace BlockyBlock.Core
             transform.DOKill(true);
             Setup(m_StartPosition, m_StartDirection, (int)m_StartCell.x, (int)m_StartCell.y);
             m_Animation.Reset();
+        }
+        void JumpIfGrabSomething(BlockFunctionJumpIfGrabSth _blockFunction)
+        {
+            UnitEvents.ON_JUMP_IF_GRAB_STH_VALIDATE?.Invoke(_blockFunction, IsGrabSomething);
         }
         void UpdateGrabStatus(bool _status)
         {
