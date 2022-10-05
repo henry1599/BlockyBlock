@@ -41,7 +41,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 964067014660118357, guid: 28686d5318568c54b8f94e37ad8575fa, type: 3}
       propertyPath: m_TagString
-      value: UI Block Option
+      value: UI Block Option Turn
       objectReference: {fileID: 0}
     - target: {fileID: 1245233684097623620, guid: 28686d5318568c54b8f94e37ad8575fa, type: 3}
       propertyPath: m_RootOrder
@@ -73,7 +73,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2127926685485410354, guid: 28686d5318568c54b8f94e37ad8575fa, type: 3}
       propertyPath: m_TagString
-      value: UI Block Option
+      value: UI Block Option Turn
       objectReference: {fileID: 0}
     - target: {fileID: 2700481490498909001, guid: 28686d5318568c54b8f94e37ad8575fa, type: 3}
       propertyPath: m_IsActive
@@ -277,7 +277,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3770951449414523459, guid: 28686d5318568c54b8f94e37ad8575fa, type: 3}
       propertyPath: m_TagString
-      value: UI Block Option
+      value: UI Block Option Turn
       objectReference: {fileID: 0}
     - target: {fileID: 3912697177461614282, guid: 28686d5318568c54b8f94e37ad8575fa, type: 3}
       propertyPath: m_AnchoredPosition.x
@@ -458,7 +458,6 @@ MonoBehaviour:
   m_CanvasGroup: {fileID: 480777280354109453}
   m_UILineNumber: {fileID: 801586193536916229}
   UIBlockOption: {fileID: 5710594803090064239}
-  m_UIBlockOptionTurn: {fileID: 5710594803090064239}
 --- !u!224 &3404574263737222071 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 2700481491166757150, guid: 28686d5318568c54b8f94e37ad8575fa, type: 3}

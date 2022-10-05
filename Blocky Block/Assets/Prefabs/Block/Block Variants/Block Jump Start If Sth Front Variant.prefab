@@ -18,7 +18,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &235319148629631505
 RectTransform:
   m_ObjectHideFlags: 0
@@ -137,6 +137,18 @@ PrefabInstance:
       propertyPath: m_RootOrder
       value: 3
       objectReference: {fileID: 0}
+    - target: {fileID: 588194796663939065, guid: 28686d5318568c54b8f94e37ad8575fa, type: 3}
+      propertyPath: m_Color.b
+      value: 0.5377358
+      objectReference: {fileID: 0}
+    - target: {fileID: 588194796663939065, guid: 28686d5318568c54b8f94e37ad8575fa, type: 3}
+      propertyPath: m_Color.g
+      value: 0.23082057
+      objectReference: {fileID: 0}
+    - target: {fileID: 588194796663939065, guid: 28686d5318568c54b8f94e37ad8575fa, type: 3}
+      propertyPath: m_Color.r
+      value: 0.35929677
+      objectReference: {fileID: 0}
     - target: {fileID: 605363921494397703, guid: 28686d5318568c54b8f94e37ad8575fa, type: 3}
       propertyPath: m_text
       value: Right
@@ -167,7 +179,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 964067014660118357, guid: 28686d5318568c54b8f94e37ad8575fa, type: 3}
       propertyPath: m_TagString
-      value: UI Block Option
+      value: UI Block Option Sth Front
       objectReference: {fileID: 0}
     - target: {fileID: 1245233684097623620, guid: 28686d5318568c54b8f94e37ad8575fa, type: 3}
       propertyPath: m_RootOrder
@@ -179,7 +191,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1585000575625938929, guid: 28686d5318568c54b8f94e37ad8575fa, type: 3}
       propertyPath: m_SizeDelta.x
-      value: 105
+      value: 115
       objectReference: {fileID: 0}
     - target: {fileID: 1585000575625938929, guid: 28686d5318568c54b8f94e37ad8575fa, type: 3}
       propertyPath: m_LocalScale.x
@@ -199,7 +211,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2127926685485410354, guid: 28686d5318568c54b8f94e37ad8575fa, type: 3}
       propertyPath: m_TagString
-      value: UI Block Option
+      value: UI Block Option Sth Front
       objectReference: {fileID: 0}
     - target: {fileID: 2700481490498909001, guid: 28686d5318568c54b8f94e37ad8575fa, type: 3}
       propertyPath: m_IsActive
@@ -401,13 +413,25 @@ PrefabInstance:
       propertyPath: m_SizeDelta.y
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 3756231467460120356, guid: 28686d5318568c54b8f94e37ad8575fa, type: 3}
+      propertyPath: m_Color.b
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3756231467460120356, guid: 28686d5318568c54b8f94e37ad8575fa, type: 3}
+      propertyPath: m_Color.g
+      value: 0.49411765
+      objectReference: {fileID: 0}
+    - target: {fileID: 3756231467460120356, guid: 28686d5318568c54b8f94e37ad8575fa, type: 3}
+      propertyPath: m_Color.r
+      value: 0.7058824
+      objectReference: {fileID: 0}
     - target: {fileID: 3770951449414523459, guid: 28686d5318568c54b8f94e37ad8575fa, type: 3}
       propertyPath: m_TagString
-      value: UI Block Option
+      value: UI Block Option Sth Front
       objectReference: {fileID: 0}
     - target: {fileID: 3912697177461614282, guid: 28686d5318568c54b8f94e37ad8575fa, type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: 52.5
+      value: 55
       objectReference: {fileID: 0}
     - target: {fileID: 3912697177461614282, guid: 28686d5318568c54b8f94e37ad8575fa, type: 3}
       propertyPath: m_AnchoredPosition.y
@@ -427,7 +451,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8149866018025985412, guid: 28686d5318568c54b8f94e37ad8575fa, type: 3}
       propertyPath: m_SizeDelta.x
-      value: 105
+      value: 115
       objectReference: {fileID: 0}
     - target: {fileID: 8149866018025985412, guid: 28686d5318568c54b8f94e37ad8575fa, type: 3}
       propertyPath: m_LocalScale.x
@@ -586,7 +610,6 @@ MonoBehaviour:
   UIBlockOption: {fileID: 5710594803090064239}
   MinWeightConnection: 150
   MaxWeightConnection: 260
-  m_Connection: {fileID: 1439556364412998306}
   ClickedColor: {r: 0.85490197, g: 0.7490196, b: 1, a: 1}
   UnclickedColor: {r: 0.7058824, g: 0.49411765, b: 1, a: 1}
   TopPanel: {fileID: 2286278826583704920}

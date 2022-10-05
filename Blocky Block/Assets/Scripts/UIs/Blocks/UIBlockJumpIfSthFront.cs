@@ -15,7 +15,7 @@ namespace BlockyBlock.UI
         public float MaxWeightConnection;
         // public ArrowJump m_ArrowJump;
         private bool m_IsPlaced = false;
-        public Connection m_Connection;
+        // public Connection m_Connection;
         public Color ClickedColor, UnclickedColor;
         public RectTransform TopPanel;
         private float m_WeightConnection = 0;
@@ -74,13 +74,13 @@ namespace BlockyBlock.UI
         public override void ClickSelf()
         {
             base.ClickSelf();
-            m_Connection.line.color = ClickedColor;
+            // m_Connection.line.color = ClickedColor;
             m_UIBlockJumpTo.Arrow.color = ClickedColor;
         }
         public override void UnclickSelf()
         {
             base.UnclickSelf();
-            m_Connection.line.color = UnclickedColor;
+            // m_Connection.line.color = UnclickedColor;
             m_UIBlockJumpTo.Arrow.color = UnclickedColor;
         }
         public void EnableArrow()
@@ -91,8 +91,8 @@ namespace BlockyBlock.UI
         IEnumerator SetupConnection()
         {
             yield return new WaitUntil(() => m_UIBlockJumpTo != null);
-            m_Connection.SetTargets(TopPanel, m_UIBlockJumpTo.TopPanel);
-            m_Connection.SetWeight(m_WeightConnection);
+            // m_Connection.SetTargets(TopPanel, m_UIBlockJumpTo.TopPanel);
+            // m_Connection.SetWeight(m_WeightConnection);
         }
         public void SetupArrow()
         {
