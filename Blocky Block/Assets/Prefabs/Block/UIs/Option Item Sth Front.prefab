@@ -149,7 +149,7 @@ GameObject:
   - component: {fileID: 932723674209985044}
   - component: {fileID: 1509107663036303590}
   m_Layer: 0
-  m_Name: Option Item
+  m_Name: Option Item Sth Front
   m_TagString: UI Block Option
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -185,7 +185,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 1134982735531130873}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f8342272cbc5a6c4a81cf8d5460edae1, type: 3}
+  m_Script: {fileID: 11500000, guid: 9e4861486c5c93944b41331818d7347a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   m_Text: {fileID: 8247204408625127862}

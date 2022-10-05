@@ -76,7 +76,9 @@ namespace BlockyBlock.Enums
         JUMP_GRAB_STH,
         SKIP_GRAB_STH,
         JUMP_GRAB_NTH,
-        SKIP_GRAB_NTH
+        SKIP_GRAB_NTH,
+        JUMP_IF_STH_FRONT,
+        SKIP_IF_STH_FRONT
     }
     public enum LevelID {
         HOME,
