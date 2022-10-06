@@ -1036,10 +1036,11 @@ MonoBehaviour:
   m_CanvasGroup: {fileID: 480777280354109453}
   m_UILineNumber: {fileID: 801586193536916229}
   UIBlockOption: {fileID: 5710594803090064239}
-  MinWeightConnectionFrom: 0
-  MaxWeightConnectionFrom: 15
+  MinWeightConnectionFrom: 50
+  MaxWeightConnectionFrom: 150
   MinWeightConnectionTo: 150
   MaxWeightConnectionTo: 260
+  UIBlockOptionSthFront: {fileID: 5710594803090064239}
   m_Connection: {fileID: 1439556364412998306}
   ClickedColor: {r: 0.85490197, g: 0.7490196, b: 1, a: 1}
   UnclickedColor: {r: 0.7058824, g: 0.49411765, b: 1, a: 1}

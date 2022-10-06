@@ -37,6 +37,8 @@ namespace BlockyBlock.Events
         public static Action<BlockFunctionPush> ON_PUSH;
         public static Action<BlockFunctionJumpIfGrabSth> ON_JUMP_IF_GRAB_STH;
         public static Action<BlockFunctionJumpIfGrabSth, bool> ON_JUMP_IF_GRAB_STH_VALIDATE;
+        public static Action<BlockFunctionJumpIfSthFront> ON_JUMP_IF_STH_FRONT; 
+        public static Action<BlockFunctionJumpIfSthFront, bool> ON_JUMP_IF_STH_FRONT_VALIDATE; 
         public static Action ON_COLLECT_STUFF;
         public static Action ON_STOP;
         public static Action ON_RESET;
