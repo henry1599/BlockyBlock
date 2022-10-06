@@ -41,7 +41,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 964067014660118357, guid: 28686d5318568c54b8f94e37ad8575fa, type: 3}
       propertyPath: m_TagString
-      value: UI Block Option Turn
+      value: UI Block Option
       objectReference: {fileID: 0}
     - target: {fileID: 1245233684097623620, guid: 28686d5318568c54b8f94e37ad8575fa, type: 3}
       propertyPath: m_RootOrder
@@ -73,7 +73,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2127926685485410354, guid: 28686d5318568c54b8f94e37ad8575fa, type: 3}
       propertyPath: m_TagString
-      value: UI Block Option Turn
+      value: UI Block Option
       objectReference: {fileID: 0}
     - target: {fileID: 2700481490498909001, guid: 28686d5318568c54b8f94e37ad8575fa, type: 3}
       propertyPath: m_IsActive
@@ -277,7 +277,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3770951449414523459, guid: 28686d5318568c54b8f94e37ad8575fa, type: 3}
       propertyPath: m_TagString
-      value: UI Block Option Turn
+      value: UI Block Option
       objectReference: {fileID: 0}
     - target: {fileID: 3912697177461614282, guid: 28686d5318568c54b8f94e37ad8575fa, type: 3}
       propertyPath: m_AnchoredPosition.x

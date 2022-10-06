@@ -113,6 +113,10 @@ namespace BlockyBlock.Managers
                 {
                     return true;
                 }
+                if (result.gameObject.tag == _objectTag)
+                {
+                    return true;
+                }
             }
             return false;
         }

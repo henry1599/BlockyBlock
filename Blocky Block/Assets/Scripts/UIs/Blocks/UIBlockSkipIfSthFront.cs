@@ -57,13 +57,13 @@ namespace BlockyBlock.UI
         public override void ClickSelf()
         {
             base.ClickSelf();
-            // m_UIBlockJumpFrom.m_Connection.line.color = m_UIBlockJumpFrom.ClickedColor;
+            m_UIBlockJumpFrom.m_Connection.line.color = m_UIBlockJumpFrom.ClickedColor;
             Arrow.color = m_UIBlockJumpFrom.ClickedColor;
         }
         public override void UnclickSelf()
         {
             base.UnclickSelf();
-            // m_UIBlockJumpFrom.m_Connection.line.color = m_UIBlockJumpFrom.UnclickedColor;
+            m_UIBlockJumpFrom.m_Connection.line.color = m_UIBlockJumpFrom.UnclickedColor;
             Arrow.color = m_UIBlockJumpFrom.UnclickedColor;
         }
     }

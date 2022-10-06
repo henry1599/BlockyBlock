@@ -38,9 +38,9 @@ MonoBehaviour:
     _keyValues: 010000000200000003000000080000002000000018000000
     _keys: 010000000200000003000000080000002000000018000000
     _values:
-    - GROUND
-    - WATER
-    - HOLE
-    - BOX
-    - STAR
-    - TRAP
+    - Ground
+    - Water
+    - Hole
+    - Box
+    - Star
+    - Trap
