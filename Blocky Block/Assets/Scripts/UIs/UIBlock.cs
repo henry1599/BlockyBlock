@@ -76,17 +76,6 @@ namespace BlockyBlock.UI
 
 
 
-        // [Space(10)]
-        // [Header("Click Shake Rotation")]
-        // [Range(0.05f, 1f)]
-        // public float ShakeDuration = 0.15f;
-        // public Vector3 ShakeStrength = new Vector3(0, 0, 1);
-        // [Range(0f, 180f)]
-        // public float Randomness = 90f;
-        // [Range(10f, 100f)]
-        // public float Vibrato = 10;
-
-
 
         protected bool m_IsDisabled = false;
         protected RectTransform m_IDEMainField;
@@ -150,16 +139,30 @@ namespace BlockyBlock.UI
 
             BlockEvents.ON_HIGHLIGHT += HandleHighlight;
         }
-        void Update()
+        public void Update()
         {
-            if (UIManager.Instance.CheckTriggerUI(GameConstants.UI_BLOCK_OPTION_TAG))
-            {
-                m_IsHoverOptionBlock = true;
-            }
-            else
-            {
-                m_IsHoverOptionBlock = false;
-            }
+            // if (m_Type == BlockType.TURN)
+            // {
+                if (UIManager.Instance.CheckTriggerUI(GameConstants.UI_BLOCK_OPTION_TAG))
+                {
+                    m_IsHoverOptionBlock = true;
+                }
+                else
+                {
+                    m_IsHoverOptionBlock = false;
+                }
+            // }
+            // else if (m_Type == BlockType.JUMP_IF_STH_FRONT)
+            // {
+            //     if (UIManager.Instance.CheckTriggerUI(GameConstants.UI_BLOCK_OPTION_STH_FRONT_TAG))
+            //     {
+            //         m_IsHoverOptionBlock = true;
+            //     }
+            //     else
+            //     {
+            //         m_IsHoverOptionBlock = false;
+            //     }
+            // }
             if (m_IsDragging)
             {
                 CastBlockPosition();
@@ -373,13 +376,11 @@ namespace BlockyBlock.UI
         {
             if (UIManager.Instance.CheckTriggerUI(GameConstants.TOP_IDE_TAG))
             {
-                print("TOP");
                 ScrollIDEState = ScrollIDEState.SCROLL_DOWN;
                 UIManager.Instance.m_DummyUIBlock.transform.SetAsLastSibling();
             }
             else if (UIManager.Instance.CheckTriggerUI(GameConstants.BELOW_IDE_TAG))
             {
-                print("BELOW");
                 ScrollIDEState = ScrollIDEState.SCROLL_UP;
                 UIManager.Instance.m_DummyUIBlock.transform.SetAsLastSibling();
             }

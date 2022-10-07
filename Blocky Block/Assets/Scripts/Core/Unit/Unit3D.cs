@@ -45,6 +45,7 @@ namespace BlockyBlock.Core
             UnitEvents.ON_PUT_DOWN += Putdown;
             UnitEvents.ON_PUSH += Push;
             UnitEvents.ON_JUMP_IF_GRAB_STH += JumpIfGrabSomething;
+            UnitEvents.ON_JUMP_IF_STH_FRONT += JumpIfSthFront;
 
             UnitEvents.ON_STOP += HandleStop;
             UnitEvents.ON_RESET += HandleReset;
@@ -58,6 +59,7 @@ namespace BlockyBlock.Core
             UnitEvents.ON_PUT_DOWN -= Putdown;
             UnitEvents.ON_PUSH -= Push;
             UnitEvents.ON_JUMP_IF_GRAB_STH -= JumpIfGrabSomething;
+            UnitEvents.ON_JUMP_IF_STH_FRONT -= JumpIfSthFront;
             
             UnitEvents.ON_STOP -= HandleStop;
             UnitEvents.ON_RESET -= HandleReset;
@@ -83,10 +85,6 @@ namespace BlockyBlock.Core
             transform.DOKill(true);
             Setup(m_StartPosition, m_StartDirection, (int)m_StartCell.x, (int)m_StartCell.y);
             m_Animation.Reset();
-        }
-        void JumpIfGrabSomething(BlockFunctionJumpIfGrabSth _blockFunction)
-        {
-            UnitEvents.ON_JUMP_IF_GRAB_STH_VALIDATE?.Invoke(_blockFunction, IsGrabSomething);
         }
         void UpdateGrabStatus(bool _status)
         {
@@ -307,6 +305,67 @@ namespace BlockyBlock.Core
             yield return Helper.GetWait(m_PushDelay);
             
             _pushableObject?.PushSelf(_pushIdxX, _pushIdxY, _floor);
+        }
+        #endregion
+
+        #region Jump If Grab Something
+        void JumpIfGrabSomething(BlockFunctionJumpIfGrabSth _blockFunction)
+        {
+            UnitEvents.ON_JUMP_IF_GRAB_STH_VALIDATE?.Invoke(_blockFunction, IsGrabSomething);
+        }
+        #endregion
+
+        #region Jump If Something Front
+        void JumpIfSthFront(BlockFunctionJumpIfSthFront _function)
+        {
+            DirectionData directionData = ConfigManager.Instance.UnitConfig.GetDataByDirection(m_CurrentDirection);
+            int nextX = (int)m_CurrentCell.x + directionData.XIdx;
+            int nextY = (int)m_CurrentCell.y + directionData.YIdx;
+
+            GroundType frontType = GridManager.Instance.Grids[m_CurrentFloor].GridArray[nextX, nextY].Type;
+            GroundType frontGroundCheck = _function.GroundFront;
+
+            bool result = false;
+            switch (frontGroundCheck)
+            {
+                case GroundType.GROUND:
+                    frontType = (GroundType)((int)frontType & 0b000111);
+                    if (frontType == GroundType.GROUND)
+                    {
+                        result = true;
+                    }
+                    break;
+                case GroundType.WATER:
+                    frontType = (GroundType)((int)frontType & 0b000111);
+                    if (frontType == GroundType.WATER)
+                    {
+                        result = true;
+                    }
+                    break;
+                case GroundType.COLLECTIBLE:
+                    frontType = (GroundType)((int)frontType & 0b111000);
+                    if (frontType == GroundType.COLLECTIBLE)
+                    {
+                        result = true;
+                    }
+                    break;
+                case GroundType.SPACE:
+                    if (frontType == GroundType.SPACE)
+                    {
+                        result = true;
+                    }
+                    break;
+                case GroundType.BOX:
+                    frontType = (GroundType)((int)frontType & 0b111000);
+                    if (frontType == GroundType.BOX)
+                    {
+                        result = true;
+                    }
+                    break;
+                case GroundType.TRAP:
+                    break;
+            }
+            UnitEvents.ON_JUMP_IF_STH_FRONT_VALIDATE?.Invoke(_function, result);
         }
         #endregion
     }

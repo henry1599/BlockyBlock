@@ -5,12 +5,13 @@ using BlockyBlock.Events;
 using BlockyBlock.Enums;
 using BlockyBlock.Managers;
 using BlockyBlock.Configurations;
+using RotaryHeart.Lib.SerializableDictionary;
 
 namespace BlockyBlock.UI 
 {
-    public class UIBlockOptionTurn : UIBlockOption
+    public class UIBlockOptionSthFront : UIBlockOption
     {
-        public TurnDirection[] Options;
+        public GroundType[] Options;
         public Transform m_SnapPivot;
         public bool IsOpenned
         {
@@ -21,32 +22,32 @@ namespace BlockyBlock.UI
                 Selected(value);
             }
         } private bool m_IsOpenned;
-        public TurnDirection CurrentTurnDirection
+        public GroundType CurrentGroundType
         {
-            get => m_TurnDirection;
+            get => m_GroundType;
             set 
             {
-                m_TurnDirection = value;
+                m_GroundType = value;
                 UpdateOption(value);
             }
-        } private TurnDirection m_TurnDirection;
+        } private GroundType m_GroundType;
         // public UIOptionTurn UIOptionTurn;
         void Start()
         {
             IsOpenned = false;
-            CurrentTurnDirection = TurnDirection.LEFT;
+            CurrentGroundType = GroundType.GROUND;
 
             BlockEvents.ON_UI_BLOCK_OPTION_SELECTED += HandleSelected;
             BlockEvents.ON_DISABLE_UI_FUNCTION += HandleDisableUIFunction;
 
-            UIOptionItemTurn.ON_OPTION_ITEM_CLICKED += HandleOptionItemClicked;
+            UIOptionItemSthFront.ON_OPTION_ITEM_CLICKED += HandleOptionItemClicked;
         }
         void OnDestroy() 
         {
             BlockEvents.ON_UI_BLOCK_OPTION_SELECTED -= HandleSelected;
             BlockEvents.ON_DISABLE_UI_FUNCTION -= HandleDisableUIFunction;
             
-            UIOptionItemTurn.ON_OPTION_ITEM_CLICKED -= HandleOptionItemClicked;
+            UIOptionItemSthFront.ON_OPTION_ITEM_CLICKED -= HandleOptionItemClicked;
         }
         void HandleOptionItemClicked(int _idx)
         {
@@ -54,17 +55,17 @@ namespace BlockyBlock.UI
             {
                 return;
             }
-            CurrentTurnDirection = (TurnDirection)_idx;
+            CurrentGroundType = (GroundType)_idx;
             HandleDisableUIFunction();
         }
         void HandleSelected(UIBlockOption _uiBlockOption, bool _status)
         {
-            if (!(_uiBlockOption is UIBlockOptionTurn))
+            if (!(_uiBlockOption is UIBlockOptionSthFront))
             {
                 IsOpenned = false;
                 return;
             }
-            if ((UIBlockOptionTurn)_uiBlockOption != this)
+            if ((UIBlockOptionSthFront)_uiBlockOption != this)
             {
                 return;
             }
@@ -77,7 +78,7 @@ namespace BlockyBlock.UI
         }
         void Selected(bool _status)
         {
-            UIManager.Instance.UIOptionTurn.Setup(_status, m_SnapPivot, GetOptionStrings());
+            UIManager.Instance.UIOptionSthFront.Setup(_status, m_SnapPivot, GetOptionStrings());
             // * Block ui ide
             if (_status)
             {
@@ -91,24 +92,24 @@ namespace BlockyBlock.UI
         List<string> GetOptionStrings()
         {
             List<string> result = new List<string>();
-            List<TurnDirection> remainingOptions = new List<TurnDirection>();
-            foreach (TurnDirection direction in Options)
+            List<GroundType> remainingOptions = new List<GroundType>();
+            foreach (GroundType groundType in Options)
             {
-                if (direction != CurrentTurnDirection)
+                if (groundType != CurrentGroundType)
                 {
-                    remainingOptions.Add(direction);
+                    remainingOptions.Add(groundType);
                 }
             }
-            foreach (TurnDirection direction in remainingOptions)
+            foreach (GroundType groundType in remainingOptions)
             {
-                result.Add(ConfigManager.Instance.TurnDirectionConfig.Data[direction]);
+                result.Add(ConfigManager.Instance.GroundFrontDataConfig.Data[groundType]);
             }
             return result;
         }
-        void UpdateOption(TurnDirection _turnDirection)
+        void UpdateOption(GroundType _groundType)
         {
             string result = "";
-            result = ConfigManager.Instance.TurnDirectionConfig.Data[_turnDirection];
+            result = ConfigManager.Instance.GroundFrontDataConfig.Data[_groundType];
             m_CurrentOptionText.text = result;
         }
     }

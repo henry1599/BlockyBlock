@@ -13,6 +13,7 @@ namespace BlockyBlock.UI
 {
     public class UIOption : MonoBehaviour
     {
+        public BlockType m_Type;
         public float DropDuration;
         public float HeightForEachOption = 45;
         public RectTransform m_TopPanel;
@@ -20,7 +21,7 @@ namespace BlockyBlock.UI
         public UIOptionItem UIOptionItemTemplate;
         public virtual void Setup(bool _status, Transform _rectSnapTo, List<string> _optionStrings)
         {
-            ShowData(_optionStrings);
+            ShowData(_optionStrings, m_Type);
             if (_status)
             {
                 // m_ThisRect.anchoredPosition = _rectSnapTo.anchoredPosition;
@@ -32,7 +33,7 @@ namespace BlockyBlock.UI
                 transform.DOScaleY(0, DropDuration).SetEase(Ease.InBack);
             }
         }
-        public virtual void ShowData(List<string> _optionStrings)
+        public virtual void ShowData(List<string> _optionStrings, BlockType _type)
         {
             float actualHeight = _optionStrings.Count * HeightForEachOption;
 
@@ -45,7 +46,14 @@ namespace BlockyBlock.UI
             foreach (string optionString in _optionStrings)
             {
                 UIOptionItem itemInstance = Instantiate(UIOptionItemTemplate.gameObject, m_TopPanel.transform).GetComponent<UIOptionItem>();
-                itemInstance.SetText((int)HelperBlockyBlock.StringToTurnDirection(optionString), optionString);
+                if (_type == BlockType.TURN)
+                {
+                    itemInstance.SetText((int)HelperBlockyBlock.StringToTurnDirection(optionString), optionString);
+                }
+                else if (_type == BlockType.JUMP_IF_STH_FRONT)
+                {
+                    itemInstance.SetText((int)HelperBlockyBlock.StringToGroundType(optionString), optionString);
+                }
             }
         }
     }

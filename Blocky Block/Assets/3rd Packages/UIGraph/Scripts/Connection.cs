@@ -33,6 +33,10 @@ public class Connection : MonoBehaviour {
 		points[0].weight = _weight;
 		points[1].weight = _weight;
 	}
+	public void SetWeight(int _idx, float _weight)
+	{
+		points[_idx].weight = _weight;
+	}
 
 	public bool Match(RectTransform start, RectTransform end) {
 		if (!start || !end) return false;

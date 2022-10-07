@@ -170,6 +170,10 @@ PrefabInstance:
       propertyPath: BehaviourConfig
       value: 
       objectReference: {fileID: 11400000, guid: 7ad2c0afdb1df864cae2399b7a1241f7, type: 2}
+    - target: {fileID: 7514088452171215768, guid: 9c9d3106ee98ae148bcab1b1dd811979, type: 3}
+      propertyPath: GroundFrontDataConfig
+      value: 
+      objectReference: {fileID: 11400000, guid: d7e4449c04e599a4199f97661e1dfdc8, type: 2}
     - target: {fileID: 7514088452171215769, guid: 9c9d3106ee98ae148bcab1b1dd811979, type: 3}
       propertyPath: m_RootOrder
       value: 1
