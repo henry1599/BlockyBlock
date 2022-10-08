@@ -1433,6 +1433,10 @@ PrefabInstance:
       propertyPath: m_SizeDelta.y
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 7796412885200075499, guid: 3dfdf424db28de64983b6f6aac2df112, type: 3}
+      propertyPath: m_text
+      value: 'Level 01: Test Level'
+      objectReference: {fileID: 0}
     - target: {fileID: 7796412885422190038, guid: 3dfdf424db28de64983b6f6aac2df112, type: 3}
       propertyPath: m_SizeDelta.y
       value: 0
@@ -1524,6 +1528,15 @@ PrefabInstance:
     - target: {fileID: 7796412885740912675, guid: 3dfdf424db28de64983b6f6aac2df112, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7796412885768317371, guid: 3dfdf424db28de64983b6f6aac2df112, type: 3}
+      propertyPath: m_text
+      value: Use below blocks to collect the star. The standard number of blocks
+        is 16. Try to beat this standard
+      objectReference: {fileID: 0}
+    - target: {fileID: 7796412885768317373, guid: 3dfdf424db28de64983b6f6aac2df112, type: 3}
+      propertyPath: m_Name
+      value: Level Requirement
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 3dfdf424db28de64983b6f6aac2df112, type: 3}
