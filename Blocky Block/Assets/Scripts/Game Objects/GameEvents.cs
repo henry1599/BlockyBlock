@@ -63,6 +63,7 @@ namespace BlockyBlock.Events
         public static Action<UIBlock> BLOCK_IDE_UI;
         public static Action<UIBlock> UNBLOCK_IDE_UI;
         public static Action ON_DISABLE_UI_FUNCTION;
+        public static Action ON_UNHOVER_ALL_GRID_ITEM;
     }
     public class ToolEvents
     {
