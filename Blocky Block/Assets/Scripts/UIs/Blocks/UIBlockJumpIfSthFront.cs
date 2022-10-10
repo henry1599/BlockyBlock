@@ -27,6 +27,7 @@ namespace BlockyBlock.UI
         {
             base.Setup(_parentBlock);
             ((UIBlockOptionSthFront)UIBlockOption).Setup();
+            
             if (m_WeightConnectionTo == 0)
             {
                 m_WeightConnectionTo = Random.Range(MinWeightConnectionTo, MaxWeightConnectionTo);

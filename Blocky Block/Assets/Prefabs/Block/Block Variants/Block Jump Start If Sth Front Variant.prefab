@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 7061480333270624025}
   m_Layer: 0
   m_Name: Top-Center
-  m_TagString: Untagged
+  m_TagString: UI Block Option
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -90,7 +90,7 @@ GameObject:
   - component: {fileID: 3977393854587631799}
   m_Layer: 0
   m_Name: Image
-  m_TagString: Untagged
+  m_TagString: UI Block Option
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -166,7 +166,7 @@ GameObject:
   - component: {fileID: 4068306383850244098}
   m_Layer: 0
   m_Name: Top-Right
-  m_TagString: Untagged
+  m_TagString: UI Block Option
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -243,7 +243,7 @@ GameObject:
   - component: {fileID: 2893601519245498879}
   m_Layer: 0
   m_Name: Image
-  m_TagString: Untagged
+  m_TagString: UI Block Option
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -320,7 +320,7 @@ GameObject:
   - component: {fileID: 8517830668965725760}
   m_Layer: 0
   m_Name: Below Panel Temp
-  m_TagString: Untagged
+  m_TagString: UI Block Option
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -409,7 +409,7 @@ GameObject:
   - component: {fileID: 5380592922803428722}
   m_Layer: 0
   m_Name: Top-Left
-  m_TagString: Untagged
+  m_TagString: UI Block Option
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -486,7 +486,7 @@ GameObject:
   - component: {fileID: 6483745897018107327}
   m_Layer: 0
   m_Name: Image
-  m_TagString: Untagged
+  m_TagString: UI Block Option
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -562,7 +562,7 @@ GameObject:
   - component: {fileID: 520738027960914569}
   m_Layer: 0
   m_Name: Bot-Left
-  m_TagString: Untagged
+  m_TagString: UI Block Option
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -675,7 +675,7 @@ GameObject:
   - component: {fileID: 1826895667949776494}
   m_Layer: 0
   m_Name: Bot-Center
-  m_TagString: Untagged
+  m_TagString: UI Block Option
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -752,7 +752,7 @@ GameObject:
   - component: {fileID: 1777362723167812417}
   m_Layer: 0
   m_Name: Mid-Left
-  m_TagString: Untagged
+  m_TagString: UI Block Option
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -829,7 +829,7 @@ GameObject:
   - component: {fileID: 1338424508832875677}
   m_Layer: 0
   m_Name: Image
-  m_TagString: Untagged
+  m_TagString: UI Block Option
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1031,7 +1031,7 @@ GameObject:
   - component: {fileID: 1181384579700005738}
   m_Layer: 0
   m_Name: Image
-  m_TagString: Untagged
+  m_TagString: UI Block Option
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1107,7 +1107,7 @@ GameObject:
   - component: {fileID: 6802926990349180922}
   m_Layer: 0
   m_Name: Image
-  m_TagString: Untagged
+  m_TagString: UI Block Option
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1184,7 +1184,7 @@ GameObject:
   - component: {fileID: 3333591023726988953}
   m_Layer: 0
   m_Name: Top Panel Temp
-  m_TagString: Untagged
+  m_TagString: UI Block Option
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1274,7 +1274,7 @@ GameObject:
   - component: {fileID: 1234662362821348820}
   m_Layer: 0
   m_Name: Mid-Right
-  m_TagString: Untagged
+  m_TagString: UI Block Option
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1351,7 +1351,7 @@ GameObject:
   - component: {fileID: 3040553476317494029}
   m_Layer: 0
   m_Name: Image
-  m_TagString: Untagged
+  m_TagString: UI Block Option
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1427,7 +1427,7 @@ GameObject:
   - component: {fileID: 8628423766175683697}
   m_Layer: 0
   m_Name: Image
-  m_TagString: Untagged
+  m_TagString: UI Block Option
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1501,7 +1501,7 @@ GameObject:
   - component: {fileID: 3399239266542124646}
   m_Layer: 0
   m_Name: Option Grids
-  m_TagString: Untagged
+  m_TagString: UI Block Option
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1548,7 +1548,7 @@ GameObject:
   - component: {fileID: 3058921388498949580}
   m_Layer: 0
   m_Name: Image
-  m_TagString: Untagged
+  m_TagString: UI Block Option
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1620,9 +1620,10 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 49891026567738649}
+  - component: {fileID: 3697723171031335721}
   m_Layer: 0
   m_Name: Option Block (1)
-  m_TagString: Untagged
+  m_TagString: UI Block Option
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1650,6 +1651,43 @@ RectTransform:
   m_AnchoredPosition: {x: -57.5, y: 0}
   m_SizeDelta: {x: -115, y: -45}
   m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &3697723171031335721
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8859237536959526386}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2d3003b51600f2e43aa1903ec89797f6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_TopPanel: {fileID: 6851282575453678551}
+  m_BelowPanel: {fileID: 6001866049870868471}
+  m_TextObject: {fileID: 0}
+  m_CurrentOptionText: {fileID: 0}
+  UIBlock: {fileID: 1396007082449984454}
+  GridDirectionData:
+  - Type: 5
+    Image: {fileID: 2893601519245498879}
+  - Type: 9
+    Image: {fileID: 1338424508832875677}
+  - Type: 13
+    Image: {fileID: 3040553476317494029}
+  - Type: 6
+    Image: {fileID: 8628423766175683697}
+  - Type: 14
+    Image: {fileID: 1181384579700005738}
+  - Type: 7
+    Image: {fileID: 6483745897018107327}
+  - Type: 11
+    Image: {fileID: 6802926990349180922}
+  - Type: 15
+    Image: {fileID: 3977393854587631799}
+  m_SnapPivot: {fileID: 6851282575453678551}
+  m_SeletedColor: {r: 0.8352941, g: 0.72156864, b: 0.99215686, a: 1}
+  m_UnselectedColor: {r: 0.7058824, g: 0.49803922, b: 1, a: 1}
 --- !u!1 &9215094587220256514
 GameObject:
   m_ObjectHideFlags: 0
@@ -1663,7 +1701,7 @@ GameObject:
   - component: {fileID: 5632263944752365827}
   m_Layer: 0
   m_Name: Bot-Right
-  m_TagString: Untagged
+  m_TagString: UI Block Option
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0

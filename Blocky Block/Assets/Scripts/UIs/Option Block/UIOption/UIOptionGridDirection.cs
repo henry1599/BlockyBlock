@@ -3,15 +3,18 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
+using BlockyBlock.Enums;
 using BlockyBlock.Events;
 
 namespace BlockyBlock.UI
 {
     public class UIOptionGridDirection : MonoBehaviour, IPointerExitHandler, IPointerEnterHandler
     {
+        [SerializeField] ConditionDirection m_GridPosition;
         [SerializeField] Image m_ThisImage;
         public Color m_HoverColor;
         public Color m_UnhoverColor;
+        public static event System.Action<ConditionDirection> ON_CLICK;
         void Start()
         {
             BlockEvents.ON_UNHOVER_ALL_GRID_ITEM += UnsetHover;
@@ -28,6 +31,10 @@ namespace BlockyBlock.UI
         public void OnPointerExit(PointerEventData eventData)
         {
             UnsetHover();
+        }
+        public void OnClick()
+        {
+            ON_CLICK?.Invoke(m_GridPosition);
         }
         public void SetHover()
         {
