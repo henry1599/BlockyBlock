@@ -22,6 +22,7 @@ namespace BlockyBlock.Managers
         public GameObject m_IDECodeField;
         public Transform m_IDECodeContent;
         public GameObject m_PreviewCodeField;
+        public GameObject SideRect;
         public Transform m_PreviewCodeContent;
         public EventSystem m_EventSystem;
         public BlockData m_BlockDatas;
