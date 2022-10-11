@@ -2252,6 +2252,7 @@ MonoBehaviour:
   MinWeightConnectionTo: 150
   MaxWeightConnectionTo: 260
   UIBlockOptionSthFront: {fileID: 5710594803090064239}
+  UIBlockOptionGrid: {fileID: 3697723171031335721}
   m_Connection: {fileID: 1439556364412998306}
   ClickedColor: {r: 0.85490197, g: 0.7490196, b: 1, a: 1}
   UnclickedColor: {r: 0.7058824, g: 0.49411765, b: 1, a: 1}

@@ -319,8 +319,44 @@ namespace BlockyBlock.Core
         void JumpIfSthFront(BlockFunctionJumpIfSthFront _function)
         {
             DirectionData directionData = ConfigManager.Instance.UnitConfig.GetDataByDirection(m_CurrentDirection);
-            int nextX = (int)m_CurrentCell.x + directionData.XIdx;
-            int nextY = (int)m_CurrentCell.y + directionData.YIdx;
+
+            ConditionDirection direction = _function.Direction;
+            int nextX = (int)m_CurrentCell.x;
+            int nextY = (int)m_CurrentCell.y;
+            switch (direction)
+            {
+                case ConditionDirection.TOP_LEFT:
+                    nextX += -1;
+                    nextY += 1;
+                    break;
+                case ConditionDirection.TOP_RIGHT:
+                    nextX += 1;
+                    nextY += 1;
+                    break;
+                case ConditionDirection.CENTER_LEFT:
+                    nextX += -1;
+                    break;
+                case ConditionDirection.CENTER_RIGHT:
+                    nextX += 1;
+                    break;
+                case ConditionDirection.BOTTOM_LEFT:
+                    nextX += -1;
+                    nextY += -1;
+                    break;
+                case ConditionDirection.BOTTOM_MID:
+                    nextY += -1;
+                    break;
+                case ConditionDirection.BOTTOM_RIGHT:
+                    nextX += 1;
+                    nextY += -1;
+                    break;
+                case ConditionDirection.TOP_MID:
+                default:
+                    nextY += 1;
+                    break;
+            }
+            // int nextX = (int)m_CurrentCell.x + directionData.XIdx;
+            // int nextY = (int)m_CurrentCell.y + directionData.YIdx;
 
             GroundType frontType = GridManager.Instance.Grids[m_CurrentFloor].GridArray[nextX, nextY].Type;
             GroundType frontGroundCheck = _function.GroundFront;
