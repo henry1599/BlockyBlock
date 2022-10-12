@@ -124,10 +124,10 @@ MonoBehaviour:
       WinCondition: 1000
       StuffToCollect: 1
       LevelName: Level Test
-      BlockTypes: 0000000004000000050000000100000002000000070000000c00000008000000
+      BlockTypes: 0000000004000000050000000c000000
       UnitDatas:
       - Floor: 0
-        X: 2
+        X: 1
         Y: 1
         StartDirection: 0
       LevelRawData: {fileID: 4900000, guid: 7b4589d22cb05c644ab7e863b5c36d3a, type: 3}
