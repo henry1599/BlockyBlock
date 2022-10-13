@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEditor;
 using UnityEditor.UIElements;
 #endif
+using System.IO;
 using UnityEngine;
 using UnityEngine.UIElements;
 using BlockyBlock.Enums;
@@ -29,7 +30,24 @@ namespace BlockyBlock.Editor
         float m_ButtonWidth = 65;
         float m_ButtonHeight = 20;
         List<EnumField> m_Enums = new List<EnumField>();
-
+        public const string LevelFolder = "Resources/Data/Levels";
+        string TextFileName = "Level0";
+        public string GetPath()
+        {
+#if UNITY_EDITOR
+            string path = Application.dataPath + $"/{LevelFolder}/" ;
+            return path;
+#elif UNITY_ANDROID
+            string path = Application.persistentDataPath + $"/{LevelFolder}/";
+            return path;
+#elif UNITY_IPHONE
+            string path = Application.persistentDataPath + $"/{LevelFolder}/";
+            return path;
+#else
+            string path = Application.dataPath + $"/{LevelFolder}/";
+            return path;
+#endif
+        }
 
         [MenuItem("Tools/Map Generator")]
         public static void ShowEditor()
@@ -104,6 +122,10 @@ namespace BlockyBlock.Editor
             int height = m_HeightSlider.value;
 
             string resultString = "";
+            var dir = new System.IO.DirectoryInfo(GetPath());
+            int fileNum = dir.GetFiles().Length / 2;
+            string textName = TextFileName + (fileNum + 1).ToString();
+            string finalPath = GetPath() + textName + ".txt";
 
             for (int i = 0; i < height; i++)
             {
@@ -116,8 +138,11 @@ namespace BlockyBlock.Editor
                 stringEachRow += ";";
                 resultString += stringEachRow;
             }
-            Debug.Log(resultString);
-            // * Save to txt file here
+            File.WriteAllText(finalPath, resultString);
+            AssetDatabase.Refresh();
+
+            TextAsset textAsset = new TextAsset(resultString);
+            AssetDatabase.SaveAssets();
         }
         string GetCharByGroundTypeEditor(GroundTypeEditor _type)
         {
