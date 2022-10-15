@@ -16,6 +16,7 @@ namespace BlockyBlock.UI
         public float MinWeightConnectionTo;
         public float MaxWeightConnectionTo;
         public UIBlockOptionSthFront UIBlockOptionSthFront;
+        public UIBlockOptionGrid UIBlockOptionGrid;
         // public ArrowJump m_ArrowJump;
         private bool m_IsPlaced = false;
         public Connection m_Connection;
@@ -27,6 +28,7 @@ namespace BlockyBlock.UI
         {
             base.Setup(_parentBlock);
             ((UIBlockOptionSthFront)UIBlockOption).Setup();
+            
             if (m_WeightConnectionTo == 0)
             {
                 m_WeightConnectionTo = Random.Range(MinWeightConnectionTo, MaxWeightConnectionTo);

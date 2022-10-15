@@ -22,12 +22,14 @@ namespace BlockyBlock.Managers
         public GameObject m_IDECodeField;
         public Transform m_IDECodeContent;
         public GameObject m_PreviewCodeField;
+        public GameObject SideRect;
         public Transform m_PreviewCodeContent;
         public EventSystem m_EventSystem;
         public BlockData m_BlockDatas;
         public Transform m_DummyUIBlock;
         public UIOption UIOptionTurn;
         public UIOption UIOptionSthFront;
+        public UIOptionGrid UIOptionGrid;
         public float m_DelayBuffer = 0.15f;
         public float m_DelayBufferTimer {get; set;}
         public bool m_IsTweening = false;

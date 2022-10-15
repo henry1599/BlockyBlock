@@ -316,11 +316,193 @@ namespace BlockyBlock.Core
         #endregion
 
         #region Jump If Something Front
+        Vector2Int GetGridPosition(ConditionDirection _condd)
+        {
+            Vector2Int result = Vector2Int.zero;
+            int curX = (int)m_CurrentCell.x;
+            int curY = (int)m_CurrentCell.y;
+
+            Vector2Int topLeft = new Vector2Int(curX - 1, curY + 1);
+            Vector2Int topMid = new Vector2Int(curX, curY + 1);
+            Vector2Int topRight = new Vector2Int(curX + 1, curY + 1);
+            Vector2Int centerLeft = new Vector2Int(curX - 1, curY);
+            Vector2Int centerRight = new Vector2Int(curX + 1, curY);
+            Vector2Int botLeft = new Vector2Int(curX - 1, curY - 1);
+            Vector2Int botMid = new Vector2Int(curX, curY - 1);
+            Vector2Int botRight = new Vector2Int(curX + 1, curY - 1);
+
+            Dictionary<ConditionDirection, Vector2Int> directionPosition = new Dictionary<ConditionDirection, Vector2Int>()
+            {
+                {ConditionDirection.TOP_LEFT, topLeft},
+                {ConditionDirection.TOP_MID, topMid},
+                {ConditionDirection.TOP_RIGHT, topRight},
+                {ConditionDirection.CENTER_LEFT, centerLeft},
+                {ConditionDirection.CENTER_RIGHT, centerRight},
+                {ConditionDirection.BOTTOM_LEFT, botLeft},
+                {ConditionDirection.BOTTOM_MID, botMid},
+                {ConditionDirection.BOTTOM_RIGHT, botRight},
+            };
+
+            switch (m_CurrentDirection)
+            {
+                case UnitDirection.UP:
+                    return GetGridUp(_condd, directionPosition);
+                    break;
+                case UnitDirection.RIGHT:
+                    return GetGridRight(_condd, directionPosition);
+                    break;
+                case UnitDirection.DOWN:
+                    return GetGridDown(_condd, directionPosition);
+                    break;
+                case UnitDirection.LEFT:
+                    return GetGridLeft(_condd, directionPosition);
+                    break;
+            }
+            return result;
+
+            Vector2Int GetGridUp(ConditionDirection _condd, Dictionary<ConditionDirection, Vector2Int> _dict)
+            {
+                switch (_condd)
+                {
+                    case ConditionDirection.TOP_LEFT:  
+                        return _dict[ConditionDirection.TOP_LEFT];
+                        break;
+                    case ConditionDirection.TOP_MID:
+                        return _dict[ConditionDirection.TOP_MID];
+                        break;
+                    case ConditionDirection.TOP_RIGHT:
+                        return _dict[ConditionDirection.TOP_RIGHT];
+                        break;
+                    case ConditionDirection.CENTER_LEFT:
+                        return _dict[ConditionDirection.CENTER_LEFT];
+                        break;
+                    case ConditionDirection.CENTER_RIGHT:
+                        return _dict[ConditionDirection.CENTER_RIGHT];
+                        break;
+                    case ConditionDirection.BOTTOM_LEFT:
+                        return _dict[ConditionDirection.BOTTOM_LEFT];
+                        break;
+                    case ConditionDirection.BOTTOM_MID:
+                        return _dict[ConditionDirection.BOTTOM_MID];
+                        break;
+                    case ConditionDirection.BOTTOM_RIGHT:
+                        return _dict[ConditionDirection.BOTTOM_RIGHT];
+                        break;
+                    default:
+                        return _dict[ConditionDirection.TOP_LEFT];
+                        break;
+                }
+            }
+            Vector2Int GetGridDown(ConditionDirection _condd, Dictionary<ConditionDirection, Vector2Int> _dict)
+            {
+                switch (_condd)
+                {
+                    case ConditionDirection.TOP_LEFT:  
+                        return _dict[ConditionDirection.BOTTOM_RIGHT];
+                        break;
+                    case ConditionDirection.TOP_MID:
+                        return _dict[ConditionDirection.BOTTOM_MID];
+                        break;
+                    case ConditionDirection.TOP_RIGHT:
+                        return _dict[ConditionDirection.BOTTOM_LEFT];
+                        break;
+                    case ConditionDirection.CENTER_LEFT:
+                        return _dict[ConditionDirection.CENTER_RIGHT];
+                        break;
+                    case ConditionDirection.CENTER_RIGHT:
+                        return _dict[ConditionDirection.CENTER_LEFT];
+                        break;
+                    case ConditionDirection.BOTTOM_LEFT:
+                        return _dict[ConditionDirection.TOP_RIGHT];
+                        break;
+                    case ConditionDirection.BOTTOM_MID:
+                        return _dict[ConditionDirection.TOP_MID];
+                        break;
+                    case ConditionDirection.BOTTOM_RIGHT:
+                        return _dict[ConditionDirection.TOP_LEFT];
+                        break;
+                    default:
+                        return _dict[ConditionDirection.BOTTOM_RIGHT];
+                        break;
+                }
+            }
+            Vector2Int GetGridLeft(ConditionDirection _condd, Dictionary<ConditionDirection, Vector2Int> _dict)
+            {
+                switch (_condd)
+                {
+                    case ConditionDirection.TOP_LEFT:  
+                        return _dict[ConditionDirection.BOTTOM_LEFT];
+                        break;
+                    case ConditionDirection.TOP_MID:
+                        return _dict[ConditionDirection.CENTER_LEFT];
+                        break;
+                    case ConditionDirection.TOP_RIGHT:
+                        return _dict[ConditionDirection.TOP_LEFT];
+                        break;
+                    case ConditionDirection.CENTER_LEFT:
+                        return _dict[ConditionDirection.BOTTOM_MID];
+                        break;
+                    case ConditionDirection.CENTER_RIGHT:
+                        return _dict[ConditionDirection.TOP_MID];
+                        break;
+                    case ConditionDirection.BOTTOM_LEFT:
+                        return _dict[ConditionDirection.BOTTOM_RIGHT];
+                        break;
+                    case ConditionDirection.BOTTOM_MID:
+                        return _dict[ConditionDirection.CENTER_RIGHT];
+                        break;
+                    case ConditionDirection.BOTTOM_RIGHT:
+                        return _dict[ConditionDirection.TOP_RIGHT];
+                        break;
+                    default:
+                        return _dict[ConditionDirection.BOTTOM_LEFT];
+                        break;
+                }
+            }
+            Vector2Int GetGridRight(ConditionDirection _condd, Dictionary<ConditionDirection, Vector2Int> _dict)
+            {
+                switch (_condd)
+                {
+                    case ConditionDirection.TOP_LEFT:  
+                        return _dict[ConditionDirection.TOP_RIGHT];
+                        break;
+                    case ConditionDirection.TOP_MID:
+                        return _dict[ConditionDirection.CENTER_RIGHT];
+                        break;
+                    case ConditionDirection.TOP_RIGHT:
+                        return _dict[ConditionDirection.BOTTOM_RIGHT];
+                        break;
+                    case ConditionDirection.CENTER_LEFT:
+                        return _dict[ConditionDirection.TOP_MID];
+                        break;
+                    case ConditionDirection.CENTER_RIGHT:
+                        return _dict[ConditionDirection.BOTTOM_MID];
+                        break;
+                    case ConditionDirection.BOTTOM_LEFT:
+                        return _dict[ConditionDirection.TOP_LEFT];
+                        break;
+                    case ConditionDirection.BOTTOM_MID:
+                        return _dict[ConditionDirection.CENTER_LEFT];
+                        break;
+                    case ConditionDirection.BOTTOM_RIGHT:
+                        return _dict[ConditionDirection.BOTTOM_LEFT];
+                        break;
+                    default:
+                        return _dict[ConditionDirection.TOP_RIGHT];
+                        break;
+                }
+            }
+        }
         void JumpIfSthFront(BlockFunctionJumpIfSthFront _function)
         {
-            DirectionData directionData = ConfigManager.Instance.UnitConfig.GetDataByDirection(m_CurrentDirection);
-            int nextX = (int)m_CurrentCell.x + directionData.XIdx;
-            int nextY = (int)m_CurrentCell.y + directionData.YIdx;
+            Unit3DRotation unitRotation = ConfigManager.Instance.UnitConfig.Unit3DRotation;
+
+            ConditionDirection direction = _function.Direction;
+            Vector2Int next = GetGridPosition(direction);
+            int nextX = next.x;
+            int nextY = next.y;
+            // int nextX = (int)m_CurrentCell.x + directionData.XIdx;
+            // int nextY = (int)m_CurrentCell.y + directionData.YIdx;
 
             GroundType frontType = GridManager.Instance.Grids[m_CurrentFloor].GridArray[nextX, nextY].Type;
             GroundType frontGroundCheck = _function.GroundFront;

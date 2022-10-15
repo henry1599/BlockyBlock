@@ -141,28 +141,15 @@ namespace BlockyBlock.UI
         }
         public void Update()
         {
-            // if (m_Type == BlockType.TURN)
-            // {
-                if (UIManager.Instance.CheckTriggerUI(GameConstants.UI_BLOCK_OPTION_TAG))
-                {
-                    m_IsHoverOptionBlock = true;
-                }
-                else
-                {
-                    m_IsHoverOptionBlock = false;
-                }
-            // }
-            // else if (m_Type == BlockType.JUMP_IF_STH_FRONT)
-            // {
-            //     if (UIManager.Instance.CheckTriggerUI(GameConstants.UI_BLOCK_OPTION_STH_FRONT_TAG))
-            //     {
-            //         m_IsHoverOptionBlock = true;
-            //     }
-            //     else
-            //     {
-            //         m_IsHoverOptionBlock = false;
-            //     }
-            // }
+            if (UIManager.Instance.CheckTriggerUI(GameConstants.UI_BLOCK_OPTION_TAG))
+            {
+                m_IsHoverOptionBlock = true;
+            }
+            else
+            {
+                m_IsHoverOptionBlock = false;
+            }
+            UIManager.Instance.SideRect.SetActive(!m_IsHoverOptionBlock);
             if (m_IsDragging)
             {
                 CastBlockPosition();

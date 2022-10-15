@@ -11,9 +11,11 @@ namespace BlockyBlock.Core
     {
         public int IdxJumpTo = 0;
         public GroundType GroundFront;
+        public ConditionDirection Direction;
         public BlockFunctionJumpIfSthFront(UIBlockJumpIfSthFront _uiBlock) : base(_uiBlock, BlockType.JUMP_IF_STH_FRONT)
         {
             GroundFront = _uiBlock.UIBlockOptionSthFront.CurrentGroundType;
+            Direction = _uiBlock.UIBlockOptionGrid.CurrentGridPosition;
         }
         public void Setup()
         {

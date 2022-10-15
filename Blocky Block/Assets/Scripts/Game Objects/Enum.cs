@@ -100,4 +100,22 @@ namespace BlockyBlock.Enums
         CUSTOM,
         EVENT
     }
+    public enum ConditionDirection
+    {
+        LEFT = 0b0100,
+        MID = 0b1000,
+        RIGHT = 0b1100,
+        TOP = 0b0001,
+        CENTER = 0b0010,
+        BOTTOM = 0b0011,
+        TOP_LEFT = TOP | LEFT,
+        TOP_MID = TOP | MID,
+        TOP_RIGHT = TOP | RIGHT,
+        CENTER_LEFT = CENTER | LEFT,
+        CENTER_MID = CENTER | MID,
+        CENTER_RIGHT = CENTER | RIGHT,
+        BOTTOM_LEFT = BOTTOM | LEFT,
+        BOTTOM_MID = BOTTOM | MID,
+        BOTTOM_RIGHT = BOTTOM | RIGHT
+    }
 }
