@@ -47,61 +47,54 @@ namespace BlockyBlock.Managers
         }
         void HandleSetupLevel(LevelData _data)
         {
-            string rawLevelString = _data.LevelRawData.text;
+            string rawLevelString = _data.LevelRawData;
             string formatString = Regex.Replace(rawLevelString, @"[\r\n\t]+", "");
-            formatString = formatString.Replace(' ','4');
-            string[] levelFloors = formatString.Split("-");
-            // * levelFloors = ["000;000;000;","111;111;111"]
+            // * formatString = "000;000;000;"
 
-            List<List<string>> stringEachFloor = new List<List<string>>();
-            foreach (string levelFloor in levelFloors)
-            {
-                stringEachFloor.Add(levelFloor.Split(";").ToList());
-            }
-            // * stringEachFloor = <<"000","000","000">,<"111","111","111">>
+            List<string> stringFloor = new List<string>();
+            stringFloor = formatString.Split(";").ToList();
+            // * stringFloor = <"000","000","000">
             
-            for (int j = 0; j < stringEachFloor.Count; j++)
+            //* rawStringEachFloor = ["000","000","000"]
+            for (int i = 0; i < stringFloor.Count - 1; i++)
             {
-                //* rawStringEachFloor = ["000","000","000"]
-                for (int i = 0; i < stringEachFloor[j].Count - 1; i++)
-                {
-                    stringEachFloor[j][i] = "4" + stringEachFloor[j][i] + "4";
-                }
-                int stringWidth = stringEachFloor[j][0].Length;
-                string borderTopBot = new string('4', stringWidth);
-                stringEachFloor[j].Insert(0, borderTopBot);
-                stringEachFloor[j][stringEachFloor[j].Count - 1] = borderTopBot;
+                stringFloor[i] = "4" + stringFloor[i] + "4";
             }
+            int stringWidth = stringFloor[0].Length;
+            string borderTopBot = new string('4', stringWidth);
+            stringFloor.Insert(0, borderTopBot);
+            stringFloor[stringFloor.Count - 1] = borderTopBot;
+                
             List<LevelGround> levelGrounds = new List<LevelGround>();
             int idxFloor = 0;
-            foreach (List<string> levelStringEachRow in stringEachFloor)
+
+            LevelGround levelGround = new LevelGround();
+            int squareMapSize = 0;
+            int maxRows  = stringFloor.Count;
+            int maxColumns = stringFloor[0].Length;
+
+            Core.Grid grid = new Core.Grid(maxColumns, maxRows, Vector3.zero, idxFloor);
+            
+            for (int i = stringFloor.Count - 1, k = 0; k < stringFloor.Count; i--, k++)
             {
-                LevelGround levelGround = new LevelGround();
-                int squareMapSize = 0;
-                int maxRows  = levelStringEachRow.Count;
-                int maxColumns = levelStringEachRow[0].Length;
-
-                Core.Grid grid = new Core.Grid(maxColumns, maxRows, Vector3.zero, idxFloor);
-                
-                for (int i = levelStringEachRow.Count - 1, k = 0; k < levelStringEachRow.Count; i--, k++)
+                for (int j = 0; j < stringFloor[i].Length; j++)
                 {
-                    for (int j = 0; j < levelStringEachRow[i].Length; j++)
-                    {
-                        int levelEachRow = levelStringEachRow[i][j] - '0';
-                        GroundType groundType = GetGroundTypeByInt(levelEachRow);
-                        GroundData groundData = new GroundData(groundType, idxFloor, new Vector2(j, k));
-                        grid.GroundDatas.Add(groundData);
-                    }
+                    int levelEachRow = stringFloor[i][j] - '0';
+                    GroundType groundType = GetGroundTypeByInt(levelEachRow);
+                    GroundData groundData = new GroundData(groundType, idxFloor, new Vector2(j, k));
+                    grid.GroundDatas.Add(groundData);
                 }
-                idxFloor++;
-                levelGrounds.Add(levelGround);
-                squareMapSize = Mathf.Max(maxRows, maxColumns);
-                GameEvents.SETUP_CAMERA?.Invoke(squareMapSize, new Vector2(maxRows, maxColumns));
-
-                GridManager.Instance.AddGrid(grid);
             }
-            // print(squareMapSize);
+            idxFloor++;
+            levelGrounds.Add(levelGround);
+            squareMapSize = Mathf.Max(maxRows, maxColumns);
+            GameEvents.SETUP_CAMERA?.Invoke(squareMapSize, new Vector2(maxRows, maxColumns));
+
+            GridManager.Instance.AddGrid(grid);
+            
             GameEvents.SETUP_GROUND?.Invoke();
+            // string json = JsonUtility.ToJson(_data);
+            // print("[JSON LEVEL] : " + json);
         }
         GroundType GetGroundTypeByInt(int i)
         {
