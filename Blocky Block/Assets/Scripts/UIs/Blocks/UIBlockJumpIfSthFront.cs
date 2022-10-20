@@ -20,8 +20,9 @@ namespace BlockyBlock.UI
         // public ArrowJump m_ArrowJump;
         private bool m_IsPlaced = false;
         public Connection m_Connection;
+        public Connection m_ConnectionOutline;
         public Color ClickedColor, UnclickedColor;
-        public RectTransform TopPanel;
+        public RectTransform TopPanel, TopPanelOutline;
         private float m_WeightConnectionFrom = -1;
         private float m_WeightConnectionTo = 0;
         public override void Setup(UIBlock _parentBlock = null)
@@ -105,6 +106,10 @@ namespace BlockyBlock.UI
             m_Connection.SetTargets(TopPanel, m_UIBlockJumpTo.TopPanel);
             m_Connection.SetWeight(1, m_WeightConnectionTo);
             m_Connection.SetWeight(0, m_WeightConnectionFrom);
+
+            m_ConnectionOutline.SetTargets(TopPanelOutline, m_UIBlockJumpTo.TopPanelOutline);
+            m_ConnectionOutline.SetWeight(1, m_WeightConnectionTo);
+            m_ConnectionOutline.SetWeight(0, m_WeightConnectionFrom);
         }
         public void SetupArrow()
         {
