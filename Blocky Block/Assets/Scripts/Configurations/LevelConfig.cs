@@ -45,13 +45,6 @@ namespace BlockyBlock.Configurations
         public string LevelName; 
         public List<BlockType> BlockTypes;
         public List<UnitData> UnitDatas;
-        // * 00000
-        // * 00000
-        // * 00000
-        // * 00000
-        // * 00000
-        // * 0 : ground
-        // * 1 : water
-        public TextAsset LevelRawData;
+        public string LevelRawData;
     }
 }

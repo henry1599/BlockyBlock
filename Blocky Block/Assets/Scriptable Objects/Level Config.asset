@@ -45,7 +45,7 @@ MonoBehaviour:
       LevelName: Home
       BlockTypes: 
       UnitDatas: []
-      LevelRawData: {fileID: 0}
+      LevelRawData: 
     - LevelType: 1
       WinCondition: 0
       StuffToCollect: 0
@@ -56,70 +56,70 @@ MonoBehaviour:
         X: 0
         Y: 0
         StartDirection: 1
-      LevelRawData: {fileID: 0}
+      LevelRawData: 
     - LevelType: 1
       WinCondition: 0
       StuffToCollect: 0
       LevelName: Level 02
       BlockTypes: 
       UnitDatas: []
-      LevelRawData: {fileID: 0}
+      LevelRawData: 
     - LevelType: 1
       WinCondition: 0
       StuffToCollect: 0
       LevelName: Level 03
       BlockTypes: 
       UnitDatas: []
-      LevelRawData: {fileID: 0}
+      LevelRawData: 
     - LevelType: 1
       WinCondition: 0
       StuffToCollect: 0
       LevelName: Level 04
       BlockTypes: 
       UnitDatas: []
-      LevelRawData: {fileID: 0}
+      LevelRawData: 
     - LevelType: 1
       WinCondition: 0
       StuffToCollect: 0
       LevelName: Level 05
       BlockTypes: 
       UnitDatas: []
-      LevelRawData: {fileID: 0}
+      LevelRawData: 
     - LevelType: 1
       WinCondition: 0
       StuffToCollect: 0
       LevelName: Level 06
       BlockTypes: 
       UnitDatas: []
-      LevelRawData: {fileID: 0}
+      LevelRawData: 
     - LevelType: 1
       WinCondition: 0
       StuffToCollect: 0
       LevelName: Level 07
       BlockTypes: 
       UnitDatas: []
-      LevelRawData: {fileID: 0}
+      LevelRawData: 
     - LevelType: 1
       WinCondition: 0
       StuffToCollect: 0
       LevelName: Level 08
       BlockTypes: 
       UnitDatas: []
-      LevelRawData: {fileID: 0}
+      LevelRawData: 
     - LevelType: 1
       WinCondition: 0
       StuffToCollect: 0
       LevelName: Level 09
       BlockTypes: 
       UnitDatas: []
-      LevelRawData: {fileID: 0}
+      LevelRawData: 
     - LevelType: 1
       WinCondition: 0
       StuffToCollect: 0
       LevelName: Level 10
       BlockTypes: 
       UnitDatas: []
-      LevelRawData: {fileID: 0}
+      LevelRawData: 
     - LevelType: 1
       WinCondition: 1000
       StuffToCollect: 1
@@ -130,4 +130,4 @@ MonoBehaviour:
         X: 1
         Y: 1
         StartDirection: 0
-      LevelRawData: {fileID: 4900000, guid: 7b4589d22cb05c644ab7e863b5c36d3a, type: 3}
+      LevelRawData: 600000;311110;000000;011113;000000;311110;000000;

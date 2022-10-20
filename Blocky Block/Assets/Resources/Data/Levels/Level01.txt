@@ -1,6 +1,1 @@
-00200;
-31620;
-01110;
-01110;
-02613;
-00200;
+ {"LevelType":1,"WinCondition":1000,"StuffToCollect":1,"LevelName":"Level Test","BlockTypes":[0,4,5,12,1,2,7],"UnitDatas":[{"Floor":0,"X":1,"Y":1,"StartDirection":0}],"LevelRawData":"600000;311110;000000;011113;000000;311110;000000;"}
