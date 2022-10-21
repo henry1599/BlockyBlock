@@ -2410,7 +2410,7 @@ MonoBehaviour:
   m_CanvasGroup: {fileID: 480777280354109453}
   m_UILineNumber: {fileID: 801586193536916229}
   UIBlockOption: {fileID: 5710594803090064239}
-  MinWeightConnectionFrom: 50
+  MinWeightConnectionFrom: 30
   MaxWeightConnectionFrom: 150
   MinWeightConnectionTo: 150
   MaxWeightConnectionTo: 260
