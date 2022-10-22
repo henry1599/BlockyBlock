@@ -13,6 +13,7 @@ namespace BlockyBlock.UI
         [Header("References")]
         [SerializeField] Image m_TopPanel;
         [SerializeField] TMP_Text m_Title;
+        [SerializeField] UICustomButton m_Button;
 
         [Space(10)]
         [Header("Idle Values")]
@@ -35,24 +36,41 @@ namespace BlockyBlock.UI
         [SerializeField] Color m_ClickTitleColor;
         [SerializeField] Vector2 m_ClickRectVector;
 
+        public static event System.Action<UIHomeButton> ON_CLICK_HOME_BUTTON;
+        private bool m_IsBlock = false;
+        void Start()
+        {
+            UIHomeButton.ON_CLICK_HOME_BUTTON += HandleClick;
+        }
+        void OnDestroy()
+        {
+            UIHomeButton.ON_CLICK_HOME_BUTTON -= HandleClick;
+        }
+        void HandleClick(UIHomeButton _button)
+        {
+            m_IsBlock = _button != this;
+        }
         public void OnPointerDown(PointerEventData eventData)
         {
+            if (m_IsBlock) return;
             HandleClick();
         }
 
         public void OnPointerEnter(PointerEventData eventData)
         {
+            if (m_IsBlock) return;
             HandleHover();
         }
 
         public void OnPointerExit(PointerEventData eventData)
         {
+            if (m_IsBlock) return;
             HandleIdle();
         }
         void ResetTween()
         {
             m_TopPanel.DOKill();
-            m_Title.DOKill();
+            m_Title?.DOKill();
         }
         void HandleIdle()
         {
@@ -62,7 +80,7 @@ namespace BlockyBlock.UI
             // * Anchor Position
             DOTween.To(() => m_TopPanel.GetComponent<RectTransform>().anchoredPosition, value => m_TopPanel.GetComponent<RectTransform>().anchoredPosition = value, m_IdleRectVector, m_IdleTransitionDuration).SetEase(Ease.OutBack);
             // * Title color
-            m_Title.DOColor(m_IdleTitleColor, m_IdleTransitionDuration).SetEase(Ease.OutBack);
+            m_Title?.DOColor(m_IdleTitleColor, m_IdleTransitionDuration).SetEase(Ease.OutBack);
         }
         void HandleHover()
         {
@@ -72,7 +90,7 @@ namespace BlockyBlock.UI
             // * Anchor Position
             DOTween.To(() => m_TopPanel.GetComponent<RectTransform>().anchoredPosition, value => m_TopPanel.GetComponent<RectTransform>().anchoredPosition = value, m_HoverRectVector, m_HoverTransitionDuration).SetEase(Ease.OutBack);
             // * Title color
-            m_Title.DOColor(m_HoverTitleColor, m_HoverTransitionDuration).SetEase(Ease.OutBack);
+            m_Title?.DOColor(m_HoverTitleColor, m_HoverTransitionDuration).SetEase(Ease.OutBack);
         }
         void HandleClick()
         {
@@ -82,7 +100,12 @@ namespace BlockyBlock.UI
             // * Anchor Position
             DOTween.To(() => m_TopPanel.GetComponent<RectTransform>().anchoredPosition, value => m_TopPanel.GetComponent<RectTransform>().anchoredPosition = value, m_ClickRectVector, m_ClickTransitionDuration).SetEase(Ease.OutBack);
             // * Title color
-            m_Title.DOColor(m_ClickTitleColor, m_ClickTransitionDuration).SetEase(Ease.OutBack);
+            m_Title?.DOColor(m_ClickTitleColor, m_ClickTransitionDuration).SetEase(Ease.OutBack);
+            Invoke(nameof(Click), m_ClickTransitionDuration / 2);
+        }
+        void Click()
+        {
+            m_Button?.OnClick?.Invoke();
         }
     }
 }
