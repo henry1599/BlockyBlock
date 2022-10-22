@@ -2,9 +2,15 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using DG.Tweening;
+using BlockyBlock.Events;
 
 namespace BlockyBlock.UI 
 {
+    public enum HomeState
+    {
+        MAIN = 0,
+        LEVEL_TYPE_SELECTION = 1
+    }
     public class UIHomeAnimation : MonoBehaviour
     {
         [Header("Main Button Field")]
@@ -31,28 +37,84 @@ namespace BlockyBlock.UI
         [SerializeField] Vector2 m_CoinShowPosition;
         [SerializeField] Vector2 m_CoinHidePosition;
 
-        public static event System.Action<bool> ON_STATUS_CHANGED;
+        [Space(10)]
+        [Header("Level Section")]
+        [SerializeField] Transform m_MannualLevel;
+        [SerializeField] Transform m_CustomLevel;
+        [SerializeField] Transform m_BackButton;
+        [SerializeField] float m_LevelSectionTransitionDuration;
+        [SerializeField] Vector2 m_BackButtonShowPosition;
+        [SerializeField] Vector2 m_BackButtonHidePosition;
+        [SerializeField] Vector2 m_MannualLevelShowPosition;
+        [SerializeField] Vector2 m_MannualLevelHidePosition;
+        [SerializeField] Vector2 m_CustomLevelShowPosition;
+        [SerializeField] Vector2 m_CustomLevelHidePosition;
+        [SerializeField] Transform m_Camera;
+        [SerializeField] float m_ShowCameraX;
+        [SerializeField] float m_HideCameraX;
         void Awake()
         {
-            HandleShow();
+            HandleStageChanged(HomeState.MAIN);
         }
         void Start()
         {
-            UIHomeAnimation.ON_STATUS_CHANGED += HandleStatusChanged;
+            HomeEvents.ON_STAGE_CHANGED += HandleStageChanged;
         }
         void OnDestroy()
         {
-            UIHomeAnimation.ON_STATUS_CHANGED -= HandleStatusChanged;
+            HomeEvents.ON_STAGE_CHANGED -= HandleStageChanged;
         }
-        void HandleStatusChanged(bool _status)
+        void HandleStageChanged(HomeState _state)
         {
-            if (_status)
-                HandleShow();
-            else
-                HandleHide();
+            switch (_state)
+            {
+                case HomeState.MAIN:
+                    HandleHideLevelSection(
+                        () => HandleShowMainButtons(),
+                        m_LevelSectionTransitionDuration
+                    );
+                    break;
+                case HomeState.LEVEL_TYPE_SELECTION:
+                    HandleHideMainButtons(
+                        () => HandleShowLevelSection(),
+                        m_AvatarDelayTransition + m_AvatarTransitionDuration
+                    );
+                    break;
+            }
         }
-
-        void HandleShow()
+        void HandleShowLevelSection(System.Action _cb = null, float _delay = 0)
+        {
+            m_MannualLevel.GetComponent<RectTransform>()
+                .DOAnchorPos(m_MannualLevelShowPosition, m_LevelSectionTransitionDuration)
+                .SetEase(Ease.OutBack);
+            m_CustomLevel.GetComponent<RectTransform>()
+                .DOAnchorPos(m_CustomLevelShowPosition, m_LevelSectionTransitionDuration)
+                .SetEase(Ease.OutBack);
+            m_BackButton.GetComponent<RectTransform>()
+                .DOAnchorPos(m_BackButtonShowPosition, m_LevelSectionTransitionDuration)
+                .SetEase(Ease.OutBack);
+            m_Camera
+                .DOMoveX(m_ShowCameraX, m_LevelSectionTransitionDuration)
+                .SetEase(Ease.OutBack);
+            DOVirtual.DelayedCall(_delay, () => _cb?.Invoke());
+        }
+        void HandleHideLevelSection(System.Action _cb = null, float _delay = 0)
+        {
+            m_MannualLevel.GetComponent<RectTransform>()
+                .DOAnchorPos(m_MannualLevelHidePosition, m_LevelSectionTransitionDuration)
+                .SetEase(Ease.InBack);
+            m_CustomLevel.GetComponent<RectTransform>()
+                .DOAnchorPos(m_CustomLevelHidePosition, m_LevelSectionTransitionDuration)
+                .SetEase(Ease.InBack);
+            m_BackButton.GetComponent<RectTransform>()
+                .DOAnchorPos(m_BackButtonHidePosition, m_LevelSectionTransitionDuration)
+                .SetEase(Ease.InBack);
+            m_Camera
+                .DOMoveX(m_HideCameraX, m_LevelSectionTransitionDuration)
+                .SetEase(Ease.OutBack);
+            DOVirtual.DelayedCall(_delay, () => _cb?.Invoke());
+        }
+        void HandleShowMainButtons(System.Action _cb = null, float _delay = 0)
         {
             // * Main buttons
             int mainBtnIdx = 0;
@@ -76,9 +138,10 @@ namespace BlockyBlock.UI
                 .DOAnchorPos(m_CoinShowPosition, m_CoinTransitionDuration)
                 .SetDelay(m_CoinDelayTransition)
                 .SetEase(Ease.OutBack);
+            DOVirtual.DelayedCall(_delay, () => _cb?.Invoke());
         }
 
-        void HandleHide()
+        void HandleHideMainButtons(System.Action _cb = null, float _delay = 0)
         {
             // * Main buttons
             int mainBtnIdx = 0;
@@ -102,6 +165,7 @@ namespace BlockyBlock.UI
                 .DOAnchorPos(m_CoinHidePosition, m_CoinTransitionDuration)
                 .SetDelay(m_CoinDelayTransition)
                 .SetEase(Ease.InBack);
+            DOVirtual.DelayedCall(_delay, () => _cb?.Invoke());
         }
     }
 }

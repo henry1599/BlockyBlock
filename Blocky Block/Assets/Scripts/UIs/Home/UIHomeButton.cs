@@ -8,7 +8,8 @@ using TMPro;
 
 namespace BlockyBlock.UI 
 {
-    public class UIHomeButton : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler, IPointerDownHandler
+    [RequireComponent(typeof(UICustomButton))]
+    public class UIHomeButton : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler, IPointerDownHandler, IPointerMoveHandler
     {
         [Header("References")]
         [SerializeField] Image m_TopPanel;
@@ -66,6 +67,12 @@ namespace BlockyBlock.UI
         {
             if (m_IsBlock) return;
             HandleIdle();
+        }
+
+        public void OnPointerMove(PointerEventData eventData)
+        {
+            if (m_IsBlock) return;
+            HandleHover();
         }
         void ResetTween()
         {

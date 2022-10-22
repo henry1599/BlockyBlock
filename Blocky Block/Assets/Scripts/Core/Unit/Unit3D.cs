@@ -277,6 +277,11 @@ namespace BlockyBlock.Core
         #region Push
         void Push(BlockFunctionPush _push)
         {
+            if (m_GrabbedObject != null)
+            {
+                ErrorEvents.ON_ERROR?.Invoke(ErrorType.INVALID_PUSH);
+                return;
+            }
             DirectionData directionData = ConfigManager.Instance.UnitConfig.GetDataByDirection(m_CurrentDirection);
             // GameObject pushableObject = m_UnitVision.GetFrontObject((int)m_CurrentCell.x, (int)m_CurrentCell.y, m_CurrentFloor, directionData);
             GameObject pushableObject = m_UnitVision.GetFrontObject();
@@ -347,16 +352,12 @@ namespace BlockyBlock.Core
             {
                 case UnitDirection.UP:
                     return GetGridUp(_condd, directionPosition);
-                    break;
                 case UnitDirection.RIGHT:
                     return GetGridRight(_condd, directionPosition);
-                    break;
                 case UnitDirection.DOWN:
                     return GetGridDown(_condd, directionPosition);
-                    break;
                 case UnitDirection.LEFT:
                     return GetGridLeft(_condd, directionPosition);
-                    break;
             }
             return result;
 
@@ -366,31 +367,22 @@ namespace BlockyBlock.Core
                 {
                     case ConditionDirection.TOP_LEFT:  
                         return _dict[ConditionDirection.TOP_LEFT];
-                        break;
                     case ConditionDirection.TOP_MID:
                         return _dict[ConditionDirection.TOP_MID];
-                        break;
                     case ConditionDirection.TOP_RIGHT:
                         return _dict[ConditionDirection.TOP_RIGHT];
-                        break;
                     case ConditionDirection.CENTER_LEFT:
                         return _dict[ConditionDirection.CENTER_LEFT];
-                        break;
                     case ConditionDirection.CENTER_RIGHT:
                         return _dict[ConditionDirection.CENTER_RIGHT];
-                        break;
                     case ConditionDirection.BOTTOM_LEFT:
                         return _dict[ConditionDirection.BOTTOM_LEFT];
-                        break;
                     case ConditionDirection.BOTTOM_MID:
                         return _dict[ConditionDirection.BOTTOM_MID];
-                        break;
                     case ConditionDirection.BOTTOM_RIGHT:
                         return _dict[ConditionDirection.BOTTOM_RIGHT];
-                        break;
                     default:
                         return _dict[ConditionDirection.TOP_LEFT];
-                        break;
                 }
             }
             Vector2Int GetGridDown(ConditionDirection _condd, Dictionary<ConditionDirection, Vector2Int> _dict)
@@ -399,31 +391,22 @@ namespace BlockyBlock.Core
                 {
                     case ConditionDirection.TOP_LEFT:  
                         return _dict[ConditionDirection.BOTTOM_RIGHT];
-                        break;
                     case ConditionDirection.TOP_MID:
                         return _dict[ConditionDirection.BOTTOM_MID];
-                        break;
                     case ConditionDirection.TOP_RIGHT:
                         return _dict[ConditionDirection.BOTTOM_LEFT];
-                        break;
                     case ConditionDirection.CENTER_LEFT:
                         return _dict[ConditionDirection.CENTER_RIGHT];
-                        break;
                     case ConditionDirection.CENTER_RIGHT:
                         return _dict[ConditionDirection.CENTER_LEFT];
-                        break;
                     case ConditionDirection.BOTTOM_LEFT:
                         return _dict[ConditionDirection.TOP_RIGHT];
-                        break;
                     case ConditionDirection.BOTTOM_MID:
                         return _dict[ConditionDirection.TOP_MID];
-                        break;
                     case ConditionDirection.BOTTOM_RIGHT:
                         return _dict[ConditionDirection.TOP_LEFT];
-                        break;
                     default:
                         return _dict[ConditionDirection.BOTTOM_RIGHT];
-                        break;
                 }
             }
             Vector2Int GetGridLeft(ConditionDirection _condd, Dictionary<ConditionDirection, Vector2Int> _dict)
@@ -432,31 +415,22 @@ namespace BlockyBlock.Core
                 {
                     case ConditionDirection.TOP_LEFT:  
                         return _dict[ConditionDirection.BOTTOM_LEFT];
-                        break;
                     case ConditionDirection.TOP_MID:
                         return _dict[ConditionDirection.CENTER_LEFT];
-                        break;
                     case ConditionDirection.TOP_RIGHT:
                         return _dict[ConditionDirection.TOP_LEFT];
-                        break;
                     case ConditionDirection.CENTER_LEFT:
                         return _dict[ConditionDirection.BOTTOM_MID];
-                        break;
                     case ConditionDirection.CENTER_RIGHT:
                         return _dict[ConditionDirection.TOP_MID];
-                        break;
                     case ConditionDirection.BOTTOM_LEFT:
                         return _dict[ConditionDirection.BOTTOM_RIGHT];
-                        break;
                     case ConditionDirection.BOTTOM_MID:
                         return _dict[ConditionDirection.CENTER_RIGHT];
-                        break;
                     case ConditionDirection.BOTTOM_RIGHT:
                         return _dict[ConditionDirection.TOP_RIGHT];
-                        break;
                     default:
                         return _dict[ConditionDirection.BOTTOM_LEFT];
-                        break;
                 }
             }
             Vector2Int GetGridRight(ConditionDirection _condd, Dictionary<ConditionDirection, Vector2Int> _dict)
@@ -465,31 +439,22 @@ namespace BlockyBlock.Core
                 {
                     case ConditionDirection.TOP_LEFT:  
                         return _dict[ConditionDirection.TOP_RIGHT];
-                        break;
                     case ConditionDirection.TOP_MID:
                         return _dict[ConditionDirection.CENTER_RIGHT];
-                        break;
                     case ConditionDirection.TOP_RIGHT:
                         return _dict[ConditionDirection.BOTTOM_RIGHT];
-                        break;
                     case ConditionDirection.CENTER_LEFT:
                         return _dict[ConditionDirection.TOP_MID];
-                        break;
                     case ConditionDirection.CENTER_RIGHT:
                         return _dict[ConditionDirection.BOTTOM_MID];
-                        break;
                     case ConditionDirection.BOTTOM_LEFT:
                         return _dict[ConditionDirection.TOP_LEFT];
-                        break;
                     case ConditionDirection.BOTTOM_MID:
                         return _dict[ConditionDirection.CENTER_LEFT];
-                        break;
                     case ConditionDirection.BOTTOM_RIGHT:
                         return _dict[ConditionDirection.BOTTOM_LEFT];
-                        break;
                     default:
                         return _dict[ConditionDirection.TOP_RIGHT];
-                        break;
                 }
             }
         }

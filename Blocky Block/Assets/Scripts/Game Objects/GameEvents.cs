@@ -10,6 +10,10 @@ using System;
 
 namespace BlockyBlock.Events
 {
+    public class HomeEvents
+    {
+        public static Action<HomeState> ON_STAGE_CHANGED;
+    }
     public class GameEvents
     {
         public static Action<LevelID> LOAD_LEVEL;
