@@ -96,7 +96,7 @@ namespace BlockyBlock.UI
             m_Connection.SetWeight(m_WeightConnection);
 
             m_ConnectionOutline.SetTargets(TopPanelOutline, m_UIBlockJumpTo.TopPanelOutline);
-            m_ConnectionOutline.SetWeight(1, m_WeightConnection);
+            m_ConnectionOutline.SetWeight(m_WeightConnection);
         }
         public void SetupArrow()
         {

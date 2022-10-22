@@ -1,0 +1,88 @@
+using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
+using UnityEngine.UI;
+using UnityEngine.EventSystems;
+using DG.Tweening;
+using TMPro;
+
+namespace BlockyBlock.UI 
+{
+    public class UIHomeButton : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler, IPointerDownHandler
+    {
+        [Header("References")]
+        [SerializeField] Image m_TopPanel;
+        [SerializeField] TMP_Text m_Title;
+
+        [Space(10)]
+        [Header("Idle Values")]
+        [SerializeField] float m_IdleTransitionDuration;
+        [SerializeField] Color m_IdlePanelColor;
+        [SerializeField] Color m_IdleTitleColor;
+        [SerializeField] Vector2 m_IdleRectVector;
+        
+        [Space(10)]
+        [Header("Hover Values")]
+        [SerializeField] float m_HoverTransitionDuration;
+        [SerializeField] Color m_HoverPanelColor;
+        [SerializeField] Color m_HoverTitleColor;
+        [SerializeField] Vector2 m_HoverRectVector;
+        
+        [Space(10)]
+        [Header("Click Values")]        
+        [SerializeField] float m_ClickTransitionDuration;
+        [SerializeField] Color m_ClickPanelColor;
+        [SerializeField] Color m_ClickTitleColor;
+        [SerializeField] Vector2 m_ClickRectVector;
+
+        public void OnPointerDown(PointerEventData eventData)
+        {
+            HandleClick();
+        }
+
+        public void OnPointerEnter(PointerEventData eventData)
+        {
+            HandleHover();
+        }
+
+        public void OnPointerExit(PointerEventData eventData)
+        {
+            HandleIdle();
+        }
+        void ResetTween()
+        {
+            m_TopPanel.DOKill();
+            m_Title.DOKill();
+        }
+        void HandleIdle()
+        {
+            ResetTween();
+            // * Color
+            m_TopPanel.DOColor(m_IdlePanelColor, m_IdleTransitionDuration).SetEase(Ease.OutBack);
+            // * Anchor Position
+            DOTween.To(() => m_TopPanel.GetComponent<RectTransform>().anchoredPosition, value => m_TopPanel.GetComponent<RectTransform>().anchoredPosition = value, m_IdleRectVector, m_IdleTransitionDuration).SetEase(Ease.OutBack);
+            // * Title color
+            m_Title.DOColor(m_IdleTitleColor, m_IdleTransitionDuration).SetEase(Ease.OutBack);
+        }
+        void HandleHover()
+        {
+            ResetTween();
+            // * Color
+            m_TopPanel.DOColor(m_HoverPanelColor, m_HoverTransitionDuration).SetEase(Ease.OutBack);
+            // * Anchor Position
+            DOTween.To(() => m_TopPanel.GetComponent<RectTransform>().anchoredPosition, value => m_TopPanel.GetComponent<RectTransform>().anchoredPosition = value, m_HoverRectVector, m_HoverTransitionDuration).SetEase(Ease.OutBack);
+            // * Title color
+            m_Title.DOColor(m_HoverTitleColor, m_HoverTransitionDuration).SetEase(Ease.OutBack);
+        }
+        void HandleClick()
+        {
+            ResetTween();
+            // * Color
+            m_TopPanel.DOColor(m_ClickPanelColor, m_ClickTransitionDuration).SetEase(Ease.OutBack);
+            // * Anchor Position
+            DOTween.To(() => m_TopPanel.GetComponent<RectTransform>().anchoredPosition, value => m_TopPanel.GetComponent<RectTransform>().anchoredPosition = value, m_ClickRectVector, m_ClickTransitionDuration).SetEase(Ease.OutBack);
+            // * Title color
+            m_Title.DOColor(m_ClickTitleColor, m_ClickTransitionDuration).SetEase(Ease.OutBack);
+        }
+    }
+}
