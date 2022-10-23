@@ -194,7 +194,7 @@ namespace BlockyBlock.Managers
         }
         public void OnHomeButtonClick()
         {
-            GameEvents.LOAD_LEVEL?.Invoke(LevelID.HOME);
+            GameManager.Instance.TransitionIn(() => GameEvents.LOAD_LEVEL?.Invoke(LevelID.HOME));
         }
         public void OnControlButtonActivate(int _type)
         {

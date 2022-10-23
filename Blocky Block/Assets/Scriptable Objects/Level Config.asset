@@ -123,7 +123,7 @@ MonoBehaviour:
     - LevelType: 1
       WinCondition: 1000
       StuffToCollect: 1
-      LevelName: Level Test
+      LevelName: Level
       BlockTypes: 00000000040000000100000002000000070000000c0000000800000005000000
       UnitDatas:
       - Floor: 0

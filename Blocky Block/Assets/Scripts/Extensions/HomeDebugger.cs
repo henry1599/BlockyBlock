@@ -6,6 +6,9 @@ using NaughtyAttributes;
 [ExecuteInEditMode]
 public class HomeDebugger : MonoBehaviour
 {
+    [Header("Camera")]
+    public GameObject Camera;
+    [Space(10)]
     [Header("Main Button")]
     public GameObject StartButton;
     public GameObject ShopButton;
@@ -23,12 +26,16 @@ public class HomeDebugger : MonoBehaviour
     public GameObject ManualLevel;
     public GameObject CustomLevel;
     public GameObject BackButton;
+    [Space(10)]
+    [Header("Scene Transition")]
+    public GameObject SceneTransition;
 
     [Button("Show Level Section")]
     public void ShowLevelSection()
     {
         DOShowLevelSection();
         DOHideMainHomeUI();
+        DOHideSceneTransition();
     }  
 
     [Button("Show Main Home UI")]
@@ -36,12 +43,32 @@ public class HomeDebugger : MonoBehaviour
     {
         DOShowMainHomeUI();
         DOHideLevelSection();
+        DOHideSceneTransition();
+    }
+    [Button("Show Scene Transition")]
+    public void ShowSceneTransition()
+    {
+        DOShowSceneTransition();
+    }
+    void DOShowSceneTransition()
+    {
+        SceneTransition.SetActive(true);
+    }
+    void DOHideSceneTransition()
+    {
+        SceneTransition.SetActive(false);
     }
     void DOShowLevelSection()
     {
         ManualLevel.GetComponent<RectTransform>().anchoredPosition = new Vector2(500, ManualLevel.GetComponent<RectTransform>().anchoredPosition.y);
         CustomLevel.GetComponent<RectTransform>().anchoredPosition = new Vector2(-500, CustomLevel.GetComponent<RectTransform>().anchoredPosition.y);
         BackButton.GetComponent<RectTransform>().anchoredPosition = new Vector2(120, -120);
+        
+        Vector3 cameraPos = Camera.transform.position;
+
+        cameraPos.x = -14;
+        
+        Camera.transform.position = cameraPos;
     }
     void DOHideLevelSection()
     {
@@ -70,6 +97,12 @@ public class HomeDebugger : MonoBehaviour
 
         AvatarField.GetComponent<RectTransform>().anchoredPosition = new Vector2(AvatarField.GetComponent<RectTransform>().anchoredPosition.x, 540);
         CoinField.GetComponent<RectTransform>().anchoredPosition = new Vector2(CoinField.GetComponent<RectTransform>().anchoredPosition.x, 540);
+        
+        Vector3 cameraPos = Camera.transform.position;
+
+        cameraPos.x = -4;
+        
+        Camera.transform.position = cameraPos;
     }
 
     [Button("Reset to play mode")]
@@ -77,5 +110,12 @@ public class HomeDebugger : MonoBehaviour
     {
         DOHideMainHomeUI();
         DOHideLevelSection();
+        DOShowSceneTransition();
+
+        Vector3 cameraPos = Camera.transform.position;
+
+        cameraPos.x = -4;
+        
+        Camera.transform.position = cameraPos;
     }
 }

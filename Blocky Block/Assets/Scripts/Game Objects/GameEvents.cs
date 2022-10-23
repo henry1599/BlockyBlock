@@ -106,5 +106,7 @@ namespace BlockyBlock.Events
         public static readonly string UNWALKABLE_TAG = "Unwalkable";
         public static readonly string UIERROR_TAG = "UIError";
         public static readonly string LEVELS_RAW_DATA_PATH = $"Data/Levels/";
+        public static readonly float TRANSITION_IN_DURATION = 1.5f;
+        public static readonly float TRANSITION_OUT_DURATION = 1;
     }
 }

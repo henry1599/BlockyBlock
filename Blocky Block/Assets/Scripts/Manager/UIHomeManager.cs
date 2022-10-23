@@ -32,5 +32,9 @@ namespace BlockyBlock.Managers
         {
             Application.Quit();
         }
+        public void OnMainStoryButtonClick()
+        {
+            GameManager.Instance.TransitionIn(() => GameEvents.LOAD_LEVEL?.Invoke(LevelID.LEVEL_TEST_3D));
+        }
     }
 }
