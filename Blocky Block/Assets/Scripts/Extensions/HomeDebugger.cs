@@ -118,4 +118,30 @@ public class HomeDebugger : MonoBehaviour
         
         Camera.transform.position = cameraPos;
     }
+    [Button("Hide all UI (not player)")]
+    public void HideAllUI()
+    {
+        DOHideMainHomeUI();
+        DOHideLevelSection();
+        DOHideSceneTransition();
+        
+        Vector3 cameraPos = Camera.transform.position;
+
+        cameraPos.x = -4;
+        
+        Camera.transform.position = cameraPos;
+    }
+    [Button("Hide all UI (including player)")]
+    public void HideAllUIAndPlayer()
+    {
+        DOHideMainHomeUI();
+        DOHideLevelSection();
+        DOHideSceneTransition();
+
+        Vector3 cameraPos = Camera.transform.position;
+
+        cameraPos.x = -14;
+        
+        Camera.transform.position = cameraPos;
+    }
 }

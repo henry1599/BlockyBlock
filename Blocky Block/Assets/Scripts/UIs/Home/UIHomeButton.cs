@@ -5,6 +5,8 @@ using UnityEngine.UI;
 using UnityEngine.EventSystems;
 using DG.Tweening;
 using TMPro;
+using BlockyBlock.Managers;
+using AudioPlayer;
 
 namespace BlockyBlock.UI 
 {
@@ -60,6 +62,7 @@ namespace BlockyBlock.UI
         public void OnPointerEnter(PointerEventData eventData)
         {
             if (m_IsBlock) return;
+            Hover();
             HandleHover();
         }
 
@@ -108,11 +111,16 @@ namespace BlockyBlock.UI
             DOTween.To(() => m_TopPanel.GetComponent<RectTransform>().anchoredPosition, value => m_TopPanel.GetComponent<RectTransform>().anchoredPosition = value, m_ClickRectVector, m_ClickTransitionDuration).SetEase(Ease.OutBack);
             // * Title color
             m_Title?.DOColor(m_ClickTitleColor, m_ClickTransitionDuration).SetEase(Ease.OutBack);
+            SoundManager.Instance.PlaySound(SoundID.BUTTON_CLICK);
             Invoke(nameof(Click), m_ClickTransitionDuration / 2);
         }
         void Click()
         {
             m_Button?.OnClick?.Invoke();
+        }
+        void Hover()
+        {
+            SoundManager.Instance.PlaySound(SoundID.BUTTON_HOVER);
         }
     }
 }

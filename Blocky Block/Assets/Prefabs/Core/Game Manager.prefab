@@ -1,5 +1,80 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
+--- !u!1 &741735916
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 741735917}
+  - component: {fileID: 741735918}
+  - component: {fileID: 5598174406613521463}
+  - component: {fileID: 5705159942334373367}
+  m_Layer: 0
+  m_Name: Sound Manager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &741735917
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 741735916}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 2353429440522748516}
+  m_RootOrder: 5
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &741735918
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 741735916}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 028821da18f7e65448db6d52216bdea6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  sfxPrefab: {fileID: 2618980319728706102, guid: 7e4caf8bcbdc48b4a816142c3ed8a118, type: 3}
+  soundMapConfig: {fileID: 11400000, guid: c6f6cd12ee8a81040a37afb482341a4f, type: 2}
+  numberOfDefaultSFX: 8
+  sfxVolume: 1
+  musicVolume: 1
+  currentMixer: {fileID: 24100000, guid: 7837b0e03618e574aaf1009e7d56c49c, type: 2}
+  SFX_MixerGroup: {fileID: 24300002, guid: 7837b0e03618e574aaf1009e7d56c49c, type: 2}
+  Music_MixerGroup: {fileID: 24300002, guid: 7837b0e03618e574aaf1009e7d56c49c, type: 2}
+  LOG_TAG: SoundMgr
+--- !u!81 &5598174406613521463
+AudioListener:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 741735916}
+  m_Enabled: 1
+--- !u!114 &5705159942334373367
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 741735916}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5b3dcdcafad7b00468177fbe7b843e79, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &2357804137990867744
 GameObject:
   m_ObjectHideFlags: 0
@@ -78,6 +153,7 @@ Transform:
   - {fileID: 8138240933644127236}
   - {fileID: 2933605242316647727}
   - {fileID: 6923342298639207130}
+  - {fileID: 741735917}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
