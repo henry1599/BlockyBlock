@@ -4,6 +4,7 @@ using UnityEngine;
 using BlockyBlock.Enums;
 using RotaryHeart.Lib.SerializableDictionary;
 using System.Linq;
+using NaughtyAttributes;
 
 namespace BlockyBlock.Configurations
 {
@@ -11,22 +12,46 @@ namespace BlockyBlock.Configurations
     public class LevelConfig : ScriptableObject
     {
         public float SpaceEachFloor;
-        public Level LevelDatas;
-        public LevelData GetLevelDataByID(LevelID _id)
+        public List<LevelData> LevelDatas;
+        public Level Level;
+        public string LevelTextPath;
+        public LevelID GetLevelIDBySceneName(string _sceneName)
         {
-            return LevelDatas[_id];
+            return Level.FirstOrDefault(x => x.Value == _sceneName).Key;
         }
         public string GetSceneNameByID(LevelID _id)
         {
-            return LevelDatas[_id].LevelName;
+            return Level[_id];
         }
-        public LevelID GetLevelIDBySceneName(string _name)
+        public LevelData GetLevelDataByID(LevelID _id)
         {
-            return LevelDatas.FirstOrDefault(p => p.Value.LevelName == _name).Key;
+            string sceneName = GetSceneNameByID(_id);
+            foreach (LevelData ld in LevelDatas)
+            {
+                if (ld.LevelName == sceneName)
+                {
+                    return ld;
+                }
+            }
+            return new LevelData();
+        }
+        [Button]
+        public void LoadLevelDatas()
+        {
+            var gos = Resources.LoadAll(LevelTextPath);
+            if (gos == null || gos.Length == 0) return;
+            foreach (var go in gos)
+            {
+                TextAsset data = (TextAsset)go;
+                string jsonText = data.text;
+
+                LevelData leveData = JsonUtility.FromJson<LevelData>(jsonText);
+                LevelDatas.Add(leveData);
+            }
         }
     }
     [System.Serializable]
-    public class Level : SerializableDictionaryBase<LevelID, LevelData> {}
+    public class Level : SerializableDictionaryBase<LevelID, string> {}
     [System.Serializable]
     public class UnitData 
     {
@@ -46,5 +71,15 @@ namespace BlockyBlock.Configurations
         public List<BlockType> BlockTypes;
         public List<UnitData> UnitDatas;
         public string LevelRawData;
+        public LevelData()
+        {
+            LevelType = LevelType.HOME;
+            WinCondition = WinType.COLLECT_ALL_STUFF;
+            StuffToCollect = 0;
+            LevelName = "Home";
+            BlockTypes = new List<BlockType>();
+            UnitDatas = new List<UnitData>();
+            LevelRawData = string.Empty;
+        }
     }
 }

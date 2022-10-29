@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using NaughtyAttributes;
+using Helpers;
 
 [ExecuteInEditMode]
 public class HomeDebugger : MonoBehaviour
@@ -29,13 +30,25 @@ public class HomeDebugger : MonoBehaviour
     [Space(10)]
     [Header("Scene Transition")]
     public GameObject SceneTransition;
+    [Space(10)]
+    [Header("Chapter Selection")]
+    public GameObject[] Chapters;
+    [Button("Show Chapter Selection")]
+    public void ShowChapterSelection()
+    {
+        DOHideLevelSection();
+        DOHideMainHomeUI();
+        DOHideSceneTransition();
+        DOShowChapterSelection();
+    }
 
     [Button("Show Level Section")]
     public void ShowLevelSection()
     {
-        DOShowLevelSection();
         DOHideMainHomeUI();
         DOHideSceneTransition();
+        DOHideChapterSelection();
+        DOShowLevelSection();
     }  
 
     [Button("Show Main Home UI")]
@@ -44,11 +57,38 @@ public class HomeDebugger : MonoBehaviour
         DOShowMainHomeUI();
         DOHideLevelSection();
         DOHideSceneTransition();
+        DOHideChapterSelection();
     }
     [Button("Show Scene Transition")]
     public void ShowSceneTransition()
     {
         DOShowSceneTransition();
+    }
+    void DOShowChapterSelection()
+    {
+        Vector2 basePosition = new Vector2(400, -50);
+        float factor = 560;
+        foreach (var (g, index) in Chapters.WithIndex())
+        {
+            Vector2 position = new Vector2(basePosition.x + index * factor, basePosition.y);
+            g.GetComponent<RectTransform>().anchoredPosition = position;
+        }
+        BackButton.GetComponent<RectTransform>().anchoredPosition = new Vector2(120, -120);
+        
+        Vector3 cameraPos = Camera.transform.position;
+
+        cameraPos.x = -14;
+        
+        Camera.transform.position = cameraPos;
+    }
+    void DOHideChapterSelection()
+    {
+        foreach (var (g, index) in Chapters.WithIndex())
+        {
+            Vector2 position = new Vector2(2420, -50);
+            g.GetComponent<RectTransform>().anchoredPosition = position;
+        }
+        BackButton.GetComponent<RectTransform>().anchoredPosition = new Vector2(-100, -100);
     }
     void DOShowSceneTransition()
     {
@@ -111,6 +151,7 @@ public class HomeDebugger : MonoBehaviour
         DOHideMainHomeUI();
         DOHideLevelSection();
         DOShowSceneTransition();
+        DOHideChapterSelection();
 
         Vector3 cameraPos = Camera.transform.position;
 
@@ -124,6 +165,7 @@ public class HomeDebugger : MonoBehaviour
         DOHideMainHomeUI();
         DOHideLevelSection();
         DOHideSceneTransition();
+        DOHideChapterSelection();
         
         Vector3 cameraPos = Camera.transform.position;
 
@@ -137,6 +179,7 @@ public class HomeDebugger : MonoBehaviour
         DOHideMainHomeUI();
         DOHideLevelSection();
         DOHideSceneTransition();
+        DOHideChapterSelection();
 
         Vector3 cameraPos = Camera.transform.position;
 

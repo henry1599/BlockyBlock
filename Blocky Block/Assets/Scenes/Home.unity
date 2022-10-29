@@ -526,7 +526,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: -100, y: 100}
+  m_AnchoredPosition: {x: -100, y: -100}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!1 &134705284
@@ -9061,6 +9061,10 @@ MonoBehaviour:
   CustomLevel: {fileID: 1684190441}
   BackButton: {fileID: 131796830}
   SceneTransition: {fileID: 789235852}
+  Chapters:
+  - {fileID: 621743942}
+  - {fileID: 767140166}
+  - {fileID: 1002252041}
 --- !u!4 &1640271272
 Transform:
   m_ObjectHideFlags: 0
