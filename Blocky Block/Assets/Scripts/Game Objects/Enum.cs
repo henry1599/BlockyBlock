@@ -53,10 +53,10 @@ namespace BlockyBlock.Enums
         DEBUG = 2
     }
     public enum UnitDirection {
-        UP,
-        DOWN,
-        LEFT,
-        RIGHT
+        UP = 0,
+        DOWN = 1,
+        LEFT = 2,
+        RIGHT = 3
     }
     public enum BlockMode {
         IDE, 
@@ -65,30 +65,42 @@ namespace BlockyBlock.Enums
         DUMMY_BLOCK
     }
     public enum BlockType {
-        MOVE_FORWARD,
-        PICK_UP,
-        PUT_DOWN,
-        DO_UNTIL,
-        TURN,
-        JUMP,
-        SKIP,
-        PUSH,
-        JUMP_GRAB_STH,
-        SKIP_GRAB_STH,
-        JUMP_GRAB_NTH,
-        SKIP_GRAB_NTH,
-        JUMP_IF_STH_FRONT,
-        SKIP_IF_STH_FRONT
+        MOVE_FORWARD = 0,
+        PICK_UP = 1,
+        PUT_DOWN = 2,
+        DO_UNTIL = 3,
+        TURN = 4,
+        JUMP = 5,
+        SKIP = 6,
+        PUSH = 7,
+        JUMP_GRAB_STH = 8,
+        SKIP_GRAB_STH = 9,
+        JUMP_GRAB_NTH = 10,
+        SKIP_GRAB_NTH = 11,
+        JUMP_IF_STH_FRONT = 12,
+        SKIP_IF_STH_FRONT = 13
     }
     public enum LevelID {
         HOME,
-        LEVEL
+        LEVEL_MANNUAL_00,
+        LEVEL_MANNUAL_01,
+        LEVEL_MANNUAL_02,
+        LEVEL_MANNUAL_03,
+        LEVEL_MANNUAL_04,
+        LEVEL_MANNUAL_05,
+        LEVEL_MANNUAL_06,
+        LEVEL_MANNUAL_07,
+        LEVEL_MANNUAL_08,
+        LEVEL_MANNUAL_09,
+        LEVEL_MANNUAL_10,
+        LEVEL_MANNUAL_11,
+        LEVEL_MANNUAL_12,
     }
     public enum LevelType {
-        HOME,
-        MANUAL,
-        CUSTOM,
-        EVENT
+        HOME = 0,
+        MANUAL = 1,
+        CUSTOM = 2,
+        EVENT = 3
     }
     public enum ConditionDirection
     {

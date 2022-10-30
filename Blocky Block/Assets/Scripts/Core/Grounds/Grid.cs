@@ -33,7 +33,7 @@ namespace BlockyBlock.Core
         }
         public Vector3 GetWorldPosition(int _iX, int _iY)
         {
-            return (new Vector3(_iX * m_GroundSize, m_Floor * ConfigManager.Instance.LevelConfig.SpaceEachFloor, _iY * m_GroundSize)) + m_GridStartPosition;
+            return (new Vector3(_iX * m_GroundSize, 0, _iY * m_GroundSize)) + m_GridStartPosition;
         }
     }
 }

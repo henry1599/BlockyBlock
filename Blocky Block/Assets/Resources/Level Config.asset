@@ -12,19 +12,19 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9eb1eceb4af900641ad8cf73db21be72, type: 3}
   m_Name: Level Config
   m_EditorClassIdentifier: 
-  SpaceEachFloor: 0
   LevelDatas:
   - LevelType: 1
+    LevelID: 1
     WinCondition: 1000
     StuffToCollect: 1
     LevelName: Level
-    BlockTypes: 0000000004000000050000000c000000010000000200000007000000
+    BlockTypes: 0000000004000000050000000c000000
     UnitDatas:
     - Floor: 0
       X: 1
       Y: 1
       StartDirection: 0
-    LevelRawData: 600000;311110;000000;011113;000000;311110;000000;
+    LevelRawData: 003;000;000;
   Level:
     reorderableList:
       canAdd: 1
@@ -32,7 +32,7 @@ MonoBehaviour:
       draggable: 1
       expandable: 1
       multipleSelection: 1
-      isExpanded: 1
+      isExpanded: 0
       label:
         m_Text: Keys
         m_Image: {fileID: 0}
@@ -47,10 +47,22 @@ MonoBehaviour:
       elementNameOverride: 
       elementIcon: {fileID: 0}
     reqReferences: {fileID: 0}
-    isExpanded: 1
-    _keyValues: 0100000000000000
-    _keys: 0100000000000000
+    isExpanded: 0
+    _keyValues: 0100000002000000030000000400000005000000060000000700000008000000090000000a0000000b0000000c0000000d00000000000000
+    _keys: 0100000002000000030000000400000005000000060000000700000008000000090000000a0000000b0000000c0000000d00000000000000
     _values:
+    - Level
+    - Level
+    - Level
+    - Level
+    - Level
+    - Level
+    - Level
+    - Level
+    - Level
+    - Level
+    - Level
+    - Level
     - Level
     - Home
   LevelTextPath: Data/Levels

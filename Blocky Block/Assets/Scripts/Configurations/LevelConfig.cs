@@ -11,7 +11,6 @@ namespace BlockyBlock.Configurations
     [CreateAssetMenu(fileName = "Level Config", menuName = "Scriptable Object/Level Config")]
     public class LevelConfig : ScriptableObject
     {
-        public float SpaceEachFloor;
         public List<LevelData> LevelDatas;
         public Level Level;
         public string LevelTextPath;
@@ -38,6 +37,7 @@ namespace BlockyBlock.Configurations
         [Button]
         public void LoadLevelDatas()
         {
+            LevelDatas.Clear();
             var gos = Resources.LoadAll(LevelTextPath);
             if (gos == null || gos.Length == 0) return;
             foreach (var go in gos)
@@ -60,17 +60,35 @@ namespace BlockyBlock.Configurations
         public int X;
         public int Y;
         public UnitDirection StartDirection;
+        public UnitData(int _x, int _y, UnitDirection _direction)
+        {
+            X = _x;
+            Y = _y;
+            StartDirection = _direction;
+        }
     }
     [System.Serializable]
     public class LevelData
     {
         public LevelType LevelType;
+        public LevelID LevelID;
         public WinType WinCondition;
         public int StuffToCollect;
         public string LevelName; 
         public List<BlockType> BlockTypes;
         public List<UnitData> UnitDatas;
         public string LevelRawData;
+        public LevelData(LevelType _levelType, LevelID _levelID, WinType _winType, int _stuffToCollect, string _levelName, List<BlockType> _blockTypes, List<UnitData> _unitData, string _levelRawData)
+        {
+            LevelType = _levelType;
+            LevelID = _levelID;
+            WinCondition = _winType;
+            StuffToCollect = _stuffToCollect;
+            LevelName = _levelName;
+            BlockTypes = _blockTypes;
+            UnitDatas = _unitData;
+            LevelRawData = _levelRawData;;
+        }
         public LevelData()
         {
             LevelType = LevelType.HOME;

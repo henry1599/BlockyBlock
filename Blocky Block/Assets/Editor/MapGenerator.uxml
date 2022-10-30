@@ -1,4 +1,17 @@
 <ui:UXML xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" editor-extension-mode="True">
+    <ui:VisualElement style="height: auto;">
+        <ui:Label text="General Setup" display-tooltip-when-elided="true" style="font-size: 15px; -unity-font: url(&apos;project://database/Assets/Fonts/Raw/Dosis-Bold.ttf?fileID=12800000&amp;guid=855e119d5139f2b43a08e7ead8937fce&amp;type=3#Dosis-Bold&apos;); -unity-text-align: middle-center; -unity-font-style: bold;" />
+        <uie:EnumField label="Level Type" value="Center" name="_levelType" />
+        <uie:EnumField label="Level ID" value="Center" name="_levelID" />
+        <uie:EnumField label="Win condition" value="Center" name="_winCondition" />
+        <uie:IntegerField label="Stuff to collect" value="42" name="_stuffToCollect" />
+        <ui:SliderInt picking-mode="Ignore" label="Blocks" value="5" high-value="8" show-input-field="true" low-value="1" name="_blockNumber" style="margin-right: 0;">
+            <ui:Button text="+" display-tooltip-when-elided="true" name="_blocksButton" />
+        </ui:SliderInt>
+        <ui:IMGUIContainer name="_blocksContainer" style="height: 208px;" />
+        <uie:Vector2IntField label="Unit Position" name="_unitPosition" />
+        <uie:EnumField label="Unit Start Direction" value="Center" name="_unitStartDirection" />
+    </ui:VisualElement>
     <ui:VisualElement>
         <ui:Label text="Map Size" display-tooltip-when-elided="true" name="_mapSize" style="justify-content: center; align-items: center; -unity-text-align: upper-center; -unity-font: url(&apos;project://database/Assets/Fonts/Raw/Dosis-Bold.ttf?fileID=12800000&amp;guid=855e119d5139f2b43a08e7ead8937fce&amp;type=3#Dosis-Bold&apos;); -unity-font-style: bold; font-size: 15px; color: rgb(255, 255, 255);" />
         <ui:SliderInt picking-mode="Ignore" label="Width" value="5" high-value="12" name="_width" low-value="1" show-input-field="true" style="-unity-font-style: bold;" />
@@ -7,5 +20,5 @@
         <ui:Label text="Map Elements" display-tooltip-when-elided="true" name="_mapEle" style="justify-content: center; align-items: center; -unity-text-align: upper-center; -unity-font: url(&apos;project://database/Assets/Fonts/Raw/Dosis-Bold.ttf?fileID=12800000&amp;guid=855e119d5139f2b43a08e7ead8937fce&amp;type=3#Dosis-Bold&apos;); -unity-font-style: bold; font-size: 15px; color: rgb(255, 255, 255); padding-top: 0; margin-top: 10px;" />
     </ui:VisualElement>
     <ui:IMGUIContainer name="_mapElementsField" style="flex-grow: 0; flex-direction: row; flex-wrap: wrap; flex-basis: auto; height: 240px; width: 780px; max-width: 780px; max-height: 240px; min-width: 65px; min-height: 240px;" />
-    <ui:Button text="Generate Text File" display-tooltip-when-elided="true" name="_generateBtn" style="margin-top: 10px;" />
+    <ui:Button text="Generate Text File" display-tooltip-when-elided="true" name="_generateBtn" style="margin-top: 10px; height: 23px; padding-top: 0; border-top-width: 1px;" />
 </ui:UXML>
