@@ -13,20 +13,20 @@ namespace BlockyBlock.Editor
 {
     public enum LevelIDEditor
     {
-        HOME,
-        LEVEL_MANNUAL_00,
-        LEVEL_MANNUAL_01,
-        LEVEL_MANNUAL_02,
-        LEVEL_MANNUAL_03,
-        LEVEL_MANNUAL_04,
-        LEVEL_MANNUAL_05,
-        LEVEL_MANNUAL_06,
-        LEVEL_MANNUAL_07,
-        LEVEL_MANNUAL_08,
-        LEVEL_MANNUAL_09,
-        LEVEL_MANNUAL_10,
-        LEVEL_MANNUAL_11,
-        LEVEL_MANNUAL_12,
+        HOME = 0,
+        LEVEL_MANNUAL_00 = 1000,
+        LEVEL_MANNUAL_01 = 1001,
+        LEVEL_MANNUAL_02 = 1002,
+        LEVEL_MANNUAL_03 = 1003,
+        LEVEL_MANNUAL_04 = 1004,
+        LEVEL_MANNUAL_05 = 1005,
+        LEVEL_MANNUAL_06 = 1006,
+        LEVEL_MANNUAL_07 = 1007,
+        LEVEL_MANNUAL_08 = 1008,
+        LEVEL_MANNUAL_09 = 1009,
+        LEVEL_MANNUAL_10 = 1010,
+        LEVEL_MANNUAL_11 = 1011,
+        LEVEL_MANNUAL_12 = 1012,
     }
     public enum LevelTypeEditor
     {
@@ -254,6 +254,7 @@ namespace BlockyBlock.Editor
             string resultString = "";
             var dir = new System.IO.DirectoryInfo(GetPath());
             int fileNum = dir.GetFiles().Length / 2;
+            string levelName = "Level " + GetLevelNameByEnum((LevelTypeEditor)m_LevelTypeEnumField.value) + " " + (fileNum + 1).ToString("00");
             string textName = TextFileName + (fileNum + 1).ToString();
             string finalPath = GetPath() + textName + ".txt";
 
@@ -284,7 +285,7 @@ namespace BlockyBlock.Editor
                 (LevelID)m_LevelIDEnumField.value,
                 (WinType)m_WinConditionEnumField.value,
                 m_StuffToCollectField.value,
-                "Level",
+                levelName,
                 blockTypes,
                 unitDatas,
                 resultString
@@ -296,6 +297,22 @@ namespace BlockyBlock.Editor
 
             TextAsset textAsset = new TextAsset(json);
             AssetDatabase.SaveAssets();
+        }
+        string GetLevelNameByEnum(LevelTypeEditor _type)
+        {
+            switch (_type)
+            {
+                case LevelTypeEditor.HOME:
+                    return "Home";
+                case LevelTypeEditor.MANUAL:
+                    return "Mannual";
+                case LevelTypeEditor.CUSTOM:
+                    return "Custom";
+                case LevelTypeEditor.EVENT:
+                    return "Event";
+                default:
+                    return "Mannual";
+            }
         }
         string GetCharByLevelTypeEditor(LevelTypeEditor _type)
         {

@@ -59,7 +59,7 @@ namespace BlockyBlock.Managers
         }
         public void OnChapterButtonClick(int _chapter)
         {
-            GameManager.Instance.TransitionIn(() => GameEvents.LOAD_LEVEL?.Invoke(LevelID.LEVEL_MANNUAL_00));
+            GameManager.Instance.TransitionIn(() => GameEvents.LOAD_LEVEL?.Invoke((LevelID)_chapter));
         }
     }
 }

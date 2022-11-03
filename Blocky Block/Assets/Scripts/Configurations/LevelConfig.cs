@@ -27,7 +27,7 @@ namespace BlockyBlock.Configurations
             string sceneName = GetSceneNameByID(_id);
             foreach (LevelData ld in LevelDatas)
             {
-                if (ld.LevelName == sceneName)
+                if (ld.LevelID == _id)
                 {
                     return ld;
                 }
