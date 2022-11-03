@@ -35,8 +35,8 @@ MonoBehaviour:
       elementIcon: {fileID: 0}
     reqReferences: {fileID: 0}
     isExpanded: 1
-    _keyValues: 010000000200000003000000080000002000000018000000
-    _keys: 010000000200000003000000080000002000000018000000
+    _keyValues: 01000000020000000300000008000000200000001800000010000000
+    _keys: 01000000020000000300000008000000200000001800000010000000
     _values:
     - Ground
     - Water
@@ -44,3 +44,4 @@ MonoBehaviour:
     - Box
     - Star
     - Trap
+    - Tree

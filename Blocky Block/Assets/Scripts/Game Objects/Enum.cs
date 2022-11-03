@@ -37,12 +37,12 @@ namespace BlockyBlock.Enums
         STOP_SCROLLING
     }
     public enum GroundType {
-        GROUND = 0b000001, // * 0
-        WATER = 0b000010, // * 1
-        TREE = 0b010000, // * 2
-        BOX = 0b001000,
-        SPACE = 0b000011, // * 4
-        TRAP = 0b011000, // * 5
+        GROUND =      0b000001, // * 0
+        WATER =       0b000010, // * 1
+        TREE =        0b010000, // * 2
+        BOX =         0b001000,
+        SPACE =       0b000011, // * 4
+        TRAP =        0b011000, // * 5
         COLLECTIBLE = 0b100000, // * 6
         BOX_ON_GROUND = BOX | GROUND, // * 3
         BOX_IN_WATER = BOX | WATER // * 7

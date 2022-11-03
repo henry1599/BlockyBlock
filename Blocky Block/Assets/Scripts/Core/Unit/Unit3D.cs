@@ -509,6 +509,13 @@ namespace BlockyBlock.Core
                         result = true;
                     }
                     break;
+                case GroundType.TREE:
+                    frontType = (GroundType)((int)frontType & 0b111000);
+                    if (frontType == GroundType.TREE)
+                    {
+                        result = true;
+                    }
+                    break;
                 case GroundType.TRAP:
                     break;
             }

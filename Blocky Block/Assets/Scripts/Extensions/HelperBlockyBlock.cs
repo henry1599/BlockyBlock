@@ -24,6 +24,8 @@ namespace Helpers.BlockyBlock
                     return GroundType.COLLECTIBLE;
                 case "trap":
                     return GroundType.TRAP;
+                case "tree":
+                    return GroundType.TREE;
                 default:
                     return GroundType.GROUND;
             }
