@@ -82,6 +82,7 @@ namespace BlockyBlock.Enums
     }
     public enum LevelID {
         HOME = 0,
+        LEVEL_SELECTION = 10,
         LEVEL_MANNUAL_00 = 1000,
         LEVEL_MANNUAL_01 = 1001,
         LEVEL_MANNUAL_02 = 1002,

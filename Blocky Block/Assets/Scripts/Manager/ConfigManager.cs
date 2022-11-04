@@ -15,6 +15,7 @@ namespace BlockyBlock.Managers
         public GroundFrontDataConfig GroundFrontDataConfig;
         public ErrorConfig ErrorConfig;
         public BehaviourConfig BehaviourConfig;
+        public SceneConfig SceneConfig;
         void Awake()
         {
             Instance = this;

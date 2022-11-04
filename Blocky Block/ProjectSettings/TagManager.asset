@@ -31,6 +31,8 @@ TagManager:
   - Unwalkable
   - UIError
   - UI Block Option Sth Front
+  - UI Block Option
+  - EventSystem
   layers:
   - Default
   - TransparentFX

@@ -4,6 +4,7 @@ using UnityEngine;
 using DG.Tweening;
 using BlockyBlock.Events;
 using System.Linq;
+using BlockyBlock.Utils;
 
 namespace BlockyBlock.UI 
 {
@@ -86,8 +87,13 @@ namespace BlockyBlock.UI
             {
                 // * From level selection to main
                 case HomeState.MAIN:
+                    UIUtils.LockInput();
                     HandleHideLevelSection(
-                        () => HandleShowMainButtons(),
+                        () => 
+                        {
+                            HandleShowMainButtons();
+                            UIUtils.UnlockInput();
+                        },
                         m_LevelSectionTransitionDuration,
                         _isKeepBackBtn : false,
                         _isHideCharacter : false
@@ -96,17 +102,27 @@ namespace BlockyBlock.UI
                 
                 // * From main to level selection
                 case HomeState.LEVEL_TYPE_SELECTION:
+                    UIUtils.LockInput();
                     HandleHideChapterSelection();
                     HandleHideMainButtons(
-                        () => HandleShowLevelSection(),
+                        () => 
+                        {
+                            HandleShowLevelSection();
+                            UIUtils.UnlockInput();
+                        },
                         m_AvatarDelayTransition + m_AvatarTransitionDuration
                     );
                     break;
                 
                 // * From level selection to chapter selection
                 case HomeState.CHAPTER_SELECTION:
+                    UIUtils.LockInput();
                     HandleHideLevelSection(
-                        () => HandleShowChapterSelection(),
+                        () => 
+                        {
+                            HandleShowChapterSelection();
+                            UIUtils.UnlockInput();
+                        },
                         m_LevelSectionTransitionDuration,
                         _isKeepBackBtn : true,
                         _isHideCharacter : true

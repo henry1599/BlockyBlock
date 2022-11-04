@@ -72,11 +72,12 @@ MonoBehaviour:
       elementIcon: {fileID: 0}
     reqReferences: {fileID: 0}
     isExpanded: 1
-    _keyValues: 00000000e8030000e9030000ea030000
-    _keys: 00000000e8030000e9030000ea030000
+    _keyValues: 00000000e8030000e9030000ea0300000a000000
+    _keys: 00000000e8030000e9030000ea0300000a000000
     _values:
     - Home
     - Level Mannual 01
     - Level Mannual 02
     - Level Mannual 03
+    - Level Selection
   LevelTextPath: Data/Levels

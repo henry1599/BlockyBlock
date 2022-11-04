@@ -5,6 +5,7 @@ using BlockyBlock.Enums;
 using BlockyBlock.Events;
 using BlockyBlock.UI;
 using AudioPlayer;
+using BlockyBlock.Utils;
 
 namespace BlockyBlock.Managers
 {
@@ -59,7 +60,13 @@ namespace BlockyBlock.Managers
         }
         public void OnChapterButtonClick(int _chapter)
         {
-            GameManager.Instance.TransitionIn(() => GameEvents.LOAD_LEVEL?.Invoke((LevelID)_chapter));
+            UIUtils.LockInput();
+            GameManager.Instance.TransitionIn(() => 
+                {
+                    UIUtils.UnlockInput();
+                    GameEvents.LOAD_LEVEL?.Invoke(LevelID.LEVEL_SELECTION);
+                }
+            );
         }
     }
 }

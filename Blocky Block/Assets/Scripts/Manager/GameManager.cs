@@ -63,7 +63,7 @@ namespace BlockyBlock.Managers
             yield return new WaitUntil(() => LevelManager.Instance != null && 
                                              ConfigManager.Instance != null);
             string sceneName = SceneManager.GetActiveScene().name;
-            LevelManager.Instance.CurrentLevelID = ConfigManager.Instance.LevelConfig.GetLevelIDBySceneName(sceneName);
+            LevelManager.Instance.CurrentLevelID = ConfigManager.Instance.SceneConfig.GetLevelIDBySceneName(sceneName);
         }
     }
 }

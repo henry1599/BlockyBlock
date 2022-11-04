@@ -25,7 +25,7 @@ namespace BlockyBlock.Managers
         }
         void LoadSceneByID(LevelID _id)
         {
-            string sceneName = LevelManager.Instance.LevelConfig.GetSceneNameByID(_id);
+            string sceneName = ConfigManager.Instance.SceneConfig.GetSceneNameByID(_id);
             SceneManager.LoadScene(sceneName);
         }
     }

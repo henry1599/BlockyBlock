@@ -12,19 +12,9 @@ namespace BlockyBlock.Configurations
     public class LevelConfig : ScriptableObject
     {
         public List<LevelData> LevelDatas;
-        public Level Level;
         public string LevelTextPath;
-        public LevelID GetLevelIDBySceneName(string _sceneName)
-        {
-            return Level.FirstOrDefault(x => x.Value == _sceneName).Key;
-        }
-        public string GetSceneNameByID(LevelID _id)
-        {
-            return Level[_id];
-        }
         public LevelData GetLevelDataByID(LevelID _id)
         {
-            string sceneName = GetSceneNameByID(_id);
             foreach (LevelData ld in LevelDatas)
             {
                 if (ld.LevelID == _id)
@@ -50,8 +40,6 @@ namespace BlockyBlock.Configurations
             }
         }
     }
-    [System.Serializable]
-    public class Level : SerializableDictionaryBase<LevelID, string> {}
     [System.Serializable]
     public class UnitData 
     {
