@@ -49,35 +49,16 @@ MonoBehaviour:
       Y: 1
       StartDirection: 0
     LevelRawData: 20002;60022;01613;01112;00033;
-  Level:
-    reorderableList:
-      canAdd: 1
-      canRemove: 1
-      draggable: 1
-      expandable: 1
-      multipleSelection: 1
-      isExpanded: 1
-      label:
-        m_Text: Keys
-        m_Image: {fileID: 0}
-        m_Tooltip: 
-      headerHeight: 18
-      footerHeight: 13
-      slideEasing: 0.15
-      verticalSpacing: 2
-      showDefaultBackground: 1
-      elementDisplayType: 0
-      elementNameProperty: 
-      elementNameOverride: 
-      elementIcon: {fileID: 0}
-    reqReferences: {fileID: 0}
-    isExpanded: 1
-    _keyValues: 00000000e8030000e9030000ea0300000a000000
-    _keys: 00000000e8030000e9030000ea0300000a000000
-    _values:
-    - Home
-    - Level Mannual 01
-    - Level Mannual 02
-    - Level Mannual 03
-    - Level Selection
+  - LevelType: 1
+    LevelID: 1003
+    WinCondition: 1000
+    StuffToCollect: 2
+    LevelName: Level Mannual 04
+    BlockTypes: 000000000400000007000000
+    UnitDatas:
+    - Floor: 0
+      X: 3
+      Y: 1
+      StartDirection: 0
+    LevelRawData: 00000;01110;36363;01010;00000;
   LevelTextPath: Data/Levels

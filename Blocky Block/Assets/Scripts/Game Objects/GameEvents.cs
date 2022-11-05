@@ -10,6 +10,11 @@ using System;
 
 namespace BlockyBlock.Events
 {
+    public class LevelSelectionEvents
+    {
+        public static Action<LevelItem> ON_HIGHLIGHT_ITEM;
+        public static Action<bool> ON_ITEM_HOVER;
+    }
     public class HomeEvents
     {
         public static Action<HomeState> ON_STAGE_CHANGED;

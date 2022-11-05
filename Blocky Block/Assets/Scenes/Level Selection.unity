@@ -192,6 +192,7 @@ GameObject:
   - component: {fileID: 362298133}
   - component: {fileID: 362298132}
   - component: {fileID: 362298135}
+  - component: {fileID: 362298136}
   m_Layer: 0
   m_Name: Main Camera
   m_TagString: MainCamera
@@ -246,7 +247,7 @@ Camera:
   m_HDR: 1
   m_AllowMSAA: 1
   m_AllowDynamicResolution: 0
-  m_ForceIntoRT: 0
+  m_ForceIntoRT: 1
   m_OcclusionCulling: 1
   m_StereoConvergence: 10
   m_StereoSeparation: 0.022
@@ -298,6 +299,31 @@ MonoBehaviour:
   m_RequiresDepthTexture: 0
   m_RequiresColorTexture: 0
   m_Version: 2
+--- !u!114 &362298136
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 362298131}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7bb42831ee5422f409e7f24f9e7488ea, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  renderingStrategy: 0
+  renderTargetName: 
+  renderingMode: 0
+  outlineLayerMask: -1
+  scaleIndepented: 1
+  primaryRendererScale: 0.75
+  blurShift: 1
+  dilateShift: 1
+  dilateIterrations: 30
+  dilateQuality: 0
+  blurIterrations: 1
+  blurType: 1
+  infoRendererScale: 0.75
 --- !u!1 &1258657843
 GameObject:
   m_ObjectHideFlags: 0
@@ -423,6 +449,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1724011658}
   - component: {fileID: 1724011657}
+  - component: {fileID: 1724011659}
   m_Layer: 0
   m_Name: Level Menu Manager
   m_TagString: Untagged
@@ -446,6 +473,7 @@ MonoBehaviour:
   m_LevelContainer: {fileID: 1724011658}
   m_CenterPosition: {x: 0, y: 0, z: 0}
   m_ScrollXOffset: 8
+  Scroller: {fileID: 1724011659}
 --- !u!4 &1724011658
 Transform:
   m_ObjectHideFlags: 0
@@ -461,6 +489,24 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1724011659
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1724011656}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2336d04cf9eea3f42a5a818365099b20, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_ObjectToScroll: {fileID: 362298134}
+  m_ScrollSpeed: 0.15
+  m_LevelItemMask:
+    serializedVersion: 2
+    m_Bits: 8192
+  CanScroll: 1
 --- !u!1 &1852299414
 GameObject:
   m_ObjectHideFlags: 0
