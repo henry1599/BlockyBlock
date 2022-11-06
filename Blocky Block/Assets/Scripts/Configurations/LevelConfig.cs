@@ -12,7 +12,7 @@ namespace BlockyBlock.Configurations
     public class LevelConfig : ScriptableObject
     {
         public List<LevelData> LevelDatas;
-        public string LevelTextPath;
+        public string[] LevelTextPaths;
         public LevelData GetLevelDataByID(LevelID _id)
         {
             foreach (LevelData ld in LevelDatas)
@@ -28,15 +28,18 @@ namespace BlockyBlock.Configurations
         public void LoadLevelDatas()
         {
             LevelDatas.Clear();
-            var gos = Resources.LoadAll(LevelTextPath);
-            if (gos == null || gos.Length == 0) return;
-            foreach (var go in gos)
+            foreach (string levelPath in LevelTextPaths)
             {
-                TextAsset data = (TextAsset)go;
-                string jsonText = data.text;
+                var gos = Resources.LoadAll(levelPath);
+                if (gos == null || gos.Length == 0) return;
+                foreach (var go in gos)
+                {
+                    TextAsset data = (TextAsset)go;
+                    string jsonText = data.text;
 
-                LevelData leveData = JsonUtility.FromJson<LevelData>(jsonText);
-                LevelDatas.Add(leveData);
+                    LevelData leveData = JsonUtility.FromJson<LevelData>(jsonText);
+                    LevelDatas.Add(leveData);
+                }
             }
         }
     }

@@ -226,11 +226,23 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2662702949071303947, guid: 72f6e80d74315ce499e5189c0108258a, type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 3959559441156601304, guid: 72f6e80d74315ce499e5189c0108258a, type: 3}
       propertyPath: m_RootOrder
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3959559441156601304, guid: 72f6e80d74315ce499e5189c0108258a, type: 3}
+      propertyPath: m_LocalScale.x
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3959559441156601304, guid: 72f6e80d74315ce499e5189c0108258a, type: 3}
+      propertyPath: m_LocalScale.y
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3959559441156601304, guid: 72f6e80d74315ce499e5189c0108258a, type: 3}
+      propertyPath: m_LocalScale.z
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 3959559441156601304, guid: 72f6e80d74315ce499e5189c0108258a, type: 3}
       propertyPath: m_LocalPosition.x
@@ -271,6 +283,22 @@ PrefabInstance:
     - target: {fileID: 3959559441156601304, guid: 72f6e80d74315ce499e5189c0108258a, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3959559441156601304, guid: 72f6e80d74315ce499e5189c0108258a, type: 3}
+      propertyPath: m_ConstrainProportionsScale
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6445620260378205925, guid: 72f6e80d74315ce499e5189c0108258a, type: 3}
+      propertyPath: InitialModule.rotation3D
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6445620260378205925, guid: 72f6e80d74315ce499e5189c0108258a, type: 3}
+      propertyPath: InitialModule.startLifetime.scalar
+      value: 1.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 6445620260378205925, guid: 72f6e80d74315ce499e5189c0108258a, type: 3}
+      propertyPath: InitialModule.startRotationY.scalar
+      value: 0.5235988
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 72f6e80d74315ce499e5189c0108258a, type: 3}

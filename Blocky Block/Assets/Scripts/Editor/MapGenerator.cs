@@ -261,11 +261,12 @@ namespace BlockyBlock.Editor
             int height = m_HeightSlider.value;
 
             string resultString = "";
-            var dir = new System.IO.DirectoryInfo(GetPath());
+            string folderPath = GetPath() + GetChapterPathByChapterTypeEditor((ChapterTypeEditor)m_ChapterTypeEnumField.value);
+            var dir = new System.IO.DirectoryInfo(folderPath);
             int fileNum = dir.GetFiles().Length / 2;
             string levelName = "Level " + GetLevelNameByEnum((LevelTypeEditor)m_LevelTypeEnumField.value) + " " + (fileNum + 1).ToString("00");
             string textName = TextFileName + (fileNum + 1).ToString();
-            string finalPath = GetPath() + textName + ".txt";
+            string finalPath = folderPath + textName + ".txt";
 
             for (int i = 0; i < height; i++)
             {
@@ -324,18 +325,18 @@ namespace BlockyBlock.Editor
                     return "Mannual";
             }
         }
-        string GetCharByChapterTypeEditor(ChapterTypeEditor _type)
+        string GetChapterPathByChapterTypeEditor(ChapterTypeEditor _type)
         {
             switch (_type)
             {
                 case ChapterTypeEditor.CHAPTER_01:
-                    return "0";
+                    return "Chapter 1/";
                 case ChapterTypeEditor.CHAPTER_02:
-                    return "1";
+                    return "Chapter 2/";
                 case ChapterTypeEditor.CHAPTER_03:
-                    return "2";
+                    return "Chapter 3/";
                 default:
-                    return "0";
+                    return "Chapter 1/";
             }
         }
         string GetCharByLevelTypeEditor(LevelTypeEditor _type)

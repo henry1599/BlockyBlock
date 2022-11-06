@@ -91,4 +91,7 @@ MonoBehaviour:
       Y: 2
       StartDirection: 0
     LevelRawData: 1111;1261;1031;1111;
-  LevelTextPath: Data/Levels
+  LevelTextPaths:
+  - Data/Levels/Chapter 1
+  - Data/Levels/Chapter 2
+  - Data/Levels/Chapter 3
