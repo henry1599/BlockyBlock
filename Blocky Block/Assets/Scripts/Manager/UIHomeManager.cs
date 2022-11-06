@@ -60,6 +60,7 @@ namespace BlockyBlock.Managers
         }
         public void OnChapterButtonClick(int _chapter)
         {
+            PlayerPrefs.SetInt(GameConstants.CHAPTER_CHOSEN_KEY, _chapter);
             UIUtils.LockInput();
             GameManager.Instance.TransitionIn(() => 
                 {

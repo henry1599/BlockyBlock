@@ -13,7 +13,8 @@ MonoBehaviour:
   m_Name: Level Config
   m_EditorClassIdentifier: 
   LevelDatas:
-  - LevelType: 1
+  - ChapterID: 0
+    LevelType: 1
     LevelID: 1000
     WinCondition: 1000
     StuffToCollect: 1
@@ -25,7 +26,8 @@ MonoBehaviour:
       Y: 1
       StartDirection: 0
     LevelRawData: 060;000;000;
-  - LevelType: 1
+  - ChapterID: 0
+    LevelType: 1
     LevelID: 1001
     WinCondition: 1000
     StuffToCollect: 1
@@ -36,29 +38,57 @@ MonoBehaviour:
       X: 1
       Y: 1
       StartDirection: 0
-    LevelRawData: 006;000;000;
-  - LevelType: 1
+    LevelRawData: 006;010;002;
+  - ChapterID: 0
+    LevelType: 1
     LevelID: 1002
     WinCondition: 1000
-    StuffToCollect: 2
+    StuffToCollect: 1
     LevelName: Level Mannual 03
-    BlockTypes: 0000000004000000050000000c000000
-    UnitDatas:
-    - Floor: 0
-      X: 1
-      Y: 1
-      StartDirection: 0
-    LevelRawData: 20002;60022;01613;01112;00033;
-  - LevelType: 1
-    LevelID: 1003
-    WinCondition: 1000
-    StuffToCollect: 2
-    LevelName: Level Mannual 04
     BlockTypes: 000000000400000007000000
     UnitDatas:
     - Floor: 0
       X: 3
       Y: 1
       StartDirection: 0
-    LevelRawData: 00000;01110;36363;01010;00000;
+    LevelRawData: 00600;31113;31313;31013;00000;
+  - ChapterID: 0
+    LevelType: 1
+    LevelID: 1003
+    WinCondition: 1000
+    StuffToCollect: 1
+    LevelName: Level Mannual 04
+    BlockTypes: 000000000400000005000000
+    UnitDatas:
+    - Floor: 0
+      X: 1
+      Y: 1
+      StartDirection: 0
+    LevelRawData: 00600;01110;01210;01110;00226;
+  - ChapterID: 0
+    LevelType: 1
+    LevelID: 1004
+    WinCondition: 1000
+    StuffToCollect: 1
+    LevelName: Level Mannual 05
+    BlockTypes: 00000000040000000100000002000000
+    UnitDatas:
+    - Floor: 0
+      X: 1
+      Y: 1
+      StartDirection: 0
+    LevelRawData: 600;213;313;000;
+  - ChapterID: 0
+    LevelType: 1
+    LevelID: 1005
+    WinCondition: 1000
+    StuffToCollect: 1
+    LevelName: Level Mannual 06
+    BlockTypes: 000000000400000007000000
+    UnitDatas:
+    - Floor: 0
+      X: 2
+      Y: 2
+      StartDirection: 0
+    LevelRawData: 1111;1261;1031;1111;
   LevelTextPath: Data/Levels

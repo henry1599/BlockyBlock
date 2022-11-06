@@ -10,9 +10,8 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 10447e93dba55bb408efcc3182f07667, type: 3}
-  m_Name: Level Menu Config
+  m_Name: Level Items Config
   m_EditorClassIdentifier: 
-  LevelItemTemplate: {fileID: 7152364446191083594, guid: 65a63210cb2361045a328b1cbc0d567f, type: 3}
   LevelItems:
     reorderableList:
       canAdd: 1
@@ -36,10 +35,9 @@ MonoBehaviour:
       elementIcon: {fileID: 0}
     reqReferences: {fileID: 0}
     isExpanded: 1
-    _keyValues: e8030000e9030000ea030000eb030000
-    _keys: e8030000e9030000ea030000eb030000
+    _keyValues: 000000000100000002000000
+    _keys: 000000000100000002000000
     _values:
-    - LevelNameDisplay: LEVEL 1
-    - LevelNameDisplay: LEVEL 2
-    - LevelNameDisplay: LEVEL 3
-    - LevelNameDisplay: LEVEL 4
+    - {fileID: 5329352246192163793, guid: dcbb40c7563d6d145adb91ec3dec6d65, type: 3}
+    - {fileID: 5591935793161657247, guid: 8ccd72c63f62b934da51a66d4e0f5126, type: 3}
+    - {fileID: 2148868705601625768, guid: c58219d07506bce428f49350239af450, type: 3}

@@ -28,6 +28,12 @@ namespace BlockyBlock.Editor
         LEVEL_MANNUAL_11 = 1011,
         LEVEL_MANNUAL_12 = 1012,
     }
+    public enum ChapterTypeEditor
+    {
+        CHAPTER_01 = 0,
+        CHAPTER_02 = 1,
+        CHAPTER_03 = 2,
+    }
     public enum LevelTypeEditor
     {
         HOME = 0,
@@ -72,6 +78,7 @@ namespace BlockyBlock.Editor
     public class MapGenerator : EditorWindow
     {
         [SerializeField] VisualTreeAsset m_Tree;
+        private EnumField m_ChapterTypeEnumField;
         private EnumField m_LevelTypeEnumField;
         private EnumField m_LevelIDEnumField;
         private EnumField m_WinConditionEnumField;
@@ -125,6 +132,7 @@ namespace BlockyBlock.Editor
         {
             m_Tree.CloneTree(rootVisualElement);
 
+            m_ChapterTypeEnumField = rootVisualElement.Q<EnumField>("_chapterType");
             m_LevelTypeEnumField = rootVisualElement.Q<EnumField>("_levelType");
             m_LevelIDEnumField = rootVisualElement.Q<EnumField>("_levelID");
             m_WinConditionEnumField = rootVisualElement.Q<EnumField>("_winCondition");
@@ -145,6 +153,7 @@ namespace BlockyBlock.Editor
             m_GenerateButton.clicked += HandleGenerateBtnClicked;
             m_BlocksButton.clicked += AddBlockButtons;
 
+            m_ChapterTypeEnumField.Init(ChapterTypeEditor.CHAPTER_01);
             m_LevelTypeEnumField.Init(LevelTypeEditor.MANUAL);
             m_LevelIDEnumField.Init(LevelIDEditor.LEVEL_MANNUAL_00);
             m_WinConditionEnumField.Init(WinTypeEditor.COLLECT_ALL_STUFF);
@@ -281,6 +290,7 @@ namespace BlockyBlock.Editor
                 blockTypes.Add((BlockType)e.value);
             }
             m_LevelData = new LevelData(
+                (ChapterID)m_ChapterTypeEnumField.value,
                 (LevelType)m_LevelTypeEnumField.value,
                 (LevelID)m_LevelIDEnumField.value,
                 (WinType)m_WinConditionEnumField.value,
@@ -312,6 +322,20 @@ namespace BlockyBlock.Editor
                     return "Event";
                 default:
                     return "Mannual";
+            }
+        }
+        string GetCharByChapterTypeEditor(ChapterTypeEditor _type)
+        {
+            switch (_type)
+            {
+                case ChapterTypeEditor.CHAPTER_01:
+                    return "0";
+                case ChapterTypeEditor.CHAPTER_02:
+                    return "1";
+                case ChapterTypeEditor.CHAPTER_03:
+                    return "2";
+                default:
+                    return "0";
             }
         }
         string GetCharByLevelTypeEditor(LevelTypeEditor _type)

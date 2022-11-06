@@ -1,6 +1,7 @@
 <ui:UXML xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" editor-extension-mode="True">
     <ui:VisualElement style="height: auto;">
         <ui:Label text="General Setup" display-tooltip-when-elided="true" style="font-size: 15px; -unity-font: url(&apos;project://database/Assets/Fonts/Raw/Dosis-Bold.ttf?fileID=12800000&amp;guid=855e119d5139f2b43a08e7ead8937fce&amp;type=3#Dosis-Bold&apos;); -unity-text-align: middle-center; -unity-font-style: bold;" />
+        <uie:EnumField label="Chapter Type" value="Center" name="_chapterType" />
         <uie:EnumField label="Level Type" value="Center" name="_levelType" />
         <uie:EnumField label="Level ID" value="Center" name="_levelID" />
         <uie:EnumField label="Win condition" value="Center" name="_winCondition" />

@@ -58,6 +58,7 @@ namespace BlockyBlock.Configurations
     [System.Serializable]
     public class LevelData
     {
+        public ChapterID ChapterID;
         public LevelType LevelType;
         public LevelID LevelID;
         public WinType WinCondition;
@@ -66,8 +67,9 @@ namespace BlockyBlock.Configurations
         public List<BlockType> BlockTypes;
         public List<UnitData> UnitDatas;
         public string LevelRawData;
-        public LevelData(LevelType _levelType, LevelID _levelID, WinType _winType, int _stuffToCollect, string _levelName, List<BlockType> _blockTypes, List<UnitData> _unitData, string _levelRawData)
+        public LevelData(ChapterID _chapterId, LevelType _levelType, LevelID _levelID, WinType _winType, int _stuffToCollect, string _levelName, List<BlockType> _blockTypes, List<UnitData> _unitData, string _levelRawData)
         {
+            ChapterID = _chapterId;
             LevelType = _levelType;
             LevelID = _levelID;
             WinCondition = _winType;
@@ -79,6 +81,7 @@ namespace BlockyBlock.Configurations
         }
         public LevelData()
         {
+            ChapterID = ChapterID.CHAPTER_01;
             LevelType = LevelType.HOME;
             WinCondition = WinType.COLLECT_ALL_STUFF;
             StuffToCollect = 0;
