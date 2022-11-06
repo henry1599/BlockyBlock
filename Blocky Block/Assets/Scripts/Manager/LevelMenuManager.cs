@@ -3,6 +3,9 @@ using System.Collections.Generic;
 using UnityEngine;
 using BlockyBlock.Configurations;
 using BlockyBlock.Enums;
+using BlockyBlock.Events;
+using Helpers;
+using System.Linq;
 
 namespace BlockyBlock.Managers
 {
@@ -10,37 +13,43 @@ namespace BlockyBlock.Managers
     {
         public static LevelMenuManager Instance {get; private set;}
         [SerializeField] LevelItemConfig m_LevelItemConfig;
-        [SerializeField] Transform m_LevelContainer;
-        [SerializeField] Vector3 m_CenterPosition;
-        [SerializeField] float m_ScrollXOffset = 8;
-        public LevelScroller Scroller;
-        public float ScrollXOffset => m_ScrollXOffset;
-        private List<LevelItem> m_LevelNodes;
-        public int ItemCount => m_LevelNodes.Count;
+        [SerializeField] Transform[] m_LevelNodes;
+        private List<LevelItem> m_LevelItems;
         void Awake()
         {
             Instance = this;
+            StartCoroutine(Cor_LoadProfile());
         }
         void Start()
         {
-            InitLevels();
+            InitLevels(LoadChapterChosen());
         }
-        void InitLevels()
+        IEnumerator Cor_LoadProfile()
         {
-            m_LevelNodes = new List<LevelItem>();
-            LevelItems levelItems = m_LevelItemConfig.LevelItems;
-            LevelItem itemTemplate = m_LevelItemConfig.LevelItemTemplate;
-            int idx = 0;
-            foreach(KeyValuePair<LevelID, LevelItemData> entry in levelItems)
+            yield return new WaitUntil(() => ProfileManager.Instance != null);
+            ProfileManager.Instance.LoadProfile();
+        }
+        int LoadChapterChosen()
+        {
+            return PlayerPrefs.GetInt(GameConstants.CHAPTER_CHOSEN_KEY, 0);
+        }
+        void InitLevels(int _chapter)
+        {
+            ChapterID chapterID = (ChapterID)_chapter;
+            m_LevelItems = new List<LevelItem>();
+            Dictionary<LevelID, LevelStatus> levels = ProfileManager.Instance.ProfileData.UnlockedLevels[chapterID];
+            List<LevelData> levelDatas = ConfigManager.Instance.LevelConfig.LevelDatas;
+            List<LevelData> levelDatasInChapter = levelDatas.Where(lv => lv.ChapterID == chapterID).ToList();
+            foreach (var (data, idx) in levelDatasInChapter.WithIndex())
             {
-                Vector3 spawnPosition = m_CenterPosition;
-                spawnPosition.x += idx * m_ScrollXOffset;
-                LevelItem itemInstance = Instantiate(itemTemplate, spawnPosition, Quaternion.identity, m_LevelContainer);
+                LevelID id = data.LevelID;
+                LevelStatus status = levels[id];
                 
-                itemInstance.Setup(entry.Key, entry.Value);
-                m_LevelNodes.Add(itemInstance);
+                LevelItem itemInstance = Instantiate(m_LevelItemConfig.LevelItems[status], m_LevelNodes[idx]);
+                itemInstance.transform.localPosition = Vector3.zero;
+                itemInstance.Setup(id);
 
-                idx ++;
+                m_LevelItems.Add(itemInstance);
             }
         }
     }

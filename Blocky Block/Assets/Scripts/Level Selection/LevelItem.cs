@@ -12,25 +12,9 @@ using EPOOutline;
 
 namespace BlockyBlock
 {
+
     public class LevelItem : MonoBehaviour
     {
-        [SerializeField] TMP_Text m_LevelNameDisplayText;
-        [SerializeField] Vector3 m_InitBounds;
-        [SerializeField] BoxCollider m_BoxCol;
-        [SerializeField] Animator m_Animator;
-        private static readonly int[] SelectionKeys = new int[10]
-        {
-            Animator.StringToHash("Selection 00"),
-            Animator.StringToHash("Selection 01"),
-            Animator.StringToHash("Selection 02"),
-            Animator.StringToHash("Selection 03"),
-            Animator.StringToHash("Selection 04"),
-            Animator.StringToHash("Selection 05"),
-            Animator.StringToHash("Selection 06"),
-            Animator.StringToHash("Selection 07"),
-            Animator.StringToHash("Selection 08"),
-            Animator.StringToHash("Selection 09")
-        };
         private int m_LevelID;
         bool m_IsHighlighted = false;
         void Start()
@@ -63,7 +47,6 @@ namespace BlockyBlock
         }
         void OnMouseEnter()
         {
-            PlayRandomAnim();
             LevelSelectionEvents.ON_ITEM_HOVER?.Invoke(true);
         }
         void OnMouseExit()
@@ -72,40 +55,13 @@ namespace BlockyBlock
         }
         void Highlight()
         {
-            if (m_IsHighlighted) return;
-            m_IsHighlighted = true;
-            PlayRandomAnim();
-            transform.DOKill();
-            transform 
-                .DOScale(
-                    Vector3.one * 2,
-                    0.15f
-                )
-                .SetEase(Ease.InOutSine)
-                .OnComplete(() => m_BoxCol.size = m_InitBounds / 2.2f);
-            LevelMenuManager.Instance.Scroller.SnapTo(this);
         }
         void Unhighlight()
         {
-            if (!m_IsHighlighted) return;
-            m_IsHighlighted = false;
-            transform.DOKill();
-            transform 
-                .DOScale(
-                    Vector3.one,
-                    0.15f
-                )
-                .SetEase(Ease.InOutSine)
-                .OnComplete(() => m_BoxCol.size = m_InitBounds);
         }
-        void PlayRandomAnim()
-        {
-            m_Animator.CrossFade(SelectionKeys[Random.Range(0, SelectionKeys.Length)], 0, 0);
-        }
-        public void Setup(LevelID _levelId, LevelItemData _data)
+        public void Setup(LevelID _levelId)
         {
             m_LevelID = (int)_levelId;
-            m_LevelNameDisplayText.text = _data.LevelNameDisplay;
         }
         public void OnClick()
         {

@@ -80,6 +80,18 @@ namespace BlockyBlock.Enums
         JUMP_IF_STH_FRONT = 12,
         SKIP_IF_STH_FRONT = 13
     }
+    public enum ChapterID
+    {
+        CHAPTER_01 = 0,
+        CHAPTER_02 = 1,
+        CHAPTER_03 = 2
+    }
+    public enum LevelStatus
+    {
+        UNLOCK = 0,
+        LOCK = 1,
+        WIN = 2
+    }
     public enum LevelID {
         HOME = 0,
         LEVEL_SELECTION = 10,
