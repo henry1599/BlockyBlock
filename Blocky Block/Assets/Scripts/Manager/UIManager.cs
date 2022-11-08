@@ -192,9 +192,13 @@ namespace BlockyBlock.Managers
             _container = null;
             return false;
         }
+        public void OnBackButtonClick()
+        {
+            GameManager.Instance.TransitionIn(() => GameEvents.LOAD_LEVEL?.Invoke(LevelID.LEVEL_SELECTION));
+        }
         public void OnHomeButtonClick()
         {
-            GameManager.Instance.TransitionIn(() => GameEvents.LOAD_LEVEL?.Invoke(0));
+            GameManager.Instance.TransitionIn(() => GameEvents.LOAD_LEVEL?.Invoke(LevelID.HOME));
         }
         public void OnControlButtonActivate(int _type)
         {

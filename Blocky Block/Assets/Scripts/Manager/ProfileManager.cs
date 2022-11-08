@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using BlockyBlock.Events;
+using NaughtyAttributes;
 
 namespace BlockyBlock.Managers
 {
@@ -20,6 +21,7 @@ namespace BlockyBlock.Managers
         void Awake()
         {
             Instance = this;
+            LoadProfile();
         }
         public void LoadProfile()
         {
@@ -35,6 +37,11 @@ namespace BlockyBlock.Managers
         {
             string json = JsonUtility.ToJson(m_ProfileData);
             PlayerPrefs.SetString(GameConstants.PROFILE_KEY, json);
+        }
+        [Button("Reset Save")]
+        public void ResetSave()
+        {
+            PlayerPrefs.DeleteAll();
         }
     }
 }

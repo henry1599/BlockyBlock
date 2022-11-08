@@ -133,4 +133,19 @@ namespace BlockyBlock.Enums
         BOTTOM_MID = BOTTOM | MID,
         BOTTOM_RIGHT = BOTTOM | RIGHT
     }
+    public enum CustomizationType
+    {
+        BODY = 0,
+        BODY_PART = 1,
+        EYES = 2,
+        GLOVES = 3,
+        MOUTH = 4,
+        NOSE = 5,
+        EARS = 6,
+        GLASSES = 7,
+        HAIR = 8,
+        HAT = 9,
+        HORN = 10,
+        TAIL = 11
+    }
 }

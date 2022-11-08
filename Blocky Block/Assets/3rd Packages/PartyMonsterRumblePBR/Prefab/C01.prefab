@@ -1336,7 +1336,7 @@ SkinnedMeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: e6c4e27510e2d164d86c33ef2069b47a, type: 2}
+  - {fileID: 2100000, guid: cc0b8c83e592ffe4d935152bfbf5c47f, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -2088,7 +2088,7 @@ SkinnedMeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: e6c4e27510e2d164d86c33ef2069b47a, type: 2}
+  - {fileID: 2100000, guid: cc0b8c83e592ffe4d935152bfbf5c47f, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -2259,7 +2259,7 @@ SkinnedMeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: e6c4e27510e2d164d86c33ef2069b47a, type: 2}
+  - {fileID: 2100000, guid: cc0b8c83e592ffe4d935152bfbf5c47f, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -4944,7 +4944,7 @@ SkinnedMeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: e6c4e27510e2d164d86c33ef2069b47a, type: 2}
+  - {fileID: 2100000, guid: cc0b8c83e592ffe4d935152bfbf5c47f, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -8346,7 +8346,7 @@ SkinnedMeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: e6c4e27510e2d164d86c33ef2069b47a, type: 2}
+  - {fileID: 2100000, guid: cc0b8c83e592ffe4d935152bfbf5c47f, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -11443,6 +11443,7 @@ GameObject:
   m_Component:
   - component: {fileID: 8751161469425723191}
   - component: {fileID: 3427927787343281485}
+  - component: {fileID: 869989876}
   m_Layer: 0
   m_Name: C01
   m_TagString: Untagged
@@ -11459,8 +11460,8 @@ Transform:
   m_GameObject: {fileID: 8230766273605467533}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
+  m_LocalScale: {x: 2.5, y: 2.5, z: 2.5}
+  m_ConstrainProportionsScale: 1
   m_Children:
   - {fileID: 2861486554295028019}
   - {fileID: 8623156685373026600}
@@ -11483,7 +11484,7 @@ Animator:
   m_GameObject: {fileID: 8230766273605467533}
   m_Enabled: 1
   m_Avatar: {fileID: 9000000, guid: 2b7c51804aef3f445999af66e5132162, type: 3}
-  m_Controller: {fileID: 9100000, guid: f5e71d2eda3d6cc40857811c187df502, type: 2}
+  m_Controller: {fileID: 9100000, guid: 640f972f23c35c14189abcd2b7768ca3, type: 2}
   m_CullingMode: 1
   m_UpdateMode: 0
   m_ApplyRootMotion: 1
@@ -11493,6 +11494,110 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
+--- !u!114 &869989876
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8230766273605467533}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 923ffb47fdd25e44f9396bff9350641c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Bodies:
+  - {fileID: 330854951104570712}
+  - {fileID: 1534427201182008394}
+  - {fileID: 3877402713229274714}
+  - {fileID: 5515396190658632093}
+  - {fileID: 1106429374413872956}
+  - {fileID: 1468463968455748461}
+  BodyParts:
+  - {fileID: 3833587891844928233}
+  - {fileID: 5709642216896080147}
+  - {fileID: 5228919937585258562}
+  - {fileID: 4257166126636922224}
+  - {fileID: 9218592165030651}
+  - {fileID: 7020853879711221299}
+  - {fileID: 7108203446683770813}
+  - {fileID: 2847090538330849467}
+  - {fileID: 6754171963449274541}
+  - {fileID: 4430668203430735362}
+  Eyes:
+  - {fileID: 1930690849011592452}
+  - {fileID: 7802584667443063096}
+  - {fileID: 4091577267652858364}
+  - {fileID: 7493987547314084325}
+  - {fileID: 3176346696357518843}
+  - {fileID: 6934967064848401444}
+  - {fileID: 4003956334768402237}
+  - {fileID: 8591012765445637497}
+  - {fileID: 7316421277285004885}
+  - {fileID: 6970616490608500978}
+  - {fileID: 7724401877398509663}
+  - {fileID: 8957681020183959536}
+  - {fileID: 6635953507304632980}
+  Gloves:
+  - {fileID: 5253996989153776485}
+  - {fileID: 9052499311080821404}
+  - {fileID: 5097168804317672473}
+  - {fileID: 1276360628924739508}
+  - {fileID: 1135441481374520135}
+  - {fileID: 5505924780155381617}
+  - {fileID: 5013649138404744243}
+  - {fileID: 3881848317368213128}
+  - {fileID: 4705512001519498243}
+  - {fileID: 277710445696129634}
+  Mouths:
+  - {fileID: 7027815901743590602}
+  - {fileID: 4105274955699570224}
+  - {fileID: 74884986873698680}
+  - {fileID: 4252804273420006926}
+  - {fileID: 854315645480090496}
+  - {fileID: 5857046090550798088}
+  - {fileID: 8606457372565312577}
+  - {fileID: 923614171785590234}
+  - {fileID: 7452472292310148928}
+  - {fileID: 8545149162453757731}
+  Noses:
+  - {fileID: 2947474522650710350}
+  - {fileID: 3499900879613926817}
+  - {fileID: 7631852739301583706}
+  - {fileID: 5137986222416510358}
+  - {fileID: 2911414253788651558}
+  Ears:
+  - {fileID: 1693288358205718550}
+  - {fileID: 2326531492854763357}
+  - {fileID: 2371953950565294471}
+  - {fileID: 439869353660057308}
+  - {fileID: 4972645038240682290}
+  Glasses:
+  - {fileID: 7349876139027284508}
+  - {fileID: 4496896791072434939}
+  Hairs:
+  - {fileID: 6156336317948923431}
+  - {fileID: 7100635714831165680}
+  Hats:
+  - {fileID: 8053360205039963825}
+  - {fileID: 2200849851061769138}
+  - {fileID: 8698170600157885634}
+  - {fileID: 1728834338575931264}
+  - {fileID: 5023610724403777040}
+  Horns:
+  - {fileID: 9166149561666814272}
+  - {fileID: 9067385962190912296}
+  - {fileID: 7706259506577955150}
+  - {fileID: 1137029889846965119}
+  Tails:
+  - {fileID: 8700491234102669106}
+  - {fileID: 2176343214431888134}
+  - {fileID: 1211679409195885081}
+  - {fileID: 3995579844142538737}
+  - {fileID: 2185480920003526269}
+  - {fileID: 3765102969864731150}
+  - {fileID: 2560808146065286992}
+  - {fileID: 5469113233278601093}
 --- !u!1 &8246363882514892100
 GameObject:
   m_ObjectHideFlags: 0

@@ -18,16 +18,14 @@ namespace BlockyBlock.Managers
         void Awake()
         {
             Instance = this;
-            StartCoroutine(Cor_LoadProfile());
         }
         void Start()
         {
             InitLevels(LoadChapterChosen());
         }
-        IEnumerator Cor_LoadProfile()
+        public void OnBackButtonClick()
         {
-            yield return new WaitUntil(() => ProfileManager.Instance != null);
-            ProfileManager.Instance.LoadProfile();
+            GameManager.Instance.TransitionIn(() => GameEvents.LOAD_LEVEL?.Invoke(LevelID.HOME));
         }
         int LoadChapterChosen()
         {
@@ -37,9 +35,20 @@ namespace BlockyBlock.Managers
         {
             ChapterID chapterID = (ChapterID)_chapter;
             m_LevelItems = new List<LevelItem>();
+
+            // * Get the """status""" of all levels based on player profile
             Dictionary<LevelID, LevelStatus> levels = ProfileManager.Instance.ProfileData.UnlockedLevels[chapterID];
+
+            // * Get all levelDatas => To get all level infos in the CHOSEN CHAPTER
             List<LevelData> levelDatas = ConfigManager.Instance.LevelConfig.LevelDatas;
+
+            // * Filter all levels in the chosen chapter
             List<LevelData> levelDatasInChapter = levelDatas.Where(lv => lv.ChapterID == chapterID).ToList();
+
+            // * Traverse levelDatasInChapter in order to:
+            // * To Intantiate the level node 3d in scene
+            // * To Setup the levelID for each node
+            // * To Setup the visual of status for each node
             foreach (var (data, idx) in levelDatasInChapter.WithIndex())
             {
                 LevelID id = data.LevelID;

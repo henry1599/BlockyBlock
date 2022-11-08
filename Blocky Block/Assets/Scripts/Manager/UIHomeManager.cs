@@ -22,11 +22,21 @@ namespace BlockyBlock.Managers
             }
         } [SerializeField] HomeState m_State;
         void Awake()
-        {
-            SoundManager.Instance.LoadSoundMap(SoundType.HOME);    
+        {   
+            StartCoroutine(Cor_LoadSoundMap());
         }
         void Start()
         {
+            StartCoroutine(Cor_PlayBGMusic());
+        }
+        IEnumerator Cor_LoadSoundMap()
+        {
+            yield return new WaitUntil(() => SoundManager.Instance != null);
+            SoundManager.Instance.LoadSoundMap(SoundType.HOME); 
+        }
+        IEnumerator Cor_PlayBGMusic()
+        {
+            yield return new WaitUntil(() => SoundManager.Instance != null && MusicController.Instance != null);
             MusicController.Instance.PlayMusic(SoundID.HOME_BG_MUSIC);
         }
         void OnDestroy()

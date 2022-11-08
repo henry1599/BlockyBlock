@@ -11,6 +11,9 @@ namespace BlockyBlock.Managers
     public class GameManager : MonoBehaviour
     {
         public static GameManager Instance {get; private set;}
+        public RuntimeAnimatorController HomeAnim;
+        public RuntimeAnimatorController LevelSelectionAnim;
+        public RuntimeAnimatorController LevelAnim;
         void Awake()
         {
             Instance = this;

@@ -26,36 +26,27 @@ namespace BlockyBlock
             CustomizationData = new CustomizationData();
         }
     }
+    [System.Serializable]
     public class CustomizationData
     {
-        public int Body;
-        public int BodyPart;
-        public int Eyes;
-        public int Gloves;
-        public int HeadPart;
-        public int Mouth;
-        public int Nose;
-        public int Ears;
-        public int Glasses;
-        public int Hair;
-        public int Hat;
-        public int Horn;
-        public int Tail;
+        public Dictionary<CustomizationType, int> Datas;
         public CustomizationData()
         {
-            this.Body = 0;
-            this.BodyPart = 0;
-            this.Eyes = 0;
-            this.Gloves = 0;
-            this.HeadPart = 0;
-            this.Mouth = 0;
-            this.Nose = 0;
-            this.Ears = 0;
-            this.Glasses = 0;
-            this.Hair = 0;
-            this.Hat = 0;
-            this.Horn = 0;
-            this.Tail = 0;
+            Datas = new Dictionary<CustomizationType, int>()
+            {
+                {CustomizationType.BODY, 0},
+                {CustomizationType.BODY_PART, -1},
+                {CustomizationType.EYES, 0},
+                {CustomizationType.GLOVES, -1},
+                {CustomizationType.MOUTH, 0},
+                {CustomizationType.NOSE, -1},
+                {CustomizationType.EARS, -1},
+                {CustomizationType.GLASSES, -1},
+                {CustomizationType.HAIR, -1},
+                {CustomizationType.HAT, -1},
+                {CustomizationType.HORN, -1},
+                {CustomizationType.TAIL, -1}
+            };
         }
     }
 }

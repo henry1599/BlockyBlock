@@ -10,7 +10,8 @@ GameObject:
   m_Component:
   - component: {fileID: 7948224806158722108}
   - component: {fileID: 2148868705601625768}
-  m_Layer: 7
+  - component: {fileID: -3142761406861025272}
+  m_Layer: 13
   m_Name: Item Win
   m_TagString: Red ground
   m_Icon: {fileID: 0}
@@ -47,6 +48,19 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d47edfa4ce8e3b748b3d05f360c9a910, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!65 &-3142761406861025272
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7951198443671811228}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 1, y: 1, z: 1}
+  m_Center: {x: 0, y: 0, z: 0}
 --- !u!1 &7951491407363118112
 GameObject:
   m_ObjectHideFlags: 0
