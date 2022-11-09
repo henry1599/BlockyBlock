@@ -1,0 +1,97 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9eb1eceb4af900641ad8cf73db21be72, type: 3}
+  m_Name: Level Config
+  m_EditorClassIdentifier: 
+  LevelDatas:
+  - ChapterID: 0
+    LevelType: 1
+    LevelID: 1000
+    WinCondition: 1000
+    StuffToCollect: 1
+    LevelName: Level Mannual 01
+    BlockTypes: 00000000
+    UnitDatas:
+    - Floor: 0
+      X: 2
+      Y: 1
+      StartDirection: 0
+    LevelRawData: 060;000;000;
+  - ChapterID: 0
+    LevelType: 1
+    LevelID: 1001
+    WinCondition: 1000
+    StuffToCollect: 1
+    LevelName: Level Mannual 02
+    BlockTypes: 0000000004000000
+    UnitDatas:
+    - Floor: 0
+      X: 1
+      Y: 1
+      StartDirection: 0
+    LevelRawData: 006;010;002;
+  - ChapterID: 0
+    LevelType: 1
+    LevelID: 1002
+    WinCondition: 1000
+    StuffToCollect: 1
+    LevelName: Level Mannual 03
+    BlockTypes: 000000000400000007000000
+    UnitDatas:
+    - Floor: 0
+      X: 3
+      Y: 1
+      StartDirection: 0
+    LevelRawData: 00600;31113;31313;31013;00000;
+  - ChapterID: 0
+    LevelType: 1
+    LevelID: 1003
+    WinCondition: 1000
+    StuffToCollect: 1
+    LevelName: Level Mannual 04
+    BlockTypes: 000000000400000005000000
+    UnitDatas:
+    - Floor: 0
+      X: 1
+      Y: 1
+      StartDirection: 0
+    LevelRawData: 00600;01110;01210;01110;00226;
+  - ChapterID: 0
+    LevelType: 1
+    LevelID: 1004
+    WinCondition: 1000
+    StuffToCollect: 1
+    LevelName: Level Mannual 05
+    BlockTypes: 00000000040000000100000002000000
+    UnitDatas:
+    - Floor: 0
+      X: 1
+      Y: 1
+      StartDirection: 0
+    LevelRawData: 600;213;313;000;
+  - ChapterID: 0
+    LevelType: 1
+    LevelID: 1005
+    WinCondition: 1000
+    StuffToCollect: 1
+    LevelName: Level Mannual 06
+    BlockTypes: 000000000400000007000000
+    UnitDatas:
+    - Floor: 0
+      X: 2
+      Y: 2
+      StartDirection: 0
+    LevelRawData: 1111;1261;1031;1111;
+  LevelTextPaths:
+  - Data/Levels/Chapter 1
+  - Data/Levels/Chapter 2
+  - Data/Levels/Chapter 3

@@ -45,6 +45,7 @@ namespace BlockyBlock.Managers
                 UnitDirection startDirection = unitData.StartDirection;
 
                 Unit3D unitInstance = Instantiate(m_Unit3DTemplate.gameObject, transform).GetComponent<Unit3D>();
+                unitInstance.GetComponentInChildren<Animator>().runtimeAnimatorController = GameManager.Instance.LevelAnim;
                 unitInstance.Setup(startPosition, startDirection, unitData.X, unitData.Y);
             }
         }

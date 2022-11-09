@@ -30,6 +30,8 @@ namespace BlockyBlock.Core
         void Start()
         {
             UnitEvents.ON_JUMP += HandleJump;
+            UnitEvents.ON_JUMP_IF_GRAB_STH_VALIDATE += HandleJumpIfGrabSth;
+            UnitEvents.ON_JUMP_IF_STH_FRONT_VALIDATE += HandleJumpIfSthFront;
             ErrorEvents.ON_ERROR_HANDLING += HandleError;
 
             GameEvents.ON_WIN += HandleStopRunning;
@@ -38,10 +40,26 @@ namespace BlockyBlock.Core
         void OnDestroy()
         {
             UnitEvents.ON_JUMP -= HandleJump;
+            UnitEvents.ON_JUMP_IF_GRAB_STH_VALIDATE -= HandleJumpIfGrabSth;
+            UnitEvents.ON_JUMP_IF_STH_FRONT_VALIDATE -= HandleJumpIfSthFront;
             ErrorEvents.ON_ERROR_HANDLING -= HandleError;
 
             GameEvents.ON_WIN -= HandleStopRunning;
             GameEvents.ON_LOSE -= HandleStopRunning;
+        }
+        void HandleJumpIfGrabSth(BlockFunctionJumpIfGrabSth _blockFunction, bool _isValidate)
+        {
+            if (_isValidate)
+            {
+                m_IdxFunction = _blockFunction.IdxJumpTo;
+            }
+        }
+        void HandleJumpIfSthFront(BlockFunctionJumpIfSthFront _blockFunction, bool _isValidate)
+        {
+            if (_isValidate)
+            {
+                m_IdxFunction = _blockFunction.IdxJumpTo;
+            }
         }
         void HandleStopRunning()
         {

@@ -41,8 +41,6 @@ namespace BlockyBlock.Managers
         void Awake()
         {
             Instance = this;
-            GameEvents.LOAD_LEVEL += HandleLevelLoad;
-
             UnitEvents.ON_COLLECT_STUFF += HandleCollectStuff;
             UnitEvents.ON_RESET += HandleReset;
         }
@@ -59,8 +57,6 @@ namespace BlockyBlock.Managers
         }
         void OnDestroy()
         {
-            GameEvents.LOAD_LEVEL -= HandleLevelLoad;
-
             UnitEvents.ON_COLLECT_STUFF -= HandleCollectStuff;
             UnitEvents.ON_RESET -= HandleReset;
         }
@@ -69,10 +65,6 @@ namespace BlockyBlock.Managers
             CurrentCollectedStuff = 0;
             IsCollectTheChest = false;
             IsReachToPosition = false;
-        }
-        void HandleLevelLoad(LevelID _id)
-        {
-            CurrentLevelID = _id;
         }
         void HandleCollectStuff()
         {
@@ -85,7 +77,8 @@ namespace BlockyBlock.Managers
             yield return new WaitUntil(() => UIManager.Instance != null &&
                                              UnitManager.Instance != null &&
                                              LevelReader.Instance != null && 
-                                             ConfigManager.Instance != null);
+                                             ConfigManager.Instance != null &&
+                                             LevelManager.Instance != null);
             GameEvents.SETUP_LEVEL?.Invoke(_data);
         }
         void LevelChecker()

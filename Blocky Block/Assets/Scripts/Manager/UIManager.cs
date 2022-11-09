@@ -22,11 +22,14 @@ namespace BlockyBlock.Managers
         public GameObject m_IDECodeField;
         public Transform m_IDECodeContent;
         public GameObject m_PreviewCodeField;
+        public GameObject SideRect;
         public Transform m_PreviewCodeContent;
         public EventSystem m_EventSystem;
         public BlockData m_BlockDatas;
         public Transform m_DummyUIBlock;
-        public UIOption UIOption;
+        public UIOption UIOptionTurn;
+        public UIOption UIOptionSthFront;
+        public UIOptionGrid UIOptionGrid;
         public float m_DelayBuffer = 0.15f;
         public float m_DelayBufferTimer {get; set;}
         public bool m_IsTweening = false;
@@ -112,6 +115,10 @@ namespace BlockyBlock.Managers
                 {
                     return true;
                 }
+                if (result.gameObject.tag == _objectTag)
+                {
+                    return true;
+                }
             }
             return false;
         }
@@ -185,9 +192,13 @@ namespace BlockyBlock.Managers
             _container = null;
             return false;
         }
+        public void OnBackButtonClick()
+        {
+            GameManager.Instance.TransitionIn(() => GameEvents.LOAD_LEVEL?.Invoke(LevelID.LEVEL_SELECTION));
+        }
         public void OnHomeButtonClick()
         {
-            GameEvents.LOAD_LEVEL?.Invoke(LevelID.HOME);
+            GameManager.Instance.TransitionIn(() => GameEvents.LOAD_LEVEL?.Invoke(LevelID.HOME));
         }
         public void OnControlButtonActivate(int _type)
         {

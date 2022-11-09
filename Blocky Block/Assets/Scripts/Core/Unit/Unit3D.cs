@@ -44,6 +44,8 @@ namespace BlockyBlock.Core
             UnitEvents.ON_PICK_UP += Pickup;
             UnitEvents.ON_PUT_DOWN += Putdown;
             UnitEvents.ON_PUSH += Push;
+            UnitEvents.ON_JUMP_IF_GRAB_STH += JumpIfGrabSomething;
+            UnitEvents.ON_JUMP_IF_STH_FRONT += JumpIfSthFront;
 
             UnitEvents.ON_STOP += HandleStop;
             UnitEvents.ON_RESET += HandleReset;
@@ -56,6 +58,8 @@ namespace BlockyBlock.Core
             UnitEvents.ON_PICK_UP -= Pickup;
             UnitEvents.ON_PUT_DOWN -= Putdown;
             UnitEvents.ON_PUSH -= Push;
+            UnitEvents.ON_JUMP_IF_GRAB_STH -= JumpIfGrabSomething;
+            UnitEvents.ON_JUMP_IF_STH_FRONT -= JumpIfSthFront;
             
             UnitEvents.ON_STOP -= HandleStop;
             UnitEvents.ON_RESET -= HandleReset;
@@ -273,6 +277,11 @@ namespace BlockyBlock.Core
         #region Push
         void Push(BlockFunctionPush _push)
         {
+            if (m_GrabbedObject != null)
+            {
+                ErrorEvents.ON_ERROR?.Invoke(ErrorType.INVALID_PUSH);
+                return;
+            }
             DirectionData directionData = ConfigManager.Instance.UnitConfig.GetDataByDirection(m_CurrentDirection);
             // GameObject pushableObject = m_UnitVision.GetFrontObject((int)m_CurrentCell.x, (int)m_CurrentCell.y, m_CurrentFloor, directionData);
             GameObject pushableObject = m_UnitVision.GetFrontObject();
@@ -301,6 +310,216 @@ namespace BlockyBlock.Core
             yield return Helper.GetWait(m_PushDelay);
             
             _pushableObject?.PushSelf(_pushIdxX, _pushIdxY, _floor);
+        }
+        #endregion
+
+        #region Jump If Grab Something
+        void JumpIfGrabSomething(BlockFunctionJumpIfGrabSth _blockFunction)
+        {
+            UnitEvents.ON_JUMP_IF_GRAB_STH_VALIDATE?.Invoke(_blockFunction, IsGrabSomething);
+        }
+        #endregion
+
+        #region Jump If Something Front
+        Vector2Int GetGridPosition(ConditionDirection _condd)
+        {
+            Vector2Int result = Vector2Int.zero;
+            int curX = (int)m_CurrentCell.x;
+            int curY = (int)m_CurrentCell.y;
+
+            Vector2Int topLeft = new Vector2Int(curX - 1, curY + 1);
+            Vector2Int topMid = new Vector2Int(curX, curY + 1);
+            Vector2Int topRight = new Vector2Int(curX + 1, curY + 1);
+            Vector2Int centerLeft = new Vector2Int(curX - 1, curY);
+            Vector2Int centerRight = new Vector2Int(curX + 1, curY);
+            Vector2Int botLeft = new Vector2Int(curX - 1, curY - 1);
+            Vector2Int botMid = new Vector2Int(curX, curY - 1);
+            Vector2Int botRight = new Vector2Int(curX + 1, curY - 1);
+
+            Dictionary<ConditionDirection, Vector2Int> directionPosition = new Dictionary<ConditionDirection, Vector2Int>()
+            {
+                {ConditionDirection.TOP_LEFT, topLeft},
+                {ConditionDirection.TOP_MID, topMid},
+                {ConditionDirection.TOP_RIGHT, topRight},
+                {ConditionDirection.CENTER_LEFT, centerLeft},
+                {ConditionDirection.CENTER_RIGHT, centerRight},
+                {ConditionDirection.BOTTOM_LEFT, botLeft},
+                {ConditionDirection.BOTTOM_MID, botMid},
+                {ConditionDirection.BOTTOM_RIGHT, botRight},
+            };
+
+            switch (m_CurrentDirection)
+            {
+                case UnitDirection.UP:
+                    return GetGridUp(_condd, directionPosition);
+                case UnitDirection.RIGHT:
+                    return GetGridRight(_condd, directionPosition);
+                case UnitDirection.DOWN:
+                    return GetGridDown(_condd, directionPosition);
+                case UnitDirection.LEFT:
+                    return GetGridLeft(_condd, directionPosition);
+            }
+            return result;
+
+            Vector2Int GetGridUp(ConditionDirection _condd, Dictionary<ConditionDirection, Vector2Int> _dict)
+            {
+                switch (_condd)
+                {
+                    case ConditionDirection.TOP_LEFT:  
+                        return _dict[ConditionDirection.TOP_LEFT];
+                    case ConditionDirection.TOP_MID:
+                        return _dict[ConditionDirection.TOP_MID];
+                    case ConditionDirection.TOP_RIGHT:
+                        return _dict[ConditionDirection.TOP_RIGHT];
+                    case ConditionDirection.CENTER_LEFT:
+                        return _dict[ConditionDirection.CENTER_LEFT];
+                    case ConditionDirection.CENTER_RIGHT:
+                        return _dict[ConditionDirection.CENTER_RIGHT];
+                    case ConditionDirection.BOTTOM_LEFT:
+                        return _dict[ConditionDirection.BOTTOM_LEFT];
+                    case ConditionDirection.BOTTOM_MID:
+                        return _dict[ConditionDirection.BOTTOM_MID];
+                    case ConditionDirection.BOTTOM_RIGHT:
+                        return _dict[ConditionDirection.BOTTOM_RIGHT];
+                    default:
+                        return _dict[ConditionDirection.TOP_LEFT];
+                }
+            }
+            Vector2Int GetGridDown(ConditionDirection _condd, Dictionary<ConditionDirection, Vector2Int> _dict)
+            {
+                switch (_condd)
+                {
+                    case ConditionDirection.TOP_LEFT:  
+                        return _dict[ConditionDirection.BOTTOM_RIGHT];
+                    case ConditionDirection.TOP_MID:
+                        return _dict[ConditionDirection.BOTTOM_MID];
+                    case ConditionDirection.TOP_RIGHT:
+                        return _dict[ConditionDirection.BOTTOM_LEFT];
+                    case ConditionDirection.CENTER_LEFT:
+                        return _dict[ConditionDirection.CENTER_RIGHT];
+                    case ConditionDirection.CENTER_RIGHT:
+                        return _dict[ConditionDirection.CENTER_LEFT];
+                    case ConditionDirection.BOTTOM_LEFT:
+                        return _dict[ConditionDirection.TOP_RIGHT];
+                    case ConditionDirection.BOTTOM_MID:
+                        return _dict[ConditionDirection.TOP_MID];
+                    case ConditionDirection.BOTTOM_RIGHT:
+                        return _dict[ConditionDirection.TOP_LEFT];
+                    default:
+                        return _dict[ConditionDirection.BOTTOM_RIGHT];
+                }
+            }
+            Vector2Int GetGridLeft(ConditionDirection _condd, Dictionary<ConditionDirection, Vector2Int> _dict)
+            {
+                switch (_condd)
+                {
+                    case ConditionDirection.TOP_LEFT:  
+                        return _dict[ConditionDirection.BOTTOM_LEFT];
+                    case ConditionDirection.TOP_MID:
+                        return _dict[ConditionDirection.CENTER_LEFT];
+                    case ConditionDirection.TOP_RIGHT:
+                        return _dict[ConditionDirection.TOP_LEFT];
+                    case ConditionDirection.CENTER_LEFT:
+                        return _dict[ConditionDirection.BOTTOM_MID];
+                    case ConditionDirection.CENTER_RIGHT:
+                        return _dict[ConditionDirection.TOP_MID];
+                    case ConditionDirection.BOTTOM_LEFT:
+                        return _dict[ConditionDirection.BOTTOM_RIGHT];
+                    case ConditionDirection.BOTTOM_MID:
+                        return _dict[ConditionDirection.CENTER_RIGHT];
+                    case ConditionDirection.BOTTOM_RIGHT:
+                        return _dict[ConditionDirection.TOP_RIGHT];
+                    default:
+                        return _dict[ConditionDirection.BOTTOM_LEFT];
+                }
+            }
+            Vector2Int GetGridRight(ConditionDirection _condd, Dictionary<ConditionDirection, Vector2Int> _dict)
+            {
+                switch (_condd)
+                {
+                    case ConditionDirection.TOP_LEFT:  
+                        return _dict[ConditionDirection.TOP_RIGHT];
+                    case ConditionDirection.TOP_MID:
+                        return _dict[ConditionDirection.CENTER_RIGHT];
+                    case ConditionDirection.TOP_RIGHT:
+                        return _dict[ConditionDirection.BOTTOM_RIGHT];
+                    case ConditionDirection.CENTER_LEFT:
+                        return _dict[ConditionDirection.TOP_MID];
+                    case ConditionDirection.CENTER_RIGHT:
+                        return _dict[ConditionDirection.BOTTOM_MID];
+                    case ConditionDirection.BOTTOM_LEFT:
+                        return _dict[ConditionDirection.TOP_LEFT];
+                    case ConditionDirection.BOTTOM_MID:
+                        return _dict[ConditionDirection.CENTER_LEFT];
+                    case ConditionDirection.BOTTOM_RIGHT:
+                        return _dict[ConditionDirection.BOTTOM_LEFT];
+                    default:
+                        return _dict[ConditionDirection.TOP_RIGHT];
+                }
+            }
+        }
+        void JumpIfSthFront(BlockFunctionJumpIfSthFront _function)
+        {
+            Unit3DRotation unitRotation = ConfigManager.Instance.UnitConfig.Unit3DRotation;
+
+            ConditionDirection direction = _function.Direction;
+            Vector2Int next = GetGridPosition(direction);
+            int nextX = next.x;
+            int nextY = next.y;
+            // int nextX = (int)m_CurrentCell.x + directionData.XIdx;
+            // int nextY = (int)m_CurrentCell.y + directionData.YIdx;
+
+            GroundType frontType = GridManager.Instance.Grids[m_CurrentFloor].GridArray[nextX, nextY].Type;
+            GroundType frontGroundCheck = _function.GroundFront;
+
+            bool result = false;
+            switch (frontGroundCheck)
+            {
+                case GroundType.GROUND:
+                    frontType = (GroundType)((int)frontType & 0b000111);
+                    if (frontType == GroundType.GROUND)
+                    {
+                        result = true;
+                    }
+                    break;
+                case GroundType.WATER:
+                    frontType = (GroundType)((int)frontType & 0b000111);
+                    if (frontType == GroundType.WATER)
+                    {
+                        result = true;
+                    }
+                    break;
+                case GroundType.COLLECTIBLE:
+                    frontType = (GroundType)((int)frontType & 0b111000);
+                    if (frontType == GroundType.COLLECTIBLE)
+                    {
+                        result = true;
+                    }
+                    break;
+                case GroundType.SPACE:
+                    if (frontType == GroundType.SPACE)
+                    {
+                        result = true;
+                    }
+                    break;
+                case GroundType.BOX:
+                    frontType = (GroundType)((int)frontType & 0b111000);
+                    if (frontType == GroundType.BOX)
+                    {
+                        result = true;
+                    }
+                    break;
+                case GroundType.TREE:
+                    frontType = (GroundType)((int)frontType & 0b111000);
+                    if (frontType == GroundType.TREE)
+                    {
+                        result = true;
+                    }
+                    break;
+                case GroundType.TRAP:
+                    break;
+            }
+            UnitEvents.ON_JUMP_IF_STH_FRONT_VALIDATE?.Invoke(_function, result);
         }
         #endregion
     }

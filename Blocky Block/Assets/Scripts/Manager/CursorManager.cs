@@ -15,6 +15,7 @@ namespace BlockyBlock.Managers
         public static CursorManager Instance {get; private set;}
         public CursorData CursorData;
         public CursorType CurrentCursorType {get; set;}
+        public bool IsHome;
         void Awake()
         {
             Instance = this;

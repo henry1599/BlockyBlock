@@ -7,6 +7,29 @@ namespace Helpers.BlockyBlock
 {
     public static class HelperBlockyBlock
     {
+        public static GroundType StringToGroundType(string _string)
+        {
+            _string = _string.ToLower();
+            switch (_string)
+            {
+                case "ground":
+                    return GroundType.GROUND;
+                case "water":
+                    return GroundType.WATER;
+                case "box":
+                    return GroundType.BOX;
+                case "hole":
+                    return GroundType.SPACE;
+                case "star":
+                    return GroundType.COLLECTIBLE;
+                case "trap":
+                    return GroundType.TRAP;
+                case "tree":
+                    return GroundType.TREE;
+                default:
+                    return GroundType.GROUND;
+            }
+        }
         public static string TurnDirectionToString(TurnDirection _direction)
         {
             string result = "";

@@ -23,13 +23,16 @@ TagManager:
   - Not Any Block
   - Connection Manager
   - IDE Main Field
-  - UI Block Option
+  - UI Block Option Turn
   - Config Manager
   - Unit
   - Collectible
   - Walkable
   - Unwalkable
   - UIError
+  - UI Block Option Sth Front
+  - UI Block Option
+  - EventSystem
   layers:
   - Default
   - TransparentFX
@@ -44,7 +47,7 @@ TagManager:
   - Unwalkable
   - Obstacle
   - Space
-  - 
+  - Level Item
   - 
   - 
   - 

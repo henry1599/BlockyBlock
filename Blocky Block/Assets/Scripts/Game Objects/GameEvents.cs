@@ -10,6 +10,15 @@ using System;
 
 namespace BlockyBlock.Events
 {
+    public class LevelSelectionEvents
+    {
+        public static Action<LevelItem> ON_HIGHLIGHT_ITEM;
+        public static Action<bool> ON_ITEM_HOVER;
+    }
+    public class HomeEvents
+    {
+        public static Action<HomeState> ON_STAGE_CHANGED;
+    }
     public class GameEvents
     {
         public static Action<LevelID> LOAD_LEVEL;
@@ -35,6 +44,10 @@ namespace BlockyBlock.Events
         public static Action<BlockFunctionPickup> ON_PICK_UP;
         public static Action<BlockFunctionPutdown> ON_PUT_DOWN;
         public static Action<BlockFunctionPush> ON_PUSH;
+        public static Action<BlockFunctionJumpIfGrabSth> ON_JUMP_IF_GRAB_STH;
+        public static Action<BlockFunctionJumpIfGrabSth, bool> ON_JUMP_IF_GRAB_STH_VALIDATE;
+        public static Action<BlockFunctionJumpIfSthFront> ON_JUMP_IF_STH_FRONT; 
+        public static Action<BlockFunctionJumpIfSthFront, bool> ON_JUMP_IF_STH_FRONT_VALIDATE; 
         public static Action ON_COLLECT_STUFF;
         public static Action ON_STOP;
         public static Action ON_RESET;
@@ -59,6 +72,7 @@ namespace BlockyBlock.Events
         public static Action<UIBlock> BLOCK_IDE_UI;
         public static Action<UIBlock> UNBLOCK_IDE_UI;
         public static Action ON_DISABLE_UI_FUNCTION;
+        public static Action ON_UNHOVER_ALL_GRID_ITEM;
     }
     public class ToolEvents
     {
@@ -79,6 +93,8 @@ namespace BlockyBlock.Events
         public static readonly string IDE_SCROLL_RECT_TAG = "IDE Scroll Rect";
         public static readonly string UI_BLOCK_TAG = "UI Block";
         public static readonly string UI_BLOCK_OPTION_TAG = "UI Block Option";
+        public static readonly string UI_BLOCK_OPTION_TURN_TAG = "UI Block Option Turn";
+        public static readonly string UI_BLOCK_OPTION_STH_FRONT_TAG = "UI Block Option Sth Front";
         public static readonly string UI_DUMMY_BLOCK_TAG = "UI Dummy Block";
         public static readonly string LEVEL_MANAGER_TAG = "Level Manager";
         public static readonly string SCENE_MANAGER_TAG = "Scene Manager";
@@ -95,5 +111,9 @@ namespace BlockyBlock.Events
         public static readonly string UNWALKABLE_TAG = "Unwalkable";
         public static readonly string UIERROR_TAG = "UIError";
         public static readonly string LEVELS_RAW_DATA_PATH = $"Data/Levels/";
+        public static readonly float TRANSITION_IN_DURATION = 1.5f;
+        public static readonly float TRANSITION_OUT_DURATION = 1;
+        public static readonly string CHAPTER_CHOSEN_KEY = "Ch4pt3R_Ch053n";
+        public static readonly string PROFILE_KEY = "Pr0F1l3_K3y";
     }
 }

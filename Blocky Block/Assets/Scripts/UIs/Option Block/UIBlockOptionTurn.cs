@@ -39,14 +39,14 @@ namespace BlockyBlock.UI
             BlockEvents.ON_UI_BLOCK_OPTION_SELECTED += HandleSelected;
             BlockEvents.ON_DISABLE_UI_FUNCTION += HandleDisableUIFunction;
 
-            UIOptionItem.ON_OPTION_ITEM_CLICKED += HandleOptionItemClicked;
+            UIOptionItemTurn.ON_OPTION_ITEM_CLICKED += HandleOptionItemClicked;
         }
         void OnDestroy() 
         {
             BlockEvents.ON_UI_BLOCK_OPTION_SELECTED -= HandleSelected;
             BlockEvents.ON_DISABLE_UI_FUNCTION -= HandleDisableUIFunction;
             
-            UIOptionItem.ON_OPTION_ITEM_CLICKED -= HandleOptionItemClicked;
+            UIOptionItemTurn.ON_OPTION_ITEM_CLICKED -= HandleOptionItemClicked;
         }
         void HandleOptionItemClicked(int _idx)
         {
@@ -59,6 +59,11 @@ namespace BlockyBlock.UI
         }
         void HandleSelected(UIBlockOption _uiBlockOption, bool _status)
         {
+            if (!(_uiBlockOption is UIBlockOptionTurn))
+            {
+                IsOpenned = false;
+                return;
+            }
             if ((UIBlockOptionTurn)_uiBlockOption != this)
             {
                 return;
@@ -72,7 +77,7 @@ namespace BlockyBlock.UI
         }
         void Selected(bool _status)
         {
-            UIManager.Instance.UIOption.Setup(_status, m_SnapPivot, GetOptionStrings());
+            UIManager.Instance.UIOptionTurn.Setup(_status, m_SnapPivot, GetOptionStrings());
             // * Block ui ide
             if (_status)
             {

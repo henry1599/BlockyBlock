@@ -1,0 +1,23 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9938e02597404e54f8bd7d20d972854e, type: 3}
+  m_Name: Common Sound Map
+  m_EditorClassIdentifier: 
+  soundType: 0
+  path: SoundData/_Common
+  SoundMappingList:
+  - name: BUTTON_CLICK
+    Id: 2
+    Data: {fileID: 11400000, guid: d0447f8299baf4a4c877b5635db06571, type: 2}
+  - name: BUTTON_HOVER
+    Id: 3
+    Data: {fileID: 11400000, guid: 1ed97794c4557c94487b03704f133306, type: 2}
