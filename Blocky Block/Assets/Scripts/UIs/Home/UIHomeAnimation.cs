@@ -5,6 +5,7 @@ using DG.Tweening;
 using BlockyBlock.Events;
 using System.Linq;
 using BlockyBlock.Utils;
+using Helpers;
 
 namespace BlockyBlock.UI 
 {
@@ -13,11 +14,6 @@ namespace BlockyBlock.UI
         MAIN = 0,
         LEVEL_TYPE_SELECTION = 1,
         CHAPTER_SELECTION = 2
-    }
-    public static class EnumExtension 
-    {
-        public static IEnumerable<(T item, int index)> WithIndex<T>(this IEnumerable<T> self)       
-        => self.Select((item, index) => (item, index));
     }
     
     public class UIHomeAnimation : MonoBehaviour

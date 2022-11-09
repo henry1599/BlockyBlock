@@ -8,7 +8,6 @@ using BlockyBlock.Managers;
 using BlockyBlock.Utils;
 using BlockyBlock.Events;
 using DG.Tweening;
-using EPOOutline;
 
 namespace BlockyBlock
 {

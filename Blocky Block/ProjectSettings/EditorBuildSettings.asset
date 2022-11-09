@@ -14,4 +14,19 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/Manual Levels/Level Mannual 01.unity
     guid: bef3f797827e2184c8a67692ef3bbd12
+  - enabled: 1
+    path: Assets/Scenes/Manual Levels/Level Mannual 02.unity
+    guid: 51e1dffa318bc8c408dd0edad2039845
+  - enabled: 1
+    path: Assets/Scenes/Manual Levels/Level Mannual 03.unity
+    guid: 4aa3b97d9c818d248916c3cb55e64ab4
+  - enabled: 1
+    path: Assets/Scenes/Manual Levels/Level Mannual 04.unity
+    guid: 88b201f1e00bbba47888f6604f492e27
+  - enabled: 1
+    path: Assets/Scenes/Manual Levels/Level Mannual 05.unity
+    guid: 4e5294964251bbc4692b1071537f6aac
+  - enabled: 1
+    path: Assets/Scenes/Manual Levels/Level Mannual 06.unity
+    guid: 14c8b1c29834b7e4db81c2db284cc600
   m_configObjects: {}
