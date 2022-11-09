@@ -38,9 +38,11 @@ namespace BlockyBlock.Managers
             string json = JsonUtility.ToJson(m_ProfileData);
             PlayerPrefs.SetString(GameConstants.PROFILE_KEY, json);
         }
+        [ExecuteInEditMode]
         [Button("Reset Save")]
         public void ResetSave()
         {
+            Debug.Log("Clear PlayerPrefs");
             PlayerPrefs.DeleteAll();
         }
     }

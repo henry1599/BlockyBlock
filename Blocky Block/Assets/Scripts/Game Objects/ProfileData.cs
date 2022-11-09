@@ -16,11 +16,11 @@ namespace BlockyBlock
                 ChapterID.CHAPTER_01,
                 new Dictionary<LevelID, LevelStatus>(){
                     {LevelID.LEVEL_MANNUAL_00, LevelStatus.UNLOCK},
-                    {LevelID.LEVEL_MANNUAL_01, LevelStatus.LOCK},
-                    {LevelID.LEVEL_MANNUAL_02, LevelStatus.LOCK},
-                    {LevelID.LEVEL_MANNUAL_03, LevelStatus.LOCK},
-                    {LevelID.LEVEL_MANNUAL_04, LevelStatus.LOCK},
-                    {LevelID.LEVEL_MANNUAL_05, LevelStatus.LOCK},
+                    {LevelID.LEVEL_MANNUAL_01, LevelStatus.UNLOCK},
+                    {LevelID.LEVEL_MANNUAL_02, LevelStatus.UNLOCK},
+                    {LevelID.LEVEL_MANNUAL_03, LevelStatus.UNLOCK},
+                    {LevelID.LEVEL_MANNUAL_04, LevelStatus.UNLOCK},
+                    {LevelID.LEVEL_MANNUAL_05, LevelStatus.UNLOCK},
                 }
             );
             CustomizationData = new CustomizationData();

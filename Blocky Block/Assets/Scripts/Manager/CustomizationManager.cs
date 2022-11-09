@@ -17,7 +17,7 @@ namespace BlockyBlock.Managers
         {
             yield return new WaitUntil(() => ProfileManager.Instance != null && m_CustomizationDisplay != null);
             Dictionary<CustomizationType, int> datas = ProfileManager.Instance.ProfileData.CustomizationData.Datas;
-            m_CustomizationDisplay.Setup(
+            m_CustomizationDisplay?.Setup(
                 datas[CustomizationType.BODY],
                 datas[CustomizationType.BODY_PART],
                 datas[CustomizationType.EYES],

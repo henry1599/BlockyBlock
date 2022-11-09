@@ -14,6 +14,7 @@ namespace BlockyBlock
 
     public class LevelItem : MonoBehaviour
     {
+        public static event System.Action<LevelID, Vector3> ON_LEVEL_NODE_CLICKED;
         private int m_LevelID;
         void OnMouseDown()
         {
@@ -25,13 +26,7 @@ namespace BlockyBlock
         }
         public void OnClick()
         {
-            UIUtils.LockInput();
-            GameManager.Instance.TransitionIn(() => 
-                {
-                    UIUtils.UnlockInput();
-                    GameEvents.LOAD_LEVEL?.Invoke((LevelID)m_LevelID);
-                }
-            );
+            ON_LEVEL_NODE_CLICKED?.Invoke((LevelID)m_LevelID, transform.position);
         }
     }
 }
