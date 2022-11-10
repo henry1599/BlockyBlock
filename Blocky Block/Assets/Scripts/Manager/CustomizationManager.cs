@@ -7,30 +7,33 @@ namespace BlockyBlock.Managers
 {
     public class CustomizationManager : MonoBehaviour
     {
-        CustomizationDisplay m_CustomizationDisplay;
+        CustomizationDisplay[] m_CustomizationDisplays;
         void Start()
         {
-            m_CustomizationDisplay = FindObjectOfType<CustomizationDisplay>();
+            m_CustomizationDisplays = FindObjectsOfType<CustomizationDisplay>();
             StartCoroutine(Cor_GetProfileData());
         }
         IEnumerator Cor_GetProfileData()
         {
-            yield return new WaitUntil(() => ProfileManager.Instance != null && m_CustomizationDisplay != null);
+            yield return new WaitUntil(() => ProfileManager.Instance != null && m_CustomizationDisplays.Length > 0);
             Dictionary<CustomizationType, int> datas = ProfileManager.Instance.ProfileData.CustomizationData.Datas;
-            m_CustomizationDisplay?.Setup(
-                datas[CustomizationType.BODY],
-                datas[CustomizationType.BODY_PART],
-                datas[CustomizationType.EYES],
-                datas[CustomizationType.GLOVES],
-                datas[CustomizationType.MOUTH],
-                datas[CustomizationType.NOSE],
-                datas[CustomizationType.EARS],
-                datas[CustomizationType.GLASSES],
-                datas[CustomizationType.HAIR],
-                datas[CustomizationType.HAT],
-                datas[CustomizationType.HORN],
-                datas[CustomizationType.TAIL]
-            );
+            foreach(CustomizationDisplay display in m_CustomizationDisplays)
+            {
+                display.Setup(
+                    datas[CustomizationType.BODY],
+                    datas[CustomizationType.BODY_PART],
+                    datas[CustomizationType.EYES],
+                    datas[CustomizationType.GLOVES],
+                    datas[CustomizationType.MOUTH],
+                    datas[CustomizationType.NOSE],
+                    datas[CustomizationType.EARS],
+                    datas[CustomizationType.GLASSES],
+                    datas[CustomizationType.HAIR],
+                    datas[CustomizationType.HAT],
+                    datas[CustomizationType.HORN],
+                    datas[CustomizationType.TAIL]
+                );
+            }
         }
     }
 }

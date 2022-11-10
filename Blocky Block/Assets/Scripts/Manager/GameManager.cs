@@ -33,11 +33,18 @@ namespace BlockyBlock.Managers
         }
         void HandleWin()
         {
+            StartCoroutine(Cor_ShowVictoryScreen());
             Debug.Log("Win");
         }
         void HandleLose()
         {
             Debug.Log("Lose");
+        }
+        IEnumerator Cor_ShowVictoryScreen()
+        {
+            yield return new WaitUntil(() => VictoryScreenManager.Instance != null);
+            yield return Helpers.Helper.GetWait(0.5f);
+            VictoryScreenManager.Instance.Show();
         }
         public void TransitionIn(System.Action _cb = null)
         {
