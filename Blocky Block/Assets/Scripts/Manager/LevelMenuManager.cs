@@ -117,6 +117,7 @@ namespace BlockyBlock.Managers
         void EnterLevel()
         {
             UIUtils.LockInput();
+            m_LevelItems.ForEach(i => i.GetComponent<Collider>().enabled = false);
             GameManager.Instance.TransitionIn(() => 
                 {
                     UIUtils.UnlockInput();

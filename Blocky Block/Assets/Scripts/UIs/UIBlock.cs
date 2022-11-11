@@ -207,6 +207,10 @@ namespace BlockyBlock.UI
         }
         public void OnPointerDown(PointerEventData pointerEventData)
         {
+            if (pointerEventData.button != PointerEventData.InputButton.Left)
+            {
+                return;
+            }
             if (Mode == BlockMode.PREVIEW)
             {
                 BlockEvents.ON_DISABLE_UI_FUNCTION?.Invoke();
@@ -226,6 +230,10 @@ namespace BlockyBlock.UI
         }
         public void OnPointerUp(PointerEventData pointerEventData)
         {
+            if (pointerEventData.button != PointerEventData.InputButton.Left)
+            {
+                return;
+            }
             if (Mode == BlockMode.PREVIEW)
             {
                 return;
@@ -245,6 +253,10 @@ namespace BlockyBlock.UI
         }
         public virtual void OnBeginDrag(PointerEventData eventData)
         {
+            if (eventData.button != PointerEventData.InputButton.Left)
+            {
+                return;
+            }
             if (m_IsDragOnOptionBlock)
             {
                 return;
@@ -296,6 +308,10 @@ namespace BlockyBlock.UI
         }
         public virtual void OnDrag(PointerEventData data)
         {
+            if (data.button != PointerEventData.InputButton.Left)
+            {
+                return;
+            }
             if (m_IsDragOnOptionBlock)
             {
                 return;

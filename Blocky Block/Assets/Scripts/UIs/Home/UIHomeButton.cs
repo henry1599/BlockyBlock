@@ -16,6 +16,7 @@ namespace BlockyBlock.UI
         [Header("References")]
         [SerializeField] Image m_TopPanel;
         [SerializeField] TMP_Text m_Title;
+        [SerializeField] Image icon;
         [SerializeField] UICustomButton m_Button;
 
         [Space(10)]
@@ -81,6 +82,7 @@ namespace BlockyBlock.UI
         {
             m_TopPanel.DOKill();
             m_Title?.DOKill();
+            icon?.DOKill();
         }
         void HandleIdle()
         {
@@ -91,6 +93,8 @@ namespace BlockyBlock.UI
             DOTween.To(() => m_TopPanel.GetComponent<RectTransform>().anchoredPosition, value => m_TopPanel.GetComponent<RectTransform>().anchoredPosition = value, m_IdleRectVector, m_IdleTransitionDuration).SetEase(Ease.OutBack);
             // * Title color
             m_Title?.DOColor(m_IdleTitleColor, m_IdleTransitionDuration).SetEase(Ease.OutBack);
+            icon?.DOColor(m_IdleTitleColor, m_IdleTransitionDuration).SetEase(Ease.OutBack);
+
         }
         void HandleHover()
         {
@@ -101,6 +105,7 @@ namespace BlockyBlock.UI
             DOTween.To(() => m_TopPanel.GetComponent<RectTransform>().anchoredPosition, value => m_TopPanel.GetComponent<RectTransform>().anchoredPosition = value, m_HoverRectVector, m_HoverTransitionDuration).SetEase(Ease.OutBack);
             // * Title color
             m_Title?.DOColor(m_HoverTitleColor, m_HoverTransitionDuration).SetEase(Ease.OutBack);
+            icon?.DOColor(m_HoverTitleColor, m_HoverTransitionDuration).SetEase(Ease.OutBack);
         }
         void HandleClick()
         {
@@ -111,6 +116,7 @@ namespace BlockyBlock.UI
             DOTween.To(() => m_TopPanel.GetComponent<RectTransform>().anchoredPosition, value => m_TopPanel.GetComponent<RectTransform>().anchoredPosition = value, m_ClickRectVector, m_ClickTransitionDuration).SetEase(Ease.OutBack);
             // * Title color
             m_Title?.DOColor(m_ClickTitleColor, m_ClickTransitionDuration).SetEase(Ease.OutBack);
+            icon?.DOColor(m_ClickTitleColor, m_ClickTransitionDuration).SetEase(Ease.OutBack);
             SoundManager.Instance.PlaySound(SoundID.BUTTON_CLICK);
             Invoke(nameof(Click), m_ClickTransitionDuration / 2);
         }

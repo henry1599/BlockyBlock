@@ -26,8 +26,8 @@ MonoBehaviour:
       Y: 1
       StartDirection: 0
     LevelRawData: 060;000;000;
-    MinimumExecutionBlock: 5
-    MinimumExecutionStep: 5
+    MinimumExecutionBlock: 2
+    MinimumExecutionStep: 2
   - ChapterID: 0
     LevelType: 1
     LevelID: 1001

@@ -38,9 +38,7 @@ namespace BlockyBlock.Managers
 
             bool winGame = true;
             bool useBlockPassed = LevelCheckerManager.Instance.BlockUsed <= LevelManager.Instance.CurrentLevelData.MinimumExecutionBlock;
-            bool stepPassed = LevelCheckerManager.Instance.BlockUsed <= LevelManager.Instance.CurrentLevelData.MinimumExecutionStep;
-
-
+            bool stepPassed = LevelCheckerManager.Instance.StepPassed <= LevelManager.Instance.CurrentLevelData.MinimumExecutionStep;
 
             StartCoroutine(Cor_ShowVictoryScreen(winGame, useBlockPassed, stepPassed));
             Debug.Log("Win");

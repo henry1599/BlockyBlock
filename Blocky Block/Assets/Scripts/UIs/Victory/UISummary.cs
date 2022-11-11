@@ -6,13 +6,19 @@ using TMPro;
 using System.Text;
 using BlockyBlock.Managers;
 using Helpers;
+using DG.Tweening;
 
 namespace BlockyBlock.UI 
 {
     public class UISummary : MonoBehaviour
     {
+        [SerializeField] UIStarsSummary starsSummary;
+        [SerializeField] float delayEachStar;
         [SerializeField] List<TMP_Text> conditions;
-        public void Setup()
+        [SerializeField] Image[] conditionBorders;
+        [SerializeField] Color unfinishedColor;
+        [SerializeField] Color finishedColor;
+        public void Setup(bool winGame = true, bool usedBlockPassed = false, bool stepPassed = false)
         {
             int minBlockUsed = LevelManager.Instance.CurrentLevelData.MinimumExecutionBlock;
             int minStepPassed = LevelManager.Instance.CurrentLevelData.MinimumExecutionStep;
@@ -27,11 +33,24 @@ namespace BlockyBlock.UI
             {
                 conditions[i].text = conditionTexts[i];
             }
-            StartCoroutine(Cor_Validate());
+            conditionBorders[0].color = winGame ? finishedColor : unfinishedColor;
+            conditionBorders[1].color = usedBlockPassed ? finishedColor : unfinishedColor;
+            conditionBorders[2].color = stepPassed ? finishedColor : unfinishedColor;
+
+            int starCount = 0;
+            if (winGame) starCount++;
+            if (usedBlockPassed) starCount++;
+            if (stepPassed) starCount++;
+
+            StartCoroutine(Cor_Validate(starCount));
         }
-        IEnumerator Cor_Validate()
+        IEnumerator Cor_Validate(int stars)
         {
-            yield break;
+            yield return Helper.GetWait(0.5f);
+            for (int i = 0; i < stars; i++)
+            { 
+                DOVirtual.DelayedCall(i * this.delayEachStar, () => this.starsSummary.ShowStar());
+            }
         }
     }
 }

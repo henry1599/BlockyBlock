@@ -60,7 +60,7 @@ namespace BlockyBlock.Managers
         }
         public void Show(bool winGame = true, bool usedBlockPassed = false, bool stepPassed = false)
         {
-            StartCoroutine(Cor_Show());
+            StartCoroutine(Cor_Show(winGame, usedBlockPassed, stepPassed));
             ProfileManager.Instance.SaveProfile();
 
             string sceneName = SceneManager.GetActiveScene().name;
@@ -91,7 +91,7 @@ namespace BlockyBlock.Managers
 
             yield return Helpers.Helper.GetWait(1f);
             CreateCharacter();
-            StartCoroutine(Cor_ShowSummary());
+            StartCoroutine(Cor_ShowSummary(winGame, usedBlockPassed, stepPassed));
             yield return new WaitForSeconds(0.5f);
         }
         void CreateCharacter()
@@ -100,10 +100,10 @@ namespace BlockyBlock.Managers
             this.character.GetComponentInChildren<Animator>().runtimeAnimatorController = this.characterAnim;
             this.character.GetComponentInChildren<Animator>().CrossFade(DanceTransitionKeys[Random.Range(0, DanceTransitionKeys.Length)], 0, 0);
         }
-        IEnumerator Cor_ShowSummary()
+        IEnumerator Cor_ShowSummary(bool winGame = true, bool usedBlockPassed = false, bool stepPassed = false)
         {
             yield return Helpers.Helper.GetWait(0.5f);
-            this.summaryBoard.Setup();
+            this.summaryBoard.Setup(winGame, usedBlockPassed, stepPassed);
             this.summaryBoard.transform
                 .DOScale(Vector3.one, 0.5f).SetEase(Ease.OutBack);
         }
