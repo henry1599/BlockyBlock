@@ -33,18 +33,27 @@ namespace BlockyBlock.Managers
         }
         void HandleWin()
         {
-            StartCoroutine(Cor_ShowVictoryScreen());
+            LevelCheckerManager.Instance.ConfirmBlockUsed();
+            LevelCheckerManager.Instance.ConfirmStepPassed();
+
+            bool winGame = true;
+            bool useBlockPassed = LevelCheckerManager.Instance.BlockUsed <= LevelManager.Instance.CurrentLevelData.MinimumExecutionBlock;
+            bool stepPassed = LevelCheckerManager.Instance.BlockUsed <= LevelManager.Instance.CurrentLevelData.MinimumExecutionStep;
+
+
+
+            StartCoroutine(Cor_ShowVictoryScreen(winGame, useBlockPassed, stepPassed));
             Debug.Log("Win");
         }
         void HandleLose()
         {
             Debug.Log("Lose");
         }
-        IEnumerator Cor_ShowVictoryScreen()
+        IEnumerator Cor_ShowVictoryScreen(bool winLevel, bool useBlockPassed, bool stepPassed)
         {
             yield return new WaitUntil(() => VictoryScreenManager.Instance != null);
             yield return Helpers.Helper.GetWait(0.5f);
-            VictoryScreenManager.Instance.Show();
+            VictoryScreenManager.Instance.Show(winLevel, useBlockPassed, stepPassed);
         }
         public void TransitionIn(System.Action _cb = null)
         {

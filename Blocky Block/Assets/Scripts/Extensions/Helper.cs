@@ -61,7 +61,7 @@ namespace Helpers
         {
             _eventDataCurrentPosition = new PointerEventData(EventSystem.current) {position = Input.mousePosition};
             _results = new List<RaycastResult>();
-            EventSystem.current.RaycastAll(_eventDataCurrentPosition, _results);
+            EventSystem.current?.RaycastAll(_eventDataCurrentPosition, _results);
             return _results.Count > 0;
         }
 

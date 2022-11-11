@@ -776,9 +776,9 @@ Transform:
   - {fileID: 543450652589626108}
   - {fileID: 543450652862128407}
   - {fileID: 543450652400083162}
-  - {fileID: 371813293}
-  - {fileID: 1620142343}
   - {fileID: 1956418773}
+  - {fileID: 1620142343}
+  - {fileID: 371813293}
   m_Father: {fileID: 1088800186}
   m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -3282,6 +3282,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 1088800186}
     m_Modifications:
+    - target: {fileID: 60228152126418601, guid: 75d8353b065fd1245a060c1bf4aa2df2, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 531214003239491209, guid: 75d8353b065fd1245a060c1bf4aa2df2, type: 3}
       propertyPath: m_RootOrder
       value: 5
@@ -3326,9 +3330,17 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 870480051398492183, guid: 75d8353b065fd1245a060c1bf4aa2df2, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 870480052083346483, guid: 75d8353b065fd1245a060c1bf4aa2df2, type: 3}
       propertyPath: m_Name
       value: mill
+      objectReference: {fileID: 0}
+    - target: {fileID: 8185673986127476942, guid: 75d8353b065fd1245a060c1bf4aa2df2, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 75d8353b065fd1245a060c1bf4aa2df2, type: 3}
@@ -3364,9 +3376,17 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 1088800186}
     m_Modifications:
+    - target: {fileID: 386166720847710844, guid: c86cf997c02b9824e99964ad71aff71d, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 386166721380878138, guid: c86cf997c02b9824e99964ad71aff71d, type: 3}
       propertyPath: m_Name
       value: watermill
+      objectReference: {fileID: 0}
+    - target: {fileID: 692034025928342117, guid: c86cf997c02b9824e99964ad71aff71d, type: 3}
+      propertyPath: m_ApplyRootMotion
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 1013345353149996416, guid: c86cf997c02b9824e99964ad71aff71d, type: 3}
       propertyPath: m_RootOrder
@@ -3410,6 +3430,10 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1013345353149996416, guid: c86cf997c02b9824e99964ad71aff71d, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8707212309268263589, guid: c86cf997c02b9824e99964ad71aff71d, type: 3}
+      propertyPath: m_StaticEditorFlags
       value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []

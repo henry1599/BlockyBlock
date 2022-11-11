@@ -96,6 +96,9 @@ namespace BlockyBlock.Core
         }
         public void Stop() 
         {
+            // * reset step counter
+            LevelCheckerManager.Instance.ResetStepPassed();
+
             IsExecuting = false;
             UIErrorManager.Instance.Reset();
             GameEvents.ON_EXECUTING_BLOCK?.Invoke(IsExecuting);

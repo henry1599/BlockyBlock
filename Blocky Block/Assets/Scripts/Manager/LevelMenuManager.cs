@@ -98,8 +98,7 @@ namespace BlockyBlock.Managers
                 itemInstance.Setup(id);
 
                 m_LevelItems.Add(itemInstance);
-            }
-
+            }  
             m_Anim = m_Unit3D.GetComponentInChildren<Animator>();
             m_Anim.runtimeAnimatorController = GameManager.Instance.LevelSelectionAnim;
         }

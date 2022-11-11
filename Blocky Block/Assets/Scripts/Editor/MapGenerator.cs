@@ -82,7 +82,9 @@ namespace BlockyBlock.Editor
         private EnumField m_LevelTypeEnumField;
         private EnumField m_LevelIDEnumField;
         private EnumField m_WinConditionEnumField;
-        private IntegerField m_StuffToCollectField;
+        private SliderInt m_StuffToCollectField;
+        private IntegerField m_MinBlocksUsedField;
+        private IntegerField m_MinStepsPassedField;
         private SliderInt m_BlockNumberField;
         private Vector2IntField m_UnitPositionField;
         private EnumField m_UnitStartDirectionEnumField;
@@ -136,7 +138,9 @@ namespace BlockyBlock.Editor
             m_LevelTypeEnumField = rootVisualElement.Q<EnumField>("_levelType");
             m_LevelIDEnumField = rootVisualElement.Q<EnumField>("_levelID");
             m_WinConditionEnumField = rootVisualElement.Q<EnumField>("_winCondition");
-            m_StuffToCollectField = rootVisualElement.Q<IntegerField>("_stuffToCollect");
+            m_StuffToCollectField = rootVisualElement.Q<SliderInt>("_stuffToCollect");
+            m_MinBlocksUsedField = rootVisualElement.Q<IntegerField>("_minBlockUsed");
+            m_MinStepsPassedField = rootVisualElement.Q<IntegerField>("_minStepPassed");
             m_BlockNumberField = rootVisualElement.Q<SliderInt>("_blockNumber");
             m_UnitPositionField = rootVisualElement.Q<Vector2IntField>("_unitPosition");
             m_UnitStartDirectionEnumField = rootVisualElement.Q<EnumField>("_unitStartDirection");
@@ -281,8 +285,8 @@ namespace BlockyBlock.Editor
             }
             List<UnitData> unitDatas = new List<UnitData>();
             unitDatas.Add(new UnitData(
-                m_UnitPositionField.value.x,
-                m_UnitPositionField.value.y,
+                m_UnitPositionField.value.x + 1,
+                m_UnitPositionField.value.y + 1,
                 (UnitDirection)(m_UnitStartDirectionEnumField.value)
             ));
             List<BlockType> blockTypes = new List<BlockType>();
@@ -299,7 +303,9 @@ namespace BlockyBlock.Editor
                 levelName,
                 blockTypes,
                 unitDatas,
-                resultString
+                resultString,
+                m_MinBlocksUsedField.value,
+                m_MinStepsPassedField.value
             );
             string json = JsonUtility.ToJson(m_LevelData);
 

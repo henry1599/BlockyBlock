@@ -1,7 +1,15 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 using DG.Tweening;
+using System.Linq;
+using UnityEngine.SceneManagement;
+using BlockyBlock.Configurations;
+using BlockyBlock.UI;
+using BlockyBlock.Utils;
+using BlockyBlock.Events;
+using BlockyBlock.Enums;
 
 namespace BlockyBlock.Managers
 {
@@ -16,12 +24,16 @@ namespace BlockyBlock.Managers
             Animator.StringToHash("Dance03"),
             Animator.StringToHash("Dance04")
         };
+        [SerializeField] Button backButton;
+        [SerializeField] Button restartButton;
+        [SerializeField] Button nextButton;
         [SerializeField] GameObject container;
         [SerializeField] GameObject character;
-        [SerializeField] Transform summaryBoard;
+        [SerializeField] UISummary summaryBoard;
         [SerializeField] RuntimeAnimatorController characterAnim;
         [SerializeField] Animator transitionAnim;
         [SerializeField] GameObject normalCamera;
+        private LevelID currentId;
         public System.Action OnExit;
         public System.Action OnRestart;
         public System.Action OnNext;
@@ -46,24 +58,41 @@ namespace BlockyBlock.Managers
                 action -= (System.Action)l;
             }
         }
-        public void Show()
+        public void Show(bool winGame = true, bool usedBlockPassed = false, bool stepPassed = false)
         {
             StartCoroutine(Cor_Show());
             ProfileManager.Instance.SaveProfile();
+
+            string sceneName = SceneManager.GetActiveScene().name;
+            this.currentId = ConfigManager.Instance.SceneConfig.GetLevelIDBySceneName(sceneName);
+            ChapterID currentChapterId = (ChapterID)PlayerPrefs.GetInt(GameConstants.CHAPTER_CHOSEN_KEY, 0);
+            switch (currentChapterId)
+            {
+                case ChapterID.CHAPTER_01:
+                    nextButton.gameObject.SetActive(this.currentId < LevelID.LEVEL_MANNUAL_05);
+                    break;
+                case ChapterID.CHAPTER_02:
+                    // nextButton.gameObject.SetActive(this.currentId < LevelID.LEVEL_MANNUAL_05);
+                    break;
+                case ChapterID.CHAPTER_03:
+                    // nextButton.gameObject.SetActive(this.currentId < LevelID.LEVEL_MANNUAL_05);
+                    break;
+            }
+
+            backButton.onClick.AddListener(() => OnBackButtonClick());
+            restartButton.onClick.AddListener(() => OnRestartButtonClick());
+            nextButton.onClick.AddListener(() => OnNextButtonClick());
         }
-        IEnumerator Cor_Show()
+        IEnumerator Cor_Show(bool winGame = true, bool usedBlockPassed = false, bool stepPassed = false)
         {
             this.container.gameObject.SetActive(true);
             this.transitionAnim.CrossFade(InTransitionKey, 0, 0);
-            // AudioPlayer.SoundManager.Instance.PlaySound(AudioPlayer.SoundID.SFX_CLOUD_IN);
-            // curToy = defaultToy;
             this.normalCamera.SetActive(true);
 
             yield return Helpers.Helper.GetWait(1f);
             CreateCharacter();
             StartCoroutine(Cor_ShowSummary());
             yield return new WaitForSeconds(0.5f);
-            // SoundManager.Instance.PlaySound(SoundID.SFX_MG_END_CONFETTI);
         }
         void CreateCharacter()
         {
@@ -74,7 +103,42 @@ namespace BlockyBlock.Managers
         IEnumerator Cor_ShowSummary()
         {
             yield return Helpers.Helper.GetWait(0.5f);
-            this.summaryBoard.DOScale(Vector3.one, 0.5f).SetEase(Ease.OutBack);
+            this.summaryBoard.Setup();
+            this.summaryBoard.transform
+                .DOScale(Vector3.one, 0.5f).SetEase(Ease.OutBack);
+        }
+        public void OnBackButtonClick()
+        {
+            UIUtils.LockInput();
+            GameManager.Instance.TransitionIn(() => 
+                {
+                    UIUtils.UnlockInput();
+                    GameEvents.LOAD_LEVEL?.Invoke(LevelID.LEVEL_SELECTION);
+                }
+            );
+        }
+        public void OnNextButtonClick()
+        {
+            UIUtils.LockInput();
+            GameManager.Instance.TransitionIn(() => 
+                {
+                    UIUtils.UnlockInput();
+                    
+                    GameEvents.LOAD_LEVEL?.Invoke((LevelID)((int)this.currentId + 1));
+                }
+            );
+        }
+        public void OnRestartButtonClick()
+        {
+            UIUtils.LockInput();
+            GameManager.Instance.TransitionIn(() => 
+                {
+                    UIUtils.UnlockInput();
+                    string sceneName = SceneManager.GetActiveScene().name;
+                    LevelID currentId = ConfigManager.Instance.SceneConfig.GetLevelIDBySceneName(sceneName);
+                    GameEvents.LOAD_LEVEL?.Invoke((LevelID)currentId);
+                }
+            );
         }
     }
 }

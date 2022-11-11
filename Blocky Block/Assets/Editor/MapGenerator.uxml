@@ -5,7 +5,9 @@
         <uie:EnumField label="Level Type" value="Center" name="_levelType" />
         <uie:EnumField label="Level ID" value="Center" name="_levelID" />
         <uie:EnumField label="Win condition" value="Center" name="_winCondition" />
-        <uie:IntegerField label="Stuff to collect" value="42" name="_stuffToCollect" />
+        <ui:SliderInt picking-mode="Ignore" label="Stuff To Collect" value="1" high-value="5" name="_stuffToCollect" low-value="1" show-input-field="true" />
+        <uie:IntegerField label="Min Blocks Used" value="5" name="_minBlockUsed" />
+        <uie:IntegerField label="Min Steps Passed" value="5" name="_minStepPassed" />
         <ui:SliderInt picking-mode="Ignore" label="Blocks" value="5" high-value="8" show-input-field="true" low-value="1" name="_blockNumber" style="margin-right: 0;">
             <ui:Button text="+" display-tooltip-when-elided="true" name="_blocksButton" />
         </ui:SliderInt>

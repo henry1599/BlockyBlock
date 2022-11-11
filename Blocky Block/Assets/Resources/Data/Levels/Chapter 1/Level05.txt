@@ -1,1 +1,1 @@
-{"ChapterID":0,"LevelType":1,"LevelID":1004,"WinCondition":1000,"StuffToCollect":1,"LevelName":"Level Mannual 05","BlockTypes":[0,4,1,2],"UnitDatas":[{"Floor":0,"X":1,"Y":1,"StartDirection":0}],"LevelRawData":"600;213;313;000;"}
+{"ChapterID":0,"LevelType":1,"LevelID":1004,"WinCondition":1000,"StuffToCollect":1,"LevelName":"Level Mannual 05","BlockTypes":[0,5],"UnitDatas":[{"Floor":0,"X":1,"Y":1,"StartDirection":0}],"LevelRawData":"6;0;0;0;0;0;0;0;0;0;","MinimumExecutionBlock":3,"MinimumExecutionStep":17}

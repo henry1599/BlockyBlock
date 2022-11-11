@@ -70,7 +70,9 @@ namespace BlockyBlock.Configurations
         public List<BlockType> BlockTypes;
         public List<UnitData> UnitDatas;
         public string LevelRawData;
-        public LevelData(ChapterID _chapterId, LevelType _levelType, LevelID _levelID, WinType _winType, int _stuffToCollect, string _levelName, List<BlockType> _blockTypes, List<UnitData> _unitData, string _levelRawData)
+        public int MinimumExecutionBlock;
+        public int MinimumExecutionStep;
+        public LevelData(ChapterID _chapterId, LevelType _levelType, LevelID _levelID, WinType _winType, int _stuffToCollect, string _levelName, List<BlockType> _blockTypes, List<UnitData> _unitData, string _levelRawData, int _minimumExecutionBlocks, int _minimumExecutionSteps)
         {
             ChapterID = _chapterId;
             LevelType = _levelType;
@@ -80,7 +82,9 @@ namespace BlockyBlock.Configurations
             LevelName = _levelName;
             BlockTypes = _blockTypes;
             UnitDatas = _unitData;
-            LevelRawData = _levelRawData;;
+            LevelRawData = _levelRawData;
+            MinimumExecutionBlock = _minimumExecutionBlocks;
+            MinimumExecutionStep = _minimumExecutionSteps;
         }
         public LevelData()
         {
@@ -92,6 +96,8 @@ namespace BlockyBlock.Configurations
             BlockTypes = new List<BlockType>();
             UnitDatas = new List<UnitData>();
             LevelRawData = string.Empty;
+            MinimumExecutionBlock = 1;
+            MinimumExecutionStep = 1;
         }
     }
 }

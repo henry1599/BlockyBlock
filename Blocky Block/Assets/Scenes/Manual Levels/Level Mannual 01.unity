@@ -1034,10 +1034,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 2675122932386757022, guid: 91960d58f58a9c74b85015c4f718c563, type: 3}
-      propertyPath: m_AnchoredPosition.x
-      value: 23.333313
-      objectReference: {fileID: 0}
     - target: {fileID: 3440698419868904945, guid: 91960d58f58a9c74b85015c4f718c563, type: 3}
       propertyPath: m_Name
       value: Victory Screen
@@ -1086,14 +1082,6 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 4245348519299461935, guid: 91960d58f58a9c74b85015c4f718c563, type: 3}
-      propertyPath: OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
-      value: 
-      objectReference: {fileID: 5539900829982385011}
-    - target: {fileID: 6857033673910361780, guid: 91960d58f58a9c74b85015c4f718c563, type: 3}
-      propertyPath: OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
-      value: 
-      objectReference: {fileID: 5539900829982385011}
     - target: {fileID: 7444745171948020605, guid: 91960d58f58a9c74b85015c4f718c563, type: 3}
       propertyPath: OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 

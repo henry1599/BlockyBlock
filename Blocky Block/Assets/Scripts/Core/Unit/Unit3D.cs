@@ -76,6 +76,10 @@ namespace BlockyBlock.Core
             transform.position = m_StartPosition;
             transform.eulerAngles = ConfigManager.Instance.UnitConfig.GetDataByDirection(_startDirection).Rotation;
         }
+        void CountStep()
+        {
+            LevelCheckerManager.Instance.SetStepPassed(1);
+        }
         void HandleStop()
         {
             m_Animation.Reset();
@@ -100,6 +104,7 @@ namespace BlockyBlock.Core
         public void MoveForward(BlockFunctionMoveForward _moveForward)
         { 
             Move();
+            CountStep();
         }
         void Move()
         {
@@ -144,6 +149,7 @@ namespace BlockyBlock.Core
         #region Turn Left
         public void TurnLeft(BlockFunctionTurnLeft _turnLeft)
         {
+            CountStep();
             switch (m_CurrentDirection)
             {
                 case UnitDirection.UP:
@@ -172,7 +178,7 @@ namespace BlockyBlock.Core
         #region Turn Right
         public void TurnRight(BlockFunctionTurnRight _turnRight)
         {
-            
+            CountStep();
             switch (m_CurrentDirection)
             {
                 case UnitDirection.UP:
@@ -201,6 +207,7 @@ namespace BlockyBlock.Core
         #region Pick up
         void Pickup(BlockFunctionPickup _pickup)
         {
+            CountStep();
             DoPickup();
         }
         void DoPickup()
@@ -232,6 +239,7 @@ namespace BlockyBlock.Core
         #region Put down
         void Putdown(BlockFunctionPutdown _putdown)
         {
+            CountStep();
             DoPutdown();
         }
         void DoPutdown()
@@ -277,6 +285,7 @@ namespace BlockyBlock.Core
         #region Push
         void Push(BlockFunctionPush _push)
         {
+            CountStep();
             if (m_GrabbedObject != null)
             {
                 ErrorEvents.ON_ERROR?.Invoke(ErrorType.INVALID_PUSH);
@@ -316,6 +325,7 @@ namespace BlockyBlock.Core
         #region Jump If Grab Something
         void JumpIfGrabSomething(BlockFunctionJumpIfGrabSth _blockFunction)
         {
+            CountStep();
             UnitEvents.ON_JUMP_IF_GRAB_STH_VALIDATE?.Invoke(_blockFunction, IsGrabSomething);
         }
         #endregion
@@ -460,6 +470,7 @@ namespace BlockyBlock.Core
         }
         void JumpIfSthFront(BlockFunctionJumpIfSthFront _function)
         {
+            CountStep();
             Unit3DRotation unitRotation = ConfigManager.Instance.UnitConfig.Unit3DRotation;
 
             ConditionDirection direction = _function.Direction;
