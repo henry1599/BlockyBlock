@@ -27,16 +27,19 @@ namespace BlockyBlock.Managers
         };
         [SerializeField] LevelItemConfig m_LevelItemConfig;
         [SerializeField] Transform[] m_LevelNodes;
-        [SerializeField] NavMeshAgent m_Unit3D;
+        [SerializeField] Transform m_Unit3D;
         [SerializeField] float[] m_Speeds;
         private Animator m_Anim;
         private bool m_IsMoving = false;
         private int m_ClickFactor = -1;
         private List<LevelItem> m_LevelItems;
         private LevelID m_ChosenNodeID;
+        private NavMeshAgent unitNavMeshAgent;
         void Awake()
         {
             Instance = this;
+            unitNavMeshAgent = m_Unit3D.GetComponent<NavMeshAgent>();
+            unitNavMeshAgent.enabled = false;
         }
         void Start()
         {
@@ -50,12 +53,12 @@ namespace BlockyBlock.Managers
                 m_Anim.CrossFade(IdleKeyAnimation, 0, 0);
                 return;
             }
-            float dist = m_Unit3D.remainingDistance; 
-            if (dist != Mathf.Infinity && m_Unit3D.pathStatus == NavMeshPathStatus.PathComplete && m_Unit3D.remainingDistance <= 0.1f)
+            float dist = unitNavMeshAgent.remainingDistance; 
+            if (dist != Mathf.Infinity && unitNavMeshAgent.pathStatus == NavMeshPathStatus.PathComplete && unitNavMeshAgent.remainingDistance <= 0.1f)
             {
                 EnterLevel();
                 m_IsMoving = false;
-                m_Unit3D.speed = m_Speeds[m_ClickFactor];
+                unitNavMeshAgent.speed = m_Speeds[m_ClickFactor];
                 m_ClickFactor = -1;
             }
         }
@@ -65,6 +68,7 @@ namespace BlockyBlock.Managers
         }
         public void OnBackButtonClick()
         {
+            PlayerPrefs.SetInt(GameConstants.LEVEL_TO_BACK_KEY, (int)this.m_ChosenNodeID);
             GameManager.Instance.TransitionIn(() => GameEvents.LOAD_LEVEL?.Invoke(LevelID.HOME));
         }
         int LoadChapterChosen()
@@ -100,6 +104,11 @@ namespace BlockyBlock.Managers
 
                 m_LevelItems.Add(itemInstance);
             }  
+            
+            int idFromLevel = PlayerPrefs.GetInt(GameConstants.LEVEL_TO_BACK_KEY, 1000);
+            
+            m_Unit3D.position = m_LevelItems.Find(i => i.LevelId == idFromLevel).transform.position;
+            unitNavMeshAgent.enabled = true;
             m_Anim = m_Unit3D.GetComponentInChildren<Animator>();
             m_Anim.runtimeAnimatorController = GameManager.Instance.LevelSelectionAnim;
         }
@@ -111,9 +120,9 @@ namespace BlockyBlock.Managers
             if (m_ClickFactor > m_Speeds.Length - 1)
                 m_ClickFactor = m_Speeds.Length - 1;
             
-            m_Unit3D.speed = m_Speeds[m_ClickFactor];
+            unitNavMeshAgent.speed = m_Speeds[m_ClickFactor];
             m_Anim.CrossFade(KeysAnim[m_ClickFactor], 0, 0);
-            m_Unit3D.destination = _position;
+            unitNavMeshAgent.destination = _position;
         }
         void EnterLevel()
         {

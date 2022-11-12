@@ -16,6 +16,7 @@ namespace BlockyBlock
     {
         public static event System.Action<LevelID, Vector3> ON_LEVEL_NODE_CLICKED;
         private int m_LevelID;
+        public int LevelId => m_LevelID;
         void OnMouseDown()
         {
             OnClick();

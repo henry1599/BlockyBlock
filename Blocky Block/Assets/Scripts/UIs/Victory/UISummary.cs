@@ -26,8 +26,8 @@ namespace BlockyBlock.UI
             string[] conditionTexts = new string[3]
             {
                 "Win the level",
-                (new StringBuilder()).AppendFormat("Use at least {0} blocks", minBlockUsed).ToString(),
-                (new StringBuilder()).AppendFormat("Run at least {0} steps", minStepPassed).ToString()
+                (new StringBuilder()).AppendFormat("Use at most {0} blocks", minBlockUsed).ToString(),
+                (new StringBuilder()).AppendFormat("Run at most {0} steps", minStepPassed).ToString()
             };
             for (int i = 0; i < conditionTexts.Length; i++)
             {

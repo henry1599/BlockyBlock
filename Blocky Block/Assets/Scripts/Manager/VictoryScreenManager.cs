@@ -116,6 +116,7 @@ namespace BlockyBlock.Managers
             GameManager.Instance.TransitionIn(() => 
                 {
                     UIUtils.UnlockInput();
+                    PlayerPrefs.SetInt(GameConstants.LEVEL_TO_BACK_KEY, (int)this.currentId);
                     GameEvents.LOAD_LEVEL?.Invoke(LevelID.LEVEL_SELECTION);
                 }
             );

@@ -115,5 +115,6 @@ namespace BlockyBlock.Events
         public static readonly float TRANSITION_OUT_DURATION = 1;
         public static readonly string CHAPTER_CHOSEN_KEY = "Ch4pt3R_Ch053n";
         public static readonly string PROFILE_KEY = "Pr0F1l3_K3y";
+        public static readonly string LEVEL_TO_BACK_KEY = "L3v3L_T0_B4ck";
     }
 }
