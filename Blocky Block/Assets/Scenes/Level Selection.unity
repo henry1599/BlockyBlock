@@ -7678,6 +7678,10 @@ PrefabInstance:
       value: Back Button Level Selection
       objectReference: {fileID: 0}
     - target: {fileID: 3238271724045368957, guid: 2c344e6c45283e54bb7e2b611646c624, type: 3}
+      propertyPath: icon
+      value: 
+      objectReference: {fileID: 346629059}
+    - target: {fileID: 3238271724045368957, guid: 2c344e6c45283e54bb7e2b611646c624, type: 3}
       propertyPath: m_IdleTitleColor.a
       value: 1
       objectReference: {fileID: 0}

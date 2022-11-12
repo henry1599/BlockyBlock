@@ -207,6 +207,7 @@ namespace BlockyBlock.Core
         #region Pick up
         void Pickup(BlockFunctionPickup _pickup)
         {
+            SoundManager.Instance.PlaySound(AudioPlayer.SoundID.BOX_PICK_UP);
             CountStep();
             DoPickup();
         }
@@ -286,6 +287,7 @@ namespace BlockyBlock.Core
         void Push(BlockFunctionPush _push)
         {
             CountStep();
+            SoundManager.Instance.PlaySound(AudioPlayer.SoundID.PUSH);
             if (m_GrabbedObject != null)
             {
                 ErrorEvents.ON_ERROR?.Invoke(ErrorType.INVALID_PUSH);

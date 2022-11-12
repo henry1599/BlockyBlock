@@ -10,6 +10,7 @@ using BlockyBlock.UI;
 using BlockyBlock.Utils;
 using BlockyBlock.Events;
 using BlockyBlock.Enums;
+using AudioPlayer;
 
 namespace BlockyBlock.Managers
 {
@@ -86,10 +87,12 @@ namespace BlockyBlock.Managers
         IEnumerator Cor_Show(bool winGame = true, bool usedBlockPassed = false, bool stepPassed = false)
         {
             this.container.gameObject.SetActive(true);
+            SoundManager.Instance.PlaySound(SoundID.TRANSITION_IN);
             this.transitionAnim.CrossFade(InTransitionKey, 0, 0);
             this.normalCamera.SetActive(true);
 
             yield return Helpers.Helper.GetWait(1f);
+            SoundManager.Instance.PlaySound(SoundID.CONFETTI);
             CreateCharacter();
             StartCoroutine(Cor_ShowSummary(winGame, usedBlockPassed, stepPassed));
             yield return new WaitForSeconds(0.5f);

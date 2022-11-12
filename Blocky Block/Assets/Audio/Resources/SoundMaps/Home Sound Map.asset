@@ -18,3 +18,6 @@ MonoBehaviour:
   - name: HOME_BG_MUSIC
     Id: 1
     Data: {fileID: 11400000, guid: d983a60e11cfdda4f95f2282e2a0bd5e, type: 2}
+  - name: LEVEL_SELECTION_BG_MUSIC
+    Id: 4
+    Data: {fileID: 11400000, guid: e90f7988d86dc3541af45d4d25b40f31, type: 2}

@@ -4,6 +4,7 @@ using UnityEngine;
 using BlockyBlock.Configurations;
 using BlockyBlock.Enums;
 using BlockyBlock.Events;
+using AudioPlayer;
 
 namespace BlockyBlock.Managers
 {
@@ -13,6 +14,7 @@ namespace BlockyBlock.Managers
         LevelID m_CurrentLevelID;
         public LevelConfig LevelConfig => ConfigManager.Instance.LevelConfig;
         LevelData m_CurrentLevelData;
+        private bool isSoundMapLoaded = false;
         public LevelData CurrentLevelData
         {
             get => m_CurrentLevelData;
@@ -41,6 +43,7 @@ namespace BlockyBlock.Managers
         void Awake()
         {
             Instance = this;
+            StartCoroutine(Cor_LoadSoundMap());
             UnitEvents.ON_COLLECT_STUFF += HandleCollectStuff;
             UnitEvents.ON_RESET += HandleReset;
         }
@@ -48,12 +51,42 @@ namespace BlockyBlock.Managers
         void Start()
         {
             m_CurrentLevelID = LevelID.HOME;
+            StartCoroutine(Cor_PlayBGMusic());
         }
-
-        // Update is called once per frame
-        void Update()
+        IEnumerator Cor_LoadSoundMap()
         {
-            
+            yield return new WaitUntil(() => SoundManager.Instance != null);
+            SoundManager.Instance.LoadSoundMap(SoundType.HOME); 
+            SoundManager.Instance.LoadSoundMap(SoundType.LEVEL);
+            isSoundMapLoaded = true; 
+        }
+        IEnumerator Cor_PlayBGMusic()
+        {
+            yield return new WaitUntil(() => isSoundMapLoaded == true);
+            switch (m_CurrentLevelID)
+            {
+                case LevelID.LEVEL_MANNUAL_00:
+                case LevelID.LEVEL_MANNUAL_01:
+                case LevelID.LEVEL_MANNUAL_02:
+                case LevelID.LEVEL_MANNUAL_03:
+                case LevelID.LEVEL_MANNUAL_04:
+                case LevelID.LEVEL_MANNUAL_05:
+                case LevelID.LEVEL_MANNUAL_06:
+                case LevelID.LEVEL_MANNUAL_07:
+                case LevelID.LEVEL_MANNUAL_08:
+                case LevelID.LEVEL_MANNUAL_09:
+                case LevelID.LEVEL_MANNUAL_10:
+                case LevelID.LEVEL_MANNUAL_11:
+                case LevelID.LEVEL_MANNUAL_12:
+                    SoundManager.Instance.PlayMusic(SoundID.LEVEL_THEME);
+                    break;
+                case LevelID.HOME:
+                    SoundManager.Instance.PlayMusic(SoundID.HOME_BG_MUSIC);
+                    break;
+                case LevelID.LEVEL_SELECTION:
+                    SoundManager.Instance.PlayMusic(SoundID.LEVEL_SELECTION_BG_MUSIC);
+                    break;
+            }
         }
         void OnDestroy()
         {

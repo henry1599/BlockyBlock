@@ -21,3 +21,12 @@ MonoBehaviour:
   - name: BUTTON_HOVER
     Id: 3
     Data: {fileID: 11400000, guid: 1ed97794c4557c94487b03704f133306, type: 2}
+  - name: TRANSITION_IN
+    Id: 5
+    Data: {fileID: 11400000, guid: dd9706cad3d4eac4ea569ef4e577d40b, type: 2}
+  - name: TRANSITION_OUT
+    Id: 6
+    Data: {fileID: 11400000, guid: 7091e44c0eaa1b04cb792ef8e6836aa8, type: 2}
+  - name: CONFETTI
+    Id: 11
+    Data: {fileID: 11400000, guid: a219bb54864400344b77fb377ad7a143, type: 2}

@@ -10,7 +10,8 @@ using NaughtyAttributes;
 public enum SoundType
 {
     COMMON = 0,
-    HOME = 1
+    HOME = 1,
+    LEVEL = 2
 }
 
 namespace AudioPlayer

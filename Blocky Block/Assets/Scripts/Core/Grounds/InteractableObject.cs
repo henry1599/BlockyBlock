@@ -109,9 +109,15 @@ namespace BlockyBlock.Core
             if (_playPar)
             {
                 if (isWater)
+                {
+                    SoundManager.Instance.PlaySound(AudioPlayer.SoundID.BOX_TO_WATER);
                     m_VfxPutWater.Play();
+                }
                 else
+                {
+                    SoundManager.Instance.PlaySound(AudioPlayer.SoundID.BOX_TO_GROUND);
                     m_VfxPut?.Play();
+                }
             }
             IsGrabbed = false;
 

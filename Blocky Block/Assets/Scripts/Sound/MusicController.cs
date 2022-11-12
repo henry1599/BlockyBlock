@@ -8,16 +8,6 @@ namespace AudioPlayer
     public class MusicController : MonoSingleton<MusicController>
     {
         private AudioSource currentAudioSource;
-
-
-        void Start()
-        {
-            //PlayHubMusic();
-        }
-        void Update()
-        {
-        }
-
         public void PlayMusic(SoundID musicID)
         {
             if (currentAudioSource)

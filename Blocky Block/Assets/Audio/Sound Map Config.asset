@@ -17,3 +17,5 @@ MonoBehaviour:
     Path: SoundMaps/Home Sound Map
   - Type: 0
     Path: SoundMaps/Common Sound Map
+  - Type: 2
+    Path: SoundMaps/Level Map

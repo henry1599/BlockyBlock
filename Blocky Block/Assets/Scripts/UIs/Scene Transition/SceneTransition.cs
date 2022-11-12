@@ -1,6 +1,8 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using AudioPlayer;
+using BlockyBlock.Managers;
 
 namespace BlockyBlock.UI
 {
@@ -24,10 +26,12 @@ namespace BlockyBlock.UI
         }
         public void TransitionIn()
         {
+            SoundManager.Instance.PlaySound(SoundID.TRANSITION_IN);
             m_Animator.CrossFade(InKeyAnimation, 0, 0);
         }
         public void TransitionOut()
         {
+            SoundManager.Instance.PlaySound(SoundID.TRANSITION_OUT);
             m_Animator.CrossFade(OutKeyAnimation, 0, 0);
         }
     }
