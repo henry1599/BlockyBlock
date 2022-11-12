@@ -50,6 +50,7 @@ namespace BlockyBlock.Managers
         {
             if (!m_IsMoving) 
             {
+                if (m_Anim == null) return;
                 m_Anim.CrossFade(IdleKeyAnimation, 0, 0);
                 return;
             }
@@ -107,7 +108,7 @@ namespace BlockyBlock.Managers
             
             int idFromLevel = PlayerPrefs.GetInt(GameConstants.LEVEL_TO_BACK_KEY, 1000);
             
-            m_Unit3D.position = m_LevelItems.Find(i => i.LevelId == idFromLevel).transform.position;
+            // m_Unit3D.position = m_LevelItems.Find(i => i.LevelId == idFromLevel).transform.position;
             unitNavMeshAgent.enabled = true;
             m_Anim = m_Unit3D.GetComponentInChildren<Animator>();
             m_Anim.runtimeAnimatorController = GameManager.Instance.LevelSelectionAnim;
