@@ -73,6 +73,7 @@ namespace BlockyBlock.Core
                         pushPosition += new Vector3(0, -0.8f, 0);
                         transform.DOLocalMove(pushPosition, 0.45f).SetEase(Ease.InOutSine);
                         DOVirtual.DelayedCall(0.25f, () => m_VfxPutWater.Play());
+                        SoundManager.Instance.PlaySound(AudioPlayer.SoundID.BOX_TO_WATER);
                         
                     });
             }

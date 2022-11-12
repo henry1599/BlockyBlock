@@ -746,19 +746,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7bb42831ee5422f409e7f24f9e7488ea, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  renderingStrategy: 0
-  renderTargetName: 
-  renderingMode: 0
-  outlineLayerMask: -1
-  scaleIndepented: 1
-  primaryRendererScale: 0.75
-  blurShift: 1
-  dilateShift: 1
-  dilateIterrations: 30
-  dilateQuality: 0
-  blurIterrations: 1
-  blurType: 1
-  infoRendererScale: 0.75
 --- !u!1001 &371813292
 PrefabInstance:
   m_ObjectHideFlags: 0
