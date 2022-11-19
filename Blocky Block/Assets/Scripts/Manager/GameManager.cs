@@ -85,14 +85,13 @@ namespace BlockyBlock.Managers
         }
         void HandleLoadLevel(LevelID _id)
         {
-            LevelManager.Instance.CurrentLevelID = _id;
+            StartCoroutine(Cor_UpdateSceneID(_id));
         }
-        IEnumerator Cor_UpdateSceneID()
+        IEnumerator Cor_UpdateSceneID(LevelID _id)
         {
             yield return new WaitUntil(() => LevelManager.Instance != null && 
                                              ConfigManager.Instance != null);
-            string sceneName = SceneManager.GetActiveScene().name;
-            LevelManager.Instance.CurrentLevelID = ConfigManager.Instance.SceneConfig.GetLevelIDBySceneName(sceneName);
+            LevelManager.Instance.CurrentLevelID = _id;
         }
     }
 }
