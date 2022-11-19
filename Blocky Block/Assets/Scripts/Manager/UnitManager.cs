@@ -48,6 +48,8 @@ namespace BlockyBlock.Managers
                 unitInstance.GetComponentInChildren<Animator>().runtimeAnimatorController = GameManager.Instance.LevelAnim;
                 unitInstance.Setup(startPosition, startDirection, unitData.X, unitData.Y);
             }
+
+            GameManager.Instance.TransitionOut();
         }
 
         // Update is called once per frame

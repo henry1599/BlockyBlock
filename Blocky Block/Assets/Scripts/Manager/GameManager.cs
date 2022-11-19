@@ -16,8 +16,14 @@ namespace BlockyBlock.Managers
         public RuntimeAnimatorController LevelAnim;
         void Awake()
         {
+            if (Instance != null)
+            {
+                Destroy(gameObject);
+                return;
+            }
+            DontDestroyOnLoad(gameObject);
             Instance = this;
-            StartCoroutine(Cor_UpdateSceneID());
+            // StartCoroutine(Cor_UpdateSceneID());
         }
         // Start is called before the first frame update
         void Start()
@@ -25,11 +31,13 @@ namespace BlockyBlock.Managers
             TransitionOut();
             GameEvents.ON_WIN += HandleWin;
             GameEvents.ON_LOSE += HandleLose;
+            GameEvents.LOAD_LEVEL += HandleLoadLevel;
         }
         void OnDestroy()
         {
             GameEvents.ON_WIN -= HandleWin;
             GameEvents.ON_LOSE -= HandleLose;
+            GameEvents.LOAD_LEVEL -= HandleLoadLevel;
         }
         void HandleWin()
         {
@@ -74,6 +82,10 @@ namespace BlockyBlock.Managers
             SceneTransition.Instance.TransitionOut();
             yield return new WaitForSeconds(GameConstants.TRANSITION_OUT_DURATION);
             _cb?.Invoke();
+        }
+        void HandleLoadLevel(LevelID _id)
+        {
+            LevelManager.Instance.CurrentLevelID = _id;
         }
         IEnumerator Cor_UpdateSceneID()
         {

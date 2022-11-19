@@ -24,25 +24,8 @@ namespace BlockyBlock.Managers
         void Awake()
         {   
             // StartCoroutine(Cor_LoadSoundMap());
+            GameManager.Instance.TransitionOut();
         }
-        // IEnumerator Cor_LoadSoundMap()
-        // {
-        //     yield return new WaitUntil(() => SoundManager.Instance != null);
-        //     SoundManager.Instance.LoadSoundMap(SoundType.HOME); 
-        //     yield return Cor_PlayBGMusic();
-        // }
-        // IEnumerator Cor_PlayBGMusic()
-        // {
-        //     yield return new WaitUntil(() => SoundManager.Instance != null && MusicController.Instance != null);
-        //     if (MusicController.Instance.isPlaying())
-        //     {
-        //         yield break;
-        //     }
-        //     else
-        //     {
-        //         MusicController.Instance.PlayMusic(SoundID.HOME_BG_MUSIC);
-        //     }
-        // }
         void OnDestroy()
         {
             audioSource?.Stop();

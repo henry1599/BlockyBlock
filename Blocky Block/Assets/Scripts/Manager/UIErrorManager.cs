@@ -16,6 +16,12 @@ namespace BlockyBlock.Managers
         UIError m_UIError;
         void Awake()
         {
+            if (Instance != null)
+            {
+                Destroy(gameObject);
+                return;
+            }
+            DontDestroyOnLoad(gameObject);
             Instance = this;
             m_UIError = GameObject.FindGameObjectWithTag(GameConstants.UIERROR_TAG)?.GetComponent<UIError>();
         }

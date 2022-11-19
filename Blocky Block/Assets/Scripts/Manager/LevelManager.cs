@@ -42,6 +42,12 @@ namespace BlockyBlock.Managers
         }
         void Awake()
         {
+            if (Instance != null)
+            {
+                Destroy(gameObject);
+                return;
+            }
+            DontDestroyOnLoad(gameObject);
             Instance = this;
             StartCoroutine(Cor_LoadSoundMap());
             UnitEvents.ON_COLLECT_STUFF += HandleCollectStuff;

@@ -7,7 +7,19 @@ namespace BlockyBlock.Managers
 {
     public class CustomizationManager : MonoBehaviour
     {
+        public static CustomizationManager Instance {get; private set;}
         CustomizationDisplay[] m_CustomizationDisplays;
+        void Awake()
+        {
+            
+            if (Instance != null)
+            {
+                Destroy(gameObject);
+                return;
+            }
+            DontDestroyOnLoad(gameObject);
+            Instance = this;
+        }
         void Start()
         {
             m_CustomizationDisplays = FindObjectsOfType<CustomizationDisplay>();

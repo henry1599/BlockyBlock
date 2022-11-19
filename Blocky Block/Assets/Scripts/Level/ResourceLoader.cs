@@ -14,15 +14,13 @@ namespace BlockyBlock.Managers
         public Grounds Grounds;
         void Awake()
         {
-            DontDestroyOnLoad(gameObject);
-            if (Instance == null)
-            {
-                Instance = this;
-            }
-            else
+            if (Instance != null)
             {
                 Destroy(gameObject);
+                return;
             }
+            DontDestroyOnLoad(gameObject);
+            Instance = this;
         }
     }
 }

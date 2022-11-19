@@ -18,6 +18,12 @@ namespace BlockyBlock.Managers
         public SceneConfig SceneConfig;
         void Awake()
         {
+            if (Instance != null)
+            {
+                Destroy(gameObject);
+                return;
+            }
+            DontDestroyOnLoad(gameObject);
             Instance = this;
         }
     }
