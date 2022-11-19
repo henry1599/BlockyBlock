@@ -106,10 +106,10 @@ namespace BlockyBlock.Managers
                 m_LevelItems.Add(itemInstance);
             }  
             
-            int idFromLevel = PlayerPrefs.GetInt(GameConstants.LEVEL_TO_BACK_KEY, 1000);
+            this.m_ChosenNodeID = (LevelID)PlayerPrefs.GetInt(GameConstants.LEVEL_TO_BACK_KEY, 1000);
             
             GameManager.Instance.TransitionOut();
-            // m_Unit3D.position = m_LevelItems.Find(i => i.LevelId == idFromLevel).transform.position;
+            m_Unit3D.position = m_LevelItems.Find(i => i.LevelId == (int)this.m_ChosenNodeID).transform.position;
             unitNavMeshAgent.enabled = true;
             m_Anim = m_Unit3D.GetComponentInChildren<Animator>();
             m_Anim.runtimeAnimatorController = GameManager.Instance.LevelSelectionAnim;
