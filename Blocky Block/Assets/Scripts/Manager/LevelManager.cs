@@ -88,7 +88,7 @@ namespace BlockyBlock.Managers
                                              UnitManager.Instance != null &&
                                              LevelReader.Instance != null && 
                                              ConfigManager.Instance != null &&
-                                             LevelManager.Instance != null);
+                                             GroundManager.Instance != null);
             GameEvents.SETUP_LEVEL?.Invoke(_data);
         }
         void LevelChecker()
@@ -105,6 +105,12 @@ namespace BlockyBlock.Managers
                     CheckReachToPosition();
                     break;
             }
+        }
+        public void ResetChecker()
+        {
+            CurrentCollectedStuff = 0;
+            IsCollectTheChest = false;
+            IsReachToPosition = false;
         }
 
         // * Collect all stuff

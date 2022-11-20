@@ -33,7 +33,7 @@ namespace BlockyBlock.Managers
         }
         IEnumerator SpawnUnit(LevelData _data)
         {
-            yield return new WaitUntil(() => GroundManager.Instance.m_IsFinishedSpawnGround == true);
+            yield return new WaitUntil(() => GroundManager.Instance.m_IsFinishedSpawnGround == true && CustomizationManager.Instance != null);
             foreach (UnitData unitData in _data.UnitDatas)
             {
                 if (GridManager.Instance.Grids.Count - 1 < unitData.Floor)
@@ -47,6 +47,8 @@ namespace BlockyBlock.Managers
                 Unit3D unitInstance = Instantiate(m_Unit3DTemplate.gameObject, transform).GetComponent<Unit3D>();
                 unitInstance.GetComponentInChildren<Animator>().runtimeAnimatorController = GameManager.Instance.LevelAnim;
                 unitInstance.Setup(startPosition, startDirection, unitData.X, unitData.Y);
+
+                CustomizationManager.Instance.SetCustomization(unitInstance.GetComponentInChildren<CustomizationDisplay>());
             }
 
             GameManager.Instance.TransitionOut();

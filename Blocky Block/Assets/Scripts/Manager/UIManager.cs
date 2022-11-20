@@ -69,6 +69,13 @@ namespace BlockyBlock.Managers
                     Destroy(child.gameObject);
                 }
             }
+            foreach (Transform child in m_PreviewCodeContent)
+            {
+                if (child.GetComponent<UIBlock>() != null)
+                {
+                    Destroy(child.gameObject);
+                }
+            }
         }
         void HandleWin()
         {

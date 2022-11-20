@@ -30,6 +30,10 @@ namespace BlockyBlock.Managers
         }
         IEnumerator Cor_SpawnGround()
         {
+            // foreach (Transform tf in transform)
+            // {
+            //     Destroy(tf.gameObject);
+            // }
             yield return new WaitUntil(() => ResourceLoader.Instance != null);
             List<Core.Grid> grids = GridManager.Instance.Grids;
             foreach (Core.Grid grid in grids)

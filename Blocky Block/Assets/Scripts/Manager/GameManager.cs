@@ -100,9 +100,9 @@ namespace BlockyBlock.Managers
         }
         IEnumerator Cor_UpdateSceneID(LevelID _id)
         {
-            yield return new WaitUntil(() => LevelManager.Instance != null && 
-                                             ConfigManager.Instance != null);
+            yield return new WaitUntil(() => ConfigManager.Instance != null);
             LevelManager.Instance.CurrentLevelID = _id;
+            LevelManager.Instance.ResetChecker();
             PlayBGMusic(_id);
         }
         void PlayBGMusic(LevelID _id)
