@@ -34,18 +34,30 @@ namespace BlockyBlock
         {
             Datas = new Dictionary<CustomizationType, int>()
             {
-                {CustomizationType.BODY, 0},
-                {CustomizationType.BODY_PART, -1},
-                {CustomizationType.EYES, 0},
-                {CustomizationType.GLOVES, -1},
-                {CustomizationType.MOUTH, 0},
-                {CustomizationType.NOSE, -1},
-                {CustomizationType.EARS, -1},
-                {CustomizationType.GLASSES, -1},
-                {CustomizationType.HAIR, -1},
-                {CustomizationType.HAT, -1},
-                {CustomizationType.HORN, -1},
-                {CustomizationType.TAIL, -1}
+                // {CustomizationType.BODY, 0},
+                // {CustomizationType.BODY_PART, -1},
+                // {CustomizationType.EYES, 0},
+                // {CustomizationType.GLOVES, -1},
+                // {CustomizationType.MOUTH, 0},
+                // {CustomizationType.NOSE, -1},
+                // {CustomizationType.EARS, -1},
+                // {CustomizationType.GLASSES, -1},
+                // {CustomizationType.HAIR, -1},
+                // {CustomizationType.HAT, -1},
+                // {CustomizationType.HORN, -1},
+                // {CustomizationType.TAIL, -1}
+                {CustomizationType.BODY, 2},
+                {CustomizationType.BODY_PART, 2},
+                {CustomizationType.EYES, 2},
+                {CustomizationType.GLOVES, 2},
+                {CustomizationType.MOUTH, 2},
+                {CustomizationType.NOSE, 2},
+                {CustomizationType.EARS, 2},
+                {CustomizationType.GLASSES, 1},
+                {CustomizationType.HAIR, 1},
+                {CustomizationType.HAT, 2},
+                {CustomizationType.HORN, 2},
+                {CustomizationType.TAIL, 2}
             };
         }
     }
