@@ -32,7 +32,7 @@ MonoBehaviour:
     LevelType: 1
     LevelID: 1001
     WinCondition: 1000
-    StuffToCollect: 1
+    StuffToCollect: 2
     LevelName: Level Mannual 02
     BlockTypes: 0000000004000000
     UnitDatas:
@@ -40,7 +40,7 @@ MonoBehaviour:
       X: 1
       Y: 1
       StartDirection: 0
-    LevelRawData: 006;000;000;
+    LevelRawData: 606;000;000;
     MinimumExecutionBlock: 5
     MinimumExecutionStep: 5
   - ChapterID: 0

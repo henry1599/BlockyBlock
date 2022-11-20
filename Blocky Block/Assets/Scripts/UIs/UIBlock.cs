@@ -221,6 +221,7 @@ namespace BlockyBlock.UI
                 m_IsDragOnOptionBlock = true;
                 return;
             }
+            SoundManager.Instance.PlaySound(AudioPlayer.SoundID.CLICK_UI_BLOCK);
             ClickSelf();
             Vector3 endPosition = (Vector3)(pointerEventData.position) + m_PivotOffset;
 
@@ -261,6 +262,7 @@ namespace BlockyBlock.UI
             {
                 return;
             }
+            SoundManager.Instance.PlaySound(AudioPlayer.SoundID.DRAG_UI_BLOCK);
             BlockEvents.ON_UI_BLOCK_DRAG?.Invoke(true);
             m_DragOffset = m_PivotOffset;
 
@@ -399,6 +401,7 @@ namespace BlockyBlock.UI
                 m_IsDragOnOptionBlock = false;
                 return;
             }
+            SoundManager.Instance.PlaySound(AudioPlayer.SoundID.DROP_UI_BLOCK);
             BlockEvents.ON_UI_BLOCK_DRAG?.Invoke(false);
             UIManager.Instance.m_DelayBufferTimer = UIManager.Instance.m_DelayBuffer;
             // Cursor.visible = true;

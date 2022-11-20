@@ -57,7 +57,6 @@ namespace BlockyBlock.Managers
         void Start()
         {
             m_CurrentLevelID = LevelID.HOME;
-            StartCoroutine(Cor_PlayBGMusic());
         }
         IEnumerator Cor_LoadSoundMap()
         {
@@ -65,34 +64,6 @@ namespace BlockyBlock.Managers
             SoundManager.Instance.LoadSoundMap(SoundType.HOME); 
             SoundManager.Instance.LoadSoundMap(SoundType.LEVEL);
             isSoundMapLoaded = true; 
-        }
-        IEnumerator Cor_PlayBGMusic()
-        {
-            yield return new WaitUntil(() => isSoundMapLoaded == true);
-            switch (m_CurrentLevelID)
-            {
-                case LevelID.LEVEL_MANNUAL_00:
-                case LevelID.LEVEL_MANNUAL_01:
-                case LevelID.LEVEL_MANNUAL_02:
-                case LevelID.LEVEL_MANNUAL_03:
-                case LevelID.LEVEL_MANNUAL_04:
-                case LevelID.LEVEL_MANNUAL_05:
-                case LevelID.LEVEL_MANNUAL_06:
-                case LevelID.LEVEL_MANNUAL_07:
-                case LevelID.LEVEL_MANNUAL_08:
-                case LevelID.LEVEL_MANNUAL_09:
-                case LevelID.LEVEL_MANNUAL_10:
-                case LevelID.LEVEL_MANNUAL_11:
-                case LevelID.LEVEL_MANNUAL_12:
-                    SoundManager.Instance.PlayMusic(SoundID.LEVEL_THEME);
-                    break;
-                case LevelID.HOME:
-                    SoundManager.Instance.PlayMusic(SoundID.HOME_BG_MUSIC);
-                    break;
-                case LevelID.LEVEL_SELECTION:
-                    SoundManager.Instance.PlayMusic(SoundID.LEVEL_SELECTION_BG_MUSIC);
-                    break;
-            }
         }
         void OnDestroy()
         {

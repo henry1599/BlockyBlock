@@ -42,6 +42,7 @@ namespace BlockyBlock.Managers
         private StringBuilder _logStringBuilder;
 
         private List<SoundMap> soundMaps;
+        public static System.Action ON_FINISH_LOADING_SOUNDMAP;
         private void Awake()
         {
             this._logQueue = new Queue<string>();
@@ -70,6 +71,7 @@ namespace BlockyBlock.Managers
             yield return null;
             this.enabled = true;
             LoadSave();
+            ON_FINISH_LOADING_SOUNDMAP?.Invoke();
         }
 
         private void OnAdPauseUserMusic()
@@ -342,6 +344,13 @@ namespace BlockyBlock.Managers
 
             return audioSource;
         }
+        public AudioSource PlayMusic(SoundID soundID, float volume = 1f)
+        {
+            var audioSource = this.PlaySound(soundID, volume);
+            audioSource.outputAudioMixerGroup = this.Music_MixerGroup;
+
+            return audioSource;
+        }
         public AudioSource PlayMusic(AudioClip audioClip, float volume = 1f)
         {
             var audioSource = this.PlaySound(audioClip, volume);
@@ -603,6 +612,7 @@ namespace BlockyBlock.Managers
         private void LoadCommonSoundMaps()
         {
             LoadSoundMap(SoundType.COMMON);
+            LoadSoundMap(SoundType.HOME);
             // LoadSoundMap(SoundType.MUSIC);
             // LoadSoundMap(SoundType.SFX);
             // LoadSoundMap(SoundType.AR);

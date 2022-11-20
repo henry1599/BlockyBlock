@@ -93,6 +93,7 @@ namespace BlockyBlock.Managers
 
             yield return Helpers.Helper.GetWait(1f);
             SoundManager.Instance.PlaySound(SoundID.CONFETTI);
+            // SoundManager.Instance.PlaySound(SoundID.WIN);
             CreateCharacter();
             StartCoroutine(Cor_ShowSummary(winGame, usedBlockPassed, stepPassed));
             yield return new WaitForSeconds(0.5f);

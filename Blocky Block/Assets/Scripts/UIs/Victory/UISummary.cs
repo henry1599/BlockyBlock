@@ -49,7 +49,11 @@ namespace BlockyBlock.UI
             yield return Helper.GetWait(0.5f);
             for (int i = 0; i < stars; i++)
             { 
-                DOVirtual.DelayedCall(i * this.delayEachStar, () => this.starsSummary.ShowStar());
+                DOVirtual.DelayedCall(i * this.delayEachStar, () => 
+                {
+                    this.starsSummary.ShowStar();
+                    SoundManager.Instance.PlaySound(AudioPlayer.SoundID.STAR_GAIN_VICTORY);
+                });
             }
         }
     }

@@ -49,6 +49,7 @@ namespace BlockyBlock.Core
             print("Collect");
             m_CollectibleModel.SetActive(false);
             m_VfxCollected.Play();
+            SoundManager.Instance.PlaySound(AudioPlayer.SoundID.STAR_COLLECTED);
             UpdateGrid();
         }
         void UpdateGrid()

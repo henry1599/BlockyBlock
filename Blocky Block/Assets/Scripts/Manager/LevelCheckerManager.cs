@@ -13,12 +13,14 @@ namespace BlockyBlock.Managers
         public int StepPassed => this.stepPassed;
         void Awake()
         {
-            if (Instance != null)
-            {
-                Destroy(gameObject);
-                return;
-            }
-            DontDestroyOnLoad(gameObject);
+            // if (Instance != null)
+            // {
+            //     Destroy(gameObject);
+            //     return;
+            // }
+            // DontDestroyOnLoad(gameObject);
+            this.stepPassed = 0;
+            this.blockUsed = 0;
             Instance = this;
         }
         public void ConfirmBlockUsed()
