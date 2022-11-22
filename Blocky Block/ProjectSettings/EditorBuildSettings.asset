@@ -32,4 +32,7 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/Manual Levels/Level Mannual 06.unity
     guid: 14c8b1c29834b7e4db81c2db284cc600
+  - enabled: 1
+    path: Assets/Scenes/Account Scene.unity
+    guid: ac67195382a1280429ff0eea8dd48028
   m_configObjects: {}

@@ -116,7 +116,7 @@ namespace BlockyBlock.Utils.EditorTools
                     if (GUILayout.Button("Play Main", GUILayout.MaxHeight(60)))
                     {
                         Common.SaveCurrentScenesToPrefs();
-                        waitScene = GetScenes().Where(x => x.name == "Home").First().path;
+                        waitScene = GetScenes().Where(x => x.name == "Main").First().path;
                         if (!EditorSceneManager.SaveCurrentModifiedScenesIfUserWantsTo()) return;
                         isPlayBtnClicked = true;
                         EditorSceneManager.OpenScene(waitScene, OpenSceneMode.Single);

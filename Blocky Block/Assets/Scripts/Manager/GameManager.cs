@@ -16,6 +16,7 @@ namespace BlockyBlock.Managers
         public RuntimeAnimatorController LevelSelectionAnim;
         public RuntimeAnimatorController LevelAnim;
         public AudioSource AudioSource {get; set;}
+        public LevelID PreviousLevelID {get; set;}
         void Awake()
         {
             if (Instance != null)
@@ -30,8 +31,6 @@ namespace BlockyBlock.Managers
         // Start is called before the first frame update
         void Start()
         {
-            TransitionOut();
-            
             GameEvents.ON_WIN += HandleWin;
             GameEvents.ON_LOSE += HandleLose;
             GameEvents.LOAD_LEVEL += HandleLoadLevel;
@@ -40,7 +39,7 @@ namespace BlockyBlock.Managers
         }
         void HandleFinishLoadingSoundmap()
         {
-            AudioSource = SoundManager.Instance.PlayMusic(SoundID.HOME_BG_MUSIC);
+            // AudioSource = SoundManager.Instance.PlayMusic(SoundID.HOME_BG_MUSIC);
         }
         void OnDestroy()
         {
@@ -100,6 +99,7 @@ namespace BlockyBlock.Managers
         }
         IEnumerator Cor_UpdateSceneID(LevelID _id)
         {
+            PreviousLevelID = LevelManager.Instance.CurrentLevelID;
             yield return new WaitUntil(() => ConfigManager.Instance != null);
             LevelManager.Instance.CurrentLevelID = _id;
             LevelManager.Instance.ResetChecker();
@@ -109,6 +109,8 @@ namespace BlockyBlock.Managers
         {
             switch (_id)
             {
+                case LevelID.MAIN:
+                    break;
                 case LevelID.LEVEL_MANNUAL_00:
                 case LevelID.LEVEL_MANNUAL_01:
                 case LevelID.LEVEL_MANNUAL_02:

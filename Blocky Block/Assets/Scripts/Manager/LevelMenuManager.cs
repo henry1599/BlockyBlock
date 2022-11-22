@@ -34,11 +34,10 @@ namespace BlockyBlock.Managers
         private int m_ClickFactor = -1;
         private List<LevelItem> m_LevelItems;
         private LevelID m_ChosenNodeID;
-        private NavMeshAgent unitNavMeshAgent;
+        public NavMeshAgent unitNavMeshAgent;
         void Awake()
         {
             Instance = this;
-            unitNavMeshAgent = m_Unit3D.GetComponent<NavMeshAgent>();
             unitNavMeshAgent.enabled = false;
         }
         void Start()
@@ -106,12 +105,28 @@ namespace BlockyBlock.Managers
                 m_LevelItems.Add(itemInstance);
             }  
             
-            this.m_ChosenNodeID = (LevelID)PlayerPrefs.GetInt(GameConstants.LEVEL_TO_BACK_KEY, 1000);
+            LevelID prevID = GameManager.Instance.PreviousLevelID;
+            // * Access level selection scene not from level
+            if ((int)prevID < 1000 || (int)prevID > 2000)
+            {
+                prevID = levelDatasInChapter[0].LevelID;
+            }
+            // this.m_ChosenNodeID = (LevelID)PlayerPrefs.GetInt(GameConstants.LEVEL_TO_BACK_KEY, 1000);
             
+            foreach (LevelItem item in m_LevelItems)
+            {
+                Debug.Log(item.LevelId);
+            }
+
             GameManager.Instance.TransitionOut();
-            m_Unit3D.position = m_LevelItems.Find(i => i.LevelId == (int)this.m_ChosenNodeID).transform.position;
+            
+            m_Unit3D.position = m_LevelItems.Find(i => i.LevelId == (int)prevID).transform.position;
+            this.m_ChosenNodeID = prevID;
+
             unitNavMeshAgent.enabled = true;
+
             m_Anim = m_Unit3D.GetComponentInChildren<Animator>();
+            
             m_Anim.runtimeAnimatorController = GameManager.Instance.LevelSelectionAnim;
         }
         void HandleLevelNodeClicked(LevelID _nodeID, Vector3 _position)
