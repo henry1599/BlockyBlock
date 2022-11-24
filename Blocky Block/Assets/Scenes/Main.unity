@@ -547,6 +547,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c68bfa9f38906df47943394dfeecc417, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  Delay: 0
   Clip: {fileID: 32900000, guid: b503db9797f2fb04b97fcd5d6779028a, type: 3}
 --- !u!4 &1400887245
 Transform:

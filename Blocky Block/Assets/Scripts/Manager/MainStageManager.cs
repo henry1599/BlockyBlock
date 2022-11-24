@@ -5,11 +5,13 @@ using UnityEngine.Video;
 using BlockyBlock.Utils;
 using BlockyBlock.Events;
 using BlockyBlock.Enums;
+using DG.Tweening;
 
 namespace BlockyBlock.Managers
 {
     public class MainStageManager : MonoBehaviour
     {
+        public float Delay;
         public VideoClip Clip;
         VideoPlayer videoPlayer;
         void Start()
@@ -62,7 +64,7 @@ namespace BlockyBlock.Managers
         }
         void HandleLogoFinish()
         {
-            videoPlayer.Play();
+            DOVirtual.DelayedCall(Delay, () => videoPlayer.Play());
         }
     }
 }
