@@ -1,78 +1,27 @@
 using System.Collections;
 using UnityEngine;
 using UnityEngine.Networking;
+using BlockyBlock.Enums;
+using System.Collections.Generic;
 
 namespace BlockyBlock.Managers
 {
-    public class LoginManager : MonoBehaviour
+    public class LoginManager : FormManager
     {
         public UI.LoginDisplay LoginDisplay;
         public void Login()
         {
+            base.isError = false;
             string email = LoginDisplay.Email;
             string password = LoginDisplay.Password;
-            StartCoroutine(Cor_PostRequest(email, password));
-            // StartCoroutine(Cor_HealthCheck());
-        }
-        IEnumerator Cor_HealthCheck()
-        {
-            string uri = OnlineManager.WEB_URL + OnlineManager.HEALTH_CHECK_API;
-            using (UnityWebRequest webRequest = UnityWebRequest.Get(uri))
-            {
-                // Request and wait for the desired page.
-                // webRequest. = "application/json";
-                yield return webRequest.SendWebRequest();
-
-                string[] pages = uri.Split('/');
-                int page = pages.Length - 1;
-
-                switch (webRequest.result)
-                {
-                    case UnityWebRequest.Result.ConnectionError:
-                    case UnityWebRequest.Result.DataProcessingError:
-                        Debug.LogError(pages[page] + ": Error: " + webRequest.error);
-                        break;
-                    case UnityWebRequest.Result.ProtocolError:
-                        Debug.LogError(pages[page] + ": HTTP Error: " + webRequest.error);
-                        break;
-                    case UnityWebRequest.Result.Success:
-                        Debug.Log(pages[page] + ":\nReceived: " + webRequest.downloadHandler.text);
-                        break;
-                }
-            }
-        }
-        IEnumerator Cor_PostRequest(string email, string password)
-        {
             LoginRequest loginRequest = new LoginRequest(email, password);
-            string json = JsonUtility.ToJson(loginRequest);
-            string uri = OnlineManager.WEB_URL + OnlineManager.LOGIN_API;
-            using (UnityWebRequest webRequest = new UnityWebRequest(uri, "POST"))
-            {
-                byte[] jsonToSend = new System.Text.UTF8Encoding().GetBytes(json);
-                webRequest.uploadHandler = (UploadHandler)new UploadHandlerRaw(jsonToSend);
-                webRequest.downloadHandler = (DownloadHandler)new DownloadHandlerBuffer();
-                webRequest.SetRequestHeader(OnlineManager.CONTENT_TYPE, OnlineManager.CONTENT_VALUE);
-                // Request and wait for the desired page.
-                // webRequest. = "application/json";
-                yield return webRequest.SendWebRequest();
-
-                string[] pages = uri.Split('/');
-                int page = pages.Length - 1;
-
-                switch (webRequest.result)
-                {
-                    case UnityWebRequest.Result.ConnectionError:
-                    case UnityWebRequest.Result.DataProcessingError:
-                        Debug.LogError(pages[page] + ": Error: " + webRequest.error);
-                        break;
-                    case UnityWebRequest.Result.ProtocolError:
-                        Debug.LogError(pages[page] + ": HTTP Error: " + webRequest.error);
-                        break;
-                    case UnityWebRequest.Result.Success:
-                        Debug.Log(pages[page] + ":\nReceived: " + webRequest.downloadHandler.text);
-                        break;
-                }
-            }
+            WWWManager.Instance.Post(loginRequest, APIType.LOGIN, true);
+            if (base.isError)
+                return;
+            string resultJson = WWWManager.Instance.Result;
+            LoginResponse loginResponse = JsonUtility.FromJson<LoginResponse>(resultJson);
+            // * Do the save token here locally
+            Debug.Log("Login response : " + loginResponse.ToString());
         }
         [System.Serializable]
         public class LoginRequest
@@ -93,21 +42,17 @@ namespace BlockyBlock.Managers
         public class LoginResponse
         {
             public string code;
-            public string verifyToken;
             public string accessToken;
             public string refreshToken;
-            public string message;
-            public LoginResponse(string code, string verifyToken, string accessToken, string refreshToken, string message)
+            public LoginResponse(string code, string accessToken, string refreshToken)
             {
                 this.code = code;
-                this.verifyToken = verifyToken;
                 this.accessToken = accessToken;
                 this.refreshToken = refreshToken;
-                this.message = message;
             }
             public LoginResponse()
             {
-                this.code = this.verifyToken = this.accessToken = this.refreshToken = this.message = OnlineManager.DEFAULT_VALUE;
+                this.code = this.accessToken = this.refreshToken = OnlineManager.DEFAULT_VALUE;
             }
         }
     }

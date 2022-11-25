@@ -10,6 +10,10 @@ using System;
 
 namespace BlockyBlock.Events
 {
+    public class BEFormEvents
+    {
+        public static Action<FormType> ON_ENABLED;
+    }
     public class LevelSelectionEvents
     {
         public static Action<LevelItem> ON_HIGHLIGHT_ITEM;

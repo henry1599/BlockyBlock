@@ -151,4 +151,24 @@ namespace BlockyBlock.Enums
         HORN = 10,
         TAIL = 11
     }
+    public enum FormType
+    {
+        LOGIN_FORM,
+        SIGNUP_FORM,
+        FORGOT_PASSWORD_FORM,
+        VERIFICATION_FORM
+    }
+    public enum APIType
+    {
+        HEALTH_CHECK,
+        LOGIN,
+        REGISTER,
+        VERIFY,
+        RENEW_ACCESS_TOKEN,
+        RESEND,
+        LOGOUT,
+        ENCRYPT,
+        DECRYPT,
+        GENERATE
+    }
 }

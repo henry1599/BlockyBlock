@@ -1,15 +1,17 @@
+using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.UI;
-using TMPro;
 using BlockyBlock.Events;
 using BlockyBlock.Enums;
+using TMPro;
 
 namespace BlockyBlock.UI
 {
-    public class LoginDisplay : FormDisplay
+    public class RegisterDisplay : FormDisplay
     {
         [SerializeField] TMP_InputField emailField;
         [SerializeField] TMP_InputField passwordField;
+        [SerializeField] TMP_InputField confirmPasswordField;
         public string Email 
         {
             get
@@ -32,14 +34,21 @@ namespace BlockyBlock.UI
                 return passwordField.text;
             }
         }
-        
-        public void OnSignupButtonClick()
+        public string ConfirmPassword
         {
-            BEFormEvents.ON_ENABLED?.Invoke(FormType.SIGNUP_FORM);
+            get 
+            {
+                if (string.IsNullOrEmpty(confirmPasswordField.text))
+                {
+                    return "";
+                }
+                return confirmPasswordField.text;
+            }
         }
-        public void OnGuestButtonClick()
+        
+        public void OnBackButtonClick()
         {
-
+            BEFormEvents.ON_ENABLED?.Invoke(FormType.LOGIN_FORM);
         }
     }
 }

@@ -10,8 +10,6 @@ namespace BlockyBlock.Managers
         public static readonly string CONTENT_VALUE = "application/json";
         public static readonly string CONTENT_TYPE = "Content-Type";
         public static readonly string WEB_URL = "https://4jdwf133v0.execute-api.ap-southeast-1.amazonaws.com";
-        public static readonly string HEALTH_CHECK_API = "/healthcheck";
-        public static readonly string LOGIN_API = "/api/authentication/users/login";
         public static OnlineManager Instance {get; private set;}
         void Awake()
         {
