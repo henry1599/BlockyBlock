@@ -100,9 +100,9 @@ MonoBehaviour:
       X: 1
       Y: 1
       StartDirection: 3
-    LevelRawData: 03600;63226;11111;62230;00030;
-    MinimumExecutionBlock: 22
-    MinimumExecutionStep: 22
+    LevelRawData: 03600;33263;21112;36233;00630;
+    MinimumExecutionBlock: 23
+    MinimumExecutionStep: 23
   LevelTextPaths:
   - Data/Levels/Chapter 1
   - Data/Levels/Chapter 2
