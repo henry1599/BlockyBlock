@@ -22,17 +22,17 @@ MonoBehaviour:
     BlockTypes: 00000000
     UnitDatas:
     - Floor: 0
-      X: 2
+      X: 1
       Y: 1
-      StartDirection: 0
-    LevelRawData: 060;000;000;
-    MinimumExecutionBlock: 2
-    MinimumExecutionStep: 2
+      StartDirection: 3
+    LevelRawData: 0006;
+    MinimumExecutionBlock: 3
+    MinimumExecutionStep: 3
   - ChapterID: 0
     LevelType: 1
     LevelID: 1001
     WinCondition: 1000
-    StuffToCollect: 2
+    StuffToCollect: 1
     LevelName: Level Mannual 02
     BlockTypes: 0000000004000000
     UnitDatas:
@@ -40,24 +40,24 @@ MonoBehaviour:
       X: 1
       Y: 1
       StartDirection: 0
-    LevelRawData: 606;000;000;
-    MinimumExecutionBlock: 5
-    MinimumExecutionStep: 5
+    LevelRawData: 22006;00033;
+    MinimumExecutionBlock: 8
+    MinimumExecutionStep: 8
   - ChapterID: 0
     LevelType: 1
     LevelID: 1002
     WinCondition: 1000
-    StuffToCollect: 1
+    StuffToCollect: 2
     LevelName: Level Mannual 03
-    BlockTypes: 0000000007000000
+    BlockTypes: 0000000004000000
     UnitDatas:
     - Floor: 0
-      X: 2
+      X: 1
       Y: 1
-      StartDirection: 0
-    LevelRawData: 260;012;030;000;
-    MinimumExecutionBlock: 4
-    MinimumExecutionStep: 4
+      StartDirection: 3
+    LevelRawData: 006;033;006;220;000;
+    MinimumExecutionBlock: 14
+    MinimumExecutionStep: 14
   - ChapterID: 0
     LevelType: 1
     LevelID: 1003
@@ -69,40 +69,40 @@ MonoBehaviour:
     - Floor: 0
       X: 1
       Y: 1
-      StartDirection: 0
-    LevelRawData: 060;210;313;000;
-    MinimumExecutionBlock: 10
-    MinimumExecutionStep: 10
+      StartDirection: 3
+    LevelRawData: 2022;0036;
+    MinimumExecutionBlock: 7
+    MinimumExecutionStep: 7
   - ChapterID: 0
     LevelType: 1
     LevelID: 1004
     WinCondition: 1000
     StuffToCollect: 1
     LevelName: Level Mannual 05
-    BlockTypes: 0000000005000000
+    BlockTypes: 00000000040000000100000002000000
     UnitDatas:
     - Floor: 0
       X: 1
       Y: 1
-      StartDirection: 0
-    LevelRawData: 6;0;0;0;0;0;0;0;0;0;
-    MinimumExecutionBlock: 3
-    MinimumExecutionStep: 17
+      StartDirection: 3
+    LevelRawData: 0020;0016;0330;
+    MinimumExecutionBlock: 8
+    MinimumExecutionStep: 8
   - ChapterID: 0
     LevelType: 1
     LevelID: 1005
     WinCondition: 1000
-    StuffToCollect: 1
+    StuffToCollect: 4
     LevelName: Level Mannual 06
-    BlockTypes: 0000000004000000010000000200000007000000
+    BlockTypes: 00000000040000000100000002000000
     UnitDatas:
     - Floor: 0
       X: 1
       Y: 1
-      StartDirection: 2
-    LevelRawData: 26;03;
-    MinimumExecutionBlock: 6
-    MinimumExecutionStep: 6
+      StartDirection: 3
+    LevelRawData: 03600;33263;21112;36233;00630;
+    MinimumExecutionBlock: 20
+    MinimumExecutionStep: 20
   LevelTextPaths:
   - Data/Levels/Chapter 1
   - Data/Levels/Chapter 2

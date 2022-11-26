@@ -26,16 +26,16 @@ namespace BlockyBlock.Managers
         [System.Serializable]
         public class LoginRequest
         {
-            public string username;
+            public string email;
             public string password;
-            public LoginRequest(string username, string password)
+            public LoginRequest(string email, string password)
             {
-                this.username = username;
+                this.email = email;
                 this.password = password;
             }
             public LoginRequest()
             {
-                this.username = this.password = OnlineManager.DEFAULT_VALUE;
+                this.email = this.password = OnlineManager.DEFAULT_VALUE;
             }
         }
         [System.Serializable]
