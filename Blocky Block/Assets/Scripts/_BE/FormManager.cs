@@ -11,11 +11,11 @@ namespace BlockyBlock.Managers
         [SerializeField] protected List<APIType> APIsHandle;
         protected bool isError;
         protected string errorMessage;
-        void Start()
+        public virtual void Start()
         {
             WWWManager.ON_ERROR += HandleError;
         }
-        void OnDestroy()
+        public virtual void OnDestroy()
         {
             WWWManager.ON_ERROR -= HandleError;
         }

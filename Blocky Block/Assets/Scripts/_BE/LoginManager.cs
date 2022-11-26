@@ -3,6 +3,9 @@ using UnityEngine;
 using UnityEngine.Networking;
 using BlockyBlock.Enums;
 using System.Collections.Generic;
+using BlockyBlock.BackEnd;
+using System.Threading.Tasks;
+using BlockyBlock.Events;
 
 namespace BlockyBlock.Managers
 {
@@ -11,17 +14,27 @@ namespace BlockyBlock.Managers
         public UI.LoginDisplay LoginDisplay;
         public void Login()
         {
+            GameEvents.ON_LOADING?.Invoke(true);
+            StartCoroutine(Cor_Login());
+        }
+        IEnumerator Cor_Login()
+        {
             base.isError = false;
             string email = LoginDisplay.Email;
             string password = LoginDisplay.Password;
             LoginRequest loginRequest = new LoginRequest(email, password);
-            WWWManager.Instance.Post(loginRequest, APIType.LOGIN, true);
+            WWWManager.Instance.Post(loginRequest, WebType.AUTHENTICATION, APIType.LOGIN, true);
+            yield return new WaitUntil(() => WWWManager.Instance.IsComplete);
             if (base.isError)
-                return;
+            {
+                GameEvents.ON_LOADING?.Invoke(false);
+                yield break;
+            }
             string resultJson = WWWManager.Instance.Result;
             LoginResponse loginResponse = JsonUtility.FromJson<LoginResponse>(resultJson);
             // * Do the save token here locally
             Debug.Log("Login response : " + loginResponse.ToString());
+            GameEvents.ON_LOADING?.Invoke(false);
         }
         [System.Serializable]
         public class LoginRequest
@@ -35,7 +48,7 @@ namespace BlockyBlock.Managers
             }
             public LoginRequest()
             {
-                this.email = this.password = OnlineManager.DEFAULT_VALUE;
+                this.email = this.password = BEConstants.DEFAULT_VALUE;
             }
         }
         [System.Serializable]
@@ -52,7 +65,7 @@ namespace BlockyBlock.Managers
             }
             public LoginResponse()
             {
-                this.code = this.accessToken = this.refreshToken = OnlineManager.DEFAULT_VALUE;
+                this.code = this.accessToken = this.refreshToken = BEConstants.DEFAULT_VALUE;
             }
         }
     }

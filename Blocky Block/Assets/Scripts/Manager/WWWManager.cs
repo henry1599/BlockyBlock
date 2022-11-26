@@ -4,6 +4,7 @@ using UnityEngine;
 using UnityEngine.Networking;
 using BlockyBlock.Enums;
 using BlockyBlock.Configurations;
+using BlockyBlock.BackEnd;
 
 namespace BlockyBlock.Managers
 {
@@ -36,6 +37,7 @@ namespace BlockyBlock.Managers
         public static WWWManager Instance {get; private set;}
         public static event System.Action<APIType, string> ON_ERROR;
         public APIConfig APIConfig;
+        public bool IsComplete {get; set;}
         public string Result 
         {
             get => result;
@@ -50,25 +52,27 @@ namespace BlockyBlock.Managers
             }
             Instance = this;
         }
-        public void Get(APIType apiType)
+        public void Get(WebType webType, APIType apiType)
         {
-            StartCoroutine(Cor_Get(apiType));
+            IsComplete = false;
+            StartCoroutine(Cor_Get(webType, apiType));
         }
-        public void Post(object objToSend, APIType apiType, bool isHasContentType)
+        public void Post(object objToSend, WebType webType, APIType apiType, bool isHasContentType)
         {
-            StartCoroutine(Cor_Post(objToSend, apiType, isHasContentType));
+            IsComplete = false;
+            StartCoroutine(Cor_Post(objToSend, webType, apiType, isHasContentType));
         }
-        IEnumerator Cor_Post(object objToSend, APIType apiType, bool isHasContentType)
+        IEnumerator Cor_Post(object objToSend, WebType webType, APIType apiType, bool isHasContentType)
         {
             string json = JsonUtility.ToJson(objToSend);
-            string uri = OnlineManager.WEB_URL + APIConfig.APIData[apiType];
+            string uri = APIConfig.WebData[webType] + APIConfig.APIData[apiType];
             using (UnityWebRequest webRequest = new UnityWebRequest(uri, UnityWebRequest.kHttpVerbPOST))
             {
                 byte[] jsonToSend = new System.Text.UTF8Encoding().GetBytes(json);
                 webRequest.uploadHandler = (UploadHandler)new UploadHandlerRaw(jsonToSend);
                 webRequest.downloadHandler = (DownloadHandler)new DownloadHandlerBuffer();
                 if (isHasContentType)
-                    webRequest.SetRequestHeader(OnlineManager.CONTENT_TYPE, OnlineManager.CONTENT_VALUE);
+                    webRequest.SetRequestHeader(BEConstants.CONTENT_TYPE, BEConstants.CONTENT_VALUE);
                 
                 yield return webRequest.SendWebRequest();
 
@@ -97,10 +101,11 @@ namespace BlockyBlock.Managers
 
                 yield return new WaitForEndOfFrame();
             }
+            IsComplete = true;
         }
-        IEnumerator Cor_Get(APIType apiType)
+        IEnumerator Cor_Get(WebType webType, APIType apiType)
         {
-            string uri = OnlineManager.WEB_URL + APIConfig.APIData[apiType];
+            string uri = APIConfig.WebData[webType] + APIConfig.APIData[apiType];
             using (UnityWebRequest webRequest = new UnityWebRequest(uri, UnityWebRequest.kHttpVerbGET))
             {
                 yield return webRequest.SendWebRequest();
@@ -127,6 +132,7 @@ namespace BlockyBlock.Managers
 
                 yield return new WaitForEndOfFrame();
             }
+            IsComplete = true;
         }
     }
 }

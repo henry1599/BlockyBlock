@@ -48,7 +48,7 @@ namespace BlockyBlock.UI
         
         public void OnBackButtonClick()
         {
-            BEFormEvents.ON_ENABLED?.Invoke(FormType.LOGIN_FORM);
+            BEFormEvents.ON_ENABLED?.Invoke(FormType.LOGIN_FORM, null);
         }
     }
 }

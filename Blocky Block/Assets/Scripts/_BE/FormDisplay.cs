@@ -13,15 +13,15 @@ namespace BlockyBlock.UI
         public FormType Type;
         [SerializeField] protected Transform container;
         [SerializeField] protected float transitionDuration = 0.15f;
-        void Start()
+        public virtual void Start()
         {
             BEFormEvents.ON_ENABLED += HandleEnableForm;
         }
-        void OnDestroy()
+        public virtual void OnDestroy()
         {
             BEFormEvents.ON_ENABLED -= HandleEnableForm;
         }
-        void HandleEnableForm(FormType type)
+        void HandleEnableForm(FormType type, System.Action cbOpen)
         {
             if (type != this.Type)
             {
@@ -30,6 +30,7 @@ namespace BlockyBlock.UI
             else
             {
                 Open();
+                cbOpen?.Invoke();
             }
         }
         protected virtual void Open()

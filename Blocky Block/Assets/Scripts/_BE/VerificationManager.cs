@@ -1,0 +1,97 @@
+using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
+using BlockyBlock.Events;
+using BlockyBlock.BackEnd;
+using BlockyBlock.Enums;
+
+namespace BlockyBlock.Managers
+{
+    public class VerificationManager : FormManager
+    {
+        public UI.VerificationDisplay VerificationDisplay;
+        public float TimerValue;
+        public static event System.Action<float> ON_TIMER_CHANGED;
+        public static event System.Action ON_TIMEOUT;
+        float Timer 
+        {
+            get => timer;
+            set
+            {
+                timer = value;
+                ON_TIMER_CHANGED?.Invoke(value);
+            }
+        } float timer;
+        public override void Start()
+        {
+            base.Start();
+            this.Timer = TimerValue;
+        }
+        private void Update() 
+        {
+            if (!VerificationDisplay.IsOpenned)
+                return;
+            this.Timer -= Time.deltaTime;
+            this.Timer = Mathf.Max(0, this.Timer);
+            if (this.Timer == 0)
+            {
+                ON_TIMEOUT?.Invoke();
+            }
+        }
+        public void Verify()
+        {
+            GameEvents.ON_LOADING?.Invoke(true);
+            StartCoroutine(Cor_Verify());
+        }
+        IEnumerator Cor_Verify()
+        {
+            base.isError = false;
+            string code = VerificationDisplay.Code;
+            VerificationRequest verificationRequest = new VerificationRequest(OnlineManager.VERIFICATION_TOKEN_REGISTER, code);
+            WWWManager.Instance.Post(verificationRequest, WebType.AUTHENTICATION, APIType.VERIFY, true);
+            yield return new WaitUntil(() => WWWManager.Instance.IsComplete);
+            if (base.isError)
+            {
+                GameEvents.ON_LOADING?.Invoke(false);
+                yield break;
+            }
+            string resultJson = WWWManager.Instance.Result;
+            VerificationResponse registerResponse = JsonUtility.FromJson<VerificationResponse>(resultJson);
+            // * Do the save token here locally
+            Debug.Log("Verify response : " + registerResponse.ToString());
+            GameEvents.ON_LOADING?.Invoke(false);
+        }
+        [System.Serializable]
+        public class VerificationRequest
+        {
+            public string token;
+            public string code;
+            public VerificationRequest(string token, string code)
+            {
+                this.token = token;
+                this.code = code;
+            }
+            public VerificationRequest()
+            {
+                this.token = this.code = BEConstants.DEFAULT_VALUE;
+            }
+        }
+        [System.Serializable]
+        public class VerificationResponse
+        {
+            public string code;
+            public string accessToken;
+            public string refreshToken;
+            public VerificationResponse(string code, string accessToken, string refreshToken)
+            {
+                this.code = code;
+                this.accessToken = accessToken;
+                this.refreshToken = refreshToken;
+            }
+            public VerificationResponse()
+            {
+                this.code = this.accessToken = this.refreshToken = BEConstants.DEFAULT_VALUE;
+            }
+        }
+    }
+}

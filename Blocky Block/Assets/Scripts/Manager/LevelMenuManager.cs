@@ -81,7 +81,7 @@ namespace BlockyBlock.Managers
             m_LevelItems = new List<LevelItem>();
 
             // * Get the """status""" of all levels based on player profile
-            Dictionary<LevelID, LevelStatus> levels = ProfileManager.Instance.ProfileData.UnlockedLevels[chapterID];
+            Dictionary<LevelID, LevelStatus> levels = ProfileManager.Instance.ProfileData.unlockedLevels[chapterID];
 
             // * Get all levelDatas => To get all level infos in the CHOSEN CHAPTER
             List<LevelData> levelDatas = ConfigManager.Instance.LevelConfig.LevelDatas;

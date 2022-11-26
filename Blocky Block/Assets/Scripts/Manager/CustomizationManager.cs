@@ -21,7 +21,7 @@ namespace BlockyBlock.Managers
         }
         public void SetCustomization(CustomizationDisplay _display)
         {
-            Dictionary<CustomizationType, int> datas = ProfileManager.Instance.ProfileData.CustomizationData.Datas;
+            Dictionary<CustomizationType, int> datas = ProfileManager.Instance.ProfileData.customizationData.Datas;
             _display.Setup(
                 datas[CustomizationType.BODY],
                 datas[CustomizationType.BODY_PART],
@@ -40,7 +40,7 @@ namespace BlockyBlock.Managers
         IEnumerator Cor_GetProfileData()
         {
             yield return new WaitUntil(() => m_CustomizationDisplay != null);
-            Dictionary<CustomizationType, int> datas = ProfileManager.Instance.ProfileData.CustomizationData.Datas;
+            Dictionary<CustomizationType, int> datas = ProfileManager.Instance.ProfileData.customizationData.Datas;
             m_CustomizationDisplay.Setup(
                 datas[CustomizationType.BODY],
                 datas[CustomizationType.BODY_PART],

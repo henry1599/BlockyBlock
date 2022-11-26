@@ -158,9 +158,14 @@ namespace BlockyBlock.Enums
         FORGOT_PASSWORD_FORM,
         VERIFICATION_FORM
     }
+    public enum WebType
+    {
+        AUTHENTICATION = 0
+    }
     public enum APIType
     {
-        HEALTH_CHECK,
+        _______________AUTHENTICATION_______________ = -1,
+        HEALTH_CHECK = 0,
         LOGIN,
         REGISTER,
         VERIFY,
@@ -169,6 +174,7 @@ namespace BlockyBlock.Enums
         LOGOUT,
         ENCRYPT,
         DECRYPT,
-        GENERATE
+        GENERATE,
+        _______________OTHERS_______________ = 100,
     }
 }

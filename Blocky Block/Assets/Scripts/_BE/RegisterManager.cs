@@ -3,6 +3,8 @@ using UnityEngine;
 using UnityEngine.Networking;
 using BlockyBlock.Enums;
 using System.Collections.Generic;
+using BlockyBlock.BackEnd;
+using BlockyBlock.Events;
 
 namespace BlockyBlock.Managers
 {
@@ -11,18 +13,31 @@ namespace BlockyBlock.Managers
         public UI.RegisterDisplay RegisterDisplay;
         public void Register()
         {
+            GameEvents.ON_LOADING?.Invoke(true);
+            StartCoroutine(Cor_Register());
+        }
+        IEnumerator Cor_Register()
+        {
             base.isError = false;
             string email = RegisterDisplay.Email;
             string password = RegisterDisplay.Password;
             RegisterRequest registerRequest = new RegisterRequest(email, password);
-            WWWManager.Instance.Post(registerRequest, APIType.REGISTER, true);
+            WWWManager.Instance.Post(registerRequest, WebType.AUTHENTICATION, APIType.REGISTER, true);
+            yield return new WaitUntil(() => WWWManager.Instance.IsComplete);
             if (base.isError)
-                return;
+            {
+                GameEvents.ON_LOADING?.Invoke(false);
+                yield break;
+            }
             string resultJson = WWWManager.Instance.Result;
             RegisterResponse registerResponse = JsonUtility.FromJson<RegisterResponse>(resultJson);
             // * Do the save token here locally
+            OnlineManager.VERIFICATION_TOKEN_REGISTER = registerResponse.verifyToken;
+            OnlineManager.REGISTER_EMAIL = email;
             Debug.Log("Register response : " + registerResponse.ToString());
-            // * Open Verification form
+            BEFormEvents.ON_ENABLED?.Invoke(FormType.VERIFICATION_FORM, () => BEFormEvents.ON_OPEN_VERIFICATION_FORM?.Invoke());
+            
+            GameEvents.ON_LOADING?.Invoke(false);
         }
         [System.Serializable]
         public class RegisterRequest
@@ -36,22 +51,24 @@ namespace BlockyBlock.Managers
             }
             public RegisterRequest()
             {
-                this.email = this.password = OnlineManager.DEFAULT_VALUE;
+                this.email = this.password = BEConstants.DEFAULT_VALUE;
             }
         }
         [System.Serializable]
         public class RegisterResponse
         {
             public string code;
-            public string linkAccountToken;
-            public RegisterResponse(string code, string linkAccountToken)
+            public string message;
+            public string verifyToken;
+            public RegisterResponse(string code, string message, string verifyToken)
             {
                 this.code = code;
-                this.linkAccountToken = linkAccountToken;
+                this.verifyToken = verifyToken;
+                this.message = message;
             }
             public RegisterResponse()
             {
-                this.code = this.linkAccountToken = OnlineManager.DEFAULT_VALUE;
+                this.code = this.verifyToken = this.message = BEConstants.DEFAULT_VALUE;
             }
         }
     }
