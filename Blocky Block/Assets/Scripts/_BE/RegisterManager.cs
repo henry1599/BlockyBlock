@@ -11,9 +11,10 @@ namespace BlockyBlock.Managers
     public class RegisterManager : FormManager
     {
         public UI.RegisterDisplay RegisterDisplay;
+        private static readonly string SIGNUP_MESSAGE = "Signing up...";
         public void Register()
         {
-            GameEvents.ON_LOADING?.Invoke(true);
+            GameEvents.ON_LOADING?.Invoke(true, SIGNUP_MESSAGE);
             StartCoroutine(Cor_Register());
         }
         IEnumerator Cor_Register()
@@ -26,7 +27,7 @@ namespace BlockyBlock.Managers
             yield return new WaitUntil(() => WWWManager.Instance.IsComplete);
             if (base.isError)
             {
-                GameEvents.ON_LOADING?.Invoke(false);
+                GameEvents.ON_LOADING?.Invoke(false, "");
                 yield break;
             }
             string resultJson = WWWManager.Instance.Result;
@@ -37,7 +38,7 @@ namespace BlockyBlock.Managers
             Debug.Log("Register response : " + registerResponse.ToString());
             BEFormEvents.ON_ENABLED?.Invoke(FormType.VERIFICATION_FORM, () => BEFormEvents.ON_OPEN_VERIFICATION_FORM?.Invoke());
             
-            GameEvents.ON_LOADING?.Invoke(false);
+            GameEvents.ON_LOADING?.Invoke(false, "");
         }
         [System.Serializable]
         public class RegisterRequest

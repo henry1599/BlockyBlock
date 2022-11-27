@@ -61,7 +61,12 @@ namespace BlockyBlock.UI
         }
         public void OnBackButtonClick()
         {
-            BEFormEvents.ON_ENABLED?.Invoke(FormType.SIGNUP_FORM, null);
+            BEFormEvents.ON_ENABLED?.Invoke(FormType.LOGIN_FORM, null);
+        }
+        public void ResetCountDown()
+        {
+            resendButton.SetActive(false);
+            countDownField.SetActive(true);
         }
     }
 }

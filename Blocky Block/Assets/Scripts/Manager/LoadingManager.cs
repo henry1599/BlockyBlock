@@ -3,12 +3,14 @@ using System.Collections.Generic;
 using UnityEngine;
 using BlockyBlock.Events;
 using BlockyBlock.Utils;
+using TMPro;
 
 namespace BlockyBlock.Managers
 {
     public class LoadingManager : MonoBehaviour
     {
         public static LoadingManager Instance {get; private set;}
+        [SerializeField] TMP_Text loadingText;
         [SerializeField] GameObject Canvas;
         void Awake()
         {
@@ -24,7 +26,7 @@ namespace BlockyBlock.Managers
         {
             GameEvents.ON_LOADING -= HandleLoading;
         }
-        void HandleLoading(bool status)
+        void HandleLoading(bool status, string message = "")
         {
             if (status)
             {
@@ -34,6 +36,7 @@ namespace BlockyBlock.Managers
             {
                 UIUtils.UnlockInput();
             }
+            loadingText.text = message;
             this.Canvas.SetActive(status);
         }
     }

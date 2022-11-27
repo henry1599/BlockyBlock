@@ -12,6 +12,8 @@ namespace BlockyBlock.UI
         [SerializeField] TMP_InputField emailField;
         [SerializeField] TMP_InputField passwordField;
         [SerializeField] TMP_InputField confirmPasswordField;
+        [SerializeField] GameObject doesnotMatchText;
+        [SerializeField] UIHomeButton signupButton;
         public string Email 
         {
             get
@@ -45,7 +47,17 @@ namespace BlockyBlock.UI
                 return confirmPasswordField.text;
             }
         }
-        
+        public override void Start()
+        {
+            base.Start();
+            signupButton.Interactable = false;
+            confirmPasswordField.onValueChanged.AddListener(value => OnConfirmValueChanged(value));
+        }
+        void OnConfirmValueChanged(string value)
+        {
+            doesnotMatchText.SetActive(!string.IsNullOrEmpty(value) && !value.Equals(passwordField.text));
+            signupButton.Interactable = value.Equals(passwordField.text);
+        }
         public void OnBackButtonClick()
         {
             BEFormEvents.ON_ENABLED?.Invoke(FormType.LOGIN_FORM, null);

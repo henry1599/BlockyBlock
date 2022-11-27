@@ -12,9 +12,10 @@ namespace BlockyBlock.Managers
     public class LoginManager : FormManager
     {
         public UI.LoginDisplay LoginDisplay;
+        private static readonly string LOGIN_MESSAGE = "Logging in...";
         public void Login()
         {
-            GameEvents.ON_LOADING?.Invoke(true);
+            GameEvents.ON_LOADING?.Invoke(true, LOGIN_MESSAGE);
             StartCoroutine(Cor_Login());
         }
         IEnumerator Cor_Login()
@@ -27,14 +28,16 @@ namespace BlockyBlock.Managers
             yield return new WaitUntil(() => WWWManager.Instance.IsComplete);
             if (base.isError)
             {
-                GameEvents.ON_LOADING?.Invoke(false);
+                GameEvents.ON_LOADING?.Invoke(false, "");
                 yield break;
             }
             string resultJson = WWWManager.Instance.Result;
             LoginResponse loginResponse = JsonUtility.FromJson<LoginResponse>(resultJson);
             // * Do the save token here locally
+            PlayerPrefs.SetString(BEConstants.ACCESS_TOKEN_KEY, loginResponse.accessToken);
+            PlayerPrefs.SetString(BEConstants.REFRESH_TOKEN_KEY, loginResponse.refreshToken);
             Debug.Log("Login response : " + loginResponse.ToString());
-            GameEvents.ON_LOADING?.Invoke(false);
+            GameEvents.ON_LOADING?.Invoke(false, "");
         }
         [System.Serializable]
         public class LoginRequest

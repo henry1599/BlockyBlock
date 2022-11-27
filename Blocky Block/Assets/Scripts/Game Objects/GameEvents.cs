@@ -26,7 +26,7 @@ namespace BlockyBlock.Events
     }
     public class GameEvents
     {
-        public static Action<bool> ON_LOADING;
+        public static Action<bool, string> ON_LOADING;
         public static Action<LevelID> LOAD_LEVEL;
         public static Action<LevelData> SETUP_LEVEL;
         public static Action SETUP_GROUND;
@@ -132,5 +132,7 @@ namespace BlockyBlock.BackEnd
         public static readonly string DEFAULT_VALUE = "d3F4aU1";
         public static readonly string CONTENT_VALUE = "application/json";
         public static readonly string CONTENT_TYPE = "Content-Type";
+        public static readonly string ACCESS_TOKEN_KEY = "4c355_T0k3N_K3y";
+        public static readonly string REFRESH_TOKEN_KEY = "R3f35h_t0K3n_k3Y";
     }
 }
