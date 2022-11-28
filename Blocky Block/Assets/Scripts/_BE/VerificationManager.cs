@@ -67,6 +67,9 @@ namespace BlockyBlock.Managers
                 GameEvents.ON_LOADING?.Invoke(false, "");
                 yield break;
             }
+            string resultJson = WWWManager.Instance.Result;
+            ResendResponse verificationResponse = JsonUtility.FromJson<ResendResponse>(resultJson);
+            OnlineManager.VERIFICATION_TOKEN_REGISTER = verificationResponse.verifyToken;
             GameEvents.ON_LOADING?.Invoke(false, "");
             Debug.Log("Resend successful ");
             ResetForm();
@@ -75,8 +78,9 @@ namespace BlockyBlock.Managers
         {
             base.isError = false;
             string code = VerificationDisplay.Code;
-            VerificationRequest verificationRequest = new VerificationRequest(OnlineManager.VERIFICATION_TOKEN_REGISTER, code);
-            WWWManager.Instance.Post(verificationRequest, WebType.AUTHENTICATION, APIType.SIGNUP_VERIFICATION_RESEND, true);
+            string token = OnlineManager.VERIFICATION_TOKEN_REGISTER;
+            VerificationRequest verificationRequest = new VerificationRequest(token, code);
+            WWWManager.Instance.Post(verificationRequest, WebType.AUTHENTICATION, APIType.USER_VERIFY, true);
             yield return new WaitUntil(() => WWWManager.Instance.IsComplete);
             if (base.isError)
             {
@@ -84,9 +88,9 @@ namespace BlockyBlock.Managers
                 yield break;
             }
             string resultJson = WWWManager.Instance.Result;
-            VerificationResponse registerResponse = JsonUtility.FromJson<VerificationResponse>(resultJson);
+            VerificationResponse verificationResponse = JsonUtility.FromJson<VerificationResponse>(resultJson);
             // * Do the save token here locally
-            Debug.Log("Verify response : " + registerResponse.ToString());
+            Debug.Log("Verify response : " + verificationResponse.ToString());
             GameEvents.ON_LOADING?.Invoke(false, "");
             BEFormEvents.ON_ENABLED?.Invoke(FormType.LOGIN_FORM, null);
         }
@@ -101,6 +105,19 @@ namespace BlockyBlock.Managers
             public ResendRequest()
             {
                 this.otpToken = BEConstants.DEFAULT_VALUE;
+            }
+        }
+        [System.Serializable]
+        public class ResendResponse
+        {
+            public string code;
+            public string message;
+            public string verifyToken;
+            public ResendResponse(string code, string message, string verifyToken)
+            {
+                this.code = code;
+                this.message = message;
+                this.verifyToken = verifyToken;
             }
         }
         [System.Serializable]
