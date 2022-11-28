@@ -7,10 +7,10 @@ using BlockyBlock.Enums;
 
 namespace BlockyBlock.Managers
 {
-    public class VerificationManager : FormManager
+    public class ForgotPasswordManager : FormManager
     {
-        public UI.VerificationDisplay VerificationDisplay;
-        private static readonly string VERIFICATION_MESSAGE = "Verifying your account...";
+        public UI.ForgotPasswordDisplay ForgotPasswordDisplay;
+        private static readonly string CONFIRM_MESSAGE = "Changing your password...";
         private static readonly string RESEND_MESSAGE = "Resending your code...";
         public float TimerValue;
         public static event System.Action<float> ON_TIMER_CHANGED;
@@ -31,7 +31,7 @@ namespace BlockyBlock.Managers
         }
         private void Update() 
         {
-            if (!VerificationDisplay.IsOpenned)
+            if (!ForgotPasswordDisplay.IsOpenned)
                 return;
             this.Timer -= Time.deltaTime;
             this.Timer = Mathf.Max(0, this.Timer);
@@ -40,10 +40,10 @@ namespace BlockyBlock.Managers
                 ON_TIMEOUT?.Invoke();
             }
         }
-        public void Verify()
+        public void Confirm()
         {
-            GameEvents.ON_LOADING?.Invoke(true, VERIFICATION_MESSAGE);
-            StartCoroutine(Cor_Verify());
+            GameEvents.ON_LOADING?.Invoke(true, CONFIRM_MESSAGE);
+            StartCoroutine(Cor_Confirm());
         }
         public void Resend()
         {
@@ -53,14 +53,14 @@ namespace BlockyBlock.Managers
         void ResetForm()
         {
             this.Timer = TimerValue;
-            VerificationDisplay.ResetCountDown();
+            ForgotPasswordDisplay.ResetCountDown();
         }
         IEnumerator Cor_Resend()
         {
             base.isError = false;
             string otpToken = OnlineManager.VERIFICATION_TOKEN_REGISTER;
             ResendRequest resendRequest = new ResendRequest(otpToken);
-            WWWManager.Instance.Post(resendRequest, WebType.AUTHENTICATION, APIType.SIGNUP_VERIFICATION_RESEND, true);
+            WWWManager.Instance.Post(resendRequest, WebType.AUTHENTICATION, APIType.FORGOT_PASSWORD_VERIFICATION_RESEND, true);
             yield return new WaitUntil(() => WWWManager.Instance.IsComplete);
             if (base.isError)
             {
@@ -71,12 +71,12 @@ namespace BlockyBlock.Managers
             Debug.Log("Resend successful ");
             ResetForm();
         }
-        IEnumerator Cor_Verify()
+        IEnumerator Cor_Confirm()
         {
             base.isError = false;
-            string code = VerificationDisplay.Code;
-            VerificationRequest verificationRequest = new VerificationRequest(OnlineManager.VERIFICATION_TOKEN_REGISTER, code);
-            WWWManager.Instance.Post(verificationRequest, WebType.AUTHENTICATION, APIType.SIGNUP_VERIFICATION_RESEND, true);
+            string code = ForgotPasswordDisplay.Code;
+            ForgotPasswordRequest forgotPasswordRequest = new ForgotPasswordRequest(OnlineManager.VERIFICATION_TOKEN_REGISTER, code);
+            WWWManager.Instance.Post(forgotPasswordRequest, WebType.AUTHENTICATION, APIType.FORGOT_PASSWORD, true);
             yield return new WaitUntil(() => WWWManager.Instance.IsComplete);
             if (base.isError)
             {
@@ -84,9 +84,9 @@ namespace BlockyBlock.Managers
                 yield break;
             }
             string resultJson = WWWManager.Instance.Result;
-            VerificationResponse registerResponse = JsonUtility.FromJson<VerificationResponse>(resultJson);
+            ForgotPasswordResponse forgotPasswordResponse = JsonUtility.FromJson<ForgotPasswordResponse>(resultJson);
             // * Do the save token here locally
-            Debug.Log("Verify response : " + registerResponse.ToString());
+            Debug.Log("Verify response : " + forgotPasswordResponse.ToString());
             GameEvents.ON_LOADING?.Invoke(false, "");
             BEFormEvents.ON_ENABLED?.Invoke(FormType.LOGIN_FORM, null);
         }
@@ -104,33 +104,33 @@ namespace BlockyBlock.Managers
             }
         }
         [System.Serializable]
-        public class VerificationRequest
+        public class ForgotPasswordRequest
         {
             public string token;
             public string code;
-            public VerificationRequest(string token, string code)
+            public ForgotPasswordRequest(string token, string code)
             {
                 this.token = token;
                 this.code = code;
             }
-            public VerificationRequest()
+            public ForgotPasswordRequest()
             {
                 this.token = this.code = BEConstants.DEFAULT_VALUE;
             }
         }
         [System.Serializable]
-        public class VerificationResponse
+        public class ForgotPasswordResponse
         {
             public string code;
             public string accessToken;
             public string refreshToken;
-            public VerificationResponse(string code, string accessToken, string refreshToken)
+            public ForgotPasswordResponse(string code, string accessToken, string refreshToken)
             {
                 this.code = code;
                 this.accessToken = accessToken;
                 this.refreshToken = refreshToken;
             }
-            public VerificationResponse()
+            public ForgotPasswordResponse()
             {
                 this.code = this.accessToken = this.refreshToken = BEConstants.DEFAULT_VALUE;
             }

@@ -11,6 +11,17 @@ namespace BlockyBlock.Configurations
     {
         public WebData WebData;
         public APIData APIData;
+        public string GetUniqueID()
+        {
+            var deviceId = "";
+
+#if UNITY_EDITOR
+            deviceId = SystemInfo.deviceUniqueIdentifier + "-editor";
+#else
+            deviceId = SystemInfo.deviceUniqueIdentifier;
+#endif
+            return deviceId;
+        }
     }
     [System.Serializable]
     public class APIData : SerializableDictionaryBase<APIType, string> {}

@@ -37,9 +37,5 @@ namespace BlockyBlock.UI
         {
             BEFormEvents.ON_ENABLED?.Invoke(FormType.SIGNUP_FORM, null);
         }
-        public void OnGuestButtonClick()
-        {
-
-        }
     }
 }

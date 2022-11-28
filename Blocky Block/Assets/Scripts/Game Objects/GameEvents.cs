@@ -14,6 +14,7 @@ namespace BlockyBlock.Events
     {
         public static Action<FormType, Action> ON_ENABLED;
         public static Action ON_OPEN_VERIFICATION_FORM;
+        public static Action ON_OPEN_FORGOTPASSWORD_FORM;
     }
     public class LevelSelectionEvents
     {

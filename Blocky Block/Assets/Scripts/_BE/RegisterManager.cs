@@ -23,7 +23,7 @@ namespace BlockyBlock.Managers
             string email = RegisterDisplay.Email;
             string password = RegisterDisplay.Password;
             RegisterRequest registerRequest = new RegisterRequest(email, password);
-            WWWManager.Instance.Post(registerRequest, WebType.AUTHENTICATION, APIType.REGISTER, true);
+            WWWManager.Instance.Post(registerRequest, WebType.AUTHENTICATION, APIType.USER_REGISTER, true);
             yield return new WaitUntil(() => WWWManager.Instance.IsComplete);
             if (base.isError)
             {
@@ -35,6 +35,7 @@ namespace BlockyBlock.Managers
             // * Do the save token here locally
             OnlineManager.VERIFICATION_TOKEN_REGISTER = registerResponse.verifyToken;
             OnlineManager.REGISTER_EMAIL = email;
+            Debug.Log("VerifyToken receive : " + OnlineManager.VERIFICATION_TOKEN_REGISTER);
             Debug.Log("Register response : " + registerResponse.ToString());
             BEFormEvents.ON_ENABLED?.Invoke(FormType.VERIFICATION_FORM, () => BEFormEvents.ON_OPEN_VERIFICATION_FORM?.Invoke());
             
