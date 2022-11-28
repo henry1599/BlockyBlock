@@ -17,6 +17,7 @@ namespace BlockyBlock.Managers
                 return;
             }
             Instance = this;
+            DontDestroyOnLoad(gameObject);
         }
     }
 }

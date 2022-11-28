@@ -20,6 +20,7 @@ namespace BlockyBlock.Managers
                 return;
             }
             Instance = this;
+            DontDestroyOnLoad(gameObject);
             GameEvents.ON_LOADING += HandleLoading;
         }
         void OnDestroy()

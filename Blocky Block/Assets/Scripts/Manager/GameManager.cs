@@ -111,6 +111,8 @@ namespace BlockyBlock.Managers
             {
                 case LevelID.MAIN:
                     break;
+                case LevelID.ENTRY:
+                    break;
                 case LevelID.LEVEL_MANNUAL_00:
                 case LevelID.LEVEL_MANNUAL_01:
                 case LevelID.LEVEL_MANNUAL_02:

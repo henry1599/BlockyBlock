@@ -15,9 +15,16 @@ namespace BlockyBlock.UI
     {
         public bool Interactable 
         {
-            get => m_Button.Interactable;
+            get
+            {
+                if (m_Button == null) 
+                    return false;
+                return m_Button.Interactable;
+            }
             set 
             {
+                if (m_Button == null) 
+                    return;
                 m_Button.Interactable = value;
                 if (value)
                 {

@@ -43,7 +43,7 @@ namespace BlockyBlock.Managers
             Debug.Log("User Login response : " + guestLoginResponse.ToString());
             GameEvents.ON_LOADING?.Invoke(false, "");
 
-            GameEvents.LOAD_LEVEL?.Invoke(LevelID.HOME);
+            GameManager.Instance.TransitionIn(() => GameEvents.LOAD_LEVEL?.Invoke(LevelID.HOME));
         }
         IEnumerator Cor_Login()
         {
@@ -66,7 +66,7 @@ namespace BlockyBlock.Managers
             Debug.Log("Login response : " + loginResponse.ToString());
             GameEvents.ON_LOADING?.Invoke(false, "");
             
-            GameEvents.LOAD_LEVEL?.Invoke(LevelID.HOME);
+            GameManager.Instance.TransitionIn(() => GameEvents.LOAD_LEVEL?.Invoke(LevelID.HOME));
         }
         [System.Serializable]
         public class GuestLoginRequest

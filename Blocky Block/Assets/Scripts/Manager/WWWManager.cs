@@ -51,6 +51,7 @@ namespace BlockyBlock.Managers
                 return;
             }
             Instance = this;
+            DontDestroyOnLoad(gameObject);
         }
         public void Get(WebType webType, APIType apiType)
         {

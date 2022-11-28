@@ -6,6 +6,7 @@ using BlockyBlock.Utils;
 using BlockyBlock.Events;
 using BlockyBlock.Enums;
 using DG.Tweening;
+using BlockyBlock.BackEnd;
 
 namespace BlockyBlock.Managers
 {
@@ -57,7 +58,7 @@ namespace BlockyBlock.Managers
         {
             GameManager.Instance.TransitionIn(() => 
                 {
-                    GameEvents.LOAD_LEVEL?.Invoke(LevelID.HOME);
+                    LoadNextScene();
                 }
             );
             vp.Pause();
@@ -65,6 +66,20 @@ namespace BlockyBlock.Managers
         void HandleLogoFinish()
         {
             DOVirtual.DelayedCall(Delay, () => videoPlayer.Play());
+        }
+        void LoadNextScene()
+        {
+            string accessToken = PlayerPrefs.GetString(BEConstants.ACCESS_TOKEN_KEY, string.Empty);
+            string refreshToken = PlayerPrefs.GetString(BEConstants.REFRESH_TOKEN_KEY, string.Empty);
+
+            if (accessToken == string.Empty && refreshToken == string.Empty)
+            {
+                GameEvents.LOAD_LEVEL?.Invoke(LevelID.ENTRY);
+            }
+            else
+            {
+                GameEvents.LOAD_LEVEL?.Invoke(LevelID.HOME);
+            }
         }
     }
 }
