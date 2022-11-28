@@ -139,17 +139,13 @@ namespace BlockyBlock.Managers
         public class VerificationResponse
         {
             public string code;
-            public string accessToken;
-            public string refreshToken;
-            public VerificationResponse(string code, string accessToken, string refreshToken)
+            public VerificationResponse(string code)
             {
                 this.code = code;
-                this.accessToken = accessToken;
-                this.refreshToken = refreshToken;
             }
             public VerificationResponse()
             {
-                this.code = this.accessToken = this.refreshToken = BEConstants.DEFAULT_VALUE;
+                this.code = BEConstants.DEFAULT_VALUE;
             }
         }
     }
