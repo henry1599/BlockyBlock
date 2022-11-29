@@ -768,6 +768,14 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 1439356956031412078}
     m_Modifications:
+    - target: {fileID: 7704853087333954294, guid: b3b89ee6aa9aca5479c12d67477ec8be, type: 3}
+      propertyPath: m_text
+      value: Reset Account Data
+      objectReference: {fileID: 0}
+    - target: {fileID: 7704853087333954294, guid: b3b89ee6aa9aca5479c12d67477ec8be, type: 3}
+      propertyPath: m_fontSize
+      value: 42.85
+      objectReference: {fileID: 0}
     - target: {fileID: 7704853088975055541, guid: b3b89ee6aa9aca5479c12d67477ec8be, type: 3}
       propertyPath: m_Name
       value: Reset Account Button
@@ -1060,6 +1068,14 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 1439356956031412078}
     m_Modifications:
+    - target: {fileID: 7704853087333954294, guid: b3b89ee6aa9aca5479c12d67477ec8be, type: 3}
+      propertyPath: m_text
+      value: Reset User Profile
+      objectReference: {fileID: 0}
+    - target: {fileID: 7704853087333954294, guid: b3b89ee6aa9aca5479c12d67477ec8be, type: 3}
+      propertyPath: m_fontSize
+      value: 46.35
+      objectReference: {fileID: 0}
     - target: {fileID: 7704853088975055541, guid: b3b89ee6aa9aca5479c12d67477ec8be, type: 3}
       propertyPath: m_Name
       value: Reset User Profile Button
@@ -1173,6 +1189,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 1439356956031412078}
     m_Modifications:
+    - target: {fileID: 7704853087333954294, guid: b3b89ee6aa9aca5479c12d67477ec8be, type: 3}
+      propertyPath: m_text
+      value: Reset All Data
+      objectReference: {fileID: 0}
     - target: {fileID: 7704853088975055541, guid: b3b89ee6aa9aca5479c12d67477ec8be, type: 3}
       propertyPath: m_Name
       value: Reset Local Data Button
