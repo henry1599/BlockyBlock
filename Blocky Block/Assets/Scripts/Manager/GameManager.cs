@@ -13,7 +13,7 @@ namespace BlockyBlock.Managers
     {
         public static GameManager Instance {get; private set;}
         [SerializeField] bool isCheat;
-        [SerializeField] GameObject cheatMenu; 
+        [SerializeField] GameObject cheatMenu, console; 
         [SerializeField] TMPro.TMP_Text gameVersion;
         public RuntimeAnimatorController HomeAnim;
         public RuntimeAnimatorController LevelSelectionAnim;
@@ -42,6 +42,8 @@ namespace BlockyBlock.Managers
             GameEvents.LOAD_LEVEL += HandleLoadLevel;
 
             SoundManager.ON_FINISH_LOADING_SOUNDMAP += HandleFinishLoadingSoundmap;
+            
+            this.console.SetActive(this.isCheat);
         }
         void Update()
         {
