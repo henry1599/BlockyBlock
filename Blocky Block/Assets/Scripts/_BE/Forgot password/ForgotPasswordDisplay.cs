@@ -16,6 +16,7 @@ namespace BlockyBlock.UI
         [SerializeField] TMP_InputField newPassField;
         [SerializeField] TMP_InputField confirmPassField;
         [SerializeField] TMP_Text countDownText;
+        [SerializeField] UIHomeButton confirmButton;
         [SerializeField] GameObject countDownField;
         [SerializeField] GameObject resendButton;
         public bool IsOpenned = false;
@@ -59,6 +60,7 @@ namespace BlockyBlock.UI
             BEFormEvents.ON_OPEN_FORGOTPASSWORD_FORM += HandleOpen;
             ForgotPasswordManager.ON_TIMEOUT += HandleTimeout;
             ForgotPasswordManager.ON_TIMER_CHANGED += HandleTimeChanged;
+            confirmPassField.onValueChanged.AddListener(value => OnConfirmValueChanged(value));
         }
         public override void OnDestroy()
         {
@@ -66,12 +68,17 @@ namespace BlockyBlock.UI
             BEFormEvents.ON_OPEN_FORGOTPASSWORD_FORM -= HandleOpen;
             ForgotPasswordManager.ON_TIMEOUT -= HandleTimeout;
             ForgotPasswordManager.ON_TIMER_CHANGED -= HandleTimeChanged;
+            confirmPassField.onValueChanged.RemoveListener(value => OnConfirmValueChanged(value));
         }
-        void HandleOpen()
+        void OnConfirmValueChanged(string value)
+        {
+            confirmButton.Interactable = value.Equals(newPassField.text);
+        }
+        void HandleOpen(string email)
         {
             IsOpenned = true;
             stringBuilderEmailField.Clear();
-            stringBuilderEmailField.AppendFormat("Please check your email\nWe have sent a code to {0}", OnlineManager.REGISTER_EMAIL);
+            stringBuilderEmailField.AppendFormat("Please check your email\nWe have sent a code to {0}", email);
             emailText.text = stringBuilderEmailField.ToString();
         }
         void HandleTimeout()

@@ -13,8 +13,8 @@ namespace BlockyBlock.Events
     public class BEFormEvents
     {
         public static Action<FormType, Action> ON_ENABLED;
-        public static Action ON_OPEN_VERIFICATION_FORM;
-        public static Action ON_OPEN_FORGOTPASSWORD_FORM;
+        public static Action<string> ON_OPEN_VERIFICATION_FORM;
+        public static Action<string> ON_OPEN_FORGOTPASSWORD_FORM;
     }
     public class LevelSelectionEvents
     {
@@ -135,5 +135,6 @@ namespace BlockyBlock.BackEnd
         public static readonly string CONTENT_TYPE = "Content-Type";
         public static readonly string ACCESS_TOKEN_KEY = "4c355_T0k3N_K3y";
         public static readonly string REFRESH_TOKEN_KEY = "R3f35h_t0K3n_k3Y";
+        public static readonly string EMAIL = "3m4iL";
     }
 }

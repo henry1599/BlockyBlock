@@ -97,8 +97,8 @@ namespace BlockyBlock.Managers
 #if UNITY_EDITOR || UNITY_STANDALONE
             if( Input.GetKeyDown( KeyCode.M ) )
             {
-                Debug.Log( "M key was pressed." );
-                TriggerDisableMusic();
+                // Debug.Log( "M key was pressed." );
+                // TriggerDisableMusic();
             }
 #endif
         }

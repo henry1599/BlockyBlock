@@ -12,6 +12,9 @@ namespace BlockyBlock.Managers
     public class GameManager : MonoBehaviour
     {
         public static GameManager Instance {get; private set;}
+        [SerializeField] bool isCheat;
+        [SerializeField] GameObject cheatMenu; 
+        [SerializeField] TMPro.TMP_Text gameVersion;
         public RuntimeAnimatorController HomeAnim;
         public RuntimeAnimatorController LevelSelectionAnim;
         public RuntimeAnimatorController LevelAnim;
@@ -26,6 +29,9 @@ namespace BlockyBlock.Managers
             }
             DontDestroyOnLoad(gameObject);
             Instance = this;
+            System.Text.StringBuilder stringBuilder = new System.Text.StringBuilder();
+            stringBuilder.AppendFormat("Version {0} - {1}", Application.version, this.isCheat ? "Cheat" : "Release");
+            gameVersion.text = stringBuilder.ToString();
             // StartCoroutine(Cor_UpdateSceneID());
         }
         // Start is called before the first frame update
@@ -36,6 +42,17 @@ namespace BlockyBlock.Managers
             GameEvents.LOAD_LEVEL += HandleLoadLevel;
 
             SoundManager.ON_FINISH_LOADING_SOUNDMAP += HandleFinishLoadingSoundmap;
+        }
+        void Update()
+        {
+            if (this.isCheat)
+            {
+                if (Input.GetKeyDown(KeyCode.J))
+                {
+                    bool status = this.cheatMenu.activeSelf;
+                    this.cheatMenu.SetActive(!status);
+                }
+            }
         }
         void HandleFinishLoadingSoundmap()
         {

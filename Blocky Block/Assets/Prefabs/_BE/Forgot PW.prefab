@@ -1436,9 +1436,9 @@ MonoBehaviour:
   OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 0}
-        m_TargetAssemblyTypeName: BlockyBlock.Managers.UIHomeManager, Assembly-CSharp
-        m_MethodName: OnBackButtonClick
+      - m_Target: {fileID: 3205351078587784367}
+        m_TargetAssemblyTypeName: BlockyBlock.Managers.ForgotPasswordManager, Assembly-CSharp
+        m_MethodName: Confirm
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -1761,8 +1761,8 @@ MonoBehaviour:
   OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 0}
-        m_TargetAssemblyTypeName: BlockyBlock.Managers.UIHomeManager, Assembly-CSharp
+      - m_Target: {fileID: 3205351078587784366}
+        m_TargetAssemblyTypeName: BlockyBlock.UI.ForgotPasswordDisplay, Assembly-CSharp
         m_MethodName: OnBackButtonClick
         m_Mode: 1
         m_Arguments:
@@ -2413,7 +2413,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   APIsHandle: 0a000000
   ForgotPasswordDisplay: {fileID: 3205351078587784366}
-  TimerValue: 10
 --- !u!114 &3205351078587784366
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2434,6 +2433,7 @@ MonoBehaviour:
   newPassField: {fileID: 3205351078410679227}
   confirmPassField: {fileID: 3205351079029547140}
   countDownText: {fileID: 3205351077995733949}
+  confirmButton: {fileID: 3205351078220139247}
   countDownField: {fileID: 3205351077995130358}
   resendButton: {fileID: 3205351077645988616}
   IsOpenned: 0

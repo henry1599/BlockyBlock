@@ -9,6 +9,7 @@ namespace BlockyBlock.Configurations
     [CreateAssetMenu(fileName = "API Config", menuName = "Scriptable Object/APIs Config")]
     public class APIConfig : ScriptableObject
     {
+        public float VerificationDuration;
         public WebData WebData;
         public APIData APIData;
         public string GetUniqueID()

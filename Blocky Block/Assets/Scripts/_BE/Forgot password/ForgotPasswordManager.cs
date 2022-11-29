@@ -12,7 +12,6 @@ namespace BlockyBlock.Managers
         public UI.ForgotPasswordDisplay ForgotPasswordDisplay;
         private static readonly string CONFIRM_MESSAGE = "Changing your password...";
         private static readonly string RESEND_MESSAGE = "Resending your code...";
-        public float TimerValue;
         public static event System.Action<float> ON_TIMER_CHANGED;
         public static event System.Action ON_TIMEOUT;
         float Timer 
@@ -27,7 +26,7 @@ namespace BlockyBlock.Managers
         public override void Start()
         {
             base.Start();
-            this.Timer = TimerValue;
+            this.Timer = WWWManager.Instance.APIConfig.VerificationDuration;
         }
         private void Update() 
         {
@@ -45,95 +44,47 @@ namespace BlockyBlock.Managers
             GameEvents.ON_LOADING?.Invoke(true, CONFIRM_MESSAGE);
             StartCoroutine(Cor_Confirm());
         }
-        public void Resend()
-        {
-            GameEvents.ON_LOADING?.Invoke(true, RESEND_MESSAGE);
-            StartCoroutine(Cor_Resend());
-        }
         void ResetForm()
         {
-            this.Timer = TimerValue;
+            this.Timer = WWWManager.Instance.APIConfig.VerificationDuration;
             ForgotPasswordDisplay.ResetCountDown();
-        }
-        IEnumerator Cor_Resend()
-        {
-            base.isError = false;
-            string otpToken = OnlineManager.VERIFICATION_TOKEN_REGISTER;
-            ResendRequest resendRequest = new ResendRequest(otpToken);
-            WWWManager.Instance.Post(resendRequest, WebType.AUTHENTICATION, APIType.FORGOT_PASSWORD_VERIFICATION_RESEND, true);
-            yield return new WaitUntil(() => WWWManager.Instance.IsComplete);
-            if (base.isError)
-            {
-                GameEvents.ON_LOADING?.Invoke(false, "");
-                yield break;
-            }
-            GameEvents.ON_LOADING?.Invoke(false, "");
-            Debug.Log("Resend successful ");
-            ResetForm();
         }
         IEnumerator Cor_Confirm()
         {
             base.isError = false;
+            string token = OnlineManager.FORGOT_PASSWORD_VERIFY_TOKEN;
             string code = ForgotPasswordDisplay.Code;
-            ForgotPasswordRequest forgotPasswordRequest = new ForgotPasswordRequest(OnlineManager.VERIFICATION_TOKEN_REGISTER, code);
-            WWWManager.Instance.Post(forgotPasswordRequest, WebType.AUTHENTICATION, APIType.FORGOT_PASSWORD, true);
+            string newPassword = ForgotPasswordDisplay.NewPass;
+            ForgotPasswordConfirmRequest forgotPasswordConfirmRequest = new ForgotPasswordConfirmRequest(token, code, newPassword);
+            WWWManager.Instance.Post(forgotPasswordConfirmRequest, WebType.AUTHENTICATION, APIType.FORGOT_PASSWORD, true);
             yield return new WaitUntil(() => WWWManager.Instance.IsComplete);
             if (base.isError)
             {
                 GameEvents.ON_LOADING?.Invoke(false, "");
                 yield break;
             }
-            string resultJson = WWWManager.Instance.Result;
-            ForgotPasswordResponse forgotPasswordResponse = JsonUtility.FromJson<ForgotPasswordResponse>(resultJson);
-            // * Do the save token here locally
-            Debug.Log("Verify response : " + forgotPasswordResponse.ToString());
             GameEvents.ON_LOADING?.Invoke(false, "");
+            Debug.Log("Change password successfully");
+
             BEFormEvents.ON_ENABLED?.Invoke(FormType.LOGIN_FORM, null);
         }
         [System.Serializable]
-        public class ResendRequest
-        {
-            public string otpToken;
-            public ResendRequest(string otpToken)
-            {
-                this.otpToken = otpToken;
-            }
-            public ResendRequest()
-            {
-                this.otpToken = BEConstants.DEFAULT_VALUE;
-            }
-        }
-        [System.Serializable]
-        public class ForgotPasswordRequest
+        public class ForgotPasswordConfirmRequest
         {
             public string token;
             public string code;
-            public ForgotPasswordRequest(string token, string code)
+            public string password;
+            public ForgotPasswordConfirmRequest(string token, string code, string password)
             {
                 this.token = token;
                 this.code = code;
+                this.password = password;
             }
-            public ForgotPasswordRequest()
+            public ForgotPasswordConfirmRequest()
             {
-                this.token = this.code = BEConstants.DEFAULT_VALUE;
+                this.code = this.token = this.password = BEConstants.DEFAULT_VALUE;
             }
         }
-        [System.Serializable]
-        public class ForgotPasswordResponse
-        {
-            public string code;
-            public string accessToken;
-            public string refreshToken;
-            public ForgotPasswordResponse(string code, string accessToken, string refreshToken)
-            {
-                this.code = code;
-                this.accessToken = accessToken;
-                this.refreshToken = refreshToken;
-            }
-            public ForgotPasswordResponse()
-            {
-                this.code = this.accessToken = this.refreshToken = BEConstants.DEFAULT_VALUE;
-            }
-        }
+        
     }
 }

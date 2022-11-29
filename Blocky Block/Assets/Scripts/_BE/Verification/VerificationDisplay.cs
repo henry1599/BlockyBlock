@@ -43,11 +43,11 @@ namespace BlockyBlock.UI
             VerificationManager.ON_TIMEOUT -= HandleTimeout;
             VerificationManager.ON_TIMER_CHANGED -= HandleTimeChanged;
         }
-        void HandleOpen()
+        void HandleOpen(string email)
         {
             IsOpenned = true;
             stringBuilderEmailField.Clear();
-            stringBuilderEmailField.AppendFormat("Please check your email\nWe have sent a code to {0}", OnlineManager.REGISTER_EMAIL);
+            stringBuilderEmailField.AppendFormat("Please check your email\nWe have sent a code to {0}", email);
             emailText.text = stringBuilderEmailField.ToString();
         }
         void HandleTimeout()

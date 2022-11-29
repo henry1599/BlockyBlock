@@ -12,6 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ddfc9820f9534b548b93006176892ee8, type: 3}
   m_Name: API Config
   m_EditorClassIdentifier: 
+  VerificationDuration: 60
   WebData:
     reorderableList:
       canAdd: 1
@@ -19,7 +20,7 @@ MonoBehaviour:
       draggable: 1
       expandable: 1
       multipleSelection: 1
-      isExpanded: 1
+      isExpanded: 0
       label:
         m_Text: Keys
         m_Image: {fileID: 0}
@@ -34,7 +35,7 @@ MonoBehaviour:
       elementNameOverride: 
       elementIcon: {fileID: 0}
     reqReferences: {fileID: 0}
-    isExpanded: 1
+    isExpanded: 0
     _keyValues: 00000000
     _keys: 00000000
     _values:
@@ -46,7 +47,7 @@ MonoBehaviour:
       draggable: 1
       expandable: 1
       multipleSelection: 1
-      isExpanded: 1
+      isExpanded: 0
       label:
         m_Text: Keys
         m_Image: {fileID: 0}
@@ -61,9 +62,9 @@ MonoBehaviour:
       elementNameOverride: 
       elementIcon: {fileID: 0}
     reqReferences: {fileID: 0}
-    isExpanded: 1
-    _keyValues: 010000000000000002000000030000000400000005000000060000000700000008000000090000000a0000000b0000000c0000000d000000
-    _keys: 010000000000000002000000030000000400000005000000060000000700000008000000090000000a0000000b0000000c0000000d000000
+    isExpanded: 0
+    _keyValues: 010000000000000002000000030000000400000005000000060000000700000008000000090000000a0000000b0000000c0000000d0000000e000000
+    _keys: 010000000000000002000000030000000400000005000000060000000700000008000000090000000a0000000b0000000c0000000d0000000e000000
     _values:
     - /api/authentication/users/login
     - /healthcheck
@@ -75,7 +76,8 @@ MonoBehaviour:
     - /utilities/cryptor/encrypt
     - /utilities/cryptor/decrypt
     - /utilities/request-token/generate
-    - 
+    - /api/authentication/users/forget-password
     - 
     - /api/authentication/guests/login
     - /api/authentication/guests/renew-access-token
+    - /api/authentication/users/request-forget-password

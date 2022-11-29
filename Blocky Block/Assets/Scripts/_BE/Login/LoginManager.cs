@@ -13,6 +13,7 @@ namespace BlockyBlock.Managers
     {
         public UI.LoginDisplay LoginDisplay;
         private static readonly string LOGIN_MESSAGE = "Logging in...";
+        private static readonly string FORGOTPASSWORD_MESSAGE = "Requesting your action...";
         public void Login()
         {
             GameEvents.ON_LOADING?.Invoke(true, LOGIN_MESSAGE);
@@ -22,6 +23,39 @@ namespace BlockyBlock.Managers
         {
             GameEvents.ON_LOADING?.Invoke(true, LOGIN_MESSAGE);
             StartCoroutine(Cor_GuestLogin());
+        }
+        public void ForgotPassword()
+        {
+            string savedEmail = PlayerPrefs.GetString(BEConstants.EMAIL, string.Empty);
+            if (savedEmail == string.Empty)
+            {
+                WWWManager.ON_ERROR?.Invoke(APIType.FORGOT_PASSWORD, "You need to have account to perform this action");
+            }
+            else
+            {
+                GameEvents.ON_LOADING?.Invoke(true, FORGOTPASSWORD_MESSAGE);
+                StartCoroutine(Cor_ForgotPassword(savedEmail));
+            }
+        }
+        IEnumerator Cor_ForgotPassword(string email)
+        {
+            base.isError = false;
+            ForgotPasswordRequest forgotPasswordRequest = new ForgotPasswordRequest(email);
+            WWWManager.Instance.Post(forgotPasswordRequest, WebType.AUTHENTICATION, APIType.FORGOT_PASSWORD_REQUEST, true);
+            yield return new WaitUntil(() => WWWManager.Instance.IsComplete);
+            if (base.isError)
+            {
+                GameEvents.ON_LOADING?.Invoke(false, "");
+                yield break;
+            }
+            string resultJson = WWWManager.Instance.Result;
+            ForgotPasswordResponse forgotPasswordResponse = JsonUtility.FromJson<ForgotPasswordResponse>(resultJson);
+            // * Do the save token here locally
+            OnlineManager.FORGOT_PASSWORD_VERIFY_TOKEN = forgotPasswordResponse.verifyToken;
+            Debug.Log("Forgot password response : " + forgotPasswordResponse.ToString());
+            GameEvents.ON_LOADING?.Invoke(false, "");
+
+            BEFormEvents.ON_ENABLED?.Invoke(FormType.FORGOT_PASSWORD_FORM, () => BEFormEvents.ON_OPEN_FORGOTPASSWORD_FORM?.Invoke(email));
         }
         IEnumerator Cor_GuestLogin()
         {
@@ -40,7 +74,8 @@ namespace BlockyBlock.Managers
             // * Do the save token here locally
             PlayerPrefs.SetString(BEConstants.ACCESS_TOKEN_KEY, guestLoginResponse.accessToken);
             PlayerPrefs.SetString(BEConstants.REFRESH_TOKEN_KEY, guestLoginResponse.refreshToken);
-            Debug.Log("User Login response : " + guestLoginResponse.ToString());
+            PlayerPrefs.SetString(BEConstants.EMAIL, string.Empty);
+            Debug.Log("Guest Login response : " + guestLoginResponse.ToString());
             GameEvents.ON_LOADING?.Invoke(false, "");
 
             GameManager.Instance.TransitionIn(() => GameEvents.LOAD_LEVEL?.Invoke(LevelID.HOME));
@@ -63,10 +98,41 @@ namespace BlockyBlock.Managers
             // * Do the save token here locally
             PlayerPrefs.SetString(BEConstants.ACCESS_TOKEN_KEY, loginResponse.accessToken);
             PlayerPrefs.SetString(BEConstants.REFRESH_TOKEN_KEY, loginResponse.refreshToken);
-            Debug.Log("Login response : " + loginResponse.ToString());
+            PlayerPrefs.SetString(BEConstants.EMAIL, email);
+            Debug.Log("User login response : " + loginResponse.ToString());
             GameEvents.ON_LOADING?.Invoke(false, "");
             
             GameManager.Instance.TransitionIn(() => GameEvents.LOAD_LEVEL?.Invoke(LevelID.HOME));
+        }
+        [System.Serializable]
+        public class ForgotPasswordRequest
+        {
+            public string email;
+            public ForgotPasswordRequest(string email)
+            {
+                this.email = email;
+            }
+            public ForgotPasswordRequest()
+            {
+                this.email = BEConstants.DEFAULT_VALUE;
+            }
+        }
+        [System.Serializable]
+        public class ForgotPasswordResponse
+        {
+            public string code;
+            public string message;
+            public string verifyToken;
+            public ForgotPasswordResponse(string code, string message, string verifyToken)
+            {
+                this.code = code;
+                this.message = message;
+                this.verifyToken = verifyToken;
+            }
+            public ForgotPasswordResponse()
+            {
+                this.code = this.message = this.verifyToken = BEConstants.DEFAULT_VALUE;
+            }
         }
         [System.Serializable]
         public class GuestLoginRequest

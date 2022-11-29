@@ -35,9 +35,10 @@ namespace BlockyBlock.Managers
             // * Do the save token here locally
             OnlineManager.VERIFICATION_TOKEN_REGISTER = registerResponse.verifyToken;
             OnlineManager.REGISTER_EMAIL = email;
+            PlayerPrefs.SetString(BEConstants.EMAIL, email);
             Debug.Log("VerifyToken receive : " + OnlineManager.VERIFICATION_TOKEN_REGISTER);
             Debug.Log("Register response : " + registerResponse.ToString());
-            BEFormEvents.ON_ENABLED?.Invoke(FormType.VERIFICATION_FORM, () => BEFormEvents.ON_OPEN_VERIFICATION_FORM?.Invoke());
+            BEFormEvents.ON_ENABLED?.Invoke(FormType.VERIFICATION_FORM, () => BEFormEvents.ON_OPEN_VERIFICATION_FORM?.Invoke(email));
             
             GameEvents.ON_LOADING?.Invoke(false, "");
         }

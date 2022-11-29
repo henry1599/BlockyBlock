@@ -138,6 +138,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Scene Transition
       objectReference: {fileID: 0}
+    - target: {fileID: 7546128328767162745, guid: 221b0ea707982774db5020c732cb30fb, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 7546128328767162747, guid: 221b0ea707982774db5020c732cb30fb, type: 3}
       propertyPath: m_RootOrder
       value: 5
@@ -515,6 +519,14 @@ PrefabInstance:
     - target: {fileID: 6095540277375911819, guid: adf5029d67da016478788c8179558f7d, type: 3}
       propertyPath: m_Name
       value: Game Manager
+      objectReference: {fileID: 0}
+    - target: {fileID: 6578245246289598599, guid: adf5029d67da016478788c8179558f7d, type: 3}
+      propertyPath: m_fontColor.a
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6578245246289598599, guid: adf5029d67da016478788c8179558f7d, type: 3}
+      propertyPath: m_fontColor32.rgba
+      value: 4294967295
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: adf5029d67da016478788c8179558f7d, type: 3}

@@ -179,6 +179,7 @@ namespace BlockyBlock.Enums
         FORGOT_PASSWORD_VERIFICATION_RESEND,
         GUEST_LOGIN,
         GUEST_RENEW_ACCESS_TOKEN,
+        FORGOT_PASSWORD_REQUEST,
         _______________OTHERS_______________ = 100,
     }
 }

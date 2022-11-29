@@ -52,6 +52,8 @@ namespace BlockyBlock.UI
                     return "Verification Error";
                 case APIType.LOGOUT:
                 case APIType.FORGOT_PASSWORD:
+                case APIType.FORGOT_PASSWORD_REQUEST:
+                    return "Forgot password";
                 default:
                     return "Health Check Error";
             }

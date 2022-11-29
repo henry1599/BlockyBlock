@@ -12,7 +12,6 @@ namespace BlockyBlock.Managers
         public UI.VerificationDisplay VerificationDisplay;
         private static readonly string VERIFICATION_MESSAGE = "Verifying your account...";
         private static readonly string RESEND_MESSAGE = "Resending your code...";
-        public float TimerValue;
         public static event System.Action<float> ON_TIMER_CHANGED;
         public static event System.Action ON_TIMEOUT;
         float Timer 
@@ -27,7 +26,7 @@ namespace BlockyBlock.Managers
         public override void Start()
         {
             base.Start();
-            this.Timer = TimerValue;
+            this.Timer = WWWManager.Instance.APIConfig.VerificationDuration;
         }
         private void Update() 
         {
@@ -52,7 +51,7 @@ namespace BlockyBlock.Managers
         }
         void ResetForm()
         {
-            this.Timer = TimerValue;
+            this.Timer = WWWManager.Instance.APIConfig.VerificationDuration;
             VerificationDisplay.ResetCountDown();
         }
         IEnumerator Cor_Resend()

@@ -35,7 +35,7 @@ namespace BlockyBlock.Managers
     public class WWWManager : MonoBehaviour
     {
         public static WWWManager Instance {get; private set;}
-        public static event System.Action<APIType, string> ON_ERROR;
+        public static System.Action<APIType, string> ON_ERROR;
         public APIConfig APIConfig;
         public bool IsComplete {get; set;}
         public string Result 
