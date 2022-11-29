@@ -64,7 +64,7 @@ namespace BlockyBlock.Tools
                 }
             }
 
-            string outFolder = "./_build/win64/cheat";
+            string outFolder = "./_build/win64/release";
             string productName = PlayerSettings.productName;
 
             CreateFolder(outFolder);
