@@ -13,9 +13,6 @@ namespace BlockyBlock.Utils.EditorTools
     [ExecuteInEditMode]
     public static partial class Common
     {
-        public static readonly string RAWASSET_FOLDER_PATH = "Assets/Resources/ToyRawAsset";
-        public static readonly string MODEL_FOLDER_PATH = "Assets/_Game/Models/_NewToys";
-
         public static void SaveCurrentScenesToPrefs()
         {
             int sceneCount = EditorSceneManager.sceneCount;
@@ -280,11 +277,6 @@ namespace BlockyBlock.Utils.EditorTools
             return false;
         }
 
-        public static DirectoryInfo GetToyModelDirectoryInfoLocal(string toyId, bool createIfNotExist = false)
-        {
-            return GetToyModelDirectoryInfo(MODEL_FOLDER_PATH, toyId, createIfNotExist: createIfNotExist);
-        }
-
         public static DirectoryInfo GetToyModelDirectoryInfo(string toyFolderPath, string toyId, bool createIfNotExist = false)
         {
             DirectoryInfo toyFolderInfo = new DirectoryInfo(toyFolderPath).CombineInfo(toyId);
@@ -304,30 +296,6 @@ namespace BlockyBlock.Utils.EditorTools
             else
             {
                 Debug.Log($"Toy Model folder not found: {toyId}. Will create new one");
-                toyFolderInfo.Create();
-                return toyFolderInfo;
-            }
-        }
-
-        public static DirectoryInfo GetToyRawAssetDirectoryInfo(string toyId, bool createIfNotExist = false)
-        {
-            DirectoryInfo toyFolderInfo = new DirectoryInfo(RAWASSET_FOLDER_PATH).CombineInfo(toyId);
-            if (toyFolderInfo.Exists)
-            {
-                return toyFolderInfo;
-            }
-            foreach (var toyFolder in new DirectoryInfo(RAWASSET_FOLDER_PATH).EnumerateDirectories())
-            {
-                if (toyFolder.Name.Equals(toyId)) return toyFolder;
-            }
-            if (!createIfNotExist)
-            {
-                Debug.Log($"ToyRawAsset folder not found: {toyId}");
-                return null;
-            }
-            else
-            {
-                Debug.Log($"ToyRawAsset folder not found: {toyId}. Will create new one");
                 toyFolderInfo.Create();
                 return toyFolderInfo;
             }
