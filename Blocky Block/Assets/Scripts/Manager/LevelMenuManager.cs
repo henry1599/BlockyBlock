@@ -16,14 +16,10 @@ namespace BlockyBlock.Managers
     {
         public static LevelMenuManager Instance {get; private set;}
         private static readonly int IdleKeyAnimation = Animator.StringToHash("Idle");
-        private static readonly int RunSlowKeyAnimation = Animator.StringToHash("Run Slow");
         private static readonly int RunMediumKeyAnimation = Animator.StringToHash("Run Medium");
-        private static readonly int RunFastKeyAnimation = Animator.StringToHash("Run Fast");
-        private static readonly int[] KeysAnim = new int[3]
+        private static readonly int[] KeysAnim = new int[1]
         {
-            RunSlowKeyAnimation,
-            RunMediumKeyAnimation,
-            RunFastKeyAnimation
+            RunMediumKeyAnimation
         };
         [SerializeField] LevelItemConfig m_LevelItemConfig;
         [SerializeField] Transform[] m_LevelNodes;

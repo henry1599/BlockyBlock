@@ -711,17 +711,6 @@ RectTransform:
   m_CorrespondingSourceObject: {fileID: 8998249518037122289, guid: 51706e66640b28f4e9064f9a93ba074c, type: 3}
   m_PrefabInstance: {fileID: 8998249519483915733}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &1808118054 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 8998249518037122291, guid: 51706e66640b28f4e9064f9a93ba074c, type: 3}
-  m_PrefabInstance: {fileID: 8998249519483915733}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 908a518cd7d102a45aa36c4c2e7622c0, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1001 &696328085370622256
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -829,7 +818,15 @@ PrefabInstance:
     - target: {fileID: 3205351077645988623, guid: 5a3baaab21fb18746b0cfc0b86919053, type: 3}
       propertyPath: OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
-      objectReference: {fileID: 1808118054}
+      objectReference: {fileID: 3205351078735354099}
+    - target: {fileID: 3205351077645988623, guid: 5a3baaab21fb18746b0cfc0b86919053, type: 3}
+      propertyPath: OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: Resend
+      objectReference: {fileID: 0}
+    - target: {fileID: 3205351077645988623, guid: 5a3baaab21fb18746b0cfc0b86919053, type: 3}
+      propertyPath: OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
+      value: BlockyBlock.Managers.ForgotPasswordManager, Assembly-CSharp
+      objectReference: {fileID: 0}
     - target: {fileID: 3205351078587784360, guid: 5a3baaab21fb18746b0cfc0b86919053, type: 3}
       propertyPath: m_Name
       value: Forgot PW
@@ -918,8 +915,27 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 3205351079263026628, guid: 5a3baaab21fb18746b0cfc0b86919053, type: 3}
+      propertyPath: m_LocalScale.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3205351079263026628, guid: 5a3baaab21fb18746b0cfc0b86919053, type: 3}
+      propertyPath: m_LocalScale.y
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 5a3baaab21fb18746b0cfc0b86919053, type: 3}
+--- !u!114 &3205351078735354099 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 3205351078587784367, guid: 5a3baaab21fb18746b0cfc0b86919053, type: 3}
+  m_PrefabInstance: {fileID: 3205351078735354098}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: dece4a0e379e63345bdb1960ebe1f70c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &5280919419754548334
 PrefabInstance:
   m_ObjectHideFlags: 0
