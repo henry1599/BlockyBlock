@@ -815,6 +815,26 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 1667161525}
     m_Modifications:
+    - target: {fileID: 3205351077645988616, guid: 5a3baaab21fb18746b0cfc0b86919053, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3205351077645988622, guid: 5a3baaab21fb18746b0cfc0b86919053, type: 3}
+      propertyPath: m_IdleRectVector.y
+      value: -37.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 3205351077645988622, guid: 5a3baaab21fb18746b0cfc0b86919053, type: 3}
+      propertyPath: m_ClickRectVector.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3205351077645988622, guid: 5a3baaab21fb18746b0cfc0b86919053, type: 3}
+      propertyPath: m_ClickRectVector.y
+      value: -37.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 3205351077645988622, guid: 5a3baaab21fb18746b0cfc0b86919053, type: 3}
+      propertyPath: m_HoverRectVector.y
+      value: -22.5
+      objectReference: {fileID: 0}
     - target: {fileID: 3205351077645988623, guid: 5a3baaab21fb18746b0cfc0b86919053, type: 3}
       propertyPath: OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
@@ -826,6 +846,10 @@ PrefabInstance:
     - target: {fileID: 3205351077645988623, guid: 5a3baaab21fb18746b0cfc0b86919053, type: 3}
       propertyPath: OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
       value: BlockyBlock.Managers.ForgotPasswordManager, Assembly-CSharp
+      objectReference: {fileID: 0}
+    - target: {fileID: 3205351077995130358, guid: 5a3baaab21fb18746b0cfc0b86919053, type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 3205351078587784360, guid: 5a3baaab21fb18746b0cfc0b86919053, type: 3}
       propertyPath: m_Name
@@ -914,6 +938,14 @@ PrefabInstance:
     - target: {fileID: 3205351078587784361, guid: 5a3baaab21fb18746b0cfc0b86919053, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3205351079242741903, guid: 5a3baaab21fb18746b0cfc0b86919053, type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3205351079242741903, guid: 5a3baaab21fb18746b0cfc0b86919053, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: -37.5
       objectReference: {fileID: 0}
     - target: {fileID: 3205351079263026628, guid: 5a3baaab21fb18746b0cfc0b86919053, type: 3}
       propertyPath: m_LocalScale.x
