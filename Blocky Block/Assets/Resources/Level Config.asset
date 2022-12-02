@@ -103,21 +103,6 @@ MonoBehaviour:
     LevelRawData: 03000;36262;21112;26263;00030;
     MinimumExecutionBlock: 19
     MinimumExecutionStep: 19
-  - ChapterID: 1
-    LevelType: 1
-    LevelID: 1000
-    WinCondition: 1000
-    StuffToCollect: 1
-    LevelName: Level Mannual 01
-    BlockTypes: 000000000400000001000000020000000700000005000000080000000c000000
-    UnitDatas:
-    - Floor: 0
-      X: 1
-      Y: 1
-      StartDirection: 3
-    LevelRawData: 22226;30000;31113;30603;00003;
-    MinimumExecutionBlock: 5
-    MinimumExecutionStep: 5
   LevelTextPaths:
   - Data/Levels/Chapter 1
   - Data/Levels/Chapter 2

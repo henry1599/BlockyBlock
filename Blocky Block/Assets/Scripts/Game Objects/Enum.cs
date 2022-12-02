@@ -93,8 +93,11 @@ namespace BlockyBlock.Enums
         WIN = 2
     }
     public enum LevelID {
+        MAIN = -1,
         HOME = 0,
+        ENTRY = 1,
         LEVEL_SELECTION = 10,
+        // * 1000 <= LEVEL_MANNUAL <= 2000
         LEVEL_MANNUAL_00 = 1000,
         LEVEL_MANNUAL_01 = 1001,
         LEVEL_MANNUAL_02 = 1002,
@@ -147,5 +150,36 @@ namespace BlockyBlock.Enums
         HAT = 9,
         HORN = 10,
         TAIL = 11
+    }
+    public enum FormType
+    {
+        LOGIN_FORM,
+        SIGNUP_FORM,
+        FORGOT_PASSWORD_FORM,
+        VERIFICATION_FORM
+    }
+    public enum WebType
+    {
+        AUTHENTICATION = 0
+    }
+    public enum APIType
+    {
+        _______________AUTHENTICATION_______________ = -1,
+        HEALTH_CHECK = 0,
+        USER_LOGIN,
+        USER_REGISTER,
+        USER_VERIFY,
+        USER_RENEW_ACCESS_TOKEN,
+        SIGNUP_VERIFICATION_RESEND,
+        LOGOUT,
+        ENCRYPT,
+        DECRYPT,
+        GENERATE,
+        FORGOT_PASSWORD,
+        FORGOT_PASSWORD_VERIFICATION_RESEND,
+        GUEST_LOGIN,
+        GUEST_RENEW_ACCESS_TOKEN,
+        FORGOT_PASSWORD_REQUEST,
+        _______________OTHERS_______________ = 100,
     }
 }

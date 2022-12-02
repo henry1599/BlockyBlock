@@ -93,6 +93,7 @@ namespace BlockyBlock.Managers
 
             yield return Helpers.Helper.GetWait(1f);
             SoundManager.Instance.PlaySound(SoundID.CONFETTI);
+            // SoundManager.Instance.PlaySound(SoundID.WIN);
             CreateCharacter();
             StartCoroutine(Cor_ShowSummary(winGame, usedBlockPassed, stepPassed));
             yield return new WaitForSeconds(0.5f);
@@ -102,6 +103,7 @@ namespace BlockyBlock.Managers
             this.character.SetActive(true);
             this.character.GetComponentInChildren<Animator>().runtimeAnimatorController = this.characterAnim;
             this.character.GetComponentInChildren<Animator>().CrossFade(DanceTransitionKeys[Random.Range(0, DanceTransitionKeys.Length)], 0, 0);
+            CustomizationManager.Instance.SetCustomization(this.character.GetComponentInChildren<CustomizationDisplay>());
         }
         IEnumerator Cor_ShowSummary(bool winGame = true, bool usedBlockPassed = false, bool stepPassed = false)
         {

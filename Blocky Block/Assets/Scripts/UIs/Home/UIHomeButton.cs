@@ -13,6 +13,25 @@ namespace BlockyBlock.UI
     [RequireComponent(typeof(UICustomButton))]
     public class UIHomeButton : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler, IPointerDownHandler, IPointerMoveHandler
     {
+        public bool Interactable 
+        {
+            get
+            {
+                if (m_Button == null) 
+                    return false;
+                return m_Button.Interactable;
+            }
+            set 
+            {
+                if (m_Button == null) 
+                    return;
+                m_Button.Interactable = value;
+                if (value)
+                {
+                    HandleIdle();
+                }
+            }
+        }
         [Header("References")]
         [SerializeField] Image m_TopPanel;
         [SerializeField] TMP_Text m_Title;
@@ -56,12 +75,14 @@ namespace BlockyBlock.UI
         }
         public void OnPointerDown(PointerEventData eventData)
         {
+            if (!Interactable) return;
             if (m_IsBlock) return;
             HandleClick();
         }
 
         public void OnPointerEnter(PointerEventData eventData)
         {
+            if (!Interactable) return;
             if (m_IsBlock) return;
             Hover();
             HandleHover();
@@ -69,12 +90,14 @@ namespace BlockyBlock.UI
 
         public void OnPointerExit(PointerEventData eventData)
         {
+            if (!Interactable) return;
             if (m_IsBlock) return;
             HandleIdle();
         }
 
         public void OnPointerMove(PointerEventData eventData)
         {
+            if (!Interactable) return;
             if (m_IsBlock) return;
             HandleHover();
         }
@@ -117,7 +140,8 @@ namespace BlockyBlock.UI
             // * Title color
             m_Title?.DOColor(m_ClickTitleColor, m_ClickTransitionDuration).SetEase(Ease.OutBack);
             icon?.DOColor(m_ClickTitleColor, m_ClickTransitionDuration).SetEase(Ease.OutBack);
-            SoundManager.Instance.PlaySound(SoundID.BUTTON_CLICK);
+            if (SoundManager.Instance != null)
+                SoundManager.Instance.PlaySound(SoundID.BUTTON_CLICK);
             Invoke(nameof(Click), m_ClickTransitionDuration / 2);
         }
         void Click()
@@ -126,7 +150,8 @@ namespace BlockyBlock.UI
         }
         void Hover()
         {
-            SoundManager.Instance.PlaySound(SoundID.BUTTON_HOVER);
+            if (SoundManager.Instance != null)
+                SoundManager.Instance.PlaySound(SoundID.BUTTON_HOVER);
         }
     }
 }

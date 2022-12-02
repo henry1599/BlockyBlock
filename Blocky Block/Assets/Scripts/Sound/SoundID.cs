@@ -21,6 +21,15 @@ namespace AudioPlayer
         PUSH,
         CONFETTI,
         BOX_PICK_UP,
-        LEVEL_THEME
+        LEVEL_THEME,
+        WIN,
+        DRAG_UI_BLOCK,
+        DROP_UI_BLOCK,
+        CLICK_UI_BLOCK,
+        STAR_GAIN_VICTORY,
+        STAR_COLLECTED,
+        CHAR_FOOTSTEP_GRASS,
+        CHAR_FOOTSTEP_BOX,
+        ERROR_ALERT
     }
 }

@@ -33,3 +33,30 @@ MonoBehaviour:
   - name: LEVEL_THEME
     Id: 13
     Data: {fileID: 11400000, guid: bf14ec217d6f5f144863db6baa0e237c, type: 2}
+  - name: WIN
+    Id: 14
+    Data: {fileID: 11400000, guid: 55bd81668da338c4ba6de31303da0a8d, type: 2}
+  - name: DRAG_UI_BLOCK
+    Id: 15
+    Data: {fileID: 11400000, guid: fbd44ede9d2ceeb4996ea5bf375ad254, type: 2}
+  - name: DROP_UI_BLOCK
+    Id: 16
+    Data: {fileID: 11400000, guid: 9c36bc3ed4bee1f409172d8313435df7, type: 2}
+  - name: CLICK_UI_BLOCK
+    Id: 17
+    Data: {fileID: 11400000, guid: d3d97cf0934051946b58891ff08ea0ec, type: 2}
+  - name: STAR_GAIN_VICTORY
+    Id: 18
+    Data: {fileID: 11400000, guid: 300f9f52b97d8544192a800c3ae9f2aa, type: 2}
+  - name: STAR_COLLECTED
+    Id: 19
+    Data: {fileID: 11400000, guid: 7b62c4e19f8082f43ba026ef6f1093ff, type: 2}
+  - name: CHAR_FOOTSTEP_GRASS
+    Id: 20
+    Data: {fileID: 11400000, guid: 1be2a80fc5f345a4aa8d9f128fd354b5, type: 2}
+  - name: CHAR_FOOTSTEP_BOX
+    Id: 21
+    Data: {fileID: 11400000, guid: d95c8189eca401247851b020fdc119ca, type: 2}
+  - name: ERROR_ALERT
+    Id: 22
+    Data: {fileID: 11400000, guid: 81bfb29ed8489ed4a99a156f26e08794, type: 2}

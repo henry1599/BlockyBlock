@@ -16,6 +16,12 @@ namespace BlockyBlock.Managers
         UIError m_UIError;
         void Awake()
         {
+            // if (Instance != null)
+            // {
+            //     Destroy(gameObject);
+            //     return;
+            // }
+            // DontDestroyOnLoad(gameObject);
             Instance = this;
             m_UIError = GameObject.FindGameObjectWithTag(GameConstants.UIERROR_TAG)?.GetComponent<UIError>();
         }
@@ -29,6 +35,7 @@ namespace BlockyBlock.Managers
         }
         void HandleError(ErrorType _type)
         {
+            SoundManager.Instance.PlaySound(AudioPlayer.SoundID.ERROR_ALERT);
             ErrorEvents.ON_ERROR_HANDLING?.Invoke();
             string msg = ConfigManager.Instance.ErrorConfig.ErrorData[_type];
             m_UIError.Open(msg);

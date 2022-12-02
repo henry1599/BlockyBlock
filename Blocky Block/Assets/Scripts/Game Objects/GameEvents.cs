@@ -10,6 +10,12 @@ using System;
 
 namespace BlockyBlock.Events
 {
+    public class BEFormEvents
+    {
+        public static Action<FormType, Action> ON_ENABLED;
+        public static Action<string> ON_OPEN_VERIFICATION_FORM;
+        public static Action<string> ON_OPEN_FORGOTPASSWORD_FORM;
+    }
     public class LevelSelectionEvents
     {
         public static Action<LevelItem> ON_HIGHLIGHT_ITEM;
@@ -21,6 +27,7 @@ namespace BlockyBlock.Events
     }
     public class GameEvents
     {
+        public static Action<bool, string> ON_LOADING;
         public static Action<LevelID> LOAD_LEVEL;
         public static Action<LevelData> SETUP_LEVEL;
         public static Action SETUP_GROUND;
@@ -116,5 +123,18 @@ namespace BlockyBlock.Events
         public static readonly string CHAPTER_CHOSEN_KEY = "Ch4pt3R_Ch053n";
         public static readonly string PROFILE_KEY = "Pr0F1l3_K3y";
         public static readonly string LEVEL_TO_BACK_KEY = "L3v3L_T0_B4ck";
+    }
+}
+
+namespace BlockyBlock.BackEnd
+{
+    public class BEConstants
+    {
+        public static readonly string DEFAULT_VALUE = "d3F4aU1";
+        public static readonly string CONTENT_VALUE = "application/json";
+        public static readonly string CONTENT_TYPE = "Content-Type";
+        public static readonly string ACCESS_TOKEN_KEY = "4c355_T0k3N_K3y";
+        public static readonly string REFRESH_TOKEN_KEY = "R3f35h_t0K3n_k3Y";
+        public static readonly string EMAIL = "3m4iL";
     }
 }

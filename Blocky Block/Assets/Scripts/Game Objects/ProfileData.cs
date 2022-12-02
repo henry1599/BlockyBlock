@@ -7,12 +7,14 @@ namespace BlockyBlock
 {
     public class ProfileData
     {
-        public Dictionary<ChapterID, Dictionary<LevelID, LevelStatus>> UnlockedLevels;
-        public CustomizationData CustomizationData;
+        public string name;
+        public int avatarIdx;
+        public Dictionary<ChapterID, Dictionary<LevelID, LevelStatus>> unlockedLevels;
+        public CustomizationData customizationData;
         public ProfileData()
         {
-            UnlockedLevels = new Dictionary<ChapterID, Dictionary<LevelID, LevelStatus>>();
-            UnlockedLevels.TryAdd(
+            unlockedLevels = new Dictionary<ChapterID, Dictionary<LevelID, LevelStatus>>();
+            unlockedLevels.TryAdd(
                 ChapterID.CHAPTER_01,
                 new Dictionary<LevelID, LevelStatus>(){
                     {LevelID.LEVEL_MANNUAL_00, LevelStatus.UNLOCK},
@@ -23,7 +25,7 @@ namespace BlockyBlock
                     {LevelID.LEVEL_MANNUAL_05, LevelStatus.UNLOCK},
                 }
             );
-            CustomizationData = new CustomizationData();
+            customizationData = new CustomizationData();
         }
     }
     [System.Serializable]

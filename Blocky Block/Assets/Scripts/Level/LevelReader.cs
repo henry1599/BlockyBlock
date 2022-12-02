@@ -34,6 +34,12 @@ namespace BlockyBlock.Managers
         public static LevelReader Instance {get; private set;}
         void Awake()
         {
+            // if (Instance != null)
+            // {
+            //     Destroy(gameObject);
+            //     return;
+            // }
+            // DontDestroyOnLoad(gameObject);
             Instance = this;
         }
         // Start is called before the first frame update

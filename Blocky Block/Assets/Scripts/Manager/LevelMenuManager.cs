@@ -16,14 +16,10 @@ namespace BlockyBlock.Managers
     {
         public static LevelMenuManager Instance {get; private set;}
         private static readonly int IdleKeyAnimation = Animator.StringToHash("Idle");
-        private static readonly int RunSlowKeyAnimation = Animator.StringToHash("Run Slow");
         private static readonly int RunMediumKeyAnimation = Animator.StringToHash("Run Medium");
-        private static readonly int RunFastKeyAnimation = Animator.StringToHash("Run Fast");
-        private static readonly int[] KeysAnim = new int[3]
+        private static readonly int[] KeysAnim = new int[1]
         {
-            RunSlowKeyAnimation,
-            RunMediumKeyAnimation,
-            RunFastKeyAnimation
+            RunMediumKeyAnimation
         };
         [SerializeField] LevelItemConfig m_LevelItemConfig;
         [SerializeField] Transform[] m_LevelNodes;
@@ -34,11 +30,10 @@ namespace BlockyBlock.Managers
         private int m_ClickFactor = -1;
         private List<LevelItem> m_LevelItems;
         private LevelID m_ChosenNodeID;
-        private NavMeshAgent unitNavMeshAgent;
+        public NavMeshAgent unitNavMeshAgent;
         void Awake()
         {
             Instance = this;
-            unitNavMeshAgent = m_Unit3D.GetComponent<NavMeshAgent>();
             unitNavMeshAgent.enabled = false;
         }
         void Start()
@@ -82,7 +77,7 @@ namespace BlockyBlock.Managers
             m_LevelItems = new List<LevelItem>();
 
             // * Get the """status""" of all levels based on player profile
-            Dictionary<LevelID, LevelStatus> levels = ProfileManager.Instance.ProfileData.UnlockedLevels[chapterID];
+            Dictionary<LevelID, LevelStatus> levels = ProfileManager.Instance.ProfileData.unlockedLevels[chapterID];
 
             // * Get all levelDatas => To get all level infos in the CHOSEN CHAPTER
             List<LevelData> levelDatas = ConfigManager.Instance.LevelConfig.LevelDatas;
@@ -106,11 +101,28 @@ namespace BlockyBlock.Managers
                 m_LevelItems.Add(itemInstance);
             }  
             
-            int idFromLevel = PlayerPrefs.GetInt(GameConstants.LEVEL_TO_BACK_KEY, 1000);
+            LevelID prevID = GameManager.Instance.PreviousLevelID;
+            // * Access level selection scene not from level
+            if ((int)prevID < 1000 || (int)prevID > 2000)
+            {
+                prevID = levelDatasInChapter[0].LevelID;
+            }
+            // this.m_ChosenNodeID = (LevelID)PlayerPrefs.GetInt(GameConstants.LEVEL_TO_BACK_KEY, 1000);
             
-            // m_Unit3D.position = m_LevelItems.Find(i => i.LevelId == idFromLevel).transform.position;
+            foreach (LevelItem item in m_LevelItems)
+            {
+                Debug.Log(item.LevelId);
+            }
+
+            GameManager.Instance.TransitionOut();
+            
+            m_Unit3D.position = m_LevelItems.Find(i => i.LevelId == (int)prevID).transform.position;
+            this.m_ChosenNodeID = prevID;
+
             unitNavMeshAgent.enabled = true;
+
             m_Anim = m_Unit3D.GetComponentInChildren<Animator>();
+            
             m_Anim.runtimeAnimatorController = GameManager.Instance.LevelSelectionAnim;
         }
         void HandleLevelNodeClicked(LevelID _nodeID, Vector3 _position)
