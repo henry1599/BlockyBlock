@@ -8,6 +8,7 @@ using BlockyBlock.Events;
 using BlockyBlock.Configurations;
 using RotaryHeart.Lib.SerializableDictionary;
 using BlockyBlock.UI;
+using NaughtyAttributes;
 
 namespace BlockyBlock.Managers
 {
@@ -40,6 +41,11 @@ namespace BlockyBlock.Managers
             Instance = this;
 
             GameEvents.SETUP_LEVEL += HandleSetupLevel;
+        }
+        [Button("Show Screen Size")]
+        public void ShowScreenSize()
+        {
+            Debug.Log("SCREEN WIDTH = " + Screen.width + ", SCREEN HEIGHT = " + Screen.height);
         }
         // Start is called before the first frame update
         void Start()
@@ -99,6 +105,7 @@ namespace BlockyBlock.Managers
                 GameObject uiBlockObject = Instantiate(m_BlockDatas[t].gameObject);
                 uiBlockObject.GetComponent<UIBlock>().Init(ConfigManager.Instance.BlockConfig.Blocks[t].TopColor, ConfigManager.Instance.BlockConfig.Blocks[t].ShadowColor, ConfigManager.Instance.BlockConfig.Blocks[t].Text);
                 uiBlockObject.transform.SetParent(m_PreviewCodeContent);
+                uiBlockObject.transform.localScale = Vector3.one;
             }
             
         }

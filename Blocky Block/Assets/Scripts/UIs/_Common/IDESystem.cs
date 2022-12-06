@@ -38,7 +38,7 @@ namespace BlockyBlock.UI
             float contentTopPadding = m_ContentLayout.padding.top;
             m_CurrentIDEHeight = 
                 m_TopPadding + contentTopPadding + contentSpacing * _childCount + m_BottomPadding;
-            m_CurrentIDEHeight = Mathf.Max(m_CurrentIDEHeight, m_MinRectHeight);
+            m_CurrentIDEHeight = Mathf.Max(m_CurrentIDEHeight, 1080);
             Vector2 finalSize = new Vector2(m_ThisRect.sizeDelta.x, m_CurrentIDEHeight);
 
             DOTween.To(() => m_ThisRect.sizeDelta, value => m_ThisRect.sizeDelta = value, finalSize, m_ScaleDuration);

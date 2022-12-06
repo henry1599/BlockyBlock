@@ -19,10 +19,10 @@ namespace BlockyBlock.UI
         {
             m_TweenSequence = DOTween.Sequence();
 
-            m_ThisRect.sizeDelta = new Vector2(m_ThisRect.sizeDelta.x, Screen.height);
-            Vector2 anchoredPos = m_ThisRect.anchoredPosition;
-            anchoredPos.y = 0;
-            m_ThisRect.anchoredPosition = anchoredPos;
+            // m_ThisRect.sizeDelta = new Vector2(m_ThisRect.sizeDelta.x, Screen.height);
+            // Vector2 anchoredPos = m_ThisRect.anchoredPosition;
+            // anchoredPos.y = 0;
+            // m_ThisRect.anchoredPosition = anchoredPos;
 
             EditorEvents.ON_IDE_SCROLL += HandleIDEScroll;
             EditorEvents.ON_IDE_SCROLL_SNAP += HandleIDEScrollSnap;
