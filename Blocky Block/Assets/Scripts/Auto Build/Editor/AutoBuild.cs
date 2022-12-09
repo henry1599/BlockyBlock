@@ -18,10 +18,43 @@ namespace BlockyBlock.Tools
 {
     public class AutoBuild : MonoBehaviour
     {
-        [MenuItem("Auto Build/Windows 64 Cheat")]
-        public static void AutoBuildWin64_Cheat()
+        public enum ScreenResolution {FULL_SCREEN, WINDOWED}
+        
+        [MenuItem("Auto Build/Windows 64 Cheat/Full Screen 16:9")]
+        public static void AutoBuildWin64_Cheat_FullScreen()
+        {
+            AutoBuildWin64(true, ScreenResolution.FULL_SCREEN, 1920, 1080);
+        }
+        [MenuItem("Auto Build/Windows 64 Cheat/Windowed 1920 x 1080")]
+        public static void AutoBuildWin64_Cheat_Windowed_1920_1080()
+        {
+            AutoBuildWin64(true, ScreenResolution.WINDOWED, 1920, 1080);
+        }
+        [MenuItem("Auto Build/Windows 64 Cheat/Windowed 1280 x 720")]
+        public static void AutoBuildWin64_Cheat_Windowed_1280_720()
+        {
+            AutoBuildWin64(true, ScreenResolution.WINDOWED, 1280, 720);
+        }
+        [MenuItem("Auto Build/Windows 64 Release/Full Screen 16:9")]
+        public static void AutoBuildWin64_Release_FullScreen()
+        {
+            AutoBuildWin64(false, ScreenResolution.FULL_SCREEN, 1920, 1080);
+        }
+        [MenuItem("Auto Build/Windows 64 Release/Windowed 1920 x 1080")]
+        public static void AutoBuildWin64_Release_Windowed_1920_1080()
+        {
+            AutoBuildWin64(false, ScreenResolution.WINDOWED, 1920, 1080);
+        }
+        [MenuItem("Auto Build/Windows 64 Release/Windowed 1280 x 720")]
+        public static void AutoBuildWin64_Release_Windowed_1280_720()
+        {
+            AutoBuildWin64(false, ScreenResolution.WINDOWED, 1280, 720);
+        }
+        [ExecuteInEditMode]
+        static void AutoBuildWin64(bool isCheat, ScreenResolution resolution, int width, int height)
         {
             BuildPlayerOptions buildPlayerOptions = new BuildPlayerOptions();
+            Screen.SetResolution(width, height, GetScreenMode(resolution));
             List<string> sceneArrays = new List<string>();
             int count = EditorBuildSettings.scenes.Length;
             for (int i = 0; i < count; i++)
@@ -32,53 +65,32 @@ namespace BlockyBlock.Tools
                     sceneArrays.Add(path);
                 }
             }
-
-            string outFolder = "./_build/win64/cheat";
-            string productName = PlayerSettings.productName + "_Cheat";
+            
+            string outFolder = isCheat ? "./_build/win64/cheat" : "./_build/win64/release";
+            string productName = PlayerSettings.productName + (isCheat ? "_Cheat" : "_Release");
 
             CreateFolder(outFolder);
 
             buildPlayerOptions.scenes = sceneArrays.ToArray();
             buildPlayerOptions.locationPathName = outFolder + "/" + productName + ".exe";
             buildPlayerOptions.target = BuildTarget.StandaloneWindows64;
+            
 
-            buildPlayerOptions.options = GetBuildOptions(BuildTargetGroup.Standalone, true);
+            buildPlayerOptions.options = GetBuildOptions(BuildTargetGroup.Standalone, isCheat);
 
-            // var report = BuildPipeline.BuildPlayer(buildPlayerOptions);
-            // int resultCode = (report.summary.result == BuildResult.Succeeded) ? 0 : 1;
-            // EditorApplication.Exit(resultCode);
             BuildPipeline.BuildPlayer(buildPlayerOptions);
         }
-        [MenuItem("Auto Build/Windows 64 Release")]
-        public static void AutoBuildWin64_Release()
+        static FullScreenMode GetScreenMode(ScreenResolution resolution)
         {
-            BuildPlayerOptions buildPlayerOptions = new BuildPlayerOptions();
-            List<string> sceneArrays = new List<string>();
-            int count = EditorBuildSettings.scenes.Length;
-            for (int i = 0; i < count; i++)
+            switch (resolution)
             {
-                string path = EditorBuildSettings.scenes[i].path;
-                if (EditorBuildSettings.scenes[i].enabled)
-                {
-                    sceneArrays.Add(path);
-                }
+                case ScreenResolution.FULL_SCREEN:
+                    return FullScreenMode.FullScreenWindow;
+                case ScreenResolution.WINDOWED:
+                    return FullScreenMode.Windowed;
+                default:
+                    return FullScreenMode.FullScreenWindow;
             }
-
-            string outFolder = "./_build/win64/release";
-            string productName = PlayerSettings.productName + "_Release";
-
-            CreateFolder(outFolder);
-
-            buildPlayerOptions.scenes = sceneArrays.ToArray();
-            buildPlayerOptions.locationPathName = outFolder + "/" + productName + ".exe";
-            buildPlayerOptions.target = BuildTarget.StandaloneWindows64;
-
-            buildPlayerOptions.options = GetBuildOptions(BuildTargetGroup.Standalone, false);
-
-            // var report = BuildPipeline.BuildPlayer(buildPlayerOptions);
-            // int resultCode = (report.summary.result == BuildResult.Succeeded) ? 0 : 1;
-            // EditorApplication.Exit(resultCode);
-            BuildPipeline.BuildPlayer(buildPlayerOptions);
         }
         static void CreateFolder(string path)
         {

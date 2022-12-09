@@ -156,7 +156,8 @@ namespace BlockyBlock.Enums
         LOGIN_FORM,
         SIGNUP_FORM,
         FORGOT_PASSWORD_FORM,
-        VERIFICATION_FORM
+        VERIFICATION_FORM,
+        FORGOT_PASSWORD_EMAIL_FORM
     }
     public enum WebType
     {

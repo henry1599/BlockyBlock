@@ -39,5 +39,9 @@ namespace BlockyBlock.UI
         {
             BEFormEvents.ON_ENABLED?.Invoke(FormType.SIGNUP_FORM, null);
         }
+        public void OnForgotPasswordButtonClick()
+        {
+            BEFormEvents.ON_ENABLED?.Invoke(FormType.FORGOT_PASSWORD_EMAIL_FORM, null);
+        }
     }
 }

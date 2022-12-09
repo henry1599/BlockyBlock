@@ -62,6 +62,7 @@ namespace BlockyBlock.UI
         [Space(10)]
         [Header("Drag & Drop Value")]
         public Vector3 m_PivotOffset;
+        Vector3 pivotOffset;
         [SerializeField] protected CanvasGroup m_CanvasGroup;
         protected Transform m_OutsideContainerPrefab;
         public UILineNumber m_UILineNumber;
@@ -138,6 +139,8 @@ namespace BlockyBlock.UI
             Mode = BlockMode.PREVIEW;
 
             BlockEvents.ON_HIGHLIGHT += HandleHighlight;
+
+            this.pivotOffset = m_PivotOffset * Screen.width / 1920f;
         }
         public void Update()
         {
@@ -223,7 +226,7 @@ namespace BlockyBlock.UI
             }
             SoundManager.Instance.PlaySound(AudioPlayer.SoundID.CLICK_UI_BLOCK);
             ClickSelf();
-            Vector3 endPosition = (Vector3)(pointerEventData.position) + m_PivotOffset;
+            Vector3 endPosition = (Vector3)(pointerEventData.position) + this.pivotOffset;
 
             m_InitClickPosition = transform.position;
             transform
@@ -264,7 +267,7 @@ namespace BlockyBlock.UI
             }
             SoundManager.Instance.PlaySound(AudioPlayer.SoundID.DRAG_UI_BLOCK);
             BlockEvents.ON_UI_BLOCK_DRAG?.Invoke(true);
-            m_DragOffset = m_PivotOffset;
+            m_DragOffset = this.pivotOffset;
 
             if (Mode == BlockMode.PREVIEW)
             {
