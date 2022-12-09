@@ -526,6 +526,7 @@ MonoBehaviour:
   signupForm: {fileID: 5280919419754548335}
   forgotPasswordForm: {fileID: 3205351078735354100}
   verificationSignupForm: {fileID: 8998249519483915734}
+  forgotPasswordEmailForm: {fileID: 7026281087032173913}
 --- !u!4 &996131275
 Transform:
   m_ObjectHideFlags: 0
@@ -1160,6 +1161,10 @@ PrefabInstance:
       propertyPath: m_LocalScale.y
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 8571069777218863641, guid: bd723fa4606195f469ba09eab36f61fd, type: 3}
+      propertyPath: m_LocalScale.z
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 8571069777625703284, guid: bd723fa4606195f469ba09eab36f61fd, type: 3}
       propertyPath: m_Pivot.x
       value: 0.5
@@ -1248,16 +1253,13 @@ PrefabInstance:
       propertyPath: m_Name
       value: Forgot PW Email
       objectReference: {fileID: 0}
-    - target: {fileID: 8571069778396886321, guid: bd723fa4606195f469ba09eab36f61fd, type: 3}
-      propertyPath: OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
-      value: 
-      objectReference: {fileID: 0}
-    - target: {fileID: 8571069778438457304, guid: bd723fa4606195f469ba09eab36f61fd, type: 3}
-      propertyPath: OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
-      value: 
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: bd723fa4606195f469ba09eab36f61fd, type: 3}
+--- !u!224 &7026281087032173913 stripped
+RectTransform:
+  m_CorrespondingSourceObject: {fileID: 8571069777218863641, guid: bd723fa4606195f469ba09eab36f61fd, type: 3}
+  m_PrefabInstance: {fileID: 7026281087032173912}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &8587741560471803215
 PrefabInstance:
   m_ObjectHideFlags: 0
