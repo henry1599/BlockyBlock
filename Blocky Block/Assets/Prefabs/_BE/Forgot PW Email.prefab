@@ -715,7 +715,7 @@ RectTransform:
   m_GameObject: {fileID: 8571069777218863642}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 0}
+  m_LocalScale: {x: 0, y: 0, z: 0}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 8571069777869012843}
@@ -1677,8 +1677,9 @@ MonoBehaviour:
   OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 0}
-        m_TargetAssemblyTypeName: BlockyBlock.Managers.ForgotPasswordManager, Assembly-CSharp
+      - m_Target: {fileID: 8571069777625703286}
+        m_TargetAssemblyTypeName: BlockyBlock.Managers.ForgotPasswordEmailManager,
+          Assembly-CSharp
         m_MethodName: Confirm
         m_Mode: 1
         m_Arguments:
@@ -1772,8 +1773,8 @@ MonoBehaviour:
   OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 0}
-        m_TargetAssemblyTypeName: BlockyBlock.UI.ForgotPasswordDisplay, Assembly-CSharp
+      - m_Target: {fileID: 8571069777625703287}
+        m_TargetAssemblyTypeName: BlockyBlock.UI.ForgotPasswordEmailDisplay, Assembly-CSharp
         m_MethodName: OnBackButtonClick
         m_Mode: 1
         m_Arguments:

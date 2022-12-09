@@ -11,6 +11,7 @@ namespace BlockyBlock.Cheat
         public Transform signupForm;
         public Transform forgotPasswordForm;
         public Transform verificationSignupForm;
+        public Transform forgotPasswordEmailForm;
 
         [Button("Reset to play mode")]
         public void ResetToPlayMode()
@@ -25,6 +26,7 @@ namespace BlockyBlock.Cheat
             signupForm.localScale = Vector3.zero;
             forgotPasswordForm.localScale = Vector3.zero;
             verificationSignupForm.localScale = Vector3.zero;
+            forgotPasswordEmailForm.localScale = Vector3.zero;
         }
         
         [Button("Show Signup form")]
@@ -34,6 +36,7 @@ namespace BlockyBlock.Cheat
             signupForm.localScale = Vector3.one;
             forgotPasswordForm.localScale = Vector3.zero;
             verificationSignupForm.localScale = Vector3.zero;
+            forgotPasswordEmailForm.localScale = Vector3.zero;
         }
         
         [Button("Show Forgot password form")]
@@ -43,6 +46,7 @@ namespace BlockyBlock.Cheat
             signupForm.localScale = Vector3.zero;
             forgotPasswordForm.localScale = Vector3.one;
             verificationSignupForm.localScale = Vector3.zero;
+            forgotPasswordEmailForm.localScale = Vector3.zero;
         }
 
         [Button("Show Verification form")]
@@ -52,6 +56,16 @@ namespace BlockyBlock.Cheat
             signupForm.localScale = Vector3.zero;
             forgotPasswordForm.localScale = Vector3.zero;
             verificationSignupForm.localScale = Vector3.one;
+            forgotPasswordEmailForm.localScale = Vector3.zero;
+        }
+        [Button("Show Forgot password email form")]
+        public void ShowForgotPasswordEmailForm()
+        {
+            loginForm.localScale = Vector3.zero;
+            signupForm.localScale = Vector3.zero;
+            forgotPasswordForm.localScale = Vector3.zero;
+            verificationSignupForm.localScale = Vector3.zero;
+            forgotPasswordEmailForm.localScale = Vector3.one;
         }
     }
 }
