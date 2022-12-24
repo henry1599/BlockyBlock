@@ -13,6 +13,7 @@ namespace BlockyBlock.Managers
     {
         public static GameManager Instance {get; private set;}
         bool isCheat;
+        [SerializeField] GameObject sceneTransition;
         [SerializeField] GameObject cheatMenu, console; 
         [SerializeField] TMPro.TMP_Text gameVersion;
         public RuntimeAnimatorController HomeAnim;
@@ -38,6 +39,11 @@ namespace BlockyBlock.Managers
             stringBuilder.AppendFormat("Version {0} - {1}", Application.version, this.isCheat ? "Cheat" : "Release");
             gameVersion.text = stringBuilder.ToString();
             this.console.SetActive(this.isCheat);
+            SceneTransition sceneTransitionInstance = FindObjectOfType<SceneTransition>();
+            if (sceneTransitionInstance == null)
+            {
+                Instantiate(this.sceneTransition, transform);
+            }
         }
         // Start is called before the first frame update
         void Start()
