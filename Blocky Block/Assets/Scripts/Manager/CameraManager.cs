@@ -23,6 +23,8 @@ namespace BlockyBlock.Managers
         [SerializeField] float m_DragPanSpeed = 0.07f;
         [Space(10)]
         [Header("Rotate")]
+        [SerializeField] bool horizontalRotation = true;
+        [SerializeField] bool verticalRotation = false;
         [SerializeField] float m_RotateSpeed = 5f;
         [SerializeField] float m_RotatePanSpeed = 1;
         [SerializeField] float m_RotateYSpeed = 0.1f;
