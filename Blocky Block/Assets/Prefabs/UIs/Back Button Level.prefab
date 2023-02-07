@@ -194,6 +194,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_TopPanel: {fileID: 2561064659622828275}
   m_Title: {fileID: 0}
+  icon: {fileID: 0}
   m_Button: {fileID: 2561064659749088695}
   m_IdleTransitionDuration: 0.5
   m_IdlePanelColor: {r: 1, g: 1, b: 1, a: 1}

@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using System.Linq;
+using BlockyBlock.Enums;
 
 namespace Helpers
 {
@@ -74,6 +75,38 @@ namespace Helpers
         public static void DeletChildren(this Transform t)
         {
             foreach(Transform child in t) Object.Destroy(child.gameObject);
+        }
+        public static CustomizationType ToCustomizationType(this string customName)
+        {
+            switch (customName)
+            {
+                case "BodyParts":
+                    return CustomizationType.BODY_PART;
+                case "Body":
+                    return CustomizationType.BODY;
+                case "Eyes":
+                    return CustomizationType.EYES;
+                case "Gloves":
+                    return CustomizationType.GLOVES;
+                case "Mouths":
+                    return CustomizationType.MOUTH;
+                case "Noses":
+                    return CustomizationType.NOSE;
+                case "Ears":
+                    return CustomizationType.EARS;
+                case "Glasses":
+                    return CustomizationType.GLASSES;
+                case "Hairs":
+                    return CustomizationType.HAIR;
+                case "Hats":
+                    return CustomizationType.HAT;
+                case "Horns":
+                    return CustomizationType.HORN;
+                case "Tails":
+                    return CustomizationType.TAIL;
+                default:
+                    return CustomizationType.NONE;
+            }
         }
     }
 }

@@ -138,6 +138,7 @@ namespace BlockyBlock.Enums
     }
     public enum CustomizationType
     {
+        NONE = -1,
         BODY = 0,
         BODY_PART = 1,
         EYES = 2,
