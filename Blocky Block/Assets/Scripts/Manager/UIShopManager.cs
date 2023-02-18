@@ -33,7 +33,7 @@ namespace BlockyBlock.Managers
                 Texture2D texture2D = shopItem.sprite;
 
                 ShopItem shopItemInstance = Instantiate(this.itemTemplate, this.itemContainer);
-                shopItemInstance.Setup(type, idx, texture2D, null);
+                shopItemInstance.Setup(type, idx, texture2D);
             }
         }
         public void OnTabButtonClick(string tabName)

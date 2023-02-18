@@ -2,7 +2,9 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using BlockyBlock.Events;
+using BlockyBlock.Enums;
 using NaughtyAttributes;
+using Newtonsoft.Json;
 
 namespace BlockyBlock.Managers
 {
@@ -37,12 +39,43 @@ namespace BlockyBlock.Managers
                 m_ProfileData = new ProfileData();
                 return;
             }
-            m_ProfileData = JsonUtility.FromJson<ProfileData>(json);
+            m_ProfileData = JsonConvert.DeserializeObject<ProfileData>(json);
         }
         public void SaveProfile()
         {
-            string json = JsonUtility.ToJson(m_ProfileData);
+            string json = JsonConvert.SerializeObject(m_ProfileData);
+            Debug.Log("Save String : " + json);
             PlayerPrefs.SetString(GameConstants.PROFILE_KEY, json);
+        }
+        public void UnlockCustomization(CustomizationType type, int idx)
+        {
+            // * Validate
+            if (!IsValidateCustomization(type, idx))
+                return;
+            // * Unlock
+            // TODO: Validate money here
+            //...
+            m_ProfileData.customizationData.datas[type].index = idx;
+            m_ProfileData.customizationData.datas[type].isUnlock = true;
+            CustomizationManager.Instance.LoadCustomization();
+
+            SaveProfile();
+        }
+        bool IsValidateCustomization(CustomizationType type, int idx)
+        {
+            if (CustomizationManager.Instance == null)
+            {
+                Debug.Log("CustomizationManager.Instance is null, cannot validate customization");
+                return false;
+            }
+            CustomizationDisplay display = CustomizationManager.Instance.Display;
+            if (display == null)
+            {
+                Debug.Log("CustomizationManager.Instance.Display is null, cannot validate customization");
+                return false;
+            }
+            int displayCount = display.GetCustomizationCountByType(type);
+            return idx >= -1 && idx < displayCount;
         }
         [ExecuteInEditMode]
         [Button("Reset Save")]

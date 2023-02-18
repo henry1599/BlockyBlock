@@ -153,5 +153,6 @@ namespace BlockyBlock.UI
             if (SoundManager.Instance != null)
                 SoundManager.Instance.PlaySound(SoundID.BUTTON_HOVER);
         }
+        public void Reset() => HandleIdle();
     }
 }

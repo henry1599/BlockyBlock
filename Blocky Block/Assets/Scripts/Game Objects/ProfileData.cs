@@ -31,24 +31,35 @@ namespace BlockyBlock
     [System.Serializable]
     public class CustomizationData
     {
-        public Dictionary<CustomizationType, int> Datas;
+        public Dictionary<CustomizationType, CustomizationStatus> datas;
         public CustomizationData()
         {
-            Datas = new Dictionary<CustomizationType, int>()
+            datas = new Dictionary<CustomizationType, CustomizationStatus>()
             {
-                {CustomizationType.BODY, 0},
-                {CustomizationType.BODY_PART, -1},
-                {CustomizationType.EYES, 0},
-                {CustomizationType.GLOVES, -1},
-                {CustomizationType.MOUTH, 0},
-                {CustomizationType.NOSE, -1},
-                {CustomizationType.EARS, -1},
-                {CustomizationType.GLASSES, -1},
-                {CustomizationType.HAIR, -1},
-                {CustomizationType.HAT, -1},
-                {CustomizationType.HORN, -1},
-                {CustomizationType.TAIL, -1}
+                {CustomizationType.BODY, new CustomizationStatus() {index = 0, isUnlock = true}},
+                {CustomizationType.BODY_PART, new CustomizationStatus() {index = -1, isUnlock = true}},
+                {CustomizationType.EYES, new CustomizationStatus() {index = 0, isUnlock = true}},
+                {CustomizationType.GLOVES, new CustomizationStatus() {index = -1, isUnlock = true}},
+                {CustomizationType.MOUTH, new CustomizationStatus() {index = 0, isUnlock = true}},
+                {CustomizationType.NOSE, new CustomizationStatus() {index = -1, isUnlock = true}},
+                {CustomizationType.EARS, new CustomizationStatus() {index = -1, isUnlock = true}},
+                {CustomizationType.GLASSES, new CustomizationStatus() {index = -1, isUnlock = true}},
+                {CustomizationType.HAIR, new CustomizationStatus() {index = -1, isUnlock = true}},
+                {CustomizationType.HAT, new CustomizationStatus() {index = -1, isUnlock = true}},
+                {CustomizationType.HORN, new CustomizationStatus() {index = -1, isUnlock = true}},
+                {CustomizationType.TAIL, new CustomizationStatus() {index = -1, isUnlock = true}}
             };
+        }
+    }
+    [System.Serializable]
+    public class CustomizationStatus
+    {
+        public int index;
+        public bool isUnlock;
+        public CustomizationStatus()
+        {
+            index = 0;
+            isUnlock = true;
         }
     }
 }

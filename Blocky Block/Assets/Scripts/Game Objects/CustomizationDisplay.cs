@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using BlockyBlock.Enums;
 
 namespace BlockyBlock
 {
@@ -141,6 +142,37 @@ namespace BlockyBlock
                 Tails[i].SetActive(i == _idx);
             }
         }
-
+        public int GetCustomizationCountByType(CustomizationType type)
+        {
+            switch (type)
+            {
+                case CustomizationType.BODY:
+                    return this.Bodies.Length;
+                case CustomizationType.BODY_PART:
+                    return this.BodyParts.Length;
+                case CustomizationType.EARS:
+                    return this.Ears.Length;
+                case CustomizationType.EYES:
+                    return this.Eyes.Length;
+                case CustomizationType.GLASSES:
+                    return this.Glasses.Length;
+                case CustomizationType.GLOVES:
+                    return this.Gloves.Length;
+                case CustomizationType.HAIR:
+                    return this.Hairs.Length;
+                case CustomizationType.HAT:
+                    return this.Hats.Length;
+                case CustomizationType.HORN:
+                    return this.Horns.Length;
+                case CustomizationType.MOUTH:
+                    return this.Mouths.Length;
+                case CustomizationType.NOSE:
+                    return this.Noses.Length;
+                case CustomizationType.TAIL:
+                    return this.Tails.Length;
+                default:
+                    return 0;
+            }
+        }
     }
 }

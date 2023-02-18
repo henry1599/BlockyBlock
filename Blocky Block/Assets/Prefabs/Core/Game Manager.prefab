@@ -394,7 +394,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6a355cc64b0ddee4e975ea3c4a112bea, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  isCheat: 1
+  sceneTransition: {fileID: 0}
   cheatMenu: {fileID: 6906462652819627844}
   console: {fileID: 7132745170812745712}
   gameVersion: {fileID: 6578245246289598599}
