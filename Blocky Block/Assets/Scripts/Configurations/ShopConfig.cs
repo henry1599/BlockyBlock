@@ -60,15 +60,6 @@ namespace BlockyBlock.Configurations
     {
         public List<ShopItemData> itemList;
         public ShopItemList() => this.itemList = new List<ShopItemData>();
-#if UNITY_EDITOR
-        void OnValidate() 
-        {
-            for (int i = 0; i < this.itemList.Count; i++)
-            {
-                this.itemList[i].id = i;
-            }
-        }
-#endif
     }
     [System.Serializable]
     public class ShopItemData
