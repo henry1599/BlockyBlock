@@ -96,6 +96,7 @@ namespace BlockyBlock.Enums
         MAIN = -1,
         HOME = 0,
         ENTRY = 1,
+        SHOP = 2,
         LEVEL_SELECTION = 10,
         // * 1000 <= LEVEL_MANNUAL <= 2000
         LEVEL_MANNUAL_00 = 1000,

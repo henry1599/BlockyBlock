@@ -5,6 +5,7 @@ using BlockyBlock.Enums;
 using BlockyBlock.Configurations;
 using Helpers;
 using BlockyBlock.Common;
+using UnityEngine.UI;
 
 namespace BlockyBlock.Managers
 {
@@ -13,7 +14,9 @@ namespace BlockyBlock.Managers
         [SerializeField] ShopConfig shopConfig;
         [SerializeField] Animator animator;
         [SerializeField] ShopItem itemTemplate;
+        [SerializeField] Button clearButtonTemplate;
         [SerializeField] Transform itemContainer;
+        private Button clearButton;
         private readonly int OpenKey = Animator.StringToHash("isOpen");
         void Start()
         {
@@ -25,7 +28,14 @@ namespace BlockyBlock.Managers
         }
         public void LoadContent(CustomizationType type)
         {
+            if (this.clearButton != null)
+            {
+                this.clearButton.onClick.RemoveAllListeners();
+                Destroy(this.clearButton.gameObject);
+            }
             itemContainer.DeletChildren();
+            this.clearButton = Instantiate(this.clearButtonTemplate, this.itemContainer).GetComponent<Button>();
+            clearButton.onClick.AddListener(() => ProfileManager.Instance.ResetCustomization(type));
             List<ShopItemData> shopItemDatas = shopConfig.GetItemListByCustomizationType(type);
             foreach (var shopItem in shopItemDatas)
             {

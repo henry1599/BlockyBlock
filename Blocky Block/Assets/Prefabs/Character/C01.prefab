@@ -11492,7 +11492,7 @@ Transform:
   m_GameObject: {fileID: 8230766273605467533}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 2.5, y: 2.5, z: 2.5}
   m_ConstrainProportionsScale: 1
   m_Children:
   - {fileID: 2861486554295028019}
@@ -11516,7 +11516,7 @@ Animator:
   m_GameObject: {fileID: 8230766273605467533}
   m_Enabled: 1
   m_Avatar: {fileID: 9000000, guid: 2b7c51804aef3f445999af66e5132162, type: 3}
-  m_Controller: {fileID: 9100000, guid: f5e71d2eda3d6cc40857811c187df502, type: 2}
+  m_Controller: {fileID: 9100000, guid: 640f972f23c35c14189abcd2b7768ca3, type: 2}
   m_CullingMode: 1
   m_UpdateMode: 0
   m_ApplyRootMotion: 1
@@ -11559,17 +11559,17 @@ MonoBehaviour:
   Eyes:
   - {fileID: 1930690849011592452}
   - {fileID: 7802584667443063096}
+  - {fileID: 8957681020183959536}
   - {fileID: 4091577267652858364}
   - {fileID: 7493987547314084325}
   - {fileID: 3176346696357518843}
+  - {fileID: 6635953507304632980}
   - {fileID: 6934967064848401444}
   - {fileID: 4003956334768402237}
   - {fileID: 8591012765445637497}
   - {fileID: 7316421277285004885}
   - {fileID: 6970616490608500978}
   - {fileID: 7724401877398509663}
-  - {fileID: 8957681020183959536}
-  - {fileID: 6635953507304632980}
   Gloves:
   - {fileID: 5253996989153776485}
   - {fileID: 9052499311080821404}

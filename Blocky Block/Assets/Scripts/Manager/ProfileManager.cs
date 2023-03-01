@@ -61,6 +61,35 @@ namespace BlockyBlock.Managers
 
             SaveProfile();
         }
+        public void ResetCustomization(CustomizationType type)
+        {
+            int resetIdx = 0;
+            switch (type)
+            {
+                case CustomizationType.BODY:
+                case CustomizationType.EYES:
+                case CustomizationType.MOUTH:
+                    resetIdx = 0;
+                    break;
+                case CustomizationType.BODY_PART:
+                case CustomizationType.EARS:
+                case CustomizationType.GLASSES:
+                case CustomizationType.GLOVES:
+                case CustomizationType.HAIR:
+                case CustomizationType.HAT:
+                case CustomizationType.HORN:
+                case CustomizationType.NOSE:
+                case CustomizationType.TAIL:
+                default:
+                    resetIdx = -1;
+                    break;
+            }
+            
+            m_ProfileData.customizationData.datas[type].index = resetIdx;
+            CustomizationManager.Instance.LoadCustomization();
+
+            SaveProfile();
+        }
         bool IsValidateCustomization(CustomizationType type, int idx)
         {
             if (CustomizationManager.Instance == null)

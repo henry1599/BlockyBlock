@@ -30,6 +30,16 @@ namespace BlockyBlock.Managers
         {
             audioSource?.Stop();
         }
+        public void OnShopButtonClick()
+        {
+            UIUtils.LockInput();
+            GameManager.Instance.TransitionIn(() => 
+                {
+                    UIUtils.UnlockInput();
+                    GameEvents.LOAD_LEVEL?.Invoke(LevelID.SHOP);
+                }
+            );
+        }
         public void OnStartButtonClick()
         {
             // * Call Event to load Level
