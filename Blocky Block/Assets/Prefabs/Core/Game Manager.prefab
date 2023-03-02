@@ -48,7 +48,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   sfxPrefab: {fileID: 2618980319728706102, guid: 7e4caf8bcbdc48b4a816142c3ed8a118, type: 3}
   soundMapConfig: {fileID: 11400000, guid: c6f6cd12ee8a81040a37afb482341a4f, type: 2}
-  numberOfDefaultSFX: 8
+  numberOfDefaultSFX: 16
   sfxVolume: 1
   musicVolume: 1
   currentMixer: {fileID: 24100000, guid: 7837b0e03618e574aaf1009e7d56c49c, type: 2}
@@ -394,10 +394,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6a355cc64b0ddee4e975ea3c4a112bea, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  sceneTransition: {fileID: 0}
+  sceneTransition: {fileID: 7546128328767162745, guid: 221b0ea707982774db5020c732cb30fb, type: 3}
   cheatMenu: {fileID: 6906462652819627844}
   console: {fileID: 7132745170812745712}
   gameVersion: {fileID: 6578245246289598599}
+  defaultLayer:
+    serializedVersion: 2
+    m_Bits: 1
+  seebehindLayer:
+    serializedVersion: 2
+    m_Bits: 32768
   HomeAnim: {fileID: 9100000, guid: 640f972f23c35c14189abcd2b7768ca3, type: 2}
   LevelSelectionAnim: {fileID: 9100000, guid: 74518057125dc644d82fdb770ba272eb, type: 2}
   LevelAnim: {fileID: 9100000, guid: f5e71d2eda3d6cc40857811c187df502, type: 2}

@@ -61,5 +61,9 @@ namespace BlockyBlock.Managers
                 datas[CustomizationType.TAIL].index
             );
         }
+        public void PlayAnim(string animation)
+        {
+            Display.GetComponent<Animator>()?.CrossFade(animation, 0, 0);
+        }
     }
 }

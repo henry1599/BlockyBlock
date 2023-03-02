@@ -16,6 +16,9 @@ namespace BlockyBlock.Managers
         [SerializeField] GameObject sceneTransition;
         [SerializeField] GameObject cheatMenu, console; 
         [SerializeField] TMPro.TMP_Text gameVersion;
+
+        [SerializeField] LayerMask defaultLayer;
+        [SerializeField] LayerMask seebehindLayer;
         public RuntimeAnimatorController HomeAnim;
         public RuntimeAnimatorController LevelSelectionAnim;
         public RuntimeAnimatorController LevelAnim;
@@ -167,6 +170,22 @@ namespace BlockyBlock.Managers
                     GameManager.Instance.AudioSource = SoundManager.Instance.PlayMusic(SoundID.LEVEL_SELECTION_BG_MUSIC, 0.65f);
                     break;
             }
+        }
+        public void TurnOnSeeBehind()
+        {
+            if (CustomizationManager.Instance == null)
+                return;
+            if (CustomizationManager.Instance.Display == null)
+                return;
+            CustomizationManager.Instance.Display.gameObject.layer = this.seebehindLayer;
+        }
+        public void TurnOffSeeBehind()
+        {
+            if (CustomizationManager.Instance == null)
+                return;
+            if (CustomizationManager.Instance.Display == null)
+                return;
+            CustomizationManager.Instance.Display.gameObject.layer = this.defaultLayer;
         }
     }
 }

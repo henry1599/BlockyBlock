@@ -23,6 +23,7 @@ namespace BlockyBlock.Common
         public void OnClick()
         {
             ProfileManager.Instance.UnlockCustomization(type, id);
+            ShopManager.Instance.OnExcited();
         }
     }
 }

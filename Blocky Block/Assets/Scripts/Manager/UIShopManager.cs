@@ -52,10 +52,19 @@ namespace BlockyBlock.Managers
             if (tabType == CustomizationType.NONE)
                 return;
             LoadContent(tabType);
+            if (tabType == CustomizationType.TAIL)
+            {
+                ShopManager.Instance.OnRotateCharacterToTail();
+            }
+            else
+            {
+                ShopManager.Instance.OnResetCharacterTransform();
+            }
             TriggerAnimOpen();
         }
         public void OnBackButtonClick()
         {
+            ShopManager.Instance.OnResetCharacterTransform();
             TriggerAnimClose();
         }
         void TriggerAnimOpen()
