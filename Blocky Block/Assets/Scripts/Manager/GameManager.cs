@@ -161,6 +161,7 @@ namespace BlockyBlock.Managers
                     GameManager.Instance.AudioSource?.Stop();
                     GameManager.Instance.AudioSource = SoundManager.Instance.PlayMusic(SoundID.LEVEL_THEME, 0.5f);
                     break;
+                case LevelID.SHOP:
                 case LevelID.HOME:
                     GameManager.Instance.AudioSource?.Stop();
                     GameManager.Instance.AudioSource = SoundManager.Instance.PlayMusic(SoundID.HOME_BG_MUSIC);

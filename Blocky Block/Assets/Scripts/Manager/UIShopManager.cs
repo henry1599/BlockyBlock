@@ -5,6 +5,7 @@ using BlockyBlock.Enums;
 using BlockyBlock.Configurations;
 using Helpers;
 using BlockyBlock.Common;
+using BlockyBlock.Events;
 using UnityEngine.UI;
 
 namespace BlockyBlock.Managers
@@ -74,6 +75,10 @@ namespace BlockyBlock.Managers
         void TriggerAnimClose()
         {
             this.animator.SetBool(OpenKey, false);
+        }
+        public void OnBackSceneButtonClick()
+        {
+            GameManager.Instance.TransitionIn(() => GameEvents.LOAD_LEVEL?.Invoke(LevelID.HOME));
         }
     }
 }
