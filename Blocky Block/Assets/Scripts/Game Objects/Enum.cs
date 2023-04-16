@@ -163,7 +163,8 @@ namespace BlockyBlock.Enums
     }
     public enum WebType
     {
-        AUTHENTICATION = 0
+        AUTHENTICATION = 0,
+        TRACKING = 1,
     }
     public enum APIType
     {
@@ -183,6 +184,7 @@ namespace BlockyBlock.Enums
         GUEST_LOGIN,
         GUEST_RENEW_ACCESS_TOKEN,
         FORGOT_PASSWORD_REQUEST,
-        _______________OTHERS_______________ = 100,
+        _______________TRACKING_______________ = 100,
+        TRACKER = 101,
     }
 }
