@@ -6,6 +6,8 @@ using BlockyBlock.Events;
 using UnityEngine.SceneManagement;
 using BlockyBlock.UI;
 using AudioPlayer;
+using BlockyBlock.Tracking;
+using BlockyBlock.BackEnd;
 
 namespace BlockyBlock.Managers
 {
@@ -24,6 +26,15 @@ namespace BlockyBlock.Managers
         public RuntimeAnimatorController LevelAnim;
         public AudioSource AudioSource {get; set;}
         public LevelID PreviousLevelID {get; set;}
+        private int startTimeSpent = 0;
+        public string AccessToken => this.accessToken;
+        private string accessToken;
+        public string RefreshToken => this.refreshToken;
+        private string refreshToken;
+        public bool IsGuest => this.isGuest;
+        private bool isGuest;
+        public bool CanLoadHome => this.canLoadHome;
+        private bool canLoadHome;
         void Awake()
         {
             if (Instance != null)
@@ -47,6 +58,10 @@ namespace BlockyBlock.Managers
             {
                 Instantiate(this.sceneTransition, transform);
             }
+            this.accessToken = PlayerPrefs.GetString(BEConstants.ACCESS_TOKEN_KEY, string.Empty);
+            this.refreshToken = PlayerPrefs.GetString(BEConstants.REFRESH_TOKEN_KEY, string.Empty);
+            this.canLoadHome = !string.IsNullOrEmpty(this.accessToken) && !string.IsNullOrEmpty(this.refreshToken);
+            this.isGuest = PlayerPrefs.GetInt(BEConstants.GUESS, 1) == 0 ? false : true;
         }
         // Start is called before the first frame update
         void Start()
@@ -56,7 +71,9 @@ namespace BlockyBlock.Managers
             GameEvents.LOAD_LEVEL += HandleLoadLevel;
 
             SoundManager.ON_FINISH_LOADING_SOUNDMAP += HandleFinishLoadingSoundmap;
-            
+
+            TrackingActionEvent.ON_GAME_ENTER?.Invoke();
+            StartRecordTimeSpent();
         }
         void Update()
         {
@@ -68,6 +85,23 @@ namespace BlockyBlock.Managers
                     this.cheatMenu.SetActive(!status);
                 }
             }
+        }
+        void StartRecordTimeSpent()
+        {
+            this.startTimeSpent = (int)Time.time;
+        }
+        void StopRecordTimeSpent()
+        {
+            TrackingManager.Instance.Helper.SessionFinished.timeSpent = (int)Time.time - this.startTimeSpent;
+        }
+        private void OnApplicationPause(bool pauseStatus) 
+        {
+            if (pauseStatus)
+            {  
+                TrackingManager.Instance.Helper.SessionFinished.entry = LevelEntry.None.LevelEntryToString();
+                StopRecordTimeSpent();
+                TrackingActionEvent.ON_GAME_EXIT?.Invoke();
+            }    
         }
         void HandleFinishLoadingSoundmap()
         {

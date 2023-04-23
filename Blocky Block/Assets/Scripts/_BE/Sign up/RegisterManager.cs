@@ -23,7 +23,7 @@ namespace BlockyBlock.Managers
             string email = RegisterDisplay.Email;
             string password = RegisterDisplay.Password;
             RegisterRequest registerRequest = new RegisterRequest(email, password);
-            WWWManager.Instance.Post(registerRequest, WebType.AUTHENTICATION, APIType.USER_REGISTER, true);
+            WWWManager.Instance.Post(registerRequest, WebType.AUTHENTICATION, APIType.USER_REGISTER, (BEConstants.CONTENT_TYPE, BEConstants.CONTENT_VALUE));
             yield return new WaitUntil(() => WWWManager.Instance.IsComplete);
             if (base.isError)
             {

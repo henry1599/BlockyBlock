@@ -29,7 +29,7 @@ namespace BlockyBlock.Managers
             base.isError = false;
             string systemId = WWWManager.Instance.APIConfig.GetUniqueID();
             GuestLoginRequest guestLoginRequest = new GuestLoginRequest(systemId);
-            WWWManager.Instance.Post(guestLoginRequest, WebType.AUTHENTICATION, APIType.GUEST_LOGIN, true);
+            WWWManager.Instance.Post(guestLoginRequest, WebType.AUTHENTICATION, APIType.GUEST_LOGIN, (BEConstants.CONTENT_TYPE, BEConstants.CONTENT_VALUE));
             yield return new WaitUntil(() => WWWManager.Instance.IsComplete);
             if (base.isError)
             {
@@ -42,6 +42,7 @@ namespace BlockyBlock.Managers
             PlayerPrefs.SetString(BEConstants.ACCESS_TOKEN_KEY, guestLoginResponse.accessToken);
             PlayerPrefs.SetString(BEConstants.REFRESH_TOKEN_KEY, guestLoginResponse.refreshToken);
             PlayerPrefs.SetString(BEConstants.EMAIL, string.Empty);
+            PlayerPrefs.SetInt(BEConstants.GUESS, 1);
             Debug.Log("Guest Login response : " + guestLoginResponse.ToString());
             GameEvents.ON_LOADING?.Invoke(false, "");
 
@@ -53,7 +54,7 @@ namespace BlockyBlock.Managers
             string email = LoginDisplay.Email;
             string password = LoginDisplay.Password;
             LoginRequest loginRequest = new LoginRequest(email, password);
-            WWWManager.Instance.Post(loginRequest, WebType.AUTHENTICATION, APIType.USER_LOGIN, true);
+            WWWManager.Instance.Post(loginRequest, WebType.AUTHENTICATION, APIType.USER_LOGIN, (BEConstants.CONTENT_TYPE, BEConstants.CONTENT_VALUE));
             yield return new WaitUntil(() => WWWManager.Instance.IsComplete);
             if (base.isError)
             {
@@ -66,6 +67,7 @@ namespace BlockyBlock.Managers
             PlayerPrefs.SetString(BEConstants.ACCESS_TOKEN_KEY, loginResponse.accessToken);
             PlayerPrefs.SetString(BEConstants.REFRESH_TOKEN_KEY, loginResponse.refreshToken);
             PlayerPrefs.SetString(BEConstants.EMAIL, email);
+            PlayerPrefs.SetInt(BEConstants.GUESS, 0);
             Debug.Log("User login response : " + loginResponse.ToString());
             GameEvents.ON_LOADING?.Invoke(false, "");
             

@@ -47,6 +47,7 @@ namespace BlockyBlock.Tracking
         public int ifElseBlockCountUse;
         public Metadata metadata;
         public string entry;
+        public bool isProgress;
         public LevelFinishedRecordData() : base()
         {
             this.levelId = string.Empty;
@@ -76,6 +77,7 @@ namespace BlockyBlock.Tracking
             this.ifElseBlockCountUse = 0;
             this.metadata = null;
             this.entry = string.Empty;
+            this.isProgress = false;
         }
         public LevelFinishedRecordData(LevelFinishedRecordData data) : base()
         {
@@ -106,6 +108,7 @@ namespace BlockyBlock.Tracking
             this.ifElseBlockCountUse = data.ifElseBlockCountUse;
             this.metadata = data.metadata;
             this.entry = data.entry;
+            this.isProgress = data.isProgress;
         }
     }
     [System.Serializable]
@@ -130,6 +133,7 @@ namespace BlockyBlock.Tracking
             this.entry = data.entry;
         }
     }
+    // * Track from start to end the game
     [System.Serializable]
     public class SessionFinishedRecordData : RecordData
     {
@@ -143,6 +147,7 @@ namespace BlockyBlock.Tracking
         public int timeSpent;
         public Metadata metadata;
         public string entry;
+        public bool isProgress;
         public SessionFinishedRecordData() : base()
         {
             this.levelsPlay = new();
@@ -155,6 +160,7 @@ namespace BlockyBlock.Tracking
             this.timeSpent = 0;
             this.metadata = null;
             this.entry = string.Empty;
+            this.isProgress = false;
         }
         public SessionFinishedRecordData(SessionFinishedRecordData data) : base()
         {
@@ -168,8 +174,10 @@ namespace BlockyBlock.Tracking
             this.timeSpent = data.timeSpent;
             this.metadata = data.metadata;
             this.entry = data.entry;
+            this.isProgress = data.isProgress;
         }
     }
+    // * Track when entering game
     [System.Serializable]
     public class SessionTriggerRecordData : RecordData
     {

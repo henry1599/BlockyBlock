@@ -69,16 +69,13 @@ namespace BlockyBlock.Managers
         }
         void LoadNextScene()
         {
-            string accessToken = PlayerPrefs.GetString(BEConstants.ACCESS_TOKEN_KEY, string.Empty);
-            string refreshToken = PlayerPrefs.GetString(BEConstants.REFRESH_TOKEN_KEY, string.Empty);
-
-            if (accessToken == string.Empty && refreshToken == string.Empty)
+            if (GameManager.Instance.CanLoadHome)
             {
-                GameEvents.LOAD_LEVEL?.Invoke(LevelID.ENTRY);
+                GameEvents.LOAD_LEVEL?.Invoke(LevelID.HOME);
             }
             else
             {
-                GameEvents.LOAD_LEVEL?.Invoke(LevelID.HOME);
+                GameEvents.LOAD_LEVEL?.Invoke(LevelID.ENTRY);
             }
         }
     }

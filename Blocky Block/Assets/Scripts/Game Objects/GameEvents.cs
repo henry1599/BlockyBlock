@@ -136,5 +136,7 @@ namespace BlockyBlock.BackEnd
         public static readonly string ACCESS_TOKEN_KEY = "4c355_T0k3N_K3y";
         public static readonly string REFRESH_TOKEN_KEY = "R3f35h_t0K3n_k3Y";
         public static readonly string EMAIL = "3m4iL";
+        public static readonly string GUESS = "gue55";
+        public static readonly string CONTENT_TYPE_TRACKING = "x-access-token";
     }
 }

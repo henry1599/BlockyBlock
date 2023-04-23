@@ -4,6 +4,7 @@ using UnityEngine;
 using BlockyBlock.Tracking;
 using BlockyBlock.Configurations;
 using BlockyBlock.Enums;
+using BlockyBlock.BackEnd;
 
 namespace BlockyBlock.Managers
 {
@@ -23,23 +24,39 @@ namespace BlockyBlock.Managers
         }
         public void SendLevelFinishedRecordData(LevelFinishedRecordData recordData)
         {
+#if UNITY_EDITOR
+            string logData = JsonUtility.ToJson(recordData);
+            Debug.Log("[TRACK] : " + logData);
+#endif
             RequestTracking requestData = new(RecordDataType.LEVEL_FINISHED.ToString(), recordData, recordData.metadata);
-            WWWManager.Instance.Post(requestData, WebType.TRACKING, APIType.TRACKER, false);
+            WWWManager.Instance.Post(requestData, WebType.TRACKING, APIType.TRACKER, (BEConstants.CONTENT_TYPE, BEConstants.CONTENT_VALUE), (BEConstants.CONTENT_TYPE_TRACKING, GameManager.Instance.AccessToken));
         }
         public void SendLevelTriggerRecordData(LevelTriggerRecordData recordData)
         {
+#if UNITY_EDITOR
+            string logData = JsonUtility.ToJson(recordData);
+            Debug.Log("[TRACK] : " + logData);
+#endif
             RequestTracking requestData = new(RecordDataType.LEVEL_TRIGGER.ToString(), recordData, recordData.metadata);
-            WWWManager.Instance.Post(requestData, WebType.TRACKING, APIType.TRACKER, false);
+            WWWManager.Instance.Post(requestData, WebType.TRACKING, APIType.TRACKER, (BEConstants.CONTENT_TYPE, BEConstants.CONTENT_VALUE), (BEConstants.CONTENT_TYPE_TRACKING, GameManager.Instance.AccessToken));
         }
         public void SendSessionFinishedRecordData(SessionFinishedRecordData recordData)
         {
+#if UNITY_EDITOR
+            string logData = JsonUtility.ToJson(recordData);
+            Debug.Log("[TRACK] : " + logData);
+#endif
             RequestTracking requestData = new(RecordDataType.SESSION_FINISHED.ToString(), recordData, recordData.metadata);
-            WWWManager.Instance.Post(requestData, WebType.TRACKING, APIType.TRACKER, false);
+            WWWManager.Instance.Post(requestData, WebType.TRACKING, APIType.TRACKER, (BEConstants.CONTENT_TYPE, BEConstants.CONTENT_VALUE), (BEConstants.CONTENT_TYPE_TRACKING, GameManager.Instance.AccessToken));
         }
         public void SendSessionTriggerRecordData(SessionTriggerRecordData recordData)
         {
+#if UNITY_EDITOR
+            string logData = JsonUtility.ToJson(recordData);
+            Debug.Log("[TRACK] : " + logData);
+#endif
             RequestTracking requestData = new(RecordDataType.SESSION_TRIGGER.ToString(), recordData, recordData.metadata);
-            WWWManager.Instance.Post(requestData, WebType.TRACKING, APIType.TRACKER, false);
+            WWWManager.Instance.Post(requestData, WebType.TRACKING, APIType.TRACKER, (BEConstants.CONTENT_TYPE, BEConstants.CONTENT_VALUE), (BEConstants.CONTENT_TYPE_TRACKING, GameManager.Instance.AccessToken));
         }
         [System.Serializable]
         public class RequestTracking

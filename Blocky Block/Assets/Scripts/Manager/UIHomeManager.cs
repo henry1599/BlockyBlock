@@ -6,6 +6,7 @@ using BlockyBlock.Events;
 using BlockyBlock.UI;
 using AudioPlayer;
 using BlockyBlock.Utils;
+using BlockyBlock.Tracking;
 
 namespace BlockyBlock.Managers
 {
@@ -32,6 +33,7 @@ namespace BlockyBlock.Managers
         }
         public void OnShopButtonClick()
         {
+            TrackingManager.Instance.Helper.SessionFinished.shopButtonClickCount++;
             UIUtils.LockInput();
             GameManager.Instance.TransitionIn(() => 
                 {
@@ -40,8 +42,21 @@ namespace BlockyBlock.Managers
                 }
             );
         }
+        public void OnProfileButtonClick()
+        {
+            TrackingManager.Instance.Helper.SessionFinished.profileButtonClickCount++;
+        }
+        public void OnSettingButtonClick()
+        {
+            TrackingManager.Instance.Helper.SessionFinished.settingButtonClickCount++;
+        }
+        public void OnCreditButtonClick()
+        {
+            TrackingManager.Instance.Helper.SessionFinished.creditButtonClickCount++;
+        }
         public void OnStartButtonClick()
         {
+            TrackingManager.Instance.Helper.SessionFinished.mainGamePlayButtonClickCount++;
             // * Call Event to load Level
             // GameEvents.LOAD_LEVEL?.Invoke(LevelID.LEVEL_TEST_3D);
             State = HomeState.LEVEL_TYPE_SELECTION;
@@ -59,6 +74,7 @@ namespace BlockyBlock.Managers
         }
         public void OnExitButtonClick()
         {
+            TrackingManager.Instance.Helper.SessionFinished.endCause = EndCause.Quit_button.EndCauseToString();
             Application.Quit();
         }
         public void OnMainStoryButtonClick()

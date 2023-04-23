@@ -59,7 +59,7 @@ namespace BlockyBlock.Managers
             base.isError = false;
             string otpToken = OnlineManager.FORGOT_PASSWORD_VERIFY_TOKEN;
             ResendRequest resendRequest = new ResendRequest(otpToken);
-            WWWManager.Instance.Post(resendRequest, WebType.AUTHENTICATION, APIType.FORGOT_PASSWORD_VERIFICATION_RESEND, true);
+            WWWManager.Instance.Post(resendRequest, WebType.AUTHENTICATION, APIType.FORGOT_PASSWORD_VERIFICATION_RESEND, (BEConstants.CONTENT_TYPE, BEConstants.CONTENT_VALUE));
             yield return new WaitUntil(() => WWWManager.Instance.IsComplete);
             if (base.isError)
             {
@@ -80,7 +80,7 @@ namespace BlockyBlock.Managers
             string code = ForgotPasswordDisplay.Code;
             string newPassword = ForgotPasswordDisplay.NewPass;
             ForgotPasswordConfirmRequest forgotPasswordConfirmRequest = new ForgotPasswordConfirmRequest(token, code, newPassword);
-            WWWManager.Instance.Post(forgotPasswordConfirmRequest, WebType.AUTHENTICATION, APIType.FORGOT_PASSWORD, true);
+            WWWManager.Instance.Post(forgotPasswordConfirmRequest, WebType.AUTHENTICATION, APIType.FORGOT_PASSWORD, (BEConstants.CONTENT_TYPE, BEConstants.CONTENT_VALUE));
             yield return new WaitUntil(() => WWWManager.Instance.IsComplete);
             if (base.isError)
             {

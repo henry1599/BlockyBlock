@@ -58,12 +58,12 @@ namespace BlockyBlock.Managers
             IsComplete = false;
             StartCoroutine(Cor_Get(webType, apiType));
         }
-        public void Post(object objToSend, WebType webType, APIType apiType, bool isHasContentType)
+        public void Post(object objToSend, WebType webType, APIType apiType, params (string, string)[] headers)
         {
             IsComplete = false;
-            StartCoroutine(Cor_Post(objToSend, webType, apiType, isHasContentType));
+            StartCoroutine(Cor_Post(objToSend, webType, apiType, headers));
         }
-        IEnumerator Cor_Post(object objToSend, WebType webType, APIType apiType, bool isHasContentType)
+        IEnumerator Cor_Post(object objToSend, WebType webType, APIType apiType, params (string, string)[] headers)
         {
             string json = JsonUtility.ToJson(objToSend);
             string uri = APIConfig.WebData[webType] + APIConfig.APIData[apiType];
@@ -72,8 +72,10 @@ namespace BlockyBlock.Managers
                 byte[] jsonToSend = new System.Text.UTF8Encoding().GetBytes(json);
                 webRequest.uploadHandler = (UploadHandler)new UploadHandlerRaw(jsonToSend);
                 webRequest.downloadHandler = (DownloadHandler)new DownloadHandlerBuffer();
-                if (isHasContentType)
-                    webRequest.SetRequestHeader(BEConstants.CONTENT_TYPE, BEConstants.CONTENT_VALUE);
+                foreach (var header in headers)
+                {
+                    webRequest.SetRequestHeader(header.Item1, header.Item2);
+                }
                 
                 yield return webRequest.SendWebRequest();
 
@@ -90,8 +92,9 @@ namespace BlockyBlock.Managers
                         break;
                     case UnityWebRequest.Result.ProtocolError:
                         Debug.LogError(pages[page] + ": HTTP Error: " + webRequest.error);
-                        string jsonRecieved = webRequest.downloadHandler.text;
-                        errorMessage = JsonUtility.FromJson<ErrorResponse>(jsonRecieved).error.message;
+                        string jsonReceived = webRequest.downloadHandler.text;
+                        errorMessage = JsonUtility.FromJson<ErrorResponse>(jsonReceived).error.message;
+                        Debug.Log("Json Recieved : " + jsonReceived);
                         ON_ERROR?.Invoke(apiType, errorMessage);
                         break;
                     case UnityWebRequest.Result.Success:

@@ -59,7 +59,7 @@ namespace BlockyBlock.Managers
             base.isError = false;
             string otpToken = OnlineManager.VERIFICATION_TOKEN_REGISTER;
             ResendRequest resendRequest = new ResendRequest(otpToken);
-            WWWManager.Instance.Post(resendRequest, WebType.AUTHENTICATION, APIType.SIGNUP_VERIFICATION_RESEND, true);
+            WWWManager.Instance.Post(resendRequest, WebType.AUTHENTICATION, APIType.SIGNUP_VERIFICATION_RESEND, (BEConstants.CONTENT_TYPE, BEConstants.CONTENT_VALUE));
             yield return new WaitUntil(() => WWWManager.Instance.IsComplete);
             if (base.isError)
             {
@@ -79,7 +79,7 @@ namespace BlockyBlock.Managers
             string code = VerificationDisplay.Code;
             string token = OnlineManager.VERIFICATION_TOKEN_REGISTER;
             VerificationRequest verificationRequest = new VerificationRequest(token, code);
-            WWWManager.Instance.Post(verificationRequest, WebType.AUTHENTICATION, APIType.USER_VERIFY, true);
+            WWWManager.Instance.Post(verificationRequest, WebType.AUTHENTICATION, APIType.USER_VERIFY, (BEConstants.CONTENT_TYPE, BEConstants.CONTENT_VALUE));
             yield return new WaitUntil(() => WWWManager.Instance.IsComplete);
             if (base.isError)
             {

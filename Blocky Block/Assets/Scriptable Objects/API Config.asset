@@ -40,7 +40,7 @@ MonoBehaviour:
     _keys: 0000000001000000
     _values:
     - https://4jdwf133v0.execute-api.ap-southeast-1.amazonaws.com/
-    - https://yby3rol25j.execute-api.ap-southeast-1.amazonaws.com/api/tracking/items
+    - https://yby3rol25j.execute-api.ap-southeast-1.amazonaws.com/
   APIData:
     reorderableList:
       canAdd: 1
@@ -64,8 +64,8 @@ MonoBehaviour:
       elementIcon: {fileID: 0}
     reqReferences: {fileID: 0}
     isExpanded: 1
-    _keyValues: 010000000000000002000000030000000400000005000000060000000700000008000000090000000a0000000b0000000c0000000d0000000e000000
-    _keys: 010000000000000002000000030000000400000005000000060000000700000008000000090000000a0000000b0000000c0000000d0000000e000000
+    _keyValues: 010000000000000002000000030000000400000005000000060000000700000008000000090000000a0000000b0000000c0000000d0000000e00000065000000
+    _keys: 010000000000000002000000030000000400000005000000060000000700000008000000090000000a0000000b0000000c0000000d0000000e00000065000000
     _values:
     - /api/authentication/users/login
     - /healthcheck
@@ -82,3 +82,4 @@ MonoBehaviour:
     - /api/authentication/guests/login
     - /api/authentication/guests/renew-access-token
     - /api/authentication/users/request-forget-password
+    - api/tracking/items

@@ -10,7 +10,8 @@ namespace BlockyBlock.Managers
     public class ForgotPasswordEmailManager : FormManager
     {
         public UI.ForgotPasswordEmailDisplay ForgotPasswordEmailDisplay;
-        private static readonly string CONFIRM_MESSAGE = "Sending code to your email...";        public override void Start()
+        private static readonly string CONFIRM_MESSAGE = "Sending code to your email...";        
+        public override void Start()
         {
             base.Start();
         }
@@ -24,7 +25,7 @@ namespace BlockyBlock.Managers
             base.isError = false;
             string email = ForgotPasswordEmailDisplay.Email;
             ForgotPasswordRequest forgotPasswordRequest = new ForgotPasswordRequest(email);
-            WWWManager.Instance.Post(forgotPasswordRequest, WebType.AUTHENTICATION, APIType.FORGOT_PASSWORD_REQUEST, true);
+            WWWManager.Instance.Post(forgotPasswordRequest, WebType.AUTHENTICATION, APIType.FORGOT_PASSWORD_REQUEST, (BEConstants.CONTENT_TYPE, BEConstants.CONTENT_VALUE));
             yield return new WaitUntil(() => WWWManager.Instance.IsComplete);
             if (base.isError)
             {
