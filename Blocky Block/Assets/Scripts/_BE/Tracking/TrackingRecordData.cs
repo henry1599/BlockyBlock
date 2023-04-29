@@ -77,7 +77,7 @@ namespace BlockyBlock.Tracking
             this.ifElseBlockCountUse = 0;
             this.metadata = null;
             this.entry = string.Empty;
-            this.isProgress = false;
+            this.isProgress = true;
         }
         public LevelFinishedRecordData(LevelFinishedRecordData data) : base()
         {
@@ -160,7 +160,7 @@ namespace BlockyBlock.Tracking
             this.timeSpent = 0;
             this.metadata = null;
             this.entry = string.Empty;
-            this.isProgress = false;
+            this.isProgress = true;
         }
         public SessionFinishedRecordData(SessionFinishedRecordData data) : base()
         {

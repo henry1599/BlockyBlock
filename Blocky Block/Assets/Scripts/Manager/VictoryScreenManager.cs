@@ -122,6 +122,7 @@ namespace BlockyBlock.Managers
                     GameEvents.LOAD_LEVEL?.Invoke(LevelID.LEVEL_SELECTION);
                 }
             );
+            GameManager.Instance.UnsetFromState(FromState.Level_selection, FromState.Replay_current_level, FromState.Previous_level);
         }
         public void OnNextButtonClick()
         {
@@ -133,6 +134,7 @@ namespace BlockyBlock.Managers
                     GameEvents.LOAD_LEVEL?.Invoke((LevelID)((int)this.currentId + 1));
                 }
             );
+            GameManager.Instance.UnsetFromState(FromState.Level_selection, FromState.Replay_current_level);
         }
         public void OnRestartButtonClick()
         {
@@ -145,6 +147,8 @@ namespace BlockyBlock.Managers
                     GameEvents.LOAD_LEVEL?.Invoke((LevelID)currentId);
                 }
             );
+            GameManager.Instance.UnsetFromState(FromState.Level_selection, FromState.Previous_level);
+            GameManager.Instance.SetFromState(FromState.Replay_current_level);
         }
     }
 }

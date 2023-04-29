@@ -15,6 +15,11 @@ namespace BlockyBlock.Managers
         public LevelConfig LevelConfig => ConfigManager.Instance.LevelConfig;
         LevelData m_CurrentLevelData;
         private bool isSoundMapLoaded = false;
+        private FromState[] possibleEntries = new FromState[] {
+            FromState.Level_selection,
+            FromState.Previous_level,
+            FromState.Replay_current_level
+        };
         public LevelData CurrentLevelData
         {
             get => m_CurrentLevelData;
@@ -141,5 +146,29 @@ namespace BlockyBlock.Managers
                 GameEvents.ON_WIN?.Invoke();
             }
         }
+
+        #region TRACKING
+        // * Level trigger
+        public void SetLevelIDLevelTrigger()
+        {
+            TrackingManager.Instance.Helper.LevelTrigger.levelId = CurrentLevelID.ToString();
+        }
+        public void SetChapterIDLevelTrigger()
+        {
+            TrackingManager.Instance.Helper.LevelTrigger.chapterId = CurrentLevelData.ChapterID.ToString();
+        }
+        public void SetEntryLevelTrigger()
+        {
+            TrackingManager.Instance.Helper.LevelTrigger.entry = this.possibleEntries[0].ToString();
+            foreach (var state in this.possibleEntries)
+            {
+                if (GameManager.Instance.IsFrom(state))
+                {
+                    TrackingManager.Instance.Helper.LevelTrigger.entry = state.ToString();
+                    return;
+                }
+            }
+        }
+        #endregion
     }
 }

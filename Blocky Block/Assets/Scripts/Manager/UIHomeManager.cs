@@ -26,6 +26,11 @@ namespace BlockyBlock.Managers
         {   
             // StartCoroutine(Cor_LoadSoundMap());
             GameManager.Instance.TransitionOut();
+            GameManager.Instance.SetFromState(FromState.Home);
+        }
+        void Start()
+        {
+            TrackingActionEvent.ON_GAME_ENTER?.Invoke();
         }
         void OnDestroy()
         {

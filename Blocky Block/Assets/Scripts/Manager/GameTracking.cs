@@ -28,7 +28,7 @@ namespace BlockyBlock.Managers
             string logData = JsonUtility.ToJson(recordData);
             Debug.Log("[TRACK] : " + logData);
 #endif
-            RequestTracking requestData = new(RecordDataType.LEVEL_FINISHED.ToString(), recordData, recordData.metadata);
+            RequestTrackingLevelFinished requestData = new(RecordDataType.LEVEL_FINISHED.ToString(), recordData, recordData.metadata);
             WWWManager.Instance.Post(requestData, WebType.TRACKING, APIType.TRACKER, (BEConstants.CONTENT_TYPE, BEConstants.CONTENT_VALUE), (BEConstants.CONTENT_TYPE_TRACKING, GameManager.Instance.AccessToken));
         }
         public void SendLevelTriggerRecordData(LevelTriggerRecordData recordData)
@@ -37,7 +37,7 @@ namespace BlockyBlock.Managers
             string logData = JsonUtility.ToJson(recordData);
             Debug.Log("[TRACK] : " + logData);
 #endif
-            RequestTracking requestData = new(RecordDataType.LEVEL_TRIGGER.ToString(), recordData, recordData.metadata);
+            RequestTrackingLevelTrigger requestData = new(RecordDataType.LEVEL_TRIGGER.ToString(), recordData, recordData.metadata);
             WWWManager.Instance.Post(requestData, WebType.TRACKING, APIType.TRACKER, (BEConstants.CONTENT_TYPE, BEConstants.CONTENT_VALUE), (BEConstants.CONTENT_TYPE_TRACKING, GameManager.Instance.AccessToken));
         }
         public void SendSessionFinishedRecordData(SessionFinishedRecordData recordData)
@@ -46,7 +46,7 @@ namespace BlockyBlock.Managers
             string logData = JsonUtility.ToJson(recordData);
             Debug.Log("[TRACK] : " + logData);
 #endif
-            RequestTracking requestData = new(RecordDataType.SESSION_FINISHED.ToString(), recordData, recordData.metadata);
+            RequestTrackingSessionFinished requestData = new(RecordDataType.SESSION_FINISHED.ToString(), recordData, recordData.metadata);
             WWWManager.Instance.Post(requestData, WebType.TRACKING, APIType.TRACKER, (BEConstants.CONTENT_TYPE, BEConstants.CONTENT_VALUE), (BEConstants.CONTENT_TYPE_TRACKING, GameManager.Instance.AccessToken));
         }
         public void SendSessionTriggerRecordData(SessionTriggerRecordData recordData)
@@ -55,26 +55,75 @@ namespace BlockyBlock.Managers
             string logData = JsonUtility.ToJson(recordData);
             Debug.Log("[TRACK] : " + logData);
 #endif
-            RequestTracking requestData = new(RecordDataType.SESSION_TRIGGER.ToString(), recordData, recordData.metadata);
+            RequestTrackingSessionTrigger requestData = new(RecordDataType.SESSION_TRIGGER.ToString(), recordData, recordData.metadata);
             WWWManager.Instance.Post(requestData, WebType.TRACKING, APIType.TRACKER, (BEConstants.CONTENT_TYPE, BEConstants.CONTENT_VALUE), (BEConstants.CONTENT_TYPE_TRACKING, GameManager.Instance.AccessToken));
         }
         [System.Serializable]
         public class RequestTracking
         {
             public string activityName;
-            public RecordData trackingData;
             public BlockyBlock.Tracking.Metadata metaData;
             public RequestTracking()
             {
                 this.activityName = string.Empty;
-                this.trackingData = new();
                 this.metaData = null;
             }
-            public RequestTracking(string name, RecordData data, BlockyBlock.Tracking.Metadata meta)
+            public RequestTracking(string name, BlockyBlock.Tracking.Metadata meta)
             {
                 this.activityName = name;
-                this.trackingData = data;
                 this.metaData = meta;
+            }
+        }
+        [System.Serializable]
+        public class RequestTrackingSessionTrigger : RequestTracking
+        {
+            public SessionTriggerRecordData trackingData;
+            public RequestTrackingSessionTrigger()
+            {
+                this.trackingData = new();
+            }
+            public RequestTrackingSessionTrigger(string name, SessionTriggerRecordData data, BlockyBlock.Tracking.Metadata meta) : base(name, meta)
+            {
+                this.trackingData = data;
+            }
+        }
+        [System.Serializable]
+        public class RequestTrackingSessionFinished : RequestTracking
+        {
+            public SessionFinishedRecordData trackingData;
+            public RequestTrackingSessionFinished() : base()
+            {
+                this.trackingData = new();
+            }
+            public RequestTrackingSessionFinished(string name, SessionFinishedRecordData data, BlockyBlock.Tracking.Metadata meta) : base(name, meta)
+            {
+                this.trackingData = data;
+            }
+        }
+        [System.Serializable]
+        public class RequestTrackingLevelTrigger : RequestTracking
+        {
+            public LevelTriggerRecordData trackingData;
+            public RequestTrackingLevelTrigger() : base()
+            {
+                this.trackingData = new();
+            }
+            public RequestTrackingLevelTrigger(string name, LevelTriggerRecordData data, BlockyBlock.Tracking.Metadata meta) : base(name, meta)
+            {
+                this.trackingData = data;
+            }
+        }
+        [System.Serializable]
+        public class RequestTrackingLevelFinished : RequestTracking
+        {
+            public LevelFinishedRecordData trackingData;
+            public RequestTrackingLevelFinished() : base()
+            {
+                this.trackingData = new();
+            }
+            public RequestTrackingLevelFinished(string name, LevelFinishedRecordData data, BlockyBlock.Tracking.Metadata meta) : base(name, meta)
+            {
+                this.trackingData = data;
             }
         }
     }

@@ -147,6 +147,7 @@ namespace BlockyBlock.Managers
                     GameEvents.LOAD_LEVEL?.Invoke((LevelID)m_ChosenNodeID);
                 }
             );
+            GameManager.Instance.SetFromState(FromState.Level_selection);
         }
     }
 }

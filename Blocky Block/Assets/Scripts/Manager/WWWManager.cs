@@ -94,6 +94,8 @@ namespace BlockyBlock.Managers
             if (this.isErrorSelf)
             {
                 Debug.LogError("Error when renewing access token, reason: Unknown");
+                PlayerPrefs.DeleteKey(BEConstants.ACCESS_TOKEN_KEY);
+                PlayerPrefs.DeleteKey(BEConstants.REFRESH_TOKEN_KEY);
                 yield break;
             }
             string resultJson = WWWManager.Instance.Result;
@@ -160,6 +162,7 @@ namespace BlockyBlock.Managers
                         ON_ERROR?.Invoke(apiType, errorMessage);
                         break;
                     case UnityWebRequest.Result.Success:
+                        Debug.Log("Post Success, json Posted: " + json);
                         Debug.Log(pages[page] + ":\nReceived: " + webRequest.downloadHandler.text);
                         this.result = webRequest.downloadHandler.text;
                         this.isErrorSelf = false;

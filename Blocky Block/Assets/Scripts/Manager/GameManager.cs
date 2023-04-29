@@ -11,6 +11,14 @@ using BlockyBlock.BackEnd;
 
 namespace BlockyBlock.Managers
 {
+    [System.Flags]
+    public enum FromState
+    {
+        Home = 1 << 0,
+        Level_selection = 1 << 1,
+        Previous_level = 1 << 2,
+        Replay_current_level = 1 << 3,
+    }
     public class GameManager : MonoBehaviour
     {
         public static GameManager Instance {get; private set;}
@@ -21,6 +29,7 @@ namespace BlockyBlock.Managers
 
         [SerializeField] LayerMask defaultLayer;
         [SerializeField] LayerMask seebehindLayer;
+        private FromState fromState;
         public RuntimeAnimatorController HomeAnim;
         public RuntimeAnimatorController LevelSelectionAnim;
         public RuntimeAnimatorController LevelAnim;
@@ -60,6 +69,24 @@ namespace BlockyBlock.Managers
             }
             UpdateTokens();
         }
+        public void SetFromState(params FromState[] froms)
+        {
+            foreach (var from in froms)
+            {
+                this.fromState |= from;
+            }
+        }
+        public void UnsetFromState(params FromState[] froms)
+        {
+            foreach (var from in froms)
+            {
+                this.fromState &= ~from;
+            }
+        }
+        public bool IsFrom(FromState stateToCheck)
+        {
+            return this.fromState.HasFlag(stateToCheck);
+        }
         public void UpdateTokens()
         {
             this.accessToken = PlayerPrefs.GetString(BEConstants.ACCESS_TOKEN_KEY, string.Empty);
@@ -75,8 +102,6 @@ namespace BlockyBlock.Managers
             GameEvents.LOAD_LEVEL += HandleLoadLevel;
 
             SoundManager.ON_FINISH_LOADING_SOUNDMAP += HandleFinishLoadingSoundmap;
-
-            TrackingActionEvent.ON_GAME_ENTER?.Invoke();
             StartRecordTimeSpent();
         }
         void Update()
@@ -102,6 +127,8 @@ namespace BlockyBlock.Managers
         {
             if (pauseStatus)
             {  
+                if (TrackingManager.Instance.Helper.SessionFinished == null)
+                    return;
                 TrackingManager.Instance.Helper.SessionFinished.entry = LevelEntry.None.LevelEntryToString();
                 StopRecordTimeSpent();
                 TrackingActionEvent.ON_GAME_EXIT?.Invoke();
@@ -173,7 +200,22 @@ namespace BlockyBlock.Managers
             yield return new WaitUntil(() => ConfigManager.Instance != null);
             LevelManager.Instance.CurrentLevelID = _id;
             LevelManager.Instance.ResetChecker();
+            StartRecordForLevel(_id);
             PlayBGMusic(_id);
+        }
+        void StartRecordForLevel(LevelID _id)
+        {
+            int iid = (int)_id;
+            if (1000 <= iid && iid <= 2000)
+            {
+                TrackingManager.Instance.StartRecord(Tracking.RecordDataType.LEVEL_TRIGGER);
+                TrackingManager.Instance.StartRecord(Tracking.RecordDataType.LEVEL_FINISHED);
+
+                LevelManager.Instance.SetLevelIDLevelTrigger();
+                LevelManager.Instance.SetChapterIDLevelTrigger();
+                LevelManager.Instance.SetEntryLevelTrigger();
+                TrackingManager.Instance.StopRecord(Tracking.RecordDataType.LEVEL_TRIGGER);
+            }
         }
         void PlayBGMusic(LevelID _id)
         {
