@@ -5,6 +5,7 @@ using UnityEngine.Networking;
 using BlockyBlock.Enums;
 using BlockyBlock.Configurations;
 using BlockyBlock.BackEnd;
+using System;
 
 namespace BlockyBlock.Managers
 {
@@ -32,12 +33,37 @@ namespace BlockyBlock.Managers
             this.code = this.message = "";
         }
     }
+    [System.Serializable]
+    public class RenewAccessTokenRequest
+    {
+        public string refreshToken;
+        public RenewAccessTokenRequest(string refreshToken)
+        {
+            this.refreshToken = refreshToken;
+        }
+        public RenewAccessTokenRequest()
+        {
+            this.refreshToken = BEConstants.DEFAULT_VALUE;
+        }
+    }
+    [System.Serializable]
+    public class RenewAccessTokenResponse
+    {
+        public string refreshToken;
+        public string accessToken;
+        public RenewAccessTokenResponse(string refreshToken, string accessToken)
+        {
+            this.refreshToken = refreshToken;
+            this.accessToken = accessToken;
+        }
+    }
     public class WWWManager : MonoBehaviour
     {
         public static WWWManager Instance {get; private set;}
         public static System.Action<APIType, string> ON_ERROR;
         public APIConfig APIConfig;
         public bool IsComplete {get; set;}
+        private bool isErrorSelf = false;
         public string Result 
         {
             get => result;
@@ -52,6 +78,31 @@ namespace BlockyBlock.Managers
             }
             Instance = this;
             DontDestroyOnLoad(gameObject);
+        }
+
+        void RenewAccessToken(System.Action callBack = null)
+        {
+            StartCoroutine(Cor_RenewAccessToken(callBack));
+        }
+        IEnumerator Cor_RenewAccessToken(System.Action callBack = null)
+        {
+            var apiType = GameManager.Instance.IsGuest ? APIType.GUEST_RENEW_ACCESS_TOKEN : APIType.USER_RENEW_ACCESS_TOKEN;
+            string refreshToken = GameManager.Instance.RefreshToken;
+            RenewAccessTokenRequest request = new RenewAccessTokenRequest(refreshToken);
+            Post(request, WebType.AUTHENTICATION, apiType, (BEConstants.CONTENT_TYPE, BEConstants.CONTENT_VALUE));
+            yield return new WaitUntil(() => IsComplete);
+            if (this.isErrorSelf)
+            {
+                Debug.LogError("Error when renewing access token, reason: Unknown");
+                yield break;
+            }
+            string resultJson = WWWManager.Instance.Result;
+            RenewAccessTokenResponse renewResponse = JsonUtility.FromJson<RenewAccessTokenResponse>(resultJson);
+            PlayerPrefs.SetString(BEConstants.ACCESS_TOKEN_KEY, renewResponse.accessToken);
+            PlayerPrefs.SetString(BEConstants.REFRESH_TOKEN_KEY, renewResponse.refreshToken);
+            GameManager.Instance.UpdateTokens();
+            yield return null;
+            callBack?.Invoke();
         }
         public void Get(WebType webType, APIType apiType)
         {
@@ -89,17 +140,29 @@ namespace BlockyBlock.Managers
                         Debug.LogError(pages[page] + ": Error: " + webRequest.error);
                         errorMessage = JsonUtility.FromJson<ErrorResponse>(webRequest.downloadHandler.text).error.message;
                         ON_ERROR?.Invoke(apiType, errorMessage);
+                        this.isErrorSelf = true;
                         break;
                     case UnityWebRequest.Result.ProtocolError:
                         Debug.LogError(pages[page] + ": HTTP Error: " + webRequest.error);
                         string jsonReceived = webRequest.downloadHandler.text;
-                        errorMessage = JsonUtility.FromJson<ErrorResponse>(jsonReceived).error.message;
+                        var errorResponse = JsonUtility.FromJson<ErrorResponse>(jsonReceived);
+                        errorMessage = errorResponse.error.message;
+                        var code = errorResponse.error.code;
                         Debug.Log("Json Recieved : " + jsonReceived);
+                        Debug.Log("Error code : " + code);
+                        this.isErrorSelf = true;
+                        if (code.Equals("ACCESS_TOKEN_EXPIRED"))
+                        {
+                            Debug.Log("Access token is expired, renewing...");
+                            RenewAccessToken(() => Post(objToSend, webType, apiType, (BEConstants.CONTENT_TYPE, BEConstants.CONTENT_VALUE), (BEConstants.CONTENT_TYPE_TRACKING, GameManager.Instance.AccessToken)));
+                            yield break;
+                        }
                         ON_ERROR?.Invoke(apiType, errorMessage);
                         break;
                     case UnityWebRequest.Result.Success:
                         Debug.Log(pages[page] + ":\nReceived: " + webRequest.downloadHandler.text);
                         this.result = webRequest.downloadHandler.text;
+                        this.isErrorSelf = false;
                         break;
                 }
 

@@ -58,6 +58,10 @@ namespace BlockyBlock.Managers
             {
                 Instantiate(this.sceneTransition, transform);
             }
+            UpdateTokens();
+        }
+        public void UpdateTokens()
+        {
             this.accessToken = PlayerPrefs.GetString(BEConstants.ACCESS_TOKEN_KEY, string.Empty);
             this.refreshToken = PlayerPrefs.GetString(BEConstants.REFRESH_TOKEN_KEY, string.Empty);
             this.canLoadHome = !string.IsNullOrEmpty(this.accessToken) && !string.IsNullOrEmpty(this.refreshToken);
