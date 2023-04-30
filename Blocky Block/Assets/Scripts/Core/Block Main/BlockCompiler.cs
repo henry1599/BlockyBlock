@@ -78,6 +78,7 @@ namespace BlockyBlock.Core
         }
         public void Play() 
         {
+            LevelManager.Instance.SetPlayButtonCount();
             IsExecuting = true;
             GameEvents.ON_EXECUTING_BLOCK?.Invoke(IsExecuting);
             IDEState = IDERunState.MANNUAL;
@@ -96,6 +97,7 @@ namespace BlockyBlock.Core
         }
         public void Stop() 
         {
+            LevelManager.Instance.SetStopButtonCount();
             // * reset step counter
             LevelCheckerManager.Instance.ResetStepPassed();
 
@@ -112,6 +114,7 @@ namespace BlockyBlock.Core
         }
         public void Debug() 
         {
+            LevelManager.Instance.SetDebugButtonCount();
             StopCoroutine(Cor_Play());
             IsExecuting = true;
             m_Parser.Debug();

@@ -5,6 +5,7 @@ using BlockyBlock.Configurations;
 using BlockyBlock.Enums;
 using BlockyBlock.Events;
 using AudioPlayer;
+using BlockyBlock.Tracking;
 
 namespace BlockyBlock.Managers
 {
@@ -20,6 +21,8 @@ namespace BlockyBlock.Managers
             FromState.Previous_level,
             FromState.Replay_current_level
         };
+        public LevelFinishedRecordData LevelFinished => TrackingManager.Instance.Helper.LevelFinished;
+        public LevelTriggerRecordData LevelTrigger => TrackingManager.Instance.Helper.LevelTrigger;
         public LevelData CurrentLevelData
         {
             get => m_CurrentLevelData;
@@ -149,25 +152,140 @@ namespace BlockyBlock.Managers
 
         #region TRACKING
         // * Level trigger
+        float levelTimeSpentStart = 0;
+        public void StartTimer()
+        {
+            this.levelTimeSpentStart = Time.time;
+        }
         public void SetLevelIDLevelTrigger()
         {
-            TrackingManager.Instance.Helper.LevelTrigger.levelId = CurrentLevelID.ToString();
+            LevelTrigger.levelId = CurrentLevelID.ToString();
         }
         public void SetChapterIDLevelTrigger()
         {
-            TrackingManager.Instance.Helper.LevelTrigger.chapterId = CurrentLevelData.ChapterID.ToString();
+            LevelTrigger.chapterId = CurrentLevelData.ChapterID.ToString();
         }
         public void SetEntryLevelTrigger()
         {
-            TrackingManager.Instance.Helper.LevelTrigger.entry = this.possibleEntries[0].ToString();
+            LevelTrigger.entry = this.possibleEntries[0].ToString();
             foreach (var state in this.possibleEntries)
             {
                 if (GameManager.Instance.IsFrom(state))
                 {
-                    TrackingManager.Instance.Helper.LevelTrigger.entry = state.ToString();
+                    LevelTrigger.entry = state.ToString();
                     return;
                 }
             }
+        }
+        public void SetLevelIDLevelFinished()
+        {
+            LevelFinished.levelId = CurrentLevelID.ToString();
+        }
+        public void SetChapterIDLevelFinished()
+        {
+            LevelFinished.chapterId = CurrentLevelData.ChapterID.ToString();
+        }
+        public void SetEntryLevelFinished()
+        {
+            LevelFinished.entry = this.possibleEntries[0].ToString();
+            foreach (var state in this.possibleEntries)
+            {
+                if (GameManager.Instance.IsFrom(state))
+                {
+                    LevelFinished.entry = state.ToString();
+                    return;
+                }
+            }
+        }
+        public void SetDebugButtonCount()
+        {
+            LevelFinished.debugButtonCount++;
+        }
+        public void SetEndCauseLevelFinished(EndCause endCause)
+        {
+            LevelFinished.endCause = endCause.ToString();
+        }
+        public void SetPickupBlockCount()
+        {
+            LevelFinished.pickUpBlockCount++;
+        }
+        public void SetPickupBlockCountUse()
+        {
+            LevelFinished.pickUpBlockCountUse++;
+        }
+        public void SetPlayButtonCount()
+        {
+            LevelFinished.playButtonCount++;
+        }
+        public void SetPushBlockCount()
+        {
+            LevelFinished.pushBlockCount++;
+        }
+        public void SetPushBlockCountUse()
+        {
+            LevelFinished.pushBlockCountUse++;
+        }
+        public void SetPutDownBlockCount()
+        {
+            LevelFinished.putDownBlockCount++;
+        }
+        public void SetPutDownBlockCountUse()
+        {
+            LevelFinished.putDownBlockCountUse++;
+        }
+        public void SetStepForwardBlockCount()
+        {
+            LevelFinished.stepForwardBlockCount++;
+        }
+        public void SetStepForwardBlockCountUse()
+        {
+            LevelFinished.stepForwardBlockCountUse++;
+        }
+        public void SetStopButtonCount()
+        {
+            LevelFinished.stopButtonCount++;
+        }
+        public void SetTimeSpent()
+        {
+            float endRecordTime = Time.time;
+            float totalTime = endRecordTime - this.levelTimeSpentStart;
+            LevelFinished.timeSpent = (int)totalTime;
+        }
+        public void SetTurnLeftBlockCount()
+        {
+            LevelFinished.turnLeftBlockCount++;
+        }
+        public void SetTurnLeftBlockCountUse()
+        {
+            LevelFinished.turnLeftBlockCountUse++;
+        }
+        public void SetTurnRightBlockCount()
+        {
+            LevelFinished.turnRightBlockCount++;
+        }
+        public void SetTurnRightBlockCountUse()
+        {
+            LevelFinished.turnRightBlockCountUse++;
+        }
+        public void SetJumpBlockCount()
+        {
+            LevelFinished.jumpBlockCount++;
+        }
+        public void SetJumpBlockCountUse()
+        {
+            LevelFinished.jumpBlockCountUse++;
+        }
+        public void SetJumpIfBlockCount()
+        {
+            LevelFinished.jumpIfBlockCount++;
+        }
+        public void SetJumpIfBlockCountUse()
+        {
+            LevelFinished.jumpIfBlockCountUse++;
+        }
+        public void SetIsProgress(bool isInProgress)
+        {
+            LevelFinished.isProgress = isInProgress;
         }
         #endregion
     }

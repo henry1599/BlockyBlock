@@ -8,8 +8,9 @@ using AudioPlayer;
 
 namespace BlockyBlock.Managers
 {
-    public class SoundManager : MonoSingleton<SoundManager>
+    public class SoundManager : MonoBehaviour
     {
+        public static SoundManager Instance {get; private set;}
         [SerializeField] GameObject sfxPrefab;        
         [SerializeField] SoundMapConfig soundMapConfig;
         [SerializeField] int numberOfDefaultSFX = 8;
@@ -45,6 +46,13 @@ namespace BlockyBlock.Managers
         public static System.Action ON_FINISH_LOADING_SOUNDMAP;
         private void Awake()
         {
+            if (Instance != null)
+            {
+                Destroy(gameObject);
+                return;
+            }
+            Instance = this;
+            DontDestroyOnLoad(gameObject);
             this._logQueue = new Queue<string>();
             this._logStringBuilder = new StringBuilder();
 
@@ -97,8 +105,9 @@ namespace BlockyBlock.Managers
 #if UNITY_EDITOR || UNITY_STANDALONE
             if( Input.GetKeyDown( KeyCode.M ) )
             {
-                // Debug.Log( "M key was pressed." );
-                // TriggerDisableMusic();
+                // * Mute key cheat
+                Debug.Log( "M key was pressed." );
+                TriggerDisableMusic();
             }
 #endif
         }
@@ -531,11 +540,15 @@ namespace BlockyBlock.Managers
             }
         }
 
-        public void SetSFXVolume(float volumeValue)
+        public void SetSFXVolume(float volumeValue, bool needSave = true)
         {
             sfxVolume = volumeValue;
-            SetVolume(SFX_VOLUME, volumeValue);
-            SetVolume(AMBIENCE_VOLUME, volumeValue);
+            SetVolume(SFX_VOLUME, volumeValue, needSave);
+            SetVolume(AMBIENCE_VOLUME, volumeValue, needSave);
+        }
+        public float GetMusicVolume()
+        {
+            return this.musicVolume;
         }
         public float GetSFXVolume()
         {

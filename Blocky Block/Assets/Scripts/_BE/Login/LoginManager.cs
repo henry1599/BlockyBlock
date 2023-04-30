@@ -68,6 +68,7 @@ namespace BlockyBlock.Managers
             PlayerPrefs.SetString(BEConstants.REFRESH_TOKEN_KEY, loginResponse.refreshToken);
             PlayerPrefs.SetString(BEConstants.EMAIL, email);
             PlayerPrefs.SetInt(BEConstants.GUESS, 0);
+            GameManager.Instance.UpdateTokens();
             Debug.Log("User login response : " + loginResponse.ToString());
             GameEvents.ON_LOADING?.Invoke(false, "");
             

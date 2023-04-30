@@ -417,6 +417,22 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 741735918, guid: adf5029d67da016478788c8179558f7d, type: 3}
+      propertyPath: currentMixer
+      value: 
+      objectReference: {fileID: 24100000, guid: 8759422c99684094ea166ade50602b0b, type: 2}
+    - target: {fileID: 741735918, guid: adf5029d67da016478788c8179558f7d, type: 3}
+      propertyPath: SFX_MixerGroup
+      value: 
+      objectReference: {fileID: 243859828884416902, guid: 8759422c99684094ea166ade50602b0b, type: 2}
+    - target: {fileID: 741735918, guid: adf5029d67da016478788c8179558f7d, type: 3}
+      propertyPath: Music_MixerGroup
+      value: 
+      objectReference: {fileID: 243261478563552786, guid: 8759422c99684094ea166ade50602b0b, type: 2}
+    - target: {fileID: 741735918, guid: adf5029d67da016478788c8179558f7d, type: 3}
+      propertyPath: numberOfDefaultSFX
+      value: 100
+      objectReference: {fileID: 0}
     - target: {fileID: 512338602833641929, guid: adf5029d67da016478788c8179558f7d, type: 3}
       propertyPath: sceneTransition
       value: 

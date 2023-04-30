@@ -38,7 +38,7 @@ namespace BlockyBlock.Managers
         }
         public void OnShopButtonClick()
         {
-            TrackingManager.Instance.Helper.SessionFinished.shopButtonClickCount++;
+            TrackingManager.Instance.SetShopButtonClickCount();
             UIUtils.LockInput();
             GameManager.Instance.TransitionIn(() => 
                 {
@@ -49,26 +49,28 @@ namespace BlockyBlock.Managers
         }
         public void OnProfileButtonClick()
         {
-            TrackingManager.Instance.Helper.SessionFinished.profileButtonClickCount++;
+            TrackingManager.Instance.SetProfileButtonClickCount();
         }
         public void OnSettingButtonClick()
         {
-            TrackingManager.Instance.Helper.SessionFinished.settingButtonClickCount++;
+            TrackingManager.Instance.SetSettingButtonClickCount();
+            State = HomeState.SETTING;
         }
         public void OnCreditButtonClick()
         {
-            TrackingManager.Instance.Helper.SessionFinished.creditButtonClickCount++;
+            TrackingManager.Instance.SetCreditButtonClickCount();
+            State = HomeState.CREDIT;
         }
         public void OnStartButtonClick()
         {
-            TrackingManager.Instance.Helper.SessionFinished.mainGamePlayButtonClickCount++;
+            TrackingManager.Instance.SetMainGamePlayButtonClickCount();
             // * Call Event to load Level
             // GameEvents.LOAD_LEVEL?.Invoke(LevelID.LEVEL_TEST_3D);
             State = HomeState.LEVEL_TYPE_SELECTION;
         }
         public void OnBackButtonClick()
         {
-            if (State == HomeState.LEVEL_TYPE_SELECTION)
+            if (State == HomeState.LEVEL_TYPE_SELECTION || State == HomeState.CREDIT || State == HomeState.SETTING)
             {
                 State = HomeState.MAIN;
             }
@@ -79,7 +81,13 @@ namespace BlockyBlock.Managers
         }
         public void OnExitButtonClick()
         {
+            if (TrackingManager.Instance.Helper.SessionFinished == null)
+                return;
+            TrackingManager.Instance.SetIsProgress(false);
+            TrackingManager.Instance.Helper.SessionFinished.entry = LevelEntry.None.LevelEntryToString();
+            GameManager.Instance.StopRecordTimeSpent();
             TrackingManager.Instance.Helper.SessionFinished.endCause = EndCause.Quit_button.EndCauseToString();
+            TrackingActionEvent.ON_GAME_EXIT?.Invoke();
             Application.Quit();
         }
         public void OnMainStoryButtonClick()

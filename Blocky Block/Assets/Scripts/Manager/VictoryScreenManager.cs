@@ -11,6 +11,7 @@ using BlockyBlock.Utils;
 using BlockyBlock.Events;
 using BlockyBlock.Enums;
 using AudioPlayer;
+using BlockyBlock.Tracking;
 
 namespace BlockyBlock.Managers
 {
@@ -122,6 +123,7 @@ namespace BlockyBlock.Managers
                     GameEvents.LOAD_LEVEL?.Invoke(LevelID.LEVEL_SELECTION);
                 }
             );
+            LevelManager.Instance.SetEndCauseLevelFinished(EndCause.Level_selection_button);
             GameManager.Instance.UnsetFromState(FromState.Level_selection, FromState.Replay_current_level, FromState.Previous_level);
         }
         public void OnNextButtonClick()
@@ -134,6 +136,7 @@ namespace BlockyBlock.Managers
                     GameEvents.LOAD_LEVEL?.Invoke((LevelID)((int)this.currentId + 1));
                 }
             );
+            LevelManager.Instance.SetEndCauseLevelFinished(EndCause.Next_button);
             GameManager.Instance.UnsetFromState(FromState.Level_selection, FromState.Replay_current_level);
         }
         public void OnRestartButtonClick()
@@ -147,6 +150,7 @@ namespace BlockyBlock.Managers
                     GameEvents.LOAD_LEVEL?.Invoke((LevelID)currentId);
                 }
             );
+            LevelManager.Instance.SetEndCauseLevelFinished(EndCause.Replay_button);
             GameManager.Instance.UnsetFromState(FromState.Level_selection, FromState.Previous_level);
             GameManager.Instance.SetFromState(FromState.Replay_current_level);
         }

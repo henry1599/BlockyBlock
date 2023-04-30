@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using BlockyBlock.Tracking;
 using System;
+using BlockyBlock.Enums;
 
 namespace BlockyBlock.Managers
 {
@@ -24,10 +25,17 @@ namespace BlockyBlock.Managers
         void Start()
         {
             TrackingActionEvent.ON_GAME_ENTER += HandleGameEnter;
+            TrackingActionEvent.ON_GAME_EXIT += HandleGameExit;
         }
         void OnDestroy()
         {
             TrackingActionEvent.ON_GAME_ENTER -= HandleGameEnter;
+            TrackingActionEvent.ON_GAME_EXIT -= HandleGameExit;
+        }
+
+        private void HandleGameExit()
+        {
+            StopRecord(RecordDataType.SESSION_FINISHED);
         }
 
         private void HandleGameEnter()
@@ -78,6 +86,43 @@ namespace BlockyBlock.Managers
                     this.trackingHelper.StopRecordAll();
                     break;
             }
+        }
+        public void SetLevelPlay(LevelID levelID)
+        {
+            int level = (int)levelID % 1000;
+            this.trackingHelper.SessionFinished.levelsPlay.Add(level);
+        }
+        public void SetEndCause(EndCause endCause)
+        {
+            this.trackingHelper.SessionFinished.endCause = endCause.ToString();
+        }
+        public void SetShopButtonClickCount()
+        {
+            this.trackingHelper.SessionFinished.shopButtonClickCount++;
+        }
+        public void SetCreditButtonClickCount()
+        {
+            this.trackingHelper.SessionFinished.creditButtonClickCount++;
+        }
+        public void SetMainGamePlayButtonClickCount()
+        {
+            this.trackingHelper.SessionFinished.mainGamePlayButtonClickCount++;
+        }
+        public void SetSettingButtonClickCount()
+        {
+            this.trackingHelper.SessionFinished.settingButtonClickCount++;
+        }
+        public void SetProfileButtonClickCount()
+        {
+            this.trackingHelper.SessionFinished.profileButtonClickCount++;
+        }
+        public void SetEntry()
+        {
+            this.trackingHelper.SessionFinished.entry = LevelEntry.None.LevelEntryToString();
+        }
+        public void SetIsProgress(bool isInProgress)
+        {
+            this.trackingHelper.SessionFinished.isProgress = isInProgress;
         }
     }
 }

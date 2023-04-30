@@ -9,6 +9,7 @@ using BlockyBlock.Configurations;
 using RotaryHeart.Lib.SerializableDictionary;
 using BlockyBlock.UI;
 using NaughtyAttributes;
+using BlockyBlock.Tracking;
 
 namespace BlockyBlock.Managers
 {
@@ -59,6 +60,9 @@ namespace BlockyBlock.Managers
         }
         void OnDestroy()
         {
+            LevelManager.Instance.SetTimeSpent();
+            LevelManager.Instance.SetIsProgress(false);
+            TrackingManager.Instance.StopRecord(RecordDataType.LEVEL_FINISHED);
             GameEvents.SETUP_LEVEL -= HandleSetupLevel;
             GameEvents.ON_CLEAR_IDE -= HandleClearIDE;
             GameEvents.ON_WIN -= HandleWin;
@@ -85,6 +89,7 @@ namespace BlockyBlock.Managers
         }
         void HandleWin()
         {
+            CountBlocksUse();
             HandleBlockEditor(true);
         }
         void HandleLose()
@@ -208,10 +213,12 @@ namespace BlockyBlock.Managers
         }
         public void OnBackButtonClick()
         {
+            LevelManager.Instance.SetEndCauseLevelFinished(EndCause.Back_button);
             GameManager.Instance.TransitionIn(() => GameEvents.LOAD_LEVEL?.Invoke(LevelID.LEVEL_SELECTION));
         }
         public void OnHomeButtonClick()
         {
+            LevelManager.Instance.SetEndCauseLevelFinished(EndCause.Back_button);
             GameManager.Instance.TransitionIn(() => GameEvents.LOAD_LEVEL?.Invoke(LevelID.HOME));
         }
         public void OnControlButtonActivate(int _type)
@@ -233,6 +240,54 @@ namespace BlockyBlock.Managers
         public void OnTogglePreview(bool _status)
         {
             EditorEvents.ON_FORCE_PREVIEW_STATUS_TOGGLE?.Invoke(_status);
+        }
+        public void CountBlocksUse()
+        {
+            foreach (Transform blockTransform in this.m_IDECodeContent)
+            {
+                UIBlock block = blockTransform.GetComponent<UIBlock>();
+                if (block == null)
+                    continue;
+                switch (block.Type)
+                {
+                    case BlockType.MOVE_FORWARD:
+                        LevelManager.Instance.SetStepForwardBlockCountUse();
+                        break;
+                    case BlockType.PICK_UP:
+                        LevelManager.Instance.SetPickupBlockCountUse();
+                        break;
+                    case BlockType.PUSH:
+                        LevelManager.Instance.SetPushBlockCountUse();
+                        break;
+                    case BlockType.PUT_DOWN:
+                        LevelManager.Instance.SetPutDownBlockCountUse();
+                        break;
+                    case BlockType.TURN:
+                        var blockTurn = (UIBlockTurn)block;
+                        var blockOptionTurn = (UIBlockOptionTurn)blockTurn.UIBlockOption;
+                        switch (blockOptionTurn.CurrentTurnDirection)
+                        {
+                            case TurnDirection.LEFT:
+                                LevelManager.Instance.SetTurnLeftBlockCountUse();
+                                break;
+                            case TurnDirection.RIGHT:
+                                LevelManager.Instance.SetTurnRightBlockCountUse();
+                                break;
+                            default:
+                                LevelManager.Instance.SetTurnLeftBlockCountUse();
+                                break;
+                        }
+                        break;
+                    case BlockType.JUMP:
+                        LevelManager.Instance.SetJumpBlockCountUse();
+                        break;
+                    case BlockType.JUMP_IF_STH_FRONT:
+                        LevelManager.Instance.SetJumpIfBlockCountUse();
+                        break;
+                    default:
+                        break;
+                }
+            }
         }
     }
 }

@@ -8,6 +8,10 @@ using BlockyBlock.UI;
 using AudioPlayer;
 using BlockyBlock.Tracking;
 using BlockyBlock.BackEnd;
+using System;
+#if UNITY_EDITOR
+using UnityEditor;
+#endif
 
 namespace BlockyBlock.Managers
 {
@@ -102,7 +106,9 @@ namespace BlockyBlock.Managers
             GameEvents.LOAD_LEVEL += HandleLoadLevel;
 
             SoundManager.ON_FINISH_LOADING_SOUNDMAP += HandleFinishLoadingSoundmap;
-            StartRecordTimeSpent();
+#if UNITY_EDITOR
+            EditorApplication.playModeStateChanged += ModeChangedInEditor;
+#endif
         }
         void Update()
         {
@@ -119,7 +125,7 @@ namespace BlockyBlock.Managers
         {
             this.startTimeSpent = (int)Time.time;
         }
-        void StopRecordTimeSpent()
+        public void StopRecordTimeSpent()
         {
             TrackingManager.Instance.Helper.SessionFinished.timeSpent = (int)Time.time - this.startTimeSpent;
         }
@@ -129,10 +135,20 @@ namespace BlockyBlock.Managers
             {  
                 if (TrackingManager.Instance.Helper.SessionFinished == null)
                     return;
+                TrackingManager.Instance.SetIsProgress(true);
                 TrackingManager.Instance.Helper.SessionFinished.entry = LevelEntry.None.LevelEntryToString();
                 StopRecordTimeSpent();
                 TrackingActionEvent.ON_GAME_EXIT?.Invoke();
             }    
+        }
+        void OnApplicationQuit()
+        {
+            if (TrackingManager.Instance.Helper.SessionFinished == null)
+                    return;
+            TrackingManager.Instance.SetIsProgress(false);
+            TrackingManager.Instance.Helper.SessionFinished.entry = LevelEntry.None.LevelEntryToString();
+            StopRecordTimeSpent();
+            TrackingActionEvent.ON_GAME_EXIT?.Invoke();
         }
         void HandleFinishLoadingSoundmap()
         {
@@ -145,7 +161,25 @@ namespace BlockyBlock.Managers
             GameEvents.LOAD_LEVEL -= HandleLoadLevel;
 
             SoundManager.ON_FINISH_LOADING_SOUNDMAP -= HandleFinishLoadingSoundmap;
+#if UNITY_EDITOR
+            EditorApplication.playModeStateChanged -= ModeChangedInEditor;
+#endif
         }
+
+        private void ModeChangedInEditor(PlayModeStateChange state)
+        {
+            if (state == PlayModeStateChange.ExitingPlayMode)
+            {
+                if (TrackingManager.Instance.Helper.SessionFinished == null)
+                    return;
+                TrackingManager.Instance.SetIsProgress(false);
+                TrackingManager.Instance.Helper.SessionFinished.entry = LevelEntry.None.LevelEntryToString();
+                GameManager.Instance.StopRecordTimeSpent();
+                TrackingManager.Instance.Helper.SessionFinished.endCause = EndCause.Quit_button.EndCauseToString();
+                TrackingActionEvent.ON_GAME_EXIT?.Invoke();
+            }
+        }
+
         void HandleWin()
         {
             LevelCheckerManager.Instance.ConfirmBlockUsed();
@@ -215,6 +249,11 @@ namespace BlockyBlock.Managers
                 LevelManager.Instance.SetChapterIDLevelTrigger();
                 LevelManager.Instance.SetEntryLevelTrigger();
                 TrackingManager.Instance.StopRecord(Tracking.RecordDataType.LEVEL_TRIGGER);
+
+                LevelManager.Instance.SetLevelIDLevelFinished();
+                LevelManager.Instance.SetChapterIDLevelFinished();
+                LevelManager.Instance.SetEntryLevelFinished();
+                LevelManager.Instance.StartTimer();
             }
         }
         void PlayBGMusic(LevelID _id)

@@ -13,7 +13,10 @@ namespace BlockyBlock.UI
     {
         MAIN = 0,
         LEVEL_TYPE_SELECTION = 1,
-        CHAPTER_SELECTION = 2
+        CHAPTER_SELECTION = 2,
+        CREDIT = 3,
+        PROFILE = 4,
+        SETTING = 5
     }
     
     public class UIHomeAnimation : MonoBehaviour
@@ -65,6 +68,12 @@ namespace BlockyBlock.UI
         [SerializeField] float m_DiffPositionForEachChapter;
         [SerializeField] float m_ChapterTransitionDuration;
         [SerializeField] float m_ChapterTransitionDelayForEach;
+        [Space(10)]
+        [Header("Credit")]
+        [SerializeField] GameObject creditObject;
+        [Space(10)]
+        [Header("Credit")]
+        [SerializeField] GameObject settingObject;
         void Awake()
         {
             HandleStageChanged(HomeState.MAIN);
@@ -88,6 +97,8 @@ namespace BlockyBlock.UI
                         () => 
                         {
                             HandleShowMainButtons();
+                            HandleHideCredit();
+                            HandleHideSetting();
                             UIUtils.UnlockInput();
                         },
                         m_LevelSectionTransitionDuration,
@@ -124,7 +135,44 @@ namespace BlockyBlock.UI
                         _isHideCharacter : true
                     );
                     break;
+                case HomeState.CREDIT:
+                    HandleHideMainButtons(
+                        () => 
+                        {
+                            HandleShowCredit();
+                            UIUtils.UnlockInput();
+                        },
+                        m_AvatarDelayTransition + m_AvatarTransitionDuration
+                    );
+                    break;
+                case HomeState.SETTING:
+                    HandleHideMainButtons(
+                        () => 
+                        {
+                            HandleShowSetting();
+                            UIUtils.UnlockInput();
+                        },
+                        m_AvatarDelayTransition + m_AvatarTransitionDuration
+                    );
+                    break;
+
             }
+        }
+        void HandleShowCredit()
+        {
+            this.creditObject.SetActive(true);
+        }
+        void HandleHideCredit()
+        {
+            this.creditObject.SetActive(false);
+        }
+        void HandleShowSetting()
+        {
+            this.settingObject.SetActive(true);
+        }
+        void HandleHideSetting()
+        {
+            this.settingObject.SetActive(false);
         }
         void HandleShowChapterSelection(System.Action _cb = null, float _delay = 0)
         {
