@@ -166,6 +166,7 @@ namespace BlockyBlock.Managers
 #endif
         }
 
+#if UNITY_EDITOR
         private void ModeChangedInEditor(PlayModeStateChange state)
         {
             if (state == PlayModeStateChange.ExitingPlayMode)
@@ -179,6 +180,7 @@ namespace BlockyBlock.Managers
                 TrackingActionEvent.ON_GAME_EXIT?.Invoke();
             }
         }
+#endif
 
         void HandleWin()
         {
