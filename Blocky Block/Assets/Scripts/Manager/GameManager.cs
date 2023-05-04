@@ -247,6 +247,9 @@ namespace BlockyBlock.Managers
                 TrackingManager.Instance.StartRecord(Tracking.RecordDataType.LEVEL_TRIGGER);
                 TrackingManager.Instance.StartRecord(Tracking.RecordDataType.LEVEL_FINISHED);
 
+                int levelIdBase = iid % 1000 + 1;
+                LevelManager.Instance.SetLevelPlaysInSession(levelIdBase);
+
                 LevelManager.Instance.SetLevelIDLevelTrigger();
                 LevelManager.Instance.SetChapterIDLevelTrigger();
                 LevelManager.Instance.SetEntryLevelTrigger();

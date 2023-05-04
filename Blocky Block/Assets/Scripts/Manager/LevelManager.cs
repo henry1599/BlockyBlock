@@ -23,6 +23,7 @@ namespace BlockyBlock.Managers
         };
         public LevelFinishedRecordData LevelFinished => TrackingManager.Instance.Helper.LevelFinished;
         public LevelTriggerRecordData LevelTrigger => TrackingManager.Instance.Helper.LevelTrigger;
+        public SessionFinishedRecordData SessionFinished => TrackingManager.Instance.Helper.SessionFinished;
         public LevelData CurrentLevelData
         {
             get => m_CurrentLevelData;
@@ -152,6 +153,10 @@ namespace BlockyBlock.Managers
 
         #region TRACKING
         // * Level trigger
+        public void SetLevelPlaysInSession(int levelId)
+        {
+            SessionFinished.levelsPlay.Add(levelId);
+        }
         float levelTimeSpentStart = 0;
         public void StartTimer()
         {
