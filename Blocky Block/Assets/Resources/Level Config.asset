@@ -94,7 +94,7 @@ MonoBehaviour:
     WinCondition: 1000
     StuffToCollect: 4
     LevelName: Level Mannual 06
-    BlockTypes: 00000000040000000100000002000000
+    BlockTypes: 0000000004000000010000000200000005000000080000000c000000
     UnitDatas:
     - Floor: 0
       X: 1

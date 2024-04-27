@@ -108,13 +108,21 @@ namespace BlockyBlock.Managers
         }
         public void Get(WebType webType, APIType apiType)
         {
+#if ENABLE_LOGIN
+            IsComplete = true;
+#else
             IsComplete = false;
             StartCoroutine(Cor_Get(webType, apiType));
+#endif
         }
         public void Post(object objToSend, WebType webType, APIType apiType, params (string, string)[] headers)
         {
+#if ENABLE_LOGIN
+            IsComplete = true;
+#else
             IsComplete = false;
             StartCoroutine(Cor_Post(objToSend, webType, apiType, headers));
+#endif
         }
         IEnumerator Cor_Post(object objToSend, WebType webType, APIType apiType, params (string, string)[] headers)
         {
