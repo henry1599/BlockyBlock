@@ -108,7 +108,7 @@ namespace BlockyBlock.Managers
         }
         public void Get(WebType webType, APIType apiType)
         {
-#if ENABLE_LOGIN
+#if DISABLE_LOGIN
             IsComplete = true;
 #else
             IsComplete = false;
@@ -117,7 +117,7 @@ namespace BlockyBlock.Managers
         }
         public void Post(object objToSend, WebType webType, APIType apiType, params (string, string)[] headers)
         {
-#if ENABLE_LOGIN
+#if DISABLE_LOGIN
             IsComplete = true;
 #else
             IsComplete = false;

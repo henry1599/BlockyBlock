@@ -3,12 +3,9 @@ using UnityEngine.SceneManagement;
 using System.IO;
 using System.Linq;
 using System.Collections.Generic;
-#if UNITY_EDITOR
 using UnityEditor.SceneManagement;
 using UnityEditor;
-#endif
 
-#if UNITY_EDITOR
 namespace BlockyBlock.Utils.EditorTools
 {
     public class EditorScene
@@ -258,5 +255,3 @@ namespace BlockyBlock.Utils.EditorTools
         }
     }
 }
-
-#endif

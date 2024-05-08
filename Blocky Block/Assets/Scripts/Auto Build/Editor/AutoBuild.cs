@@ -8,11 +8,6 @@ using UnityEngine;
 #if UNITY_EDITOR
 using UnityEditor;
 #endif
-using UnityEditor.Build.Reporting;
-using UnityEngine.SceneManagement;
-using UnityEngine.Rendering;
-using UnityEngine.Rendering.Universal;
-using System.Security.Cryptography;
 
 namespace BlockyBlock.Tools
 {
@@ -144,7 +139,7 @@ namespace BlockyBlock.Tools
             string current = PlayerSettings.GetScriptingDefineSymbolsForGroup(buildTargetGroup);
             if (!current.Contains(define))
                 return;
-            string result = current.Replace(define, String.Empty);
+            string result = current.Replace(define, string.Empty);
             PlayerSettings.SetScriptingDefineSymbolsForGroup(buildTargetGroup, result);
         }
     }

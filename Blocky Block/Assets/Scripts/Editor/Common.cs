@@ -216,25 +216,6 @@ namespace BlockyBlock.Utils.EditorTools
             }
             return false;
         }
-
-        [MenuItem("Assets/Tools/Create Original Prefab from FBX")]
-        static void CreatePrefabsFromFBX()
-        {
-            List<(GameObject, string, string)> prefabs = new List<(GameObject, string, string)>();
-            for (int i = 0; i < Selection.gameObjects.Length; i++)
-            {
-                prefabs.Add(CreatePrefabFromFBX(Selection.gameObjects[i]));
-            }
-            AssetDatabase.Refresh();
-            List<Object> selected = new List<Object>();
-            for (int i = 0; i < prefabs.Count; i++)
-            {
-                selected.Add(AttachModel(prefabs[i].Item1, prefabs[i].Item2, prefabs[i].Item3));
-            }
-            AssetDatabase.Refresh();
-            Selection.objects = selected.ToArray();
-        }
-
         static (GameObject, string, string) CreatePrefabFromFBX(Object selection)
         {
             string modelPath = AssetDatabase.GetAssetPath(selection);
@@ -245,38 +226,6 @@ namespace BlockyBlock.Utils.EditorTools
 
             return (newObj, modelPath, prefabPath);
         }
-
-        static Object AttachModel(GameObject newObj, string modelPath, string prefabPath)
-        {
-            GameObject toyPrefab = AssetDatabase.LoadAssetAtPath<GameObject>(modelPath);
-            GameObject rootToyPrefab = PrefabUtility.LoadPrefabContents(prefabPath);
-            GameObject nestedToyPrefab = PrefabUtility.InstantiatePrefab(toyPrefab) as GameObject;
-
-            nestedToyPrefab.transform.parent = rootToyPrefab.transform;
-            nestedToyPrefab.transform.localScale = Vector3.one;
-            newObj.transform.localRotation = nestedToyPrefab.transform.localRotation;
-            nestedToyPrefab.transform.localRotation = Quaternion.Euler(0, 0, 0);
-
-            PrefabUtility.SaveAsPrefabAsset(rootToyPrefab, prefabPath);
-            GameObject.DestroyImmediate(newObj);
-            return rootToyPrefab;
-        }
-
-        [MenuItem("Assets/Tools/Create Original Prefab from FBX", true)]
-        static bool CreatePrefabFromFbx_Validation()
-        {
-            if (Selection.activeObject != null)
-            {
-                bool show = true;
-                for (int i = 0; i < Selection.gameObjects.Length; i++)
-                {
-                    show &= AssetDatabase.GetAssetPath(Selection.gameObjects[i]).Contains(".fbx");
-                }
-                return show;
-            }
-            return false;
-        }
-
         public static DirectoryInfo GetToyModelDirectoryInfo(string toyFolderPath, string toyId, bool createIfNotExist = false)
         {
             DirectoryInfo toyFolderInfo = new DirectoryInfo(toyFolderPath).CombineInfo(toyId);
@@ -450,6 +399,22 @@ namespace BlockyBlock.Utils.EditorTools
                 AssetDatabase.Refresh();
             }
             return asset;
+        }
+        public static void AddScriptingDefine(BuildTargetGroup buildTargetGroup, string define)
+        {
+            string current = PlayerSettings.GetScriptingDefineSymbolsForGroup(buildTargetGroup);
+            if (current.Contains(define))
+                return;
+            string result = current + ";" + define;
+            PlayerSettings.SetScriptingDefineSymbolsForGroup(buildTargetGroup, result);
+        }
+        public static void RemoveScriptingDefine(BuildTargetGroup buildTargetGroup, string define)
+        {
+            string current = PlayerSettings.GetScriptingDefineSymbolsForGroup(buildTargetGroup);
+            if (!current.Contains(define))
+                return;
+            string result = current.Replace(define, string.Empty);
+            PlayerSettings.SetScriptingDefineSymbolsForGroup(buildTargetGroup, result);
         }
     }
 }

@@ -69,14 +69,18 @@ namespace BlockyBlock.Managers
         }
         void LoadNextScene()
         {
-            // if (GameManager.Instance.CanLoadHome)
-            // {
+#if DISABLE_LOGIN
+            GameEvents.LOAD_LEVEL?.Invoke(LevelID.HOME);
+#else
+            if (GameManager.Instance.CanLoadHome)
+            {
                 GameEvents.LOAD_LEVEL?.Invoke(LevelID.HOME);
-            // }
-            // else
-            // {
-            //     GameEvents.LOAD_LEVEL?.Invoke(LevelID.ENTRY);
-            // }
+            }
+            else
+            {
+                GameEvents.LOAD_LEVEL?.Invoke(LevelID.ENTRY);
+            }
+#endif
         }
     }
 }

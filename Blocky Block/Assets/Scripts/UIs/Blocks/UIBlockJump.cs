@@ -43,7 +43,7 @@ namespace BlockyBlock.UI
             SetupArrow();
             // * Spawn end jump block
         }
-        private void Update() 
+        public void Update() 
         {
             if (m_IsDragging)
             {

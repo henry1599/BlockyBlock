@@ -50,9 +50,9 @@ namespace BlockyBlock.Core
             }
             try
             {
-                DelayTime = ConfigManager.Instance.BlockConfig.GetDelayTime(Functions[_value].BlockType);
+                DelayTime = ConfigManager.Instance?.BlockConfig?.GetDelayTime(Functions[_value].BlockType) ?? 0f;
                 Functions[_value].Execute();
-                BlockEvents.ON_HIGHLIGHT?.Invoke(Functions[_value].UIBlock, BlockCompiler.Instance.IDEState);
+                BlockEvents.ON_HIGHLIGHT?.Invoke(Functions[_value].UIBlock, BlockCompiler.Instance?.IDEState ?? default(IDERunState));
             }
             catch(System.Exception e){}
         }
@@ -119,42 +119,40 @@ namespace BlockyBlock.Core
         }
         void FilterType(UIBlock _uiBlock)
         {
-            switch (_uiBlock.Type)
+            switch (_uiBlock)
             {
-                case BlockType.MOVE_FORWARD:
-                    HandleMoveForward((UIBlockMove)_uiBlock);
+                case UIBlockMove uiBlockMove:
+                    HandleMoveForward(uiBlockMove);
                     break;
-                case BlockType.TURN:
-                    HandleTurn((UIBlockTurn)_uiBlock);
+                case UIBlockTurn uiBlockTurn:
+                    HandleTurn(uiBlockTurn);
                     break;
-                case BlockType.PICK_UP:
-                    HandlePickup((UIBlockPickup)_uiBlock);
+                case UIBlockPickup uiBlockPickup:
+                    HandlePickup(uiBlockPickup);
                     break;
-                case BlockType.PUT_DOWN:
-                    HandlePutdown((UIBlockPutdown)_uiBlock);
+                case UIBlockPutdown uiBlockPutDown:
+                    HandlePutdown(uiBlockPutDown);
                     break;
-                case BlockType.DO_UNTIL:
+                case UIBlockJump uiBlockJump:
+                    HandleJump(uiBlockJump);
                     break;
-                case BlockType.JUMP:
-                    HandleJump((UIBlockJump)_uiBlock);
+                case UIBlockSkip uiBlockSkip:
+                    HandleSkip(uiBlockSkip);
                     break;
-                case BlockType.SKIP:
-                    HandleSkip((UIBlockSkip)_uiBlock);
+                case UIBlockPush uiBlockPush:
+                    HandlePush(uiBlockPush);
                     break;
-                case BlockType.PUSH:
-                    HandlePush((UIBlockPush)_uiBlock);
+                case UIBlockJumpIfGrabSth uiBlockJumpIfGrabSth:
+                    HandleJumpIfGrabSth(uiBlockJumpIfGrabSth);
                     break;
-                case BlockType.JUMP_GRAB_STH:
-                    HandleJumpIfGrabSth((UIBlockJumpIfGrabSth)_uiBlock);
+                case UIBlockSkipJumpIfGrabSth uiBlockSkipJumpIfGrabSth:
+                    HandleSkipJumpIfGrabSth(uiBlockSkipJumpIfGrabSth);
                     break;
-                case BlockType.SKIP_GRAB_STH:
-                    HandleSkipJumpIfGrabSth((UIBlockSkipJumpIfGrabSth)_uiBlock);
+                case UIBlockJumpIfSthFront uiBlockJumpIfSthFront:
+                    HandleJumpIfSthFront(uiBlockJumpIfSthFront);
                     break;
-                case BlockType.JUMP_IF_STH_FRONT:
-                    HandleJumpIfSthFront((UIBlockJumpIfSthFront)_uiBlock);
-                    break;
-                case BlockType.SKIP_IF_STH_FRONT:
-                    HandleSkipIfSthFront((UIBlockSkipIfSthFront)_uiBlock);
+                case UIBlockSkipIfSthFront uiBlockSkipIfSthFront:
+                    HandleSkipIfSthFront(uiBlockSkipIfSthFront);
                     break;
             }
         }

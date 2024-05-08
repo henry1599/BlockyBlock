@@ -4,6 +4,7 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 using BlockyBlock.Events;
 using BlockyBlock.Enums;
+using System;
 
 namespace BlockyBlock.Managers
 {
@@ -33,6 +34,7 @@ namespace BlockyBlock.Managers
         {
             string sceneName = ConfigManager.Instance.SceneConfig.GetSceneNameByID(_id);
             SceneManager.LoadScene(sceneName);
+            GC.Collect();
         }
     }
 }

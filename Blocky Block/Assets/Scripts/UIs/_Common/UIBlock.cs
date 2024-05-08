@@ -142,7 +142,7 @@ namespace BlockyBlock.UI
 
             this.pivotOffset = m_PivotOffset * Screen.width / 1920f;
         }
-        public void Update()
+        public virtual void Update()
         {
             if (UIManager.Instance.CheckTriggerUI(GameConstants.UI_BLOCK_OPTION_TAG))
             {

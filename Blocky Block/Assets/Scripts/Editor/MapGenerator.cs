@@ -9,7 +9,7 @@ using UnityEngine.UIElements;
 using BlockyBlock.Enums;
 using BlockyBlock.Configurations;
 
-namespace BlockyBlock.Editor 
+namespace BlockyBlock.Utils.EditorTools
 {
     public enum LevelIDEditor
     {
@@ -266,10 +266,11 @@ namespace BlockyBlock.Editor
 
             string resultString = "";
             string folderPath = GetPath() + GetChapterPathByChapterTypeEditor((ChapterTypeEditor)m_ChapterTypeEnumField.value);
-            var dir = new System.IO.DirectoryInfo(folderPath);
-            int fileNum = dir.GetFiles().Length / 2;
-            string levelName = "Level " + GetLevelNameByEnum((LevelTypeEditor)m_LevelTypeEnumField.value) + " " + (fileNum + 1).ToString("00");
-            string textName = TextFileName + (fileNum + 1).ToString();
+            // var dir = new System.IO.DirectoryInfo(folderPath);
+            // int fileNum = dir.GetFiles().Length / 2;
+            int levelId = (int)(LevelIDEditor)this.m_LevelIDEnumField.value - 999;
+            string levelName = "Level " + GetLevelNameByEnum((LevelTypeEditor)m_LevelTypeEnumField.value) + " " + levelId.ToString("00");
+            string textName = TextFileName + levelId.ToString();
             string finalPath = folderPath + textName + ".txt";
 
             for (int i = 0; i < height; i++)
@@ -314,6 +315,8 @@ namespace BlockyBlock.Editor
 
             TextAsset textAsset = new TextAsset(json);
             AssetDatabase.SaveAssets();
+
+            Debug.Log(string.Format("Successfully created data txt named: {0} at path: {1}", textName, finalPath));
         }
         string GetLevelNameByEnum(LevelTypeEditor _type)
         {

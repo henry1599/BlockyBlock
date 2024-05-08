@@ -1,1 +1,0 @@
-{"ChapterID":1,"LevelType":1,"LevelID":1000,"WinCondition":1000,"StuffToCollect":4,"LevelName":"Level Mannual 01","BlockTypes":[0,4,1,2,5],"UnitDatas":[{"Floor":0,"X":1,"Y":1,"StartDirection":3}],"LevelRawData":"03000;36262;21112;26263;00030;","MinimumExecutionBlock":13,"MinimumExecutionStep":19}

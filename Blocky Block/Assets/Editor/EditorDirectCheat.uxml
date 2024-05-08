@@ -1,0 +1,8 @@
+<ui:UXML xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" xsi="http://www.w3.org/2001/XMLSchema-instance" engine="UnityEngine.UIElements" editor="UnityEditor.UIElements" noNamespaceSchemaLocation="../../UIElementsSchema/UIElements.xsd" editor-extension-mode="False">
+    <ui:VisualElement>
+        <ui:Label text="Editor Direct Cheat" display-tooltip-when-elided="true" style="-unity-text-align: middle-center; -unity-font-style: bold;" />
+        <ui:Toggle label="Enable Cheat" value="false" name="_toggleEnableCheat" />
+        <ui:Toggle label="Enable Login" name="_toggleEnableLogin" />
+        <ui:Button text="Reset Save" display-tooltip-when-elided="true" name="_btnResetSave" />
+    </ui:VisualElement>
+</ui:UXML>
